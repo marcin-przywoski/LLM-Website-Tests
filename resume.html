@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Engineer Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .heading {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive Styles for Mobile Devices */
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <h1 class="heading">DevOps Engineer Resume</h1>
+        
+        <!-- Professional Information Section -->
+        <section>
+            <h2>Professional Information:</h2>
+            <p>Name: John Doe</p>
+            <p>Email: [johndoe@example.com](mailto:johndoe@example.com)</p>
+            <p>Phone: +1234567890</p>
+            <p>LinkedIn: linkedin.com/in/johndoe</p>
+        </section>
+        
+        <!-- Summary Section -->
+        <section>
+            <h2>Summary:</h2>
+            <p>Certified DevOps Engineer with 5+ years of experience in streamlining software development, deployment, and operations using automation tools like Jenkins, Ansible, Docker, and Kubernetes.</p>
+        </section>
+        
+        <!-- Technical Skills Section -->
+        <section>
+            <h2>Technical Skills:</h2>
+            <ul>
+                <li>Jenkins</li>
+                <li>Ansible</li>
+                <li>Docker</li>
+                <li>Kubernetes</li>
+                <li>Git</li>
+                <li>AWS</li>
+            </ul>
+        </section>
+        
+        <!-- Projects Section -->
+        <section>
+            <h2>Projects:</h2>
+            <ul>
+                <li><strong>DevOps Automation Toolchain:</strong> Designed and implemented a comprehensive DevOps toolchain using Jenkins, Ansible, Docker, and Kubernetes to improve the efficiency of software development and deployment.</li>
+                <li><strong>Containerization with Docker:</strong> Implemented containerization using Docker for legacy applications, resulting in 30% reduction in infrastructure costs and 25% improvement in application performance.</li>
+            </ul>
+        </section>
+        
+        <!-- Achievements Section -->
+        <section>
+            <h2>Achievements:</h2>
+            <ul>
+                <li>Improved deployment frequency by 40%</li>
+                <li>Reduced Mean Time To Recovery (MTTR) by 50%</li>
+                <li>Increased overall application uptime to 99.9%</li>
+            </ul>
+        </section>
+        
+        <!-- Certifications Section -->
+        <section>
+            <h2>Certifications:</h2>
+            <ul>
+                <li><strong>DevOps Foundation Certification (DOF)</strong></li>
+                <li><strong>AWS Certified Developer - Associate</strong></li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- JavaScript Section for Dynamic Effects -->
+    <script>
+        // Function to Highlight Active Sections
+        function highlightSection(currentSection) {
+            var sections = document.querySelectorAll("section");
+            sections.forEach(function(section) {
+                section.classList.remove("active");
+            });
+            currentSection.classList.add("active");
+        }
+        
+        // Add Event Listeners for Navigation Links
+        var links = document.querySelectorAll("h2, .nav-link");
+        links.forEach(function(link) {
+            link.addEventListener("click", function() {
+                highlightSection(this.parentNode);
+            });
+        });
+    </script>
+</body>
+
+</html>
