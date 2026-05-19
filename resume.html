@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            overflow-x: hidden;
         }
         .container {
             max-width: 800px;
@@ -18,17 +19,36 @@
             background-color: #fff;
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+        .container.show {
+            transform: scale(1);
+            opacity: 1;
         }
         .section {
             margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s, transform 0.5s;
         }
-        .section h2 {
-            margin-top: 0;
+        .section.show {
+            opacity: 1;
+            transform: translateY(0);
         }
         .stats {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .stats.show {
+            opacity: 1;
+            transform: scale(1);
         }
         .stats div {
             flex: 1;
@@ -38,15 +58,30 @@
             background-color: #f0f0f0;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.5s;
+        }
+        .stats div:hover {
+            transform: scale(1.1);
         }
         .stats div span {
             font-size: 24px;
             font-weight: bold;
+            color: #333;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .projects {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .projects.show {
+            opacity: 1;
+            transform: scale(1);
         }
         .project {
             margin: 10px;
@@ -55,21 +90,39 @@
             background-color: #f0f0f0;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.5s;
+        }
+        .project:hover {
+            transform: scale(1.1);
         }
         .project img {
             width: 100%;
             height: 150px;
             object-fit: cover;
             border-radius: 10px 10px 0 0;
+            filter: grayscale(0.5);
+            transition: filter 0.5s;
+        }
+        .project:hover img {
+            filter: grayscale(0);
         }
         .project h3 {
             margin-top: 0;
-        }
-        .project p {
-            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .achievements {
             margin-bottom: 20px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .achievements.show {
+            opacity: 1;
+            transform: scale(1);
         }
         .achievement {
             margin-bottom: 10px;
@@ -77,9 +130,18 @@
             background-color: #f0f0f0;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.5s;
+        }
+        .achievement:hover {
+            transform: scale(1.1);
         }
         .achievement h4 {
             margin-top: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -147,6 +209,31 @@
     </div>
     <script>
         // Add JavaScript functionality here
+        const container = document.querySelector('.container');
+        const sections = document.querySelectorAll('.section');
+        const stats = document.querySelector('.stats');
+        const projects = document.querySelector('.projects');
+        const achievements = document.querySelector('.achievements');
+
+        window.addEventListener('load', () => {
+            container.classList.add('show');
+            setTimeout(() => {
+                sections.forEach((section, index) => {
+                    setTimeout(() => {
+                        section.classList.add('show');
+                    }, index * 500);
+                });
+                setTimeout(() => {
+                    stats.classList.add('show');
+                }, 2000);
+                setTimeout(() => {
+                    projects.classList.add('show');
+                }, 2500);
+                setTimeout(() => {
+                    achievements.classList.add('show');
+                }, 3000);
+            }, 1000);
+        });
     </script>
 </body>
 </html>
