@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Engineer Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .project {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .achievement {
+            font-style: italic;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DevOps Engineer Resume</h1>
+        <h2>About Me</h2>
+        <p>Dedicated and passionate DevOps engineer with 5+ years of experience in designing, implementing, and maintaining scalable, secure, and efficient infrastructure for various applications.</p>
+
+        <h2>Statistics</h2>
+        <div class="stats">
+            <div class="stat">
+                <h3>10+</h3>
+                <p>Years of Experience</p>
+            </div>
+            <div class="stat">
+                <h3>50+</h3>
+                <p>Successful Projects</p>
+            </div>
+            <div class="stat">
+                <h3>95%</h3>
+                <p>Uptime Achievement</p>
+            </div>
+        </div>
+
+        <h2>Achievements</h2>
+        <ul>
+            <li>Improved deployment time by 80% through automation.</li>
+            <li><span class="achievement">Reduced infrastructure costs by 40% via efficient resource allocation.</span></li>
+            <li>Enhanced security posture with a 0% breach rate over the last year.</li>
+        </ul>
+
+        <h2>Projects</h2>
+        <div class="project">
+            <h3>Cloud Migration Project</h3>
+            <p>Migrated a legacy application to AWS, resulting in a 30% increase in scalability and a 25% reduction in costs.</p>
+        </div>
+        <div class="project">
+            <h3>Kubernetes Implementation</h3>
+            <p>Designed and implemented a Kubernetes cluster for container orchestration, achieving a 90% reduction in deployment errors.</p>
+        </div>
+
+        <h2>Technical Skills</h2>
+        <ul>
+            <li>AWS, Azure, Google Cloud</li>
+            <li>Kubernetes, Docker</li>
+            <li>Ansible, Terraform</li>
+            <li>Python, Java, JavaScript</li>
+        </ul>
+
+        <script>
+            // Example of dynamic content loading
+            document.addEventListener('DOMContentLoaded', function() {
+                const projectsSection = document.querySelector('.project');
+                // Fetch project data from API or any other source
+                // For demonstration, adding a new project dynamically
+                const newProject = document.createElement('div');
+                newProject.className = 'project';
+                newProject.innerHTML = `
+                    <h3>CI/CD Pipeline Implementation</h3>
+                    <p>Developed and implemented CI/CD pipelines using Jenkins and GitLab CI, resulting in a 40% decrease in time-to-market.</p>
+                `;
+                document.querySelector('h2: nth-child(4)').parentNode.appendChild(newProject);
+            });
+        </script>
+    </div>
+</body>
+</html>
