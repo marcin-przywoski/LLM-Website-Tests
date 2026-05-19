@@ -12,13 +12,21 @@
             --text: #0f172a;
             --card: #fff;
             --shadow: 0 4px 24px rgba(30,41,59,0.08);
+            --glow: 0 0 24px 6px #38bdf8cc;
         }
         html, body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-            background: var(--bg);
+            background: linear-gradient(120deg, #0ea5e9 0%, #1e293b 100%);
+            min-height: 100vh;
             color: var(--text);
+            overflow-x: hidden;
+            animation: bgmove 18s ease-in-out infinite alternate;
+        }
+        @keyframes bgmove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         .container {
             max-width: 900px;
@@ -27,6 +35,24 @@
             border-radius: 18px;
             box-shadow: var(--shadow);
             padding: 40px 32px 32px 32px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -80px; left: -80px;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #38bdf8 0%, transparent 70%);
+            opacity: 0.18;
+            z-index: 1;
+            pointer-events: none;
+            animation: floatGlow 8s ease-in-out infinite alternate;
+        }
+        @keyframes floatGlow {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(40px) scale(1.1); }
         }
         header {
             display: flex;
@@ -35,6 +61,8 @@
             border-bottom: 2px solid var(--accent);
             padding-bottom: 24px;
             margin-bottom: 32px;
+            position: relative;
+            z-index: 2;
         }
         .avatar {
             width: 110px;
@@ -42,47 +70,87 @@
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--accent);
+            box-shadow: var(--glow);
+            transition: box-shadow 0.4s, transform 0.4s;
+            animation: avatarPulse 2.5s infinite alternate;
+        }
+        .avatar:hover {
+            box-shadow: 0 0 48px 12px #38bdf8cc, 0 0 0 8px #bae6fd44;
+            transform: scale(1.07) rotate(-2deg);
+        }
+        @keyframes avatarPulse {
+            0% { box-shadow: var(--glow); }
+            100% { box-shadow: 0 0 48px 12px #38bdf8cc, 0 0 0 8px #bae6fd44; }
         }
         .intro h1 {
             margin: 0 0 8px 0;
             font-size: 2.4rem;
             color: var(--primary);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px #bae6fd44;
+            animation: fadeInDown 1s 0.2s both;
         }
         .intro h2 {
             margin: 0 0 12px 0;
             font-size: 1.2rem;
             font-weight: 400;
             color: var(--accent);
+            animation: fadeInDown 1s 0.4s both;
         }
         .intro p {
             margin: 0;
             color: #334155;
+            animation: fadeInDown 1s 0.6s both;
+        }
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         .stats {
             display: flex;
             gap: 32px;
             margin: 32px 0 24px 0;
             flex-wrap: wrap;
+            animation: fadeInUp 1.2s 0.7s both;
         }
         .stat {
             background: var(--bg);
             border-radius: 12px;
             padding: 18px 28px;
-            box-shadow: 0 2px 8px rgba(30,41,59,0.06);
+            box-shadow: 0 2px 16px 0 #38bdf822;
             text-align: center;
             min-width: 120px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat:hover {
+            transform: translateY(-8px) scale(1.05) rotate(-1deg);
+            box-shadow: 0 8px 32px 0 #38bdf866;
         }
         .stat .number {
             font-size: 2rem;
             font-weight: 700;
             color: var(--accent);
+            text-shadow: 0 2px 8px #bae6fd44;
         }
         .stat .label {
             font-size: 1rem;
             color: #64748b;
         }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
         section {
             margin-bottom: 32px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         section h3 {
             color: var(--primary);
@@ -90,6 +158,8 @@
             font-size: 1.3rem;
             border-left: 4px solid var(--accent);
             padding-left: 10px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 8px #bae6fd44;
         }
         .skills, .projects, .achievements {
             display: flex;
@@ -100,13 +170,20 @@
             background: var(--bg);
             border-radius: 10px;
             padding: 14px 20px;
-            box-shadow: 0 1px 4px rgba(30,41,59,0.04);
+            box-shadow: 0 1px 8px #38bdf822;
             min-width: 180px;
             flex: 1 1 220px;
+            position: relative;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .skill:hover, .project:hover, .achievement:hover {
+            box-shadow: 0 4px 24px #38bdf866, 0 0 0 4px #bae6fd33;
+            transform: scale(1.04) rotate(-1deg);
         }
         .project-title {
             font-weight: 600;
             color: var(--accent);
+            text-shadow: 0 2px 8px #bae6fd44;
         }
         .project-desc {
             color: #334155;
@@ -125,10 +202,12 @@
             color: var(--accent);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
+            transition: color 0.2s, text-shadow 0.2s;
+            text-shadow: 0 2px 8px #bae6fd44;
         }
         .contact a:hover {
             color: var(--primary);
+            text-shadow: 0 0 16px #38bdf8cc;
         }
         @media (max-width: 700px) {
             .container { padding: 18px 4vw; }
@@ -220,12 +299,17 @@
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
+                let value = progress * (end - start) + start;
+                if (id === "uptime") {
+                    value = (progress * (end - start) + start).toFixed(2);
+                } else {
+                    value = Math.floor(value);
+                }
                 obj.textContent = value + suffix;
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
                 } else {
-                    obj.textContent = end + suffix;
+                    obj.textContent = (id === "uptime" ? end.toFixed(2) : end) + suffix;
                 }
             };
             window.requestAnimationFrame(step);
@@ -234,6 +318,51 @@
         animateValue("uptime", 0, 99.98, 1200, "%");
         animateValue("pipelines", 0, 85, 1200);
         animateValue("cloud", 0, 14, 1200);
+
+        // Section reveal on scroll
+        function revealSections() {
+            const sections = document.querySelectorAll('section');
+            const trigger = window.innerHeight * 0.85;
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < trigger) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealSections);
+        window.addEventListener('load', revealSections);
+
+        // Epic sparkles effect
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.width = '10px';
+            sparkle.style.height = '10px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = 9999;
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.background = 'radial-gradient(circle, #38bdf8 0%, #bae6fd 80%, transparent 100%)';
+            sparkle.style.boxShadow = '0 0 16px 4px #38bdf8cc';
+            sparkle.style.opacity = '0.8';
+            sparkle.style.transform = `scale(${0.7 + Math.random() * 0.7})`;
+            document.body.appendChild(sparkle);
+            setTimeout(() => {
+                sparkle.style.transition = 'all 0.7s cubic-bezier(.4,2,.6,1)';
+                sparkle.style.opacity = '0';
+                sparkle.style.transform += ' scale(2)';
+            }, 10);
+            setTimeout(() => {
+                sparkle.remove();
+            }, 700);
+        }
+        document.addEventListener('mousemove', e => {
+            if (Math.random() < 0.13) {
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
     </script>
 </body>
 </html>
