@@ -5,178 +5,201 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevOps Engineer Resume</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-radius: 10px; /* Rounded corners */
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #0779e4 3px solid;
-            text-align: center; /* Center the heading */
-        }
-        header h1 {
-            margin: 0;
-            padding: 10px 0;
-            font-size: 24px;
-            animation: glow 2s infinite; /* Text glow effect */
-        }
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px #fff; }
-            100% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff69b4; }
-        }
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            background-color: #f2f2f2;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            margin-top: 20px; /* Space from header */
-        }
-        .stat {
-            text-align: center;
-            flex-basis: 30%; /* Equal width for stats */
-            background-color: #e5e5e5;
-            padding: 10px;
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin: 10px; /* Spacing between stats */
-        }
-        .stat h2 {
-            font-size: 36px;
-            color: #333;
-            animation: scaleUp 1s forwards; /* Scale up effect on load */
-        }
-        @keyframes scaleUp {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .achievements, .projects {
-            margin-top: 40px;
-        }
-        .achievement, .project {
-            background-color: #f9f9f9;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            transition: transform 0.3s; /* Hover effect */
-        }
-        .achievement:hover, .project:hover {
-            transform: scale(1.05);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 5px;
-            z-index: -1; /* Behind other elements */
-        }
+/* Global styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Accessibility features */
+.skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    z-index: 1000; /* Ensure it's on top of other elements */
+
+    /* Hide from sighted users, but not screen readers */
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal; /* For IE */
+}
+
+.skip-to-main:focus {
+    clip: auto;
+    clip-path: none;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+    word-wrap: normal; /* For IE */
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+/* Header and navigation */
+header {
+    background-color: #333;
+    color: white;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #0779e4 3px solid;
+    text-align: center; /* Center the heading */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+nav a:hover {
+    color: #ccc;
+}
+
+/* Main content styles */
+main {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+section {
+    background-color: white;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-top: 0; /* Remove top margin */
+}
+
+/* Statistics styles */
+#stats ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#stats li {
+    margin-bottom: 10px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    clear: both; /* Clear floats */
+}
     </style>
 </head>
 <body>
-<div class="container">
-    <header>
-        <h1>DevOps Engineer Resume</h1>
+    <!-- Skip to main content link for screen readers and keyboard navigation -->
+    <a href="#main-content" class="skip-to-main">Skip to Main Content</a>
+    
+    <header role="banner">
+        <nav role="navigation" aria-label="Main Navigation">
+            <ul>
+                <li><a href="#stats">Statistics</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
+        </nav>
     </header>
-    <section class="stats">
-        <div class="stat">
-            <h2 id="yearsOfExperience">10+</h2>
-            <p>Years of Experience</p>
-        </div>
-        <div class="stat">
-            <h2 id="successfulProjects">50+</h2>
-            <p>Successful Projects</p>
-        </div>
-        <div class="stat">
-            <h2 id="successRate">90%</h2>
-            <p>Success Rate</p>
-        </div>
-    </section>
-    <section class="achievements">
-        <h2>Achievements:</h2>
-        <div class="achievement">
-            Implemented CI/CD pipelines using Jenkins, resulting in a 40% reduction in deployment time.
-        </div>
-        <div class="achievement">
-            Designed and deployed a Kubernetes cluster for a high-traffic web application, achieving 99.99% uptime.
-        </div>
-    </section>
-    <section class="projects">
-        <h2>Notable Projects:</h2>
-        <div class="project">
-            Developed a cloud-based monitoring system using Prometheus and Grafana, improving response times to incidents by 30%.
-        </div>
-        <div class="project">
-            Led the migration of a legacy application to a microservices architecture using Docker and AWS ECS, reducing costs by 25%.
-        </div>
-    </section>
-</div>
-<footer>
-    <p>&copy; 2023 DevOps Engineer. All rights reserved.</p>
-</footer>
+    
+    <main id="main-content" role="main">
+        <section role="region" aria-label="Introduction">
+            <h1>DevOps Engineer Resume</h1>
+            <p>Welcome to my professional resume.</p>
+        </section>
+        
+        <section id="stats" role="region" aria-label="Statistics">
+            <h2>Key Statistics:</h2>
+            <ul>
+                <li><strong>Years of Experience:</strong> <span id="yearsOfExperience">10+</span></li>
+                <li><strong>Successful Projects:</strong> <span id="successfulProjects">50+</span></li>
+                <li><strong>Success Rate:</strong> <span id="successRate">90%</span></li>
+            </ul>
+        </section>
+        
+        <section id="achievements" role="region" aria-label="Achievements">
+            <h2>Achievements:</h2>
+            <ul>
+                <li>Implemented CI/CD pipelines using Jenkins, resulting in a 40% reduction in deployment time.</li>
+                <li>Designed and deployed a Kubernetes cluster for a high-traffic web application, achieving 99.99% uptime.</li>
+            </ul>
+        </section>
+        
+        <section id="projects" role="region" aria-label="Projects">
+            <h2>Notable Projects:</h2>
+            <ul>
+                <li>Developed a cloud-based monitoring system using Prometheus and Grafana, improving response times to incidents by 30%.</li>
+                <li>Led the migration of a legacy application to a microservices architecture using Docker and AWS ECS, reducing costs by 25%.</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer role="contentinfo">
+        <p>&copy; 2023 DevOps Engineer. All rights reserved.</p>
+    </footer>
 
-<script>
-    // Example JavaScript code to dynamically update the stats section
-    document.addEventListener("DOMContentLoaded", function() {
+    <!-- Additional accessibility features for screen readers and keyboard navigation -->
+    <script>
+        // Focus management
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.activeElement.blur();
+            }
+        });
+
+        // Dynamically update the stats section with animation
         const yearsOfExperience = document.getElementById('yearsOfExperience');
         const successfulProjects = document.getElementById('successfulProjects');
         const successRate = document.getElementById('successRate');
-        
+
         // Simulating dynamic data, in a real scenario, this could come from an API or database.
         const data = [15, 75, 95]; // Years of experience, successful projects, success rate
-        
-        // Update stats with animation
+
         yearsOfExperience.innerHTML = '0+';
         successfulProjects.innerHTML = '0+';
         successRate.innerHTML = '0%';
-        
+
         setTimeout(() => {
             yearsOfExperience.innerHTML = data[0] + '+';
             successfulProjects.innerHTML = data[1] + '+';
             successRate.innerHTML = data[2] + '%';
         }, 500); // Delay for animation effect
-        
-        // Adding event listeners for hover effects on achievements and projects
-        const achievementElements = document.querySelectorAll('.achievement');
-        const projectElements = document.querySelectorAll('.project');
-        
-        achievementElements.forEach(achievement => {
-            achievement.addEventListener('mouseover', () => {
-                achievement.style.transform = 'scale(1.05)';
-                achievement.style.boxShadow = '0 2px 4px rgba(0,0,0,0.5)';
-            });
-            achievement.addEventListener('mouseout', () => {
-                achievement.style.transform = '';
-                achievement.style.boxShadow = '';
-            });
-        });
-        
-        projectElements.forEach(project => {
-            project.addEventListener('mouseover', () => {
-                project.style.transform = 'scale(1.05)';
-                project.style.boxShadow = '0 2px 4px rgba(0,0,0,0.5)';
-            });
-            project.addEventListener('mouseout', () => {
-                project.style.transform = '';
-                project.style.boxShadow = '';
-            });
-        });
-    });
-</script>
+    </script>
 </body>
 </html>
