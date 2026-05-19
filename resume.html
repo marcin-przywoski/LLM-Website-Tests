@@ -6,153 +6,140 @@
     <title>DevOps Engineer Resume</title>
     <style>
         /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
             background-color: #f4f4f4;
-            overflow-x: hidden;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2em;
+        }
+
+        section {
             background-color: #fff;
-            padding: 20px;
+            padding: 1em;
+            margin-bottom: 1em;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            transform: scale(0.9);
-            opacity: 0;
-            transition: transform 0.5s, opacity 0.5s;
         }
-        .container.show {
-            transform: scale(1);
-            opacity: 1;
+
+        h1, h2, h3, h4 {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 0.5em;
         }
-        .section {
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.5s, transform 0.5s;
-        }
-        .section.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
         .stats {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.5s, transform 0.5s;
+            margin-bottom: 1em;
         }
-        .stats.show {
-            opacity: 1;
-            transform: scale(1);
-        }
+
         .stats div {
             flex: 1;
             text-align: center;
-            margin: 10px;
-            padding: 20px;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transform: scale(0.9);
-            transition: transform 0.5s;
+            margin: 0.5em;
         }
-        .stats div:hover {
-            transform: scale(1.1);
-        }
-        .stats div span {
+
+        .stats span {
             font-size: 24px;
             font-weight: bold;
-            color: #333;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .projects {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.5s, transform 0.5s;
         }
-        .projects.show {
-            opacity: 1;
-            transform: scale(1);
-        }
+
         .project {
-            margin: 10px;
-            padding: 20px;
-            width: calc(33.33% - 20px);
+            margin: 1em;
+            padding: 1em;
+            width: calc(33.33% - 2em);
             background-color: #f0f0f0;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transform: scale(0.9);
-            transition: transform 0.5s;
         }
-        .project:hover {
-            transform: scale(1.1);
-        }
+
         .project img {
             width: 100%;
             height: 150px;
             object-fit: cover;
             border-radius: 10px 10px 0 0;
-            filter: grayscale(0.5);
-            transition: filter 0.5s;
         }
-        .project:hover img {
-            filter: grayscale(0);
-        }
-        .project h3 {
-            margin-top: 0;
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+
         .achievements {
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.5s, transform 0.5s;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        .achievements.show {
-            opacity: 1;
-            transform: scale(1);
-        }
+
         .achievement {
-            margin-bottom: 10px;
-            padding: 10px;
+            margin: 1em;
+            padding: 1em;
+            width: calc(33.33% - 2em);
             background-color: #f0f0f0;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transform: scale(0.9);
-            transition: transform 0.5s;
         }
-        .achievement:hover {
-            transform: scale(1.1);
-        }
-        .achievement h4 {
-            margin-top: 0;
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            clear: both;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="section">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#stats">Statistics</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="about">
             <h1>John Doe</h1>
             <h2>DevOps Engineer</h2>
             <p>Highly motivated and experienced DevOps engineer with a passion for automation, scalability, and reliability.</p>
-        </div>
-        <div class="section">
+        </section>
+        <section id="stats">
             <h2>Statistics</h2>
             <div class="stats">
                 <div>
@@ -168,8 +155,8 @@
                     <p>Uptime Achievement</p>
                 </div>
             </div>
-        </div>
-        <div class="section">
+        </section>
+        <section id="projects">
             <h2>Projects</h2>
             <div class="projects">
                 <div class="project">
@@ -188,8 +175,8 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
                 </div>
             </div>
-        </div>
-        <div class="section">
+        </section>
+        <section id="achievements">
             <h2>Achievements</h2>
             <div class="achievements">
                 <div class="achievement">
@@ -205,34 +192,22 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 John Doe</p>
+    </footer>
     <script>
         // Add JavaScript functionality here
-        const container = document.querySelector('.container');
-        const sections = document.querySelectorAll('.section');
-        const stats = document.querySelector('.stats');
-        const projects = document.querySelector('.projects');
-        const achievements = document.querySelector('.achievements');
+        const navLinks = document.querySelectorAll('nav a');
 
-        window.addEventListener('load', () => {
-            container.classList.add('show');
-            setTimeout(() => {
-                sections.forEach((section, index) => {
-                    setTimeout(() => {
-                        section.classList.add('show');
-                    }, index * 500);
-                });
-                setTimeout(() => {
-                    stats.classList.add('show');
-                }, 2000);
-                setTimeout(() => {
-                    projects.classList.add('show');
-                }, 2500);
-                setTimeout(() => {
-                    achievements.classList.add('show');
-                }, 3000);
-            }, 1000);
+        navLinks.forEach((link) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
         });
     </script>
 </body>
