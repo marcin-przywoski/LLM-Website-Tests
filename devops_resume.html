@@ -26,6 +26,16 @@
             color: #fff;
             padding: 20px 0;
             text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         header h1 {
@@ -36,6 +46,11 @@
             font-size: 1.2rem;
         }
 
+        /* Add a glowing effect to the header */
+        header {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
         .container {
             max-width: 1100px;
             margin: 20px auto;
@@ -43,6 +58,18 @@
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: zoomIn 1.5s ease-in-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .section {
@@ -62,6 +89,29 @@
 
         .section ul li {
             margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .section ul li::before {
+            content: '\2022';
+            position: absolute;
+            left: 0;
+            color: #0078d7;
+            font-size: 1.5rem;
+            line-height: 1;
         }
 
         .stats {
@@ -78,6 +128,13 @@
             background: #0078d7;
             color: #fff;
             border-radius: 8px;
+            transform: scale(0.9);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
         .stat h3 {
@@ -94,10 +151,22 @@
             background: #333;
             color: #fff;
             margin-top: 20px;
+            animation: fadeIn 2s ease-in-out 1s;
         }
 
         footer p {
             font-size: 0.9rem;
+        }
+
+        /* Add hover effect to links */
+        a {
+            color: #0078d7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #005bb5;
         }
     </style>
 </head>
