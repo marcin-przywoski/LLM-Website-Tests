@@ -21,12 +21,19 @@
             padding: 0;
         }
 
+        /* Ensure high contrast for better readability */
+        body {
+            color: #333;
+            background-color: #f4f4f9;
+        }
+
         header {
-            background: #0078d7;
+            background: #005bb5;
             color: #fff;
             padding: 20px 0;
             text-align: center;
             animation: fadeIn 2s ease-in-out;
+            role: banner;
         }
 
         @keyframes fadeIn {
@@ -59,6 +66,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             animation: zoomIn 1.5s ease-in-out;
+            role: main;
         }
 
         @keyframes zoomIn {
@@ -125,11 +133,12 @@
             flex: 1;
             margin: 0 10px;
             padding: 20px;
-            background: #0078d7;
+            background: #005bb5;
             color: #fff;
             border-radius: 8px;
             transform: scale(0.9);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 10px;
         }
 
         .stat:hover {
@@ -152,6 +161,7 @@
             color: #fff;
             margin-top: 20px;
             animation: fadeIn 2s ease-in-out 1s;
+            role: contentinfo;
         }
 
         footer p {
@@ -161,22 +171,68 @@
         /* Add hover effect to links */
         a {
             color: #0078d7;
-            text-decoration: none;
+            text-decoration: underline;
             transition: color 0.3s ease;
         }
 
         a:hover {
             color: #005bb5;
         }
+
+        /* Add focus styles for keyboard navigation */
+        a, button {
+            outline: none;
+            transition: outline 0.2s ease;
+        }
+
+        a:focus, button:focus {
+            outline: 3px solid #ffbf47;
+            outline-offset: 2px;
+        }
+
+        /* Ensure sufficient padding for clickable elements */
+        button, .stat {
+            padding: 10px;
+        }
+
+        /* Add ARIA roles for better screen reader support */
+        header {
+            role: banner;
+        }
+
+        .container {
+            role: main;
+        }
+
+        footer {
+            role: contentinfo;
+        }
+
+        /* Add skip link for better navigation */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #005bb5;
+            color: #fff;
+            padding: 8px 15px;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header>
         <h1>John Doe</h1>
         <p>DevOps Engineer | Cloud Enthusiast | Automation Expert</p>
     </header>
 
-    <div class="container">
+    <div class="container" id="main-content">
         <section class="section">
             <h2>About Me</h2>
             <p>Experienced DevOps Engineer with a passion for building scalable infrastructure, automating workflows, and ensuring seamless deployments. Adept at working with cloud platforms, CI/CD pipelines, and monitoring tools.</p>
