@@ -4,15 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevOps Engineer Resume</title>
+    <meta name="description" content="Resume of Alex Johnson, Senior DevOps Engineer. Technical skills, achievements, and projects.">
     <style>
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px; width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap;
+        }
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: 10px;
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 6px;
+            z-index: 10000;
+            font-weight: bold;
+            transition: left 0.2s;
+        }
+        .skip-link:focus {
+            left: 10px;
+            outline: 3px solid #ffb703;
+        }
         :root {
             --primary: #1e293b;
-            --accent: #38bdf8;
+            --accent: #0077b6; /* Improved contrast */
+            --accent-focus: #023e8a;
             --bg: #f8fafc;
             --text: #0f172a;
             --card: #fff;
             --shadow: 0 4px 24px rgba(30,41,59,0.08);
             --glow: 0 0 24px 6px #38bdf8cc;
+            --focus: #ffb703;
         }
         html, body {
             margin: 0;
@@ -218,79 +244,83 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <a href="#main-content" class="skip-link" tabindex="0">Skip to main content</a>
+    <main id="main-content" class="container" role="main">
         <header>
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="DevOps Engineer" class="avatar">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Portrait of Alex Johnson, Senior DevOps Engineer" class="avatar" tabindex="0">
             <div class="intro">
                 <h1>Alex Johnson</h1>
                 <h2>Senior DevOps Engineer</h2>
                 <p>Cloud-native enthusiast with 8+ years of experience automating, scaling, and securing infrastructure. Passionate about CI/CD, observability, and empowering teams to deliver faster and safer.</p>
-                <div class="contact">
-                    <a href="mailto:alex.johnson@email.com">alex.johnson@email.com</a>
-                    <a href="tel:+1234567890">+1 234 567 890</a>
-                    <a href="https://github.com/alexjohnson" target="_blank">GitHub</a>
-                    <a href="https://linkedin.com/in/alexjohnson" target="_blank">LinkedIn</a>
-                </div>
+                <nav aria-label="Contact links" class="contact">
+                    <a href="mailto:alex.johnson@email.com" aria-label="Email Alex Johnson">alex.johnson@email.com</a>
+                    <a href="tel:+1234567890" aria-label="Call Alex Johnson">+1 234 567 890</a>
+                    <a href="https://github.com/alexjohnson" target="_blank" rel="noopener" aria-label="GitHub profile (opens in new tab)">GitHub</a>
+                    <a href="https://linkedin.com/in/alexjohnson" target="_blank" rel="noopener" aria-label="LinkedIn profile (opens in new tab)">LinkedIn</a>
+                </nav>
             </div>
         </header>
-        <div class="stats">
-            <div class="stat">
-                <div class="number" id="deployments">0</div>
-                <div class="label">Automated Deployments</div>
-            </div>
-            <div class="stat">
-                <div class="number" id="uptime">0%</div>
-                <div class="label">Avg. System Uptime</div>
-            </div>
-            <div class="stat">
-                <div class="number" id="pipelines">0</div>
-                <div class="label">CI/CD Pipelines Built</div>
-            </div>
-            <div class="stat">
-                <div class="number" id="cloud">0</div>
-                <div class="label">Cloud Migrations</div>
-            </div>
-        </div>
-        <section>
-            <h3>Technical Skills</h3>
-            <div class="skills">
-                <div class="skill">AWS, Azure, GCP</div>
-                <div class="skill">Kubernetes, Docker</div>
-                <div class="skill">Terraform, Ansible</div>
-                <div class="skill">Linux, Bash, PowerShell</div>
-                <div class="skill">Prometheus, Grafana, ELK</div>
-                <div class="skill">Python, Go, TypeScript</div>
-                <div class="skill">Jenkins, GitHub Actions, Azure DevOps</div>
-                <div class="skill">Security & Compliance</div>
+        <section aria-labelledby="stats-heading">
+            <h3 id="stats-heading" class="visually-hidden">Key Statistics</h3>
+            <div class="stats" role="list">
+                <div class="stat" role="listitem" tabindex="0">
+                    <div class="number" id="deployments" aria-label="Automated Deployments">0</div>
+                    <div class="label">Automated Deployments</div>
+                </div>
+                <div class="stat" role="listitem" tabindex="0">
+                    <div class="number" id="uptime" aria-label="Average System Uptime">0%</div>
+                    <div class="label">Avg. System Uptime</div>
+                </div>
+                <div class="stat" role="listitem" tabindex="0">
+                    <div class="number" id="pipelines" aria-label="CI/CD Pipelines Built">0</div>
+                    <div class="label">CI/CD Pipelines Built</div>
+                </div>
+                <div class="stat" role="listitem" tabindex="0">
+                    <div class="number" id="cloud" aria-label="Cloud Migrations">0</div>
+                    <div class="label">Cloud Migrations</div>
+                </div>
             </div>
         </section>
-        <section>
-            <h3>Key Projects</h3>
-            <div class="projects">
-                <div class="project">
+        <section aria-labelledby="skills-heading">
+            <h3 id="skills-heading">Technical Skills</h3>
+            <ul class="skills" role="list">
+                <li class="skill" tabindex="0">AWS, Azure, GCP</li>
+                <li class="skill" tabindex="0">Kubernetes, Docker</li>
+                <li class="skill" tabindex="0">Terraform, Ansible</li>
+                <li class="skill" tabindex="0">Linux, Bash, PowerShell</li>
+                <li class="skill" tabindex="0">Prometheus, Grafana, ELK</li>
+                <li class="skill" tabindex="0">Python, Go, TypeScript</li>
+                <li class="skill" tabindex="0">Jenkins, GitHub Actions, Azure DevOps</li>
+                <li class="skill" tabindex="0">Security & Compliance</li>
+            </ul>
+        </section>
+        <section aria-labelledby="projects-heading">
+            <h3 id="projects-heading">Key Projects</h3>
+            <ul class="projects" role="list">
+                <li class="project" tabindex="0">
                     <div class="project-title">Global E-commerce Cloud Migration</div>
                     <div class="project-desc">Led migration of 200+ microservices to AWS EKS, reducing infra costs by 30% and improving deployment frequency by 4x.</div>
-                </div>
-                <div class="project">
+                </li>
+                <li class="project" tabindex="0">
                     <div class="project-title">Self-Healing CI/CD Platform</div>
                     <div class="project-desc">Architected a self-healing pipeline with auto rollback and canary deployments, achieving 99.99% deployment success rate.</div>
-                </div>
-                <div class="project">
+                </li>
+                <li class="project" tabindex="0">
                     <div class="project-title">Observability Stack Rollout</div>
                     <div class="project-desc">Deployed Prometheus, Grafana, and ELK for real-time monitoring and alerting, reducing MTTR by 60%.</div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </section>
-        <section>
-            <h3>Achievements</h3>
-            <div class="achievements">
-                <div class="achievement">AWS Certified DevOps Engineer – Professional</div>
-                <div class="achievement">Speaker at DevOpsDays 2025: "Scaling CI/CD for 100+ Teams"</div>
-                <div class="achievement">Open-source contributor: Terraform modules, Helm charts</div>
-                <div class="achievement">Reduced incident rate by 45% via proactive monitoring</div>
-            </div>
+        <section aria-labelledby="achievements-heading">
+            <h3 id="achievements-heading">Achievements</h3>
+            <ul class="achievements" role="list">
+                <li class="achievement" tabindex="0">AWS Certified DevOps Engineer – Professional</li>
+                <li class="achievement" tabindex="0">Speaker at DevOpsDays 2025: "Scaling CI/CD for 100+ Teams"</li>
+                <li class="achievement" tabindex="0">Open-source contributor: Terraform modules, Helm charts</li>
+                <li class="achievement" tabindex="0">Reduced incident rate by 45% via proactive monitoring</li>
+            </ul>
         </section>
-    </div>
+    </main>
     <script>
         // Animate statistics for a dynamic, modern feel
         function animateValue(id, start, end, duration, suffix = "") {
@@ -321,7 +351,7 @@
 
         // Section reveal on scroll
         function revealSections() {
-            const sections = document.querySelectorAll('section');
+            const sections = document.querySelectorAll('main section');
             const trigger = window.innerHeight * 0.85;
             sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
@@ -333,8 +363,12 @@
         window.addEventListener('scroll', revealSections);
         window.addEventListener('load', revealSections);
 
-        // Epic sparkles effect
+        // Epic sparkles effect (reduced motion respects accessibility)
+        function prefersReducedMotion() {
+            return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        }
         function createSparkle(x, y) {
+            if (prefersReducedMotion()) return;
             const sparkle = document.createElement('div');
             sparkle.style.position = 'fixed';
             sparkle.style.left = x + 'px';
@@ -363,6 +397,14 @@
                 createSparkle(e.clientX, e.clientY);
             }
         });
+
+        // Keyboard navigation for sparkles (for fun, not critical)
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Tab') {
+                createSparkle(window.innerWidth / 2, window.innerHeight / 2);
+            }
+        });
+    </script>
     </script>
 </body>
 </html>
