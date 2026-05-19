@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             background-color: #f4f4f4;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
         .container {
             max-width: 800px;
@@ -16,6 +17,7 @@
             padding: 20px;
             background: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 10px; /* Rounded corners */
         }
         header {
             background-color: #333;
@@ -23,10 +25,17 @@
             padding-top: 30px;
             min-height: 70px;
             border-bottom: #0779e4 3px solid;
+            text-align: center; /* Center the heading */
         }
         header h1 {
             margin: 0;
-            padding: 10px 0 10px 20px;
+            padding: 10px 0;
+            font-size: 24px;
+            animation: glow 2s infinite; /* Text glow effect */
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #fff; }
+            100% { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff69b4; }
         }
         .stats {
             display: flex;
@@ -34,17 +43,38 @@
             background-color: #f2f2f2;
             padding: 10px;
             border-bottom: 1px solid #ddd;
+            margin-top: 20px; /* Space from header */
         }
         .stat {
             text-align: center;
+            flex-basis: 30%; /* Equal width for stats */
+            background-color: #e5e5e5;
+            padding: 10px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 10px; /* Spacing between stats */
+        }
+        .stat h2 {
+            font-size: 36px;
+            color: #333;
+            animation: scaleUp 1s forwards; /* Scale up effect on load */
+        }
+        @keyframes scaleUp {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
         .achievements, .projects {
-            margin-top: 20px;
+            margin-top: 40px;
         }
         .achievement, .project {
             background-color: #f9f9f9;
             padding: 10px;
             border-bottom: 1px solid #ddd;
+            transition: transform 0.3s; /* Hover effect */
+        }
+        .achievement:hover, .project:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
         footer {
             position: fixed;
@@ -54,6 +84,7 @@
             color: white;
             text-align: center;
             padding: 5px;
+            z-index: -1; /* Behind other elements */
         }
     </style>
 </head>
@@ -64,15 +95,15 @@
     </header>
     <section class="stats">
         <div class="stat">
-            <h2>10+</h2>
+            <h2 id="yearsOfExperience">10+</h2>
             <p>Years of Experience</p>
         </div>
         <div class="stat">
-            <h2>50+</h2>
+            <h2 id="successfulProjects">50+</h2>
             <p>Successful Projects</p>
         </div>
         <div class="stat">
-            <h2>90%</h2>
+            <h2 id="successRate">90%</h2>
             <p>Success Rate</p>
         </div>
     </section>
@@ -102,11 +133,48 @@
 <script>
     // Example JavaScript code to dynamically update the stats section
     document.addEventListener("DOMContentLoaded", function() {
-        const statElements = document.querySelectorAll(".stat h2");
+        const yearsOfExperience = document.getElementById('yearsOfExperience');
+        const successfulProjects = document.getElementById('successfulProjects');
+        const successRate = document.getElementById('successRate');
+        
         // Simulating dynamic data, in a real scenario, this could come from an API or database.
         const data = [15, 75, 95]; // Years of experience, successful projects, success rate
-        statElements.forEach((element, index) => {
-            element.textContent = data[index];
+        
+        // Update stats with animation
+        yearsOfExperience.innerHTML = '0+';
+        successfulProjects.innerHTML = '0+';
+        successRate.innerHTML = '0%';
+        
+        setTimeout(() => {
+            yearsOfExperience.innerHTML = data[0] + '+';
+            successfulProjects.innerHTML = data[1] + '+';
+            successRate.innerHTML = data[2] + '%';
+        }, 500); // Delay for animation effect
+        
+        // Adding event listeners for hover effects on achievements and projects
+        const achievementElements = document.querySelectorAll('.achievement');
+        const projectElements = document.querySelectorAll('.project');
+        
+        achievementElements.forEach(achievement => {
+            achievement.addEventListener('mouseover', () => {
+                achievement.style.transform = 'scale(1.05)';
+                achievement.style.boxShadow = '0 2px 4px rgba(0,0,0,0.5)';
+            });
+            achievement.addEventListener('mouseout', () => {
+                achievement.style.transform = '';
+                achievement.style.boxShadow = '';
+            });
+        });
+        
+        projectElements.forEach(project => {
+            project.addEventListener('mouseover', () => {
+                project.style.transform = 'scale(1.05)';
+                project.style.boxShadow = '0 2px 4px rgba(0,0,0,0.5)';
+            });
+            project.addEventListener('mouseout', () => {
+                project.style.transform = '';
+                project.style.boxShadow = '';
+            });
         });
     });
 </script>
