@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DevOps Engineer — Resume</title>
+  <style>
+    /* Reset & base */
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#7c3aed;--glass:rgba(255,255,255,0.04);--glass-2:rgba(255,255,255,0.02)}
+    *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background:linear-gradient(180deg,#071028 0%, #071827 60%);color:#e6eef8;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:920px;margin:40px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);box-shadow:0 8px 30px rgba(2,6,23,0.7);backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.04)}
+    header{display:flex;gap:20px;align-items:center;margin-bottom:18px}
+    .avatar{width:96px;height:96px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:28px;flex:0 0 96px}
+    .title{flex:1}
+    .name{font-size:20px;font-weight:700;margin:0}
+    .role{color:var(--muted);margin-top:6px}
+    .contact{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .pill{background:var(--glass);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:13px}
+
+    main{display:grid;grid-template-columns:1fr 320px;gap:22px}
+    @media (max-width:880px){main{grid-template-columns:1fr} .avatar{width:78px;height:78px;font-size:22px}}
+
+    /* Left column */
+    .section{background:linear-gradient(180deg,var(--card),rgba(11,18,32,0.95));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .lead{color:var(--muted);margin:0 0 10px 0}
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:var(--glass-2);padding:8px 10px;border-radius:8px;color:#d7e6ff;font-weight:600;font-size:13px}
+
+    /* Stats */
+    .stats{display:flex;gap:12px;margin-top:12px}
+    .stat{flex:1;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:12px;border-radius:10px;text-align:center}
+    .stat .n{font-size:20px;font-weight:800;color:var(--accent)}
+    .stat .l{color:var(--muted);font-size:12px}
+
+    /* Timeline / Projects */
+    .card-list{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+    .card-item{padding:12px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.015),transparent);border:1px solid rgba(255,255,255,0.02)}
+    .card-item h4{margin:0 0 6px 0}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .tag{background:rgba(124,58,237,0.12);color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px}
+
+    /* Right column */
+    aside{display:flex;flex-direction:column;gap:14px}
+    .box{padding:14px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent);border:1px solid rgba(255,255,255,0.02)}
+    .progress{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#06b6d4);width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
+    .muted{color:var(--muted);font-size:13px}
+
+    footer{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:18px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:10px;color:#cfe6ff;font-weight:700;cursor:pointer}
+
+    /* small utilities */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header>
+      <div class="avatar">DE</div>
+      <div class="title">
+        <h1 class="name">Senior DevOps Engineer</h1>
+        <div class="role">Cloud Infrastructure · CI/CD · Observability</div>
+        <div class="contact">
+          <span class="pill">devops@example.com</span>
+          <span class="pill">City, Country</span>
+          <span class="pill">github.com/sample-profile</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="pill">Open to opportunities</div>
+        <div class="muted" style="margin-top:8px;font-size:13px">10+ years experience</div>
+      </div>
+    </header>
+
+    <main>
+      <div>
+        <section class="section">
+          <p class="lead">Practical DevOps leader delivering reliable, scalable infrastructure and streamlined delivery pipelines. I design systems that reduce toil, improve deployment frequency, and accelerate recovery.</p>
+
+          <div class="grid-2" style="margin-top:12px">
+            <div>
+              <h3 style="margin:0 0 8px 0">Technical Skills</h3>
+              <div class="skills">
+                <div class="skill">Kubernetes</div>
+                <div class="skill">Terraform</div>
+                <div class="skill">GitHub Actions</div>
+                <div class="skill">Prometheus</div>
+                <div class="skill">Docker</div>
+                <div class="skill">AWS</div>
+                <div class="skill">GCP</div>
+                <div class="skill">Helm</div>
+              </div>
+            </div>
+            <div>
+              <h3 style="margin:0 0 8px 0">Certs & Languages</h3>
+              <div class="skills">
+                <div class="skill">AWS Certified DevOps Pro</div>
+                <div class="skill">CNCF CKA</div>
+                <div class="skill">Python</div>
+                <div class="skill">Go</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats" aria-hidden="true">
+            <div class="stat">
+              <div class="n" data-num="99">99%</div>
+              <div class="l">Uptime (SLA-driven)</div>
+            </div>
+            <div class="stat">
+              <div class="n" data-num="8">8x</div>
+              <div class="l">Faster deploys</div>
+            </div>
+            <div class="stat">
+              <div class="n" data-num="120">120+</div>
+              <div class="l">Automated pipelines</div>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="section" style="margin-top:16px">
+          <h3 style="margin:0 0 10px 0">Selected Projects & Achievements</h3>
+          <div class="card-list">
+            <article class="card-item">
+              <h4>Enterprise Platform Migration</h4>
+              <div class="muted">Led migration of a 200+ microservice platform to Kubernetes with Terraform-based infra-as-code and GitOps flows.</div>
+              <div class="tags">
+                <span class="tag">Kubernetes</span><span class="tag">Terraform</span><span class="tag">Flux</span>
+              </div>
+            </article>
+
+            <article class="card-item">
+              <h4>CI/CD at Scale</h4>
+              <div class="muted">Designed GitHub Actions pipelines that reduced merge-to-production time by 8x and increased deployment reliability.</div>
+              <div class="tags"><span class="tag">GitHub Actions</span><span class="tag">Docker</span></div>
+            </article>
+
+            <article class="card-item">
+              <h4>Observability & Incident Reduction</h4>
+              <div class="muted">Implemented Prometheus+Grafana + alerting playbooks; achieved 40% reduction in mean time to detect (MTTD).</div>
+              <div class="tags"><span class="tag">Prometheus</span><span class="tag">PagerDuty</span></div>
+            </article>
+          </div>
+        </section>
+
+      </div>
+
+      <aside>
+        <div class="box">
+          <h4 style="margin:0 0 8px 0">Core Competencies</h4>
+          <ul style="margin:0;padding-left:18px;color:#d5e9ff;line-height:1.6">
+            <li>Infrastructure as Code (Terraform, Terragrunt)</li>
+            <li>Platform Engineering & SRE practices</li>
+            <li>CI/CD automation & release engineering</li>
+            <li>Observability, logging, incident response</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h4 style="margin:0 0 8px 0">Impact Metrics</h4>
+          <div class="muted">Deployment frequency</div>
+          <div class="progress" aria-label="Deployment frequency">
+            <i id="p1" style="width:85%"></i>
+          </div>
+          <div style="height:8px"></div>
+          <div class="muted">Automation coverage</div>
+          <div class="progress"><i id="p2" style="width:72%"></i></div>
+        </div>
+
+        <div class="box">
+          <h4 style="margin:0 0 8px 0">Education</h4>
+          <div class="muted">M.Sc. Computer Science — Warsaw University of Technology</div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="muted">Focused on pragmatic automation, secure defaults, and measurable outcomes.</div>
+      <div>
+        <button class="btn" onclick="print()">Print</button>
+        <button class="btn" id="download">Download PDF</button>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Small UI polish: animate stat numbers
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.querySelectorAll('.stat .n').forEach(el=>{
+        const v=el.dataset.num||el.textContent; if(!v) return; const max=parseInt(v.replace(/\D/g,''))||0;
+        let cur=0; const step=Math.max(1,Math.floor(max/40)); const id=setInterval(()=>{cur+=step; if(cur>=max){cur=max; clearInterval(id);} el.textContent = (v.includes('%')?cur+'%':(v.includes('+')?cur+'+':cur));},22);
+      });
+
+      // Accessibility: keyboard focus styles
+      document.body.addEventListener('keyup',e=>{ if(e.key==='Tab') document.body.classList.add('user-tab'); });
+
+      // Download as PDF via print dialog guidance
+      document.getElementById('download').addEventListener('click',()=>{window.print();});
+    });
+  </script>
+</body>
+</html>
