@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             background-color: #f4f4f4;
+            transition: background-color 0.5s ease;
         }
         .container {
             max-width: 800px;
@@ -16,9 +17,12 @@
             padding: 20px;
             background: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
         }
         h1, h2, h3 {
             color: #333;
+            transition: color 0.5s ease;
         }
         .stats {
             display: flex;
@@ -27,16 +31,42 @@
         }
         .stat {
             text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            transition: transform 0.5s ease, background-color 0.5s ease;
+        }
+        .stat:hover {
+            transform: scale(1.1);
+            background-color: #e0e0e0;
         }
         .project {
             background-color: #f0f0f0;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease, background-color 0.5s ease;
+        }
+        .project:hover {
+            transform: scale(1.05);
+            background-color: #e0e0e0;
         }
         .achievement {
             font-style: italic;
             color: green;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -99,7 +129,39 @@
                     <h3>CI/CD Pipeline Implementation</h3>
                     <p>Developed and implemented CI/CD pipelines using Jenkins and GitLab CI, resulting in a 40% decrease in time-to-market.</p>
                 `;
-                document.querySelector('h2: nth-child(4)').parentNode.appendChild(newProject);
+                document.querySelector('h2:nth-child(4)').parentNode.appendChild(newProject);
+
+                // Add animation to the projects section
+                const projects = document.querySelectorAll('.project');
+                projects.forEach((project) => {
+                    project.addEventListener('mouseover', () => {
+                        project.style.transform = 'scale(1.05)';
+                    });
+                    project.addEventListener('mouseout', () => {
+                        project.style.transform = 'scale(1)';
+                    });
+                });
+
+                // Add animation to the stats section
+                const stats = document.querySelectorAll('.stat');
+                stats.forEach((stat) => {
+                    stat.addEventListener('mouseover', () => {
+                        stat.style.transform = 'scale(1.1)';
+                    });
+                    stat.addEventListener('mouseout', () => {
+                        stat.style.transform = 'scale(1)';
+                    });
+                });
+            });
+
+            // Add a scrolling animation to the body
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                if (scrollPosition > 100) {
+                    document.body.style.background = '#ccc';
+                } else {
+                    document.body.style.background = '#f4f4f4';
+                }
             });
         </script>
     </div>
