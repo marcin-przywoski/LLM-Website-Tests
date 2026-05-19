@@ -6,7 +6,7 @@
     <title>DevOps Engineer Resume</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* General Styles */
+        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -20,18 +20,18 @@
         
         .container {
             width: 80%;
-            max-width: 600px;
+            max-width: 800px;
             margin-top: 20px;
             padding: 20px;
-            background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .heading {
-            font-size: 24px;
+            font-size: 36px;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            text-align: center;
         }
         
         /* Responsive Styles for Mobile Devices */
@@ -39,32 +39,42 @@
             .container {
                 width: 90%;
             }
+            .heading {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <!-- Header Section -->
+        <!-- Header Section with Animation -->
         <h1 class="heading">DevOps Engineer Resume</h1>
+        <div class="animation" id="header-animation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         
-        <!-- Professional Information Section -->
-        <section>
+        <!-- Professional Information Section with Hover Effects -->
+        <section class="info-section">
             <h2>Professional Information:</h2>
             <p>Name: John Doe</p>
-            <p>Email: [johndoe@example.com](mailto:johndoe@example.com)</p>
+            <p>Email: <a href="mailto:johndoe@example.com">johndoe@example.com</a></p>
             <p>Phone: +1234567890</p>
-            <p>LinkedIn: linkedin.com/in/johndoe</p>
+            <p>LinkedIn: <a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a></p>
         </section>
         
-        <!-- Summary Section -->
-        <section>
+        <!-- Summary Section with CSS Animation -->
+        <section class="summary-section">
             <h2>Summary:</h2>
-            <p>Certified DevOps Engineer with 5+ years of experience in streamlining software development, deployment, and operations using automation tools like Jenkins, Ansible, Docker, and Kubernetes.</p>
+            <div class="animation" id="summary-animation">
+                <span>Certified DevOps Engineer with 5+ years of experience in streamlining software development, deployment, and operations using automation tools like Jenkins, Ansible, Docker, and Kubernetes.</span>
+            </div>
         </section>
         
-        <!-- Technical Skills Section -->
-        <section>
+        <!-- Technical Skills Section with CSS Animations -->
+        <section class="skills-section">
             <h2>Technical Skills:</h2>
             <ul>
                 <li>Jenkins</li>
@@ -76,17 +86,21 @@
             </ul>
         </section>
         
-        <!-- Projects Section -->
-        <section>
+        <!-- Projects Section with Hover Effects and CSS Animations -->
+        <section class="projects-section">
             <h2>Projects:</h2>
-            <ul>
-                <li><strong>DevOps Automation Toolchain:</strong> Designed and implemented a comprehensive DevOps toolchain using Jenkins, Ansible, Docker, and Kubernetes to improve the efficiency of software development and deployment.</li>
-                <li><strong>Containerization with Docker:</strong> Implemented containerization using Docker for legacy applications, resulting in 30% reduction in infrastructure costs and 25% improvement in application performance.</li>
-            </ul>
+            <div class="project" style="background-image: url('image1.jpg');">
+                <h3>DevOps Automation Toolchain</h3>
+                <p>Description of the project goes here.</p>
+            </div>
+            <div class="project" style="background-image: url('image2.jpg');">
+                <h3>Containerization with Docker</h3>
+                <p>Description of the project goes here.</p>
+            </div>
         </section>
         
-        <!-- Achievements Section -->
-        <section>
+        <!-- Achievements Section with CSS Animations -->
+        <section class="achievements-section">
             <h2>Achievements:</h2>
             <ul>
                 <li>Improved deployment frequency by 40%</li>
@@ -95,8 +109,8 @@
             </ul>
         </section>
         
-        <!-- Certifications Section -->
-        <section>
+        <!-- Certifications Section with CSS Animations -->
+        <section class="certifications-section">
             <h2>Certifications:</h2>
             <ul>
                 <li><strong>DevOps Foundation Certification (DOF)</strong></li>
@@ -122,6 +136,28 @@
             link.addEventListener("click", function() {
                 highlightSection(this.parentNode);
             });
+        });
+        
+        // Function to Animate Header
+        function animateHeader() {
+            var headerAnimation = document.getElementById("header-animation");
+            var spans = headerAnimation.children;
+            spans[0].style.animationPlayState = "running";
+            spans[1].style.animationPlayState = "running";
+            spans[2].style.animationPlayState = "running";
+        }
+        
+        // Function to Animate Summary and Achievements Sections
+        function animateSummary() {
+            var summaryAnimation = document.getElementById("summary-animation");
+            var span = summaryAnimation.children;
+            span.style.animationPlayState = "running";
+        }
+        
+        // Call the Animation Functions on Page Load
+        window.addEventListener("load", function() {
+            animateHeader();
+            animateSummary();
         });
     </script>
 </body>
