@@ -5,84 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevOps Engineer Resume</title>
     <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #f1c40f;
+            --background-color: #f4f4f4;
+        }
+        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            overflow-x: hidden;
+            background-color: var(--background-color);
+            color: #333;
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
         }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* Container Styles */
         .container {
             width: 80%;
             margin: auto;
             padding: 20px;
             background: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.5s ease-in-out;
+            border-radius: 10px;
+            overflow: auto;
         }
+        
+        /* Header Styles */
         header {
             text-align: center;
-            animation: fadeIn 3s;
+            margin-bottom: 20px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
         }
+        
+        header h2 {
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+        
+        /* Section Styles */
         section {
             margin-bottom: 40px;
             padding: 20px;
             background: #fff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 10px;
         }
+        
         .section-title {
             font-weight: bold;
             margin-top: 0;
             text-align: center;
-            animation: titleSlide 2s;
         }
-        @keyframes titleSlide {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
+        
+        /* Statistics Styles */
         .stats {
             display: flex;
             justify-content: space-between;
             margin: 20px 0;
-            animation: statsFade 2s;
         }
-        @keyframes statsFade {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        
         .stat {
             flex-basis: 30%;
             text-align: center;
-            transition: transform 1s ease-in-out;
         }
-        .stat:hover {
-            transform: scale(1.1);
-        }
+        
+        /* Achievements and Projects Styles */
         .achievements, .projects {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-            animation: cardsAppear 3s;
         }
-        @keyframes cardsAppear {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        
         .card {
             background: #fff;
             padding: 20px;
             margin: 10px;
             width: calc(33.33% - 20px);
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 1s ease-in-out;
+            border-radius: 10px;
         }
-        .card:hover {
-            transform: scale(1.05);
-        }
+        
+        /* Responsive Design */
         @media only screen and (max-width: 768px) {
             .container {
                 width: 90%;
@@ -94,11 +113,10 @@
     </style>
 </head>
 <body>
-    <div class="container" id="scrollToTopContainer">
+    <div class="container">
         <header>
             <h1>John Doe</h1>
             <h2>DevOps Engineer</h2>
-            <button id="scrollToTopButton" style="display:none;">Scroll to Top</button>
         </header>
         <section>
             <h2 class="section-title">Summary</h2>
@@ -154,19 +172,24 @@
     </div>
 
     <script>
-        // Example of JavaScript usage: Animating the scroll to the top on button click
-        function scrollToTop() {
-            var container = document.getElementById('scrollToTopContainer');
-            container.scrollIntoView({behavior: 'smooth'});
-        }
-        document.getElementById('scrollToTopButton').addEventListener('click', scrollToTop);
-
         // Add event listener to window scroll
         window.addEventListener('scroll', function() {
             if (window.scrollY > 500) {
-                document.getElementById('scrollToTopButton').style.display = 'block';
+                var scrollToTopButton = document.createElement('button');
+                scrollToTopButton.textContent = 'Scroll to Top';
+                scrollToTopButton.style.position = 'fixed';
+                scrollToTopButton.style.bottom = '20px';
+                scrollToTopButton.style.right = '20px';
+                scrollToTopButton.style.zIndex = '1000';
+                scrollToTopButton.onclick = function() {
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                };
+                document.body.appendChild(scrollToTopButton);
             } else {
-                document.getElementById('scrollToTopButton').style.display = 'none';
+                var scrollToTopButton = document.querySelector('button');
+                if (scrollToTopButton) {
+                    document.body.removeChild(scrollToTopButton);
+                }
             }
         });
     </script>
