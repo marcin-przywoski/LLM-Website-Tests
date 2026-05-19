@@ -6,98 +6,129 @@
     <title>DevOps Engineer Resume</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #f5f5f5;
+            --primary: #0f342e;
+            --secondary: #1a237e;
+            --accent: #e63946;
+            --light: #f8f9fa;
+            --hover: #1a237e;
         }
         
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', sans-serif;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #1a237e 0%, #0f342e 100%);
             color: var(--light);
-            line-height: 1.6;
+            transition: background 0.5s ease;
+            min-height: 100vh;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-10px) scale(1.05);
         }
         
         .card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin: 20px 0;
+            background: linear-gradient(135deg, #0f342e 0%, #1a237e 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            transition: transform 0.4s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
         
         .stats {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
         }
         
         .stat {
-            background: #e0e0e0;
-            padding: 12px 15px;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
         }
         
         .stat:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #0f342e;
         }
         
         .project {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 1.5rem;
             border-left: 4px solid var(--secondary);
         }
         
         .project h3 {
-            margin-top: 0;
             color: var(--primary);
+            margin-bottom: 0.5rem;
         }
         
         .project ul {
-            list-style-type: none;
+            list-style: none;
             padding-left: 0;
+            margin: 0 8px;
         }
         
         .project li {
-            margin-bottom: 8px;
+            margin-bottom: 0.8rem;
             padding-left: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
         .skills {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 20px;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
         
         .skill {
-            background: #f8f9fa;
-            padding: 12px 15px;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: background 0.3s;
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
         }
         
         .skill:hover {
-            background: #e3f2fd;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
         .highlight {
-            background: var(--accent);
-            padding: 2px 5px;
-            border-radius: 3px;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            padding: 1rem;
+            border-radius: 8px;
+            transition: background 0.5s ease;
+        }
+        
+        .highlight:hover {
+            background: linear-gradient(45deg, #e63946, #0f342e);
+        }
+        
+        .highlight:hover::after {
+            content: "✨";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            color: white;
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -110,44 +141,27 @@
                 <div class="stat">Certifications: AWS Certified DevOps Engineer, CI/CD Pipeline Specialist</div>
                 <div class="stat">Projects: 8+</div>
             </div>
-            
-            <div class="card">
-                <h2>Technical Expertise</h2>
-                <div class="skills">
-                    <div class="skill">Linux Server Administration</div>
-                    <div class="skill">Containerization (Docker/Kubernetes)</div>
-                    <div class="skill">Automated Testing (JUnit/Selenium)</div>
-                    <div class="skill">Infrastructure Automation</div>
-                    <div class="skill">Cloud Platforms (AWS/Azure)</div>
-                </div>
-                
-                <div class="project">
-                    <h3>DevOps Automation Project</h3>
-                    <ul>
-                        <li>Implemented CI/CD pipeline reducing deployment time by 40%</li>
-                        <li>Managed 50+ server clusters across 3 regions</li>
-                        <li>Integrated monitoring with Prometheus & Grafana</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="card">
-                <h2>Key Achievements</h2>
-                <div class="project">
-                    <h3>Scaling Infrastructure</h3>
-                    <p>Optimized server response times reducing latency by 65%</p>
-                    <p>Coordinated rollout of new services across 10+ teams</p>
-                </div>
+        </div>
+        
+        <div class="card">
+            <h2>Technical Expertise</h2>
+            <div class="skills">
+                <div class="skill">Linux Server Administration</div>
+                <div class="skill">Containerization (Docker/Kubernetes)</div>
+                <div class="skill">Automated Testing (JUnit/Selenium)</div>
+                <div class="skill">Infrastructure Automation</div>
             </div>
         </div>
         
         <div class="card">
-            <h2>Certifications</h2>
-            <ul>
-                <li>AWS Certified DevOps Engineer - Specialty</li>
-                <li>CI/CD Pipeline Specialist (Jira/Ansible)</li>
-                <li>PMP Certification</li>
-            </ul>
+            <h2>Key Achievements</h2>
+            <div class="project">
+                <h3>Scaling Infrastructure</h3>
+                <ul>
+                    <li>Optimized server response times reducing latency by 40%</li>
+                    <li>Coordinated rollout of 50+ cloud services across 3 regions</li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>
