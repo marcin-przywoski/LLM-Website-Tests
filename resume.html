@@ -4,267 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevOps Engineer Resume</title>
-    <style>
-        /* Global Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-            transition: background-color 0.5s ease-in-out;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            transition: font-size 0.5s ease-in-out;
-        }
-
-        /* Main Content Styles */
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            margin-top: 5rem;
-        }
-
-        section {
-            background-color: #fff;
-            padding: 2rem;
-            border: 1px solid #ddd;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s ease-in-out;
-        }
-
-        /* Section 1: Summary */
-        .section-1 {
-            padding: 1rem;
-            background-color: #f7f7f7;
-        }
-
-        .section-1 h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            transition: font-size 0.5s ease-in-out;
-        }
-
-        .section-1 p {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            transition: font-size 0.5s ease-in-out;
-        }
-
-        /* Section 2: Technical Skills */
-        .section-2 {
-            padding: 1rem;
-            background-color: #f7f7f7;
-        }
-
-        .section-2 ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .section-2 li {
-            padding: 0.5rem;
-            border-bottom: 1px solid #ddd;
-            transition: border-bottom 0.5s ease-in-out;
-        }
-
-        /* Section 3: Experience */
-        .section-3 {
-            padding: 1rem;
-            background-color: #f7f7f7;
-        }
-
-        .section-3 h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            transition: font-size 0.5s ease-in-out;
-        }
-
-        .section-3 .experience-item {
-            padding: 1rem;
-            border-bottom: 1px solid #ddd;
-            transition: border-bottom 0.5s ease-in-out;
-        }
-
-        /* Section 4: Projects */
-        .section-4 {
-            padding: 1rem;
-            background-color: #f7f7f7;
-        }
-
-        .section-4 h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            transition: font-size 0.5s ease-in-out;
-        }
-
-        .section-4 .project-item {
-            padding: 1rem;
-            border-bottom: 1px solid #ddd;
-            transition: border-bottom 0.5s ease-in-out;
-        }
-
-        /* Section 5: Education */
-        .section-5 {
-            padding: 1rem;
-            background-color: #f7f7f7;
-        }
-
-        .section-5 h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            transition: font-size 0.5s ease-in-out;
-        }
-
-        /* Section 6: Achievements */
-        .section-6 {
-            padding: 1rem;
-            background-color: #f7f7f7;
-        }
-
-        .section-6 h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            transition: font-size 0.5s ease-in-out;
-        }
-
-        /* Section 7: Statistics */
-        .section-7 {
-            padding: 1rem;
-            background-color: #f7f7f7;
-        }
-
-        .section-7 h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            transition: font-size 0.5s ease-in-out;
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-            clear: both;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            main {
-                flex-direction: column;
-            }
-        }
-
-        /* Animation Styles */
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fade-out {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-            }
-        }
-
-        @keyframes scale-up {
-            from {
-                transform: scale(0.5);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes scale-down {
-            from {
-                transform: scale(1);
-            }
-            to {
-                transform: scale(0.5);
-            }
-        }
-
-        @keyframes slide-in {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slide-out {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(-100%);
-            }
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    <meta name="description" content="A DevOps engineer resume that showcases technical skills, experience, and achievements.">
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content="DevOps, engineer, resume, technical skills, experience, achievements">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
 </head>
 <body>
     <header>
-        <h1>DevOps Engineer Resume</h1>
-        <button class="nav-button" onclick="toggleNav()">
-            <span class="nav-icon"></span>
-            <span class="nav-text">Toggle Nav</span>
-        </button>
+        <nav aria-label="Main Navigation">
+            <button class="nav-button" aria-label="Toggle Navigation">
+                <span class="nav-icon"></span>
+                <span class="nav-text">Toggle Navigation</span>
+            </button>
+            <ul id="nav-list" role="menu" aria-label="Navigation Menu">
+                <li role="menuitem"><a href="#summary" class="nav-link">Summary</a></li>
+                <li role="menuitem"><a href="#technical-skills" class="nav-link">Technical Skills</a></li>
+                <li role="menuitem"><a href="#experience" class="nav-link">Experience</a></li>
+                <li role="menuitem"><a href="#projects" class="nav-link">Projects</a></li>
+                <li role="menuitem"><a href="#education" class="nav-link">Education</a></li>
+                <li role="menuitem"><a href="#achievements" class="nav-link">Achievements</a></li>
+                <li role="menuitem"><a href="#statistics" class="nav-link">Statistics</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <section class="section-1" id="summary">
+        <section id="summary" role="region" aria-label="Summary">
             <h2>Summary</h2>
             <p>Highly motivated and experienced DevOps engineer with 5+ years of experience in designing and implementing scalable and efficient DevOps pipelines. Proven track record of improving deployment speed, reducing downtime, and increasing customer satisfaction.</p>
         </section>
-        <section class="section-2" id="technical-skills">
+        <section id="technical-skills" role="region" aria-label="Technical Skills">
             <h2>Technical Skills</h2>
             <ul>
                 <li>Cloud Platforms: AWS, Azure, Google Cloud</li>
@@ -274,7 +45,7 @@
                 <li>Scripting Languages: Python, Bash</li>
             </ul>
         </section>
-        <section class="section-3" id="experience">
+        <section id="experience" role="region" aria-label="Experience">
             <h2>Experience</h2>
             <div class="experience-item">
                 <h3>Senior DevOps Engineer, ABC Company</h3>
@@ -295,7 +66,7 @@
                 </ul>
             </div>
         </section>
-        <section class="section-4" id="projects">
+        <section id="projects" role="region" aria-label="Projects">
             <h2>Projects</h2>
             <div class="project-item">
                 <h3>DevOps Pipeline Automation using Jenkins and Docker</h3>
@@ -306,18 +77,18 @@
                 <p>Designed and implemented a cloud-based CI/CD pipeline using AWS and Jenkins to automate deployment and testing of a web application.</p>
             </div>
         </section>
-        <section class="section-5" id="education">
+        <section id="education" role="region" aria-label="Education">
             <h2>Education</h2>
             <p>Bachelor's Degree in Computer Science, XYZ University</p>
         </section>
-        <section class="section-6" id="achievements">
+        <section id="achievements" role="region" aria-label="Achievements">
             <h2>Achievements</h2>
             <ul>
                 <li>Recipient of the "DevOps Engineer of the Year" award at ABC Company</li>
                 <li>Published a paper on "DevOps Pipeline Automation using Jenkins and Docker" at a conference</li>
             </ul>
         </section>
-        <section class="section-7" id="statistics">
+        <section id="statistics" role="region" aria-label="Statistics">
             <h2>Statistics</h2>
             <ul>
                 <li>Improved deployment speed by 25% on average</li>
@@ -325,81 +96,9 @@
                 <li>Improved customer satisfaction by 15% on average</li>
             </ul>
         </section>
-        <footer>
-            <p>&copy; 2023 John Doe</p>
-        </footer>
     </main>
-    <script>
-        // Navigation Button Functionality
-        function toggleNav() {
-            var navButton = document.querySelector('.nav-button');
-            var navList = document.querySelector('#nav-list');
-            if (navButton.classList.contains('active')) {
-                navButton.classList.remove('active');
-                navList.classList.remove('active');
-            } else {
-                navButton.classList.add('active');
-                navList.classList.add('active');
-            }
-        }
-
-        // Section Animation Functionality
-        function animateSection(section) {
-            section.classList.add('animate');
-            section.classList.remove('fade-out');
-            setTimeout(function() {
-                section.classList.remove('animate');
-            }, 1000);
-        }
-
-        // Scroll Event Functionality
-        window.addEventListener('scroll', function() {
-            var sections = document.querySelectorAll('section');
-            sections.forEach(function(section) {
-                var sectionTop = section.offsetTop;
-                var sectionHeight = section.offsetHeight;
-                var windowTop = window.scrollY;
-                if (windowTop >= sectionTop && windowTop < sectionTop + sectionHeight) {
-                    animateSection(section);
-                }
-            });
-        });
-
-        // Scroll to Section Functionality
-        function scrollToSection(sectionId) {
-            var section = document.querySelector('#' + sectionId);
-            section.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Navigation Link Functionality
-        var navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                var sectionId = link.getAttribute('href').slice(1);
-                scrollToSection(sectionId);
-            });
-        });
-
-        // Window Resize Functionality
-        window.addEventListener('resize', function() {
-            var header = document.querySelector('header');
-            var main = document.querySelector('main');
-            if (window.innerWidth < 768) {
-                header.classList.add('sticky');
-                main.classList.add('flex-column');
-            } else {
-                header.classList.remove('sticky');
-                main.classList.remove('flex-column');
-            }
-        });
-
-        // Window Load Functionality
-        window.addEventListener('load', function() {
-            var header = document.querySelector('header');
-            var main = document.querySelector('main');
-            header.classList.remove('fade-out');
-            main.classList.remove('fade-out');
-        });
-    </script>
+    <footer>
+        <p>&copy; 2023 John Doe</p>
+    </footer>
 </body>
 </html>
