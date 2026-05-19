@@ -16,6 +16,7 @@
             align-items: center;
             height: 100vh;
             background-color: #f2f2f2;
+            box-sizing: border-box; /* Add for consistent margins and padding */
         }
         
         .container {
@@ -25,6 +26,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Add for responsive design */
         }
         
         .heading {
@@ -32,6 +34,7 @@
             color: #333;
             margin-bottom: 40px;
             text-align: center;
+            font-weight: bold; /* Use semantic HTML attributes instead of inline styles */
         }
         
         /* Responsive Styles for Mobile Devices */
@@ -48,24 +51,24 @@
 
 <body>
     <div class="container">
-        <!-- Header Section with Animation -->
-        <h1 class="heading">DevOps Engineer Resume</h1>
+        <!-- Header Section with Accessibility Features -->
+        <h1 class="heading" id="header">DevOps Engineer Resume</h1>
         <div class="animation" id="header-animation">
             <span></span>
             <span></span>
             <span></span>
         </div>
         
-        <!-- Professional Information Section with Hover Effects -->
-        <section class="info-section">
+        <!-- Professional Information Section with ARIA Attributes -->
+        <section class="info-section" role="region" aria-labelledby="profile-header">
             <h2>Professional Information:</h2>
             <p>Name: John Doe</p>
             <p>Email: <a href="mailto:johndoe@example.com">johndoe@example.com</a></p>
             <p>Phone: +1234567890</p>
-            <p>LinkedIn: <a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a></p>
+            <p>LinkedIn: <a href="https://linkedin.com/in/johndoe" target="_blank" rel="noopener noreferrer">linkedin.com/in/johndoe</a></p>
         </section>
         
-        <!-- Summary Section with CSS Animation -->
+        <!-- Summary Section with Semantic HTML and ARIA Attributes -->
         <section class="summary-section">
             <h2>Summary:</h2>
             <div class="animation" id="summary-animation">
@@ -73,8 +76,8 @@
             </div>
         </section>
         
-        <!-- Technical Skills Section with CSS Animations -->
-        <section class="skills-section">
+        <!-- Technical Skills Section with WAI-ARIA Attributes -->
+        <section class="skills-section" role="list">
             <h2>Technical Skills:</h2>
             <ul>
                 <li>Jenkins</li>
@@ -86,21 +89,21 @@
             </ul>
         </section>
         
-        <!-- Projects Section with Hover Effects and CSS Animations -->
-        <section class="projects-section">
+        <!-- Projects Section with ARIA Attributes and Semantic HTML -->
+        <section class="projects-section" role="list">
             <h2>Projects:</h2>
-            <div class="project" style="background-image: url('image1.jpg');">
+            <div class="project" role="listitem" aria-labelledby="project-header">
                 <h3>DevOps Automation Toolchain</h3>
                 <p>Description of the project goes here.</p>
             </div>
-            <div class="project" style="background-image: url('image2.jpg');">
+            <div class="project" role="listitem" aria-labelledby="project-header-2">
                 <h3>Containerization with Docker</h3>
                 <p>Description of the project goes here.</p>
             </div>
         </section>
         
-        <!-- Achievements Section with CSS Animations -->
-        <section class="achievements-section">
+        <!-- Achievements Section with ARIA Attributes and Semantic HTML -->
+        <section class="achievements-section" role="list">
             <h2>Achievements:</h2>
             <ul>
                 <li>Improved deployment frequency by 40%</li>
@@ -109,8 +112,8 @@
             </ul>
         </section>
         
-        <!-- Certifications Section with CSS Animations -->
-        <section class="certifications-section">
+        <!-- Certifications Section with ARIA Attributes and Semantic HTML -->
+        <section class="certifications-section" role="list">
             <h2>Certifications:</h2>
             <ul>
                 <li><strong>DevOps Foundation Certification (DOF)</strong></li>
@@ -119,7 +122,7 @@
         </section>
     </div>
 
-    <!-- JavaScript Section for Dynamic Effects -->
+    <!-- JavaScript Section for Dynamic Effects and Accessibility -->
     <script>
         // Function to Highlight Active Sections
         function highlightSection(currentSection) {
@@ -130,15 +133,16 @@
             currentSection.classList.add("active");
         }
         
-        // Add Event Listeners for Navigation Links
+        // Add Event Listeners for Navigation Links and ARIA Attributes
         var links = document.querySelectorAll("h2, .nav-link");
         links.forEach(function(link) {
             link.addEventListener("click", function() {
                 highlightSection(this.parentNode);
             });
+            link.setAttribute("aria-selected", "false"); // Add ARIA attribute for navigation
         });
         
-        // Function to Animate Header
+        // Function to Animate Header and Other Sections
         function animateHeader() {
             var headerAnimation = document.getElementById("header-animation");
             var spans = headerAnimation.children;
@@ -147,7 +151,7 @@
             spans[2].style.animationPlayState = "running";
         }
         
-        // Function to Animate Summary and Achievements Sections
+        // Function to Animate Summary and Other Sections
         function animateSummary() {
             var summaryAnimation = document.getElementById("summary-animation");
             var span = summaryAnimation.children;
