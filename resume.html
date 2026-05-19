@@ -10,10 +10,11 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f2f2f2;
         }
         
         header {
-            background-color: #333;
+            background-image: linear-gradient(to bottom, #333, #555);
             color: #fff;
             padding: 1em;
             text-align: center;
@@ -44,10 +45,12 @@
             margin: auto;
             padding: 2em;
             box-sizing: border-box;
+            position: relative;
         }
         
         h1, h2, h3 {
             color: #007bff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
         
         .section {
@@ -73,6 +76,11 @@
             text-align: center;
             width: calc(25% - 20px);
             margin: 0 10px;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .statistic:hover {
+            transform: scale(1.1);
         }
         
         /* Project Section */
@@ -81,10 +89,21 @@
             padding: 2em;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
         }
         
         .project h3 {
             color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        /* Achievements Section */
+        .achievements {
+            background-color: #f9f9f9;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         /* JavaScript Code */
@@ -117,12 +136,57 @@
                     section.classList.remove('active');
                 });
                 document.querySelector(`#${currentSection}`).classList.add('active');
+                
+                // Scroll to current section
+                const targetElement = document.getElementById(currentSection);
+                targetElement.scrollIntoView({ behavior: 'smooth' });
             }
         </script>
+        
+        // Animations and Effects
+        <script>
+            window.addEventListener('load', () => {
+                const header = document.querySelector('header');
+                header.classList.add('animate-header');
+                
+                setTimeout(() => {
+                    header.classList.remove('animate-header');
+                }, 2000);
+            });
+            
+            const statisticsElement = document.querySelector('.statistics');
+            statisticsElement.addEventListener('mouseover', () => {
+                statisticsElement.classList.add('animate-statistics');
+            });
+            
+            statisticsElement.addEventListener('mouseout', () => {
+                statisticsElement.classList.remove('animate-statistics');
+            });
+        </script>
+        
+        /* CSS Animations */
+        .animate-header {
+            animation: fadeIn 2s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0px); }
+        }
+        
+        .animate-statistics {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
-    <header>
+    <header class="animate-header">
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
