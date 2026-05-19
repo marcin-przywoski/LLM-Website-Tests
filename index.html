@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Morgan - DevOps Engineer</title>
+    <meta name="description" content="Alex Morgan - Senior DevOps Engineer with 8+ years of experience in Kubernetes, AWS, CI/CD pipelines, and infrastructure automation">
+    <meta name="theme-color" content="#0c0e1a">
+    <title>Alex Morgan - DevOps Engineer | Infrastructure & Cloud Architecture Specialist</title>
     <style>
         * {
             margin: 0;
@@ -39,6 +41,18 @@
             scrollbar-color: rgba(88, 166, 255, 0.5) var(--bg-dark);
         }
 
+        /* Respect prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
         html::-webkit-scrollbar {
             width: 10px;
         }
@@ -68,6 +82,8 @@
             font-size: 16px;
             position: relative;
             overflow-x: hidden;
+            /* Ensures sufficient contrast: text-primary (95% lightness) on bg-dark (12% lightness) */
+            /* WCAG AA compliant: ~15:1 contrast ratio */
         }
 
         body::before {
@@ -96,9 +112,50 @@
             padding: 4rem 2rem;
         }
 
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background-color: var(--accent);
+            color: var(--bg-dark);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            z-index: 100;
+            font-weight: 600;
+            border-radius: 0 0 4px 0;
+            transition: top 0.3s ease-out;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: 3px solid var(--text-primary);
+            outline-offset: 2px;
+        }
+
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
         @media (max-width: 640px) {
             .container {
                 padding: 2rem 1rem;
+            }
+        }
+
+        /* Animations with prefers-reduced-motion support */
+        @media (prefers-reduced-motion: no-preference) {
+            html {
+                scroll-behavior: smooth;
             }
         }
 
@@ -294,6 +351,19 @@
             width: 100%;
         }
 
+        /* Ensure links are distinguishable */
+        a:visited {
+            color: var(--accent);
+        }
+
+        /* Improve link underline visibility */
+        .project-description a,
+        .timeline-description a {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
         /* Header Section */
         .header {
             text-align: center;
@@ -359,6 +429,22 @@
             border: 1px solid rgba(88, 166, 255, 0.2);
             transition: all var(--duration-micro) var(--ease-out);
             cursor: default;
+        }
+
+        .meta-item a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .meta-item a:focus {
+            outline: none;
+        }
+
+        .meta-item a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 3px;
         }
 
         .meta-item:hover {
@@ -969,110 +1055,119 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <main id="main-content" class="container">
         <!-- Header -->
-        <header class="header">
+        <header class="header" role="banner">
             <h1 class="header-title">Alex Morgan</h1>
             <p class="header-subtitle">Senior DevOps Engineer</p>
             <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 1rem;">
                 Infrastructure automation specialist with expertise in cloud architecture, CI/CD pipelines, and Kubernetes orchestration. 
                 Proven track record of reducing deployment times and improving system reliability.
             </p>
-            <div class="header-meta">
-                <div class="meta-item">
-                    <strong>📧</strong> alex.morgan@devops.io
+            <div class="header-meta" aria-label="Contact information">
+                <div class="meta-item" aria-label="Email">
+                    <strong aria-hidden="true">📧</strong> 
+                    <a href="mailto:alex.morgan@devops.io">alex.morgan@devops.io</a>
                 </div>
-                <div class="meta-item">
-                    <strong>📍</strong> San Francisco, CA
+                <div class="meta-item" aria-label="Location">
+                    <strong aria-hidden="true">📍</strong> 
+                    <span>San Francisco, CA</span>
                 </div>
-                <div class="meta-item">
-                    <strong>💼</strong> 8+ Years Experience
+                <div class="meta-item" aria-label="Professional experience">
+                    <strong aria-hidden="true">💼</strong> 
+                    <span>8+ Years Experience</span>
                 </div>
             </div>
         </header>
 
         <!-- Key Stats -->
-        <div class="stats-grid">
-            <div class="stat-box">
-                <div class="stat-number" data-count="1200">1,200</div>
-                <div class="stat-label">Deployments Managed</div>
+        <section aria-labelledby="stats-heading" class="stats-section">
+            <h2 id="stats-heading" class="sr-only">Key metrics and achievements</h2>
+            <div class="stats-grid" role="region" aria-label="Key performance metrics">
+                <div class="stat-box" role="article" aria-label="1,200 Deployments Managed">
+                    <div class="stat-number" data-count="1200" aria-hidden="true">1,200</div>
+                    <div class="stat-label">Deployments Managed</div>
+                </div>
+                <div class="stat-box" role="article" aria-label="99.99% Uptime Average">
+                    <div class="stat-number" data-count="99.99" aria-hidden="true">99.99%</div>
+                    <div class="stat-label">Uptime Average</div>
+                </div>
+                <div class="stat-box" role="article" aria-label="45% Deployment Time Reduced">
+                    <div class="stat-number" data-count="45" aria-hidden="true">45%</div>
+                    <div class="stat-label">Deployment Time Reduced</div>
+                </div>
+                <div class="stat-box" role="article" aria-label="8 AWS and Cloud Certifications">
+                    <div class="stat-number" data-count="8" aria-hidden="true">8</div>
+                    <div class="stat-label">AWS/Cloud Certifications</div>
+                </div>
             </div>
-            <div class="stat-box">
-                <div class="stat-number" data-count="99.99">99.99%</div>
-                <div class="stat-label">Uptime Average</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number" data-count="45">45%</div>
-                <div class="stat-label">Deployment Time Reduced</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number" data-count="8">8</div>
-                <div class="stat-label">AWS/Cloud Certifications</div>
-            </div>
-        </div>
+        </section>
 
         <!-- Technical Skills -->
-        <section id="skills">
-            <h2>Technical Expertise</h2>
+        <section id="skills" aria-labelledby="skills-heading">
+            <h2 id="skills-heading">Technical Expertise</h2>
             
-            <div class="skills-category">
+            <div class="skills-category" aria-label="Cloud Platforms">
                 <span class="category-label">Cloud Platforms</span>
                 <div class="skill-pills">
-                    <div class="skill-pill featured">AWS (EC2, RDS, S3, Lambda)</div>
-                    <div class="skill-pill">Kubernetes</div>
-                    <div class="skill-pill">Docker</div>
-                    <div class="skill-pill featured">Azure</div>
-                    <div class="skill-pill">Google Cloud Platform</div>
+                    <div class="skill-pill featured" role="doc-keyword">AWS (EC2, RDS, S3, Lambda)</div>
+                    <div class="skill-pill" role="doc-keyword">Kubernetes</div>
+                    <div class="skill-pill" role="doc-keyword">Docker</div>
+                    <div class="skill-pill featured" role="doc-keyword">Azure</div>
+                    <div class="skill-pill" role="doc-keyword">Google Cloud Platform</div>
                 </div>
             </div>
 
-            <div class="skills-category">
+            <div class="skills-category" aria-label="CI/CD and Automation tools">
                 <span class="category-label">CI/CD & Automation</span>
                 <div class="skill-pills">
-                    <div class="skill-pill featured">Jenkins</div>
-                    <div class="skill-pill featured">GitLab CI</div>
-                    <div class="skill-pill">GitHub Actions</div>
-                    <div class="skill-pill">Terraform</div>
-                    <div class="skill-pill">Ansible</div>
-                    <div class="skill-pill featured">CloudFormation</div>
+                    <div class="skill-pill featured" role="doc-keyword">Jenkins</div>
+                    <div class="skill-pill featured" role="doc-keyword">GitLab CI</div>
+                    <div class="skill-pill" role="doc-keyword">GitHub Actions</div>
+                    <div class="skill-pill" role="doc-keyword">Terraform</div>
+                    <div class="skill-pill" role="doc-keyword">Ansible</div>
+                    <div class="skill-pill featured" role="doc-keyword">CloudFormation</div>
                 </div>
             </div>
 
-            <div class="skills-category">
+            <div class="skills-category" aria-label="Monitoring and Observability tools">
                 <span class="category-label">Monitoring & Observability</span>
                 <div class="skill-pills">
-                    <div class="skill-pill featured">Prometheus</div>
-                    <div class="skill-pill featured">ELK Stack</div>
-                    <div class="skill-pill">Grafana</div>
-                    <div class="skill-pill">DataDog</div>
-                    <div class="skill-pill">New Relic</div>
+                    <div class="skill-pill featured" role="doc-keyword">Prometheus</div>
+                    <div class="skill-pill featured" role="doc-keyword">ELK Stack</div>
+                    <div class="skill-pill" role="doc-keyword">Grafana</div>
+                    <div class="skill-pill" role="doc-keyword">DataDog</div>
+                    <div class="skill-pill" role="doc-keyword">New Relic</div>
                 </div>
             </div>
 
-            <div class="skills-category">
+            <div class="skills-category" aria-label="Programming and Scripting languages">
                 <span class="category-label">Programming & Scripting</span>
                 <div class="skill-pills">
-                    <div class="skill-pill featured">Python</div>
-                    <div class="skill-pill featured">Bash/Shell</div>
-                    <div class="skill-pill">Go</div>
-                    <div class="skill-pill">Ruby</div>
-                    <div class="skill-pill">YAML</div>
+                    <div class="skill-pill featured" role="doc-keyword">Python</div>
+                    <div class="skill-pill featured" role="doc-keyword">Bash/Shell</div>
+                    <div class="skill-pill" role="doc-keyword">Go</div>
+                    <div class="skill-pill" role="doc-keyword">Ruby</div>
+                    <div class="skill-pill" role="doc-keyword">YAML</div>
                 </div>
             </div>
         </section>
 
         <!-- Featured Projects -->
-        <section id="projects">
-            <h2>Notable Projects & Achievements</h2>
+        <section id="projects" aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Notable Projects & Achievements</h2>
 
-            <div class="project-card">
+            <article class="project-card" aria-labelledby="project-1-title">
                 <div class="project-header">
                     <div class="project-title">
-                        <h4>Kubernetes Migration & Orchestration</h4>
+                        <h3 id="project-1-title">Kubernetes Migration & Orchestration</h3>
                     </div>
-                    <div class="project-metrics">
-                        <span class="metric-badge">↓ 60% Costs</span>
-                        <span class="metric-badge">⬆ 99.95% Uptime</span>
+                    <div class="project-metrics" aria-label="Project metrics">
+                        <span class="metric-badge" aria-label="60 percent cost reduction">↓ 60% Costs</span>
+                        <span class="metric-badge" aria-label="99.95 percent uptime">⬆ 99.95% Uptime</span>
                     </div>
                 </div>
                 <p class="project-description">
@@ -1080,22 +1175,22 @@
                     Implemented auto-scaling policies reducing infrastructure costs by 60% while maintaining SLA commitments. 
                     Designed RBAC policies ensuring security and compliance across 15+ teams.
                 </p>
-                <div class="project-tags">
+                <div class="project-tags" aria-label="Technologies used">
                     <span class="tech-tag">Kubernetes</span>
                     <span class="tech-tag">AWS EKS</span>
                     <span class="tech-tag">Helm</span>
                     <span class="tech-tag">ArgoCD</span>
                 </div>
-            </div>
+            </article>
 
-            <div class="project-card">
+            <article class="project-card" aria-labelledby="project-2-title">
                 <div class="project-header">
                     <div class="project-title">
-                        <h4>CI/CD Pipeline Overhaul</h4>
+                        <h3 id="project-2-title">CI/CD Pipeline Overhaul</h3>
                     </div>
-                    <div class="project-metrics">
-                        <span class="metric-badge">↓ 45% Deploy Time</span>
-                        <span class="metric-badge">⬆ 10x Faster</span>
+                    <div class="project-metrics" aria-label="Project metrics">
+                        <span class="metric-badge" aria-label="45 percent deployment time reduction">↓ 45% Deploy Time</span>
+                        <span class="metric-badge" aria-label="10 times faster">⬆ 10x Faster</span>
                     </div>
                 </div>
                 <p class="project-description">
@@ -1103,22 +1198,22 @@
                     Reduced deployment time from 30 minutes to 16 minutes for standard releases. 
                     Implemented comprehensive testing layers (unit, integration, e2e) increasing deployment confidence to 99.7%.
                 </p>
-                <div class="project-tags">
+                <div class="project-tags" aria-label="Technologies used">
                     <span class="tech-tag">Jenkins</span>
                     <span class="tech-tag">GitOps</span>
                     <span class="tech-tag">Docker</span>
                     <span class="tech-tag">SonarQube</span>
                 </div>
-            </div>
+            </article>
 
-            <div class="project-card">
+            <article class="project-card" aria-labelledby="project-3-title">
                 <div class="project-header">
                     <div class="project-title">
-                        <h4>Observability Platform</h4>
+                        <h3 id="project-3-title">Observability Platform</h3>
                     </div>
-                    <div class="project-metrics">
-                        <span class="metric-badge">↓ 70% MTTR</span>
-                        <span class="metric-badge">Real-time</span>
+                    <div class="project-metrics" aria-label="Project metrics">
+                        <span class="metric-badge" aria-label="70 percent mean time to recovery reduction">↓ 70% MTTR</span>
+                        <span class="metric-badge" aria-label="Real-time monitoring">Real-time</span>
                     </div>
                 </div>
                 <p class="project-description">
@@ -1126,22 +1221,22 @@
                     Established alerting framework reducing Mean Time To Recovery from 45 minutes to 13 minutes. 
                     Created dashboards providing real-time visibility into 500+ services across production and staging.
                 </p>
-                <div class="project-tags">
+                <div class="project-tags" aria-label="Technologies used">
                     <span class="tech-tag">Prometheus</span>
                     <span class="tech-tag">Grafana</span>
                     <span class="tech-tag">ELK Stack</span>
                     <span class="tech-tag">AlertManager</span>
                 </div>
-            </div>
+            </article>
 
-            <div class="project-card">
+            <article class="project-card" aria-labelledby="project-4-title">
                 <div class="project-header">
                     <div class="project-title">
-                        <h4>Infrastructure as Code Migration</h4>
+                        <h3 id="project-4-title">Infrastructure as Code Migration</h3>
                     </div>
-                    <div class="project-metrics">
-                        <span class="metric-badge">100% Automated</span>
-                        <span class="metric-badge">Zero Downtime</span>
+                    <div class="project-metrics" aria-label="Project metrics">
+                        <span class="metric-badge" aria-label="100 percent automated">100% Automated</span>
+                        <span class="metric-badge" aria-label="Zero downtime deployment">Zero Downtime</span>
                     </div>
                 </div>
                 <p class="project-description">
@@ -1149,121 +1244,121 @@
                     Enabled infrastructure versioning and disaster recovery capabilities. 
                     Reduced infrastructure provisioning time by 80% while ensuring consistency across 10+ AWS accounts.
                 </p>
-                <div class="project-tags">
+                <div class="project-tags" aria-label="Technologies used">
                     <span class="tech-tag">Terraform</span>
                     <span class="tech-tag">AWS</span>
                     <span class="tech-tag">CloudFormation</span>
                     <span class="tech-tag">Git</span>
                 </div>
-            </div>
+            </article>
         </section>
 
         <!-- Experience -->
-        <section id="experience">
-            <h2>Professional Experience</h2>
+        <section id="experience" aria-labelledby="experience-heading">
+            <h2 id="experience-heading">Professional Experience</h2>
 
-            <div class="timeline">
-                <div class="timeline-item">
+            <div class="timeline" role="region" aria-label="Work history timeline">
+                <article class="timeline-item" aria-labelledby="job-1-title">
                     <div class="timeline-date">2021 – Present</div>
-                    <h4 class="timeline-title">Senior DevOps Engineer</h4>
+                    <h3 id="job-1-title" class="timeline-title">Senior DevOps Engineer</h3>
                     <div class="timeline-company">TechCorp Solutions</div>
                     <p class="timeline-description">
                         Lead infrastructure team managing 200+ microservices in Kubernetes. 
                         Architected cloud-native platform supporting 50M+ daily transactions. 
                         Mentored 5 junior engineers on infrastructure best practices and cloud architecture.
                     </p>
-                </div>
+                </article>
 
-                <div class="timeline-item">
+                <article class="timeline-item" aria-labelledby="job-2-title">
                     <div class="timeline-date">2018 – 2021</div>
-                    <h4 class="timeline-title">DevOps Engineer</h4>
+                    <h3 id="job-2-title" class="timeline-title">DevOps Engineer</h3>
                     <div class="timeline-company">CloudScale Inc.</div>
                     <p class="timeline-description">
                         Designed and implemented CI/CD pipelines for 40+ development teams. 
                         Established monitoring and alerting frameworks reducing incident response time by 70%. 
                         Managed AWS infrastructure across multiple regions ensuring 99.95% uptime SLA.
                     </p>
-                </div>
+                </article>
 
-                <div class="timeline-item">
+                <article class="timeline-item" aria-labelledby="job-3-title">
                     <div class="timeline-date">2016 – 2018</div>
-                    <h4 class="timeline-title">Systems Administrator</h4>
+                    <h3 id="job-3-title" class="timeline-title">Systems Administrator</h3>
                     <div class="timeline-company">DataFlow Technologies</div>
                     <p class="timeline-description">
                         Administered 100+ Linux servers and managed on-premises datacenter operations. 
                         Implemented backup and disaster recovery procedures achieving 99.9% RTO/RPO targets. 
                         Automated routine maintenance tasks saving 200+ hours annually.
                     </p>
-                </div>
+                </article>
 
-                <div class="timeline-item">
+                <article class="timeline-item" aria-labelledby="job-4-title">
                     <div class="timeline-date">2015 – 2016</div>
-                    <h4 class="timeline-title">Junior Systems Engineer</h4>
+                    <h3 id="job-4-title" class="timeline-title">Junior Systems Engineer</h3>
                     <div class="timeline-company">FirstStep IT Solutions</div>
                     <p class="timeline-description">
                         Started career supporting IT infrastructure and learning DevOps fundamentals. 
                         Contributed to server deployments and maintenance procedures. 
                         Obtained first AWS certification and introduced infrastructure automation concepts to the team.
                     </p>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- Certifications -->
-        <section id="certifications">
-            <h2>Certifications & Credentials</h2>
+        <section id="certifications" aria-labelledby="certifications-heading">
+            <h2 id="certifications-heading">Certifications & Credentials</h2>
 
-            <div class="cert-grid">
-                <div class="cert-card">
-                    <div class="cert-badge">☁️</div>
+            <div class="cert-grid" role="region" aria-label="Professional certifications">
+                <article class="cert-card" aria-label="AWS Solutions Architect certification">
+                    <div class="cert-badge" aria-hidden="true">☁️</div>
                     <div class="cert-name">AWS Solutions Architect</div>
                     <div class="cert-issuer">Amazon Web Services</div>
-                </div>
+                </article>
 
-                <div class="cert-card">
-                    <div class="cert-badge">☁️</div>
+                <article class="cert-card" aria-label="AWS DevOps Engineer certification">
+                    <div class="cert-badge" aria-hidden="true">☁️</div>
                     <div class="cert-name">AWS DevOps Engineer</div>
                     <div class="cert-issuer">Amazon Web Services</div>
-                </div>
+                </article>
 
-                <div class="cert-card">
-                    <div class="cert-badge">⚙️</div>
+                <article class="cert-card" aria-label="Certified Kubernetes Administrator certification">
+                    <div class="cert-badge" aria-hidden="true">⚙️</div>
                     <div class="cert-name">Certified Kubernetes Administrator</div>
                     <div class="cert-issuer">Cloud Native Computing Foundation</div>
-                </div>
+                </article>
 
-                <div class="cert-card">
-                    <div class="cert-badge">🐳</div>
+                <article class="cert-card" aria-label="Docker Certified Associate certification">
+                    <div class="cert-badge" aria-hidden="true">🐳</div>
                     <div class="cert-name">Docker Certified Associate</div>
                     <div class="cert-issuer">Docker</div>
-                </div>
+                </article>
 
-                <div class="cert-card">
-                    <div class="cert-badge">🔵</div>
+                <article class="cert-card" aria-label="AZ-900 Azure Fundamentals certification">
+                    <div class="cert-badge" aria-hidden="true">🔵</div>
                     <div class="cert-name">AZ-900 Azure Fundamentals</div>
                     <div class="cert-issuer">Microsoft</div>
-                </div>
+                </article>
 
-                <div class="cert-card">
-                    <div class="cert-badge">📊</div>
+                <article class="cert-card" aria-label="HashiCorp Certified Terraform Associate certification">
+                    <div class="cert-badge" aria-hidden="true">📊</div>
                     <div class="cert-name">HashiCorp Certified: Terraform Associate</div>
                     <div class="cert-issuer">HashiCorp</div>
-                </div>
+                </article>
 
-                <div class="cert-card">
-                    <div class="cert-badge">📈</div>
+                <article class="cert-card" aria-label="Linux Professional Institute LPIC-1 certification">
+                    <div class="cert-badge" aria-hidden="true">📈</div>
                     <div class="cert-name">Linux Professional Institute: LPIC-1</div>
                     <div class="cert-issuer">Linux Professional Institute</div>
-                </div>
+                </article>
 
-                <div class="cert-card">
-                    <div class="cert-badge">🔐</div>
+                <article class="cert-card" aria-label="CompTIA Security+ certification">
+                    <div class="cert-badge" aria-hidden="true">🔐</div>
                     <div class="cert-name">CompTIA Security+</div>
                     <div class="cert-issuer">CompTIA</div>
-                </div>
+                </article>
             </div>
         </section>
-    </div>
+    </main>
 
     <script>
         // Parallax and scroll effects
@@ -1462,9 +1557,40 @@
 
         /* Enhanced keyboard navigation */
         body.keyboard-nav *:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 3px;
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
             border-radius: 4px;
+        }
+
+        /* Global focus styles for better visibility */
+        *:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: more) {
+            body {
+                --text-primary: #ffffff;
+                --text-secondary: #e0e0e0;
+                --border: #404040;
+            }
+        }
+
+        /* High contrast mode for forced colors */
+        @media (forced-colors: active) {
+            body,
+            .stat-box,
+            .project-card,
+            .cert-card,
+            .skill-pill {
+                border-width: 2px;
+                border-color: CanvasText;
+            }
+
+            a {
+                text-decoration: underline;
+            }
         }
 
         .skill-pill, .project-card, .cert-card, a {
@@ -1475,8 +1601,9 @@
         .project-card:focus-visible,
         .cert-card:focus-visible,
         a:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 3px;
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+            box-shadow: 0 0 0 1px var(--bg-dark), 0 0 0 4px var(--accent);
         }
 
         /* Project card 3D effect */
