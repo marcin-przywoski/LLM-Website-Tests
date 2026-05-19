@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Engineer Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header {
+            text-align: center;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .stat {
+            flex-basis: 30%;
+            text-align: center;
+        }
+        .achievements, .projects {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            margin: 10px;
+            width: calc(33.33% - 20px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        @media only screen and (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            .card {
+                width: calc(50% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>John Doe</h1>
+            <h2>DevOps Engineer</h2>
+        </header>
+        <section>
+            <h2 class="section-title">Summary</h2>
+            <p>Highly motivated and detail-oriented DevOps engineer with 5+ years of experience in ensuring the smooth operation of software systems. Skilled in implementing automation, improving efficiency, and enhancing reliability.</p>
+        </section>
+        <section>
+            <h2 class="section-title">Statistics</h2>
+            <div class="stats">
+                <div class="stat">
+                    <h3>5+</h3>
+                    <p>Years of Experience</p>
+                </div>
+                <div class="stat">
+                    <h3>90%</h3>
+                    <p>On-time Project Delivery Rate</p>
+                </div>
+                <div class="stat">
+                    <h3>20+</h3>
+                    <p>Certifications in DevOps Tools</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2 class="section-title">Achievements</h2>
+            <div class="achievements">
+                <div class="card">
+                    <h3>Improved Deployment Speed by 300%</h3>
+                    <p>Implemented CI/CD pipeline using Jenkins and Docker, resulting in significant reduction in deployment time.</p>
+                </div>
+                <div class="card">
+                    <h3>Enhanced System Uptime to 99.9%</h3>
+                    <p>Designed and implemented a highly available architecture using load balancers and auto-scaling groups.</p>
+                </div>
+                <div class="card">
+                    <h3>Reduced Mean Time To Recovery (MTTR) by 50%</h3>
+                    <p>Developed and maintained a comprehensive monitoring system, enabling faster issue detection and resolution.</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2 class="section-title">Projects</h2>
+            <div class="projects">
+                <div class="card">
+                    <h3>DevOps Automation Platform</h3>
+                    <p>Designed and developed a platform for automating DevOps tasks, utilizing Python, Ansible, and AWS services.</p>
+                </div>
+                <div class="card">
+                    <h3>Cloud-native Application Deployment</h3>
+                    <p>Deployed a cloud-native application using Kubernetes, ensuring scalability and high availability.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Example of JavaScript usage: Animating the scroll to the top on button click
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        document.getElementById('scrollToTopButton').addEventListener('click', scrollToTop);
+    </script>
+</body>
+</html>
