@@ -4,210 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevOps Engineer Resume</title>
-    <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f2f2f2;
-        }
-        
-        header {
-            background-image: linear-gradient(to bottom, #333, #555);
-            color: #fff;
-            padding: 1em;
-            text-align: center;
-        }
-        
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        nav li a {
-            color: #fff;
-            text-decoration: none;
-            padding: 1em 2em;
-            transition: background-color 0.5s ease-in-out;
-        }
-        
-        nav li a:hover {
-            background-color: #555;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 2em;
-            box-sizing: border-box;
-            position: relative;
-        }
-        
-        h1, h2, h3 {
-            color: #007bff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-        
-        .section {
-            background-color: #f9f9f9;
-            padding: 2em;
-            margin-bottom: 1em;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        /* Statistics Section */
-        .statistics {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        
-        .statistic {
-            background-color: #007bff;
-            color: #fff;
-            padding: 2em;
-            border-radius: 10px;
-            text-align: center;
-            width: calc(25% - 20px);
-            margin: 0 10px;
-            transition: transform 0.5s ease-in-out;
-        }
-        
-        .statistic:hover {
-            transform: scale(1.1);
-        }
-        
-        /* Project Section */
-        .project {
-            background-color: #f9f9f9;
-            padding: 2em;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .project h3 {
-            color: #007bff;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        
-        /* Achievements Section */
-        .achievements {
-            background-color: #f9f9f9;
-            padding: 2em;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        /* JavaScript Code */
-        <script>
-            // Display Statistics
-            const statistics = [
-                { title: 'Managed Containers', value: '100+', icon: '<i class="fa fa-container"></i>' },
-                { title: 'Automated Builds', value: '500+', icon: '<i class="fa fa-cog"></i>' },
-                { title: 'Deployments', value: '200+', icon: '<i class="fa fa-cloud"></i>' },
-            ];
-            
-            const statisticsElement = document.querySelector('.statistics');
-            statistics.forEach(statistic => {
-                const statisticHtml = `
-                    <div class="statistic">
-                        ${statistic.icon}
-                        <h4>${statistic.title}</h4>
-                        <p>${statistic.value}</p>
-                    </div>
-                `;
-                
-                statisticsElement.innerHTML += statisticHtml;
-            });
-            
-            // Highlight Current Section
-            const sections = document.querySelectorAll('.section');
-            const currentSection = window.location.hash.slice(1);
-            if (currentSection) {
-                sections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                document.querySelector(`#${currentSection}`).classList.add('active');
-                
-                // Scroll to current section
-                const targetElement = document.getElementById(currentSection);
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-            }
-        </script>
-        
-        // Animations and Effects
-        <script>
-            window.addEventListener('load', () => {
-                const header = document.querySelector('header');
-                header.classList.add('animate-header');
-                
-                setTimeout(() => {
-                    header.classList.remove('animate-header');
-                }, 2000);
-            });
-            
-            const statisticsElement = document.querySelector('.statistics');
-            statisticsElement.addEventListener('mouseover', () => {
-                statisticsElement.classList.add('animate-statistics');
-            });
-            
-            statisticsElement.addEventListener('mouseout', () => {
-                statisticsElement.classList.remove('animate-statistics');
-            });
-        </script>
-        
-        /* CSS Animations */
-        .animate-header {
-            animation: fadeIn 2s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0px); }
-        }
-        
-        .animate-statistics {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-    </style>
+    
+    <!-- Accessibility metadata -->
+    <meta name="description" content="DevOps engineer resume with statistics, projects, and achievements">
+    <meta name="keywords" content="devops, engineer, resume, statistics, projects, achievements">
+    <meta name="author" content="Your Name">
+    
+    <!-- Stylesheet for accessibility and design -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Font Awesome icons (accessible via keyboard navigation) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
-    <header class="animate-header">
-        <nav>
+    <!-- Header with logo, navigation, and skip to content link -->
+    <header role="banner">
+        <nav aria-label="Main Navigation">
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#about" title="About">About</a></li>
+                <li><a href="#experience" title="Experience">Experience</a></li>
+                <li><a href="#projects" title="Projects">Projects</a></li>
+                <li><a href="#achievements" title="Achievements">Achievements</a></li>
             </ul>
         </nav>
+        
+        <!-- Skip to content link for accessibility -->
+        <button aria-label="Skip to main content" title="Skip to main content">
+            <span>Jump to Main Content</span>
+        </button>
     </header>
     
-    <div class="container">
-        <!-- About Section -->
-        <section id="about" class="section active">
+    <!-- Container with ARIA attributes and semantic HTML elements -->
+    <main role="main" id="container">
+        <!-- About section with heading, paragraph, and statistics -->
+        <section aria-label="About Section" id="about">
             <h1>About Me</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+            
+            <!-- Statistics with ARIA attributes and screen reader-friendly text -->
+            <div class="statistics" aria-label="Statistics">
+                <h2>Statistics</h2>
+                <ul>
+                    <li>
+                        <span role="img" aria-label="Managed Containers Icon">📦</span>
+                        <p>100+ Managed Containers</p>
+                    </li>
+                    <li>
+                        <span role="img" aria-label="Automated Builds Icon">⚙️</span>
+                        <p>500+ Automated Builds</p>
+                    </li>
+                </ul>
+            </div>
         </section>
         
-        <!-- Experience Section -->
-        <section id="experience" class="section">
+        <!-- Experience section with heading, list of items -->
+        <section aria-label="Experience Section" id="experience">
             <h2>Experience</h2>
-            <ul>
+            <ul role="list" aria-labelledby="experience-heading">
                 <li>
                     <h3>DevOps Engineer</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
@@ -219,19 +72,19 @@
             </ul>
         </section>
         
-        <!-- Projects Section -->
-        <section id="projects" class="section">
+        <!-- Projects section with heading and list of items -->
+        <section aria-label="Projects Section" id="projects">
             <h2>Projects</h2>
-            <div class="project">
+            <div class="project" role="listitem" aria-labelledby="projects-heading">
                 <h3>Kubernetes Cluster</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
             </div>
         </section>
         
-        <!-- Achievements Section -->
-        <section id="achievements" class="section">
+        <!-- Achievements section with heading and list of items -->
+        <section aria-label="Achievements Section" id="achievements">
             <h2>Achievements</h2>
-            <ul>
+            <ul role="list" aria-labelledby="achievements-heading">
                 <li>
                     <h3>CI/CD Pipeline Implementation</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
@@ -242,13 +95,19 @@
                 </li>
             </ul>
         </section>
-        
-        <!-- Statistics Section -->
-        <div class="statistics">
-            <h2>Statistics</h2>
-        </div>
-    </div>
+    </main>
     
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Footer with copyright information and social media links -->
+    <footer role="contentinfo">
+        <p>&copy; 2023 Your Name</p>
+        <ul>
+            <li><a href="#" title="LinkedIn" aria-label="LinkedIn">LinkedIn</a></li>
+            <li><a href="#" title="Twitter" aria-label="Twitter">Twitter</a></li>
+            <li><a href="#" title="GitHub" aria-label="GitHub">GitHub</a></li>
+        </ul>
+    </footer>
+    
+    <!-- JavaScript code for accessibility and interactivity -->
+    <script src="script.js"></script>
 </body>
 </html>
