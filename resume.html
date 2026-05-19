@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevOps Engineer Resume</title>
     <style>
+        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -39,33 +40,25 @@
         .animate {
             animation: pulse 2s infinite;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <header>
         <h1 class="animate">John Doe</h1>
         <p>DevOps Engineer & Cloud Architect</p>
-        
-        <section>
+    </header>
+    <main>
+        <section id="about">
             <h2>About Me</h2>
-            <p>Highly motivated DevOps engineer with 5+ years of experience in designing, implementing, and managing scalable and secure infrastructures. Proficient in cloud services (AWS, Azure, GCP), CI/CD tools (Jenkins, GitLab CI), and containerization (Docker, Kubernetes).</p>
+            <p>Highly motivated DevOps engineer with 5+ years of experience in designing, implementing, and managing scalable and secure infrastructures.</p>
         </section>
-        
-        <section>
+        <section id="technical-skills">
             <h2>Technical Skills</h2>
             <ul>
                 <li>Cloud Platforms: AWS, Azure, Google Cloud</li>
@@ -75,8 +68,7 @@
                 <li>Agile Methodologies: Scrum, Kanban</li>
             </ul>
         </section>
-        
-        <section>
+        <section id="projects">
             <h2>Projects</h2>
             <ul>
                 <li>
@@ -87,27 +79,24 @@
                 </li>
             </ul>
         </section>
-        
-        <section>
+        <section id="education">
             <h2>Education</h2>
             <ul>
                 <li>Bachelor of Science in Computer Science, XYZ University (2015-2019)</li>
             </ul>
         </section>
-        
-        <section>
+        <section id="certifications">
             <h2>Certifications</h2>
             <ul>
                 <li>AWS Certified Solutions Architect - Associate</li>
                 <li>Certified Kubernetes Administrator (CKA)</li>
             </ul>
         </section>
-        
-        <section>
+        <section id="contact">
             <h2>Contact</h2>
             <p><a href="mailto:john.doe@example.com">john.doe@example.com</a></p>
             <p><a href="https://www.linkedin.com/in/johndoe/">linkedin.com/in/johndoe</a></p>
         </section>
-    </div>
+    </main>
 </body>
 </html>
