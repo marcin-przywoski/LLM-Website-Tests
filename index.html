@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Morgan - DevOps Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: oklch(55% 0.15 264);
+            --accent-dark: oklch(45% 0.12 264);
+            --success: oklch(65% 0.14 142);
+            --warning: oklch(65% 0.14 52);
+            
+            --bg-dark: oklch(12% 0.01 240);
+            --surface: oklch(18% 0.01 240);
+            --border: oklch(25% 0.01 240);
+            --text-primary: oklch(95% 0.01 240);
+            --text-secondary: oklch(75% 0.01 240);
+            --text-tertiary: oklch(55% 0.01 240);
+            
+            --ease-out: cubic-bezier(0.23, 1, 0.320, 1);
+            --duration-micro: 200ms;
+            --duration-macro: 400ms;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Utilities */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            margin-top: 2.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color var(--duration-micro) var(--ease-out);
+        }
+
+        a:hover {
+            color: var(--accent-dark);
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.6s var(--ease-out);
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--text-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--text-tertiary);
+        }
+
+        .meta-item strong {
+            color: var(--text-secondary);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+            animation: fadeInUp 0.6s var(--ease-out) 0.1s backwards;
+        }
+
+        .stat-box {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all var(--duration-micro) var(--ease-out);
+            cursor: default;
+        }
+
+        .stat-box:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 32px rgba(88, 166, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInSection 0.6s var(--ease-out) forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.2s; }
+        section:nth-child(2) { animation-delay: 0.3s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+        section:nth-child(4) { animation-delay: 0.5s; }
+        section:nth-child(5) { animation-delay: 0.6s; }
+        section:nth-child(6) { animation-delay: 0.7s; }
+
+        /* Skills */
+        .skills-category {
+            margin-bottom: 2rem;
+        }
+
+        .category-label {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .skill-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-pill {
+            background-color: var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all var(--duration-micro) var(--ease-out);
+            border: 1px solid transparent;
+            cursor: default;
+        }
+
+        .skill-pill:hover {
+            background-color: var(--accent);
+            color: var(--bg-dark);
+            transform: scale(1.05);
+        }
+
+        .skill-pill.featured {
+            border-color: var(--accent);
+            background-color: transparent;
+            color: var(--accent);
+        }
+
+        .skill-pill.featured:hover {
+            background-color: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        /* Projects */
+        .project-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all var(--duration-micro) var(--ease-out);
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 32px rgba(88, 166, 255, 0.1);
+            transform: translateX(4px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            flex: 1;
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .metric-badge {
+            background-color: rgba(88, 166, 255, 0.15);
+            color: var(--accent);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+            font-size: 0.8rem;
+            background-color: var(--border);
+            color: var(--text-primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border: 2px solid var(--bg-dark);
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-company {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all var(--duration-micro) var(--ease-out);
+        }
+
+        .cert-card:hover {
+            border-color: var(--success);
+            box-shadow: 0 8px 32px rgba(102, 194, 137, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .cert-badge {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-issuer {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInSection {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+                color: #000;
+            }
+
+            .stat-box, .project-card, .cert-card {
+                border-color: #ddd;
+                background-color: #fff;
+                page-break-inside: avoid;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+
+            a {
+                color: #0066cc;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .header-title {
+                font-size: 2.5rem;
+            }
+
+            .stat-box .stat-number {
+                font-size: 2rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+
+            .project-metrics {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="header-title">Alex Morgan</h1>
+            <p class="header-subtitle">Senior DevOps Engineer</p>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 1rem;">
+                Infrastructure automation specialist with expertise in cloud architecture, CI/CD pipelines, and Kubernetes orchestration. 
+                Proven track record of reducing deployment times and improving system reliability.
+            </p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <strong>📧</strong> alex.morgan@devops.io
+                </div>
+                <div class="meta-item">
+                    <strong>📍</strong> San Francisco, CA
+                </div>
+                <div class="meta-item">
+                    <strong>💼</strong> 8+ Years Experience
+                </div>
+            </div>
+        </header>
+
+        <!-- Key Stats -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number" data-count="1200">1,200</div>
+                <div class="stat-label">Deployments Managed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" data-count="99.99">99.99%</div>
+                <div class="stat-label">Uptime Average</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" data-count="45">45%</div>
+                <div class="stat-label">Deployment Time Reduced</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" data-count="8">8</div>
+                <div class="stat-label">AWS/Cloud Certifications</div>
+            </div>
+        </div>
+
+        <!-- Technical Skills -->
+        <section id="skills">
+            <h2>Technical Expertise</h2>
+            
+            <div class="skills-category">
+                <span class="category-label">Cloud Platforms</span>
+                <div class="skill-pills">
+                    <div class="skill-pill featured">AWS (EC2, RDS, S3, Lambda)</div>
+                    <div class="skill-pill">Kubernetes</div>
+                    <div class="skill-pill">Docker</div>
+                    <div class="skill-pill featured">Azure</div>
+                    <div class="skill-pill">Google Cloud Platform</div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <span class="category-label">CI/CD & Automation</span>
+                <div class="skill-pills">
+                    <div class="skill-pill featured">Jenkins</div>
+                    <div class="skill-pill featured">GitLab CI</div>
+                    <div class="skill-pill">GitHub Actions</div>
+                    <div class="skill-pill">Terraform</div>
+                    <div class="skill-pill">Ansible</div>
+                    <div class="skill-pill featured">CloudFormation</div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <span class="category-label">Monitoring & Observability</span>
+                <div class="skill-pills">
+                    <div class="skill-pill featured">Prometheus</div>
+                    <div class="skill-pill featured">ELK Stack</div>
+                    <div class="skill-pill">Grafana</div>
+                    <div class="skill-pill">DataDog</div>
+                    <div class="skill-pill">New Relic</div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <span class="category-label">Programming & Scripting</span>
+                <div class="skill-pills">
+                    <div class="skill-pill featured">Python</div>
+                    <div class="skill-pill featured">Bash/Shell</div>
+                    <div class="skill-pill">Go</div>
+                    <div class="skill-pill">Ruby</div>
+                    <div class="skill-pill">YAML</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects -->
+        <section id="projects">
+            <h2>Notable Projects & Achievements</h2>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>Kubernetes Migration & Orchestration</h4>
+                    </div>
+                    <div class="project-metrics">
+                        <span class="metric-badge">↓ 60% Costs</span>
+                        <span class="metric-badge">⬆ 99.95% Uptime</span>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Led company-wide migration from EC2 to Kubernetes, managing 200+ microservices. 
+                    Implemented auto-scaling policies reducing infrastructure costs by 60% while maintaining SLA commitments. 
+                    Designed RBAC policies ensuring security and compliance across 15+ teams.
+                </p>
+                <div class="project-tags">
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">AWS EKS</span>
+                    <span class="tech-tag">Helm</span>
+                    <span class="tech-tag">ArgoCD</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>CI/CD Pipeline Overhaul</h4>
+                    </div>
+                    <div class="project-metrics">
+                        <span class="metric-badge">↓ 45% Deploy Time</span>
+                        <span class="metric-badge">⬆ 10x Faster</span>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Redesigned Jenkins pipeline architecture implementing GitOps principles. 
+                    Reduced deployment time from 30 minutes to 16 minutes for standard releases. 
+                    Implemented comprehensive testing layers (unit, integration, e2e) increasing deployment confidence to 99.7%.
+                </p>
+                <div class="project-tags">
+                    <span class="tech-tag">Jenkins</span>
+                    <span class="tech-tag">GitOps</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">SonarQube</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>Observability Platform</h4>
+                    </div>
+                    <div class="project-metrics">
+                        <span class="metric-badge">↓ 70% MTTR</span>
+                        <span class="metric-badge">Real-time</span>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Architected and deployed comprehensive monitoring stack (Prometheus + Grafana + ELK). 
+                    Established alerting framework reducing Mean Time To Recovery from 45 minutes to 13 minutes. 
+                    Created dashboards providing real-time visibility into 500+ services across production and staging.
+                </p>
+                <div class="project-tags">
+                    <span class="tech-tag">Prometheus</span>
+                    <span class="tech-tag">Grafana</span>
+                    <span class="tech-tag">ELK Stack</span>
+                    <span class="tech-tag">AlertManager</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">
+                        <h4>Infrastructure as Code Migration</h4>
+                    </div>
+                    <div class="project-metrics">
+                        <span class="metric-badge">100% Automated</span>
+                        <span class="metric-badge">Zero Downtime</span>
+                    </div>
+                </div>
+                <p class="project-description">
+                    Converted 500+ manual infrastructure configurations to Terraform code. 
+                    Enabled infrastructure versioning and disaster recovery capabilities. 
+                    Reduced infrastructure provisioning time by 80% while ensuring consistency across 10+ AWS accounts.
+                </p>
+                <div class="project-tags">
+                    <span class="tech-tag">Terraform</span>
+                    <span class="tech-tag">AWS</span>
+                    <span class="tech-tag">CloudFormation</span>
+                    <span class="tech-tag">Git</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience">
+            <h2>Professional Experience</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2021 – Present</div>
+                    <h4 class="timeline-title">Senior DevOps Engineer</h4>
+                    <div class="timeline-company">TechCorp Solutions</div>
+                    <p class="timeline-description">
+                        Lead infrastructure team managing 200+ microservices in Kubernetes. 
+                        Architected cloud-native platform supporting 50M+ daily transactions. 
+                        Mentored 5 junior engineers on infrastructure best practices and cloud architecture.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2018 – 2021</div>
+                    <h4 class="timeline-title">DevOps Engineer</h4>
+                    <div class="timeline-company">CloudScale Inc.</div>
+                    <p class="timeline-description">
+                        Designed and implemented CI/CD pipelines for 40+ development teams. 
+                        Established monitoring and alerting frameworks reducing incident response time by 70%. 
+                        Managed AWS infrastructure across multiple regions ensuring 99.95% uptime SLA.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2016 – 2018</div>
+                    <h4 class="timeline-title">Systems Administrator</h4>
+                    <div class="timeline-company">DataFlow Technologies</div>
+                    <p class="timeline-description">
+                        Administered 100+ Linux servers and managed on-premises datacenter operations. 
+                        Implemented backup and disaster recovery procedures achieving 99.9% RTO/RPO targets. 
+                        Automated routine maintenance tasks saving 200+ hours annually.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2015 – 2016</div>
+                    <h4 class="timeline-title">Junior Systems Engineer</h4>
+                    <div class="timeline-company">FirstStep IT Solutions</div>
+                    <p class="timeline-description">
+                        Started career supporting IT infrastructure and learning DevOps fundamentals. 
+                        Contributed to server deployments and maintenance procedures. 
+                        Obtained first AWS certification and introduced infrastructure automation concepts to the team.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications">
+            <h2>Certifications & Credentials</h2>
+
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-badge">☁️</div>
+                    <div class="cert-name">AWS Solutions Architect</div>
+                    <div class="cert-issuer">Amazon Web Services</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-badge">☁️</div>
+                    <div class="cert-name">AWS DevOps Engineer</div>
+                    <div class="cert-issuer">Amazon Web Services</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-badge">⚙️</div>
+                    <div class="cert-name">Certified Kubernetes Administrator</div>
+                    <div class="cert-issuer">Cloud Native Computing Foundation</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-badge">🐳</div>
+                    <div class="cert-name">Docker Certified Associate</div>
+                    <div class="cert-issuer">Docker</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-badge">🔵</div>
+                    <div class="cert-name">AZ-900 Azure Fundamentals</div>
+                    <div class="cert-issuer">Microsoft</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-badge">📊</div>
+                    <div class="cert-name">HashiCorp Certified: Terraform Associate</div>
+                    <div class="cert-issuer">HashiCorp</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-badge">📈</div>
+                    <div class="cert-name">Linux Professional Institute: LPIC-1</div>
+                    <div class="cert-issuer">Linux Professional Institute</div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-badge">🔐</div>
+                    <div class="cert-name">CompTIA Security+</div>
+                    <div class="cert-issuer">CompTIA</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Animate stat numbers on visibility
+        function animateStatNumbers() {
+            const statBoxes = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                        animateCounter(entry.target);
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            statBoxes.forEach(box => observer.observe(box));
+        }
+
+        function animateCounter(element) {
+            const target = parseFloat(element.getAttribute('data-count'));
+            const suffix = element.textContent.replace(/[0-9.]/g, '');
+            const isPercentage = suffix.includes('%');
+            const isThousand = target > 100 && !isPercentage;
+            
+            let current = 0;
+            const increment = target / 60; // 60 frames for smooth animation
+            const duration = 1000; // 1 second
+            const startTime = Date.now();
+
+            const update = () => {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                if (isPercentage) {
+                    current = (target * progress).toFixed(2);
+                } else if (isThousand) {
+                    current = Math.floor(target * progress).toLocaleString();
+                } else {
+                    current = Math.floor(target * progress);
+                }
+
+                element.textContent = current + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.textContent = target.toLocaleString() + suffix;
+                }
+            };
+
+            update();
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add interactive feedback to skill pills
+        document.querySelectorAll('.skill-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 100);
+            });
+        });
+
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            animateStatNumbers();
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                // Add visible focus styles
+                document.body.classList.add('keyboard-nav');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            // Remove visible focus styles on mouse click
+            document.body.classList.remove('keyboard-nav');
+        });
+    </script>
+
+    <style>
+        /* Additional keyboard navigation support */
+        body.keyboard-nav *:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .skill-pill, .project-card, .cert-card, a {
+            transition: all var(--duration-micro) var(--ease-out);
+        }
+
+        .skill-pill:focus-visible, 
+        .project-card:focus-visible,
+        .cert-card:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+</body>
+</html>
