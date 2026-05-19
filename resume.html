@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Engineer Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #0779e4 3px solid;
+        }
+        header h1 {
+            margin: 0;
+            padding: 10px 0 10px 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .stat {
+            text-align: center;
+        }
+        .achievements, .projects {
+            margin-top: 20px;
+        }
+        .achievement, .project {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>DevOps Engineer Resume</h1>
+    </header>
+    <section class="stats">
+        <div class="stat">
+            <h2>10+</h2>
+            <p>Years of Experience</p>
+        </div>
+        <div class="stat">
+            <h2>50+</h2>
+            <p>Successful Projects</p>
+        </div>
+        <div class="stat">
+            <h2>90%</h2>
+            <p>Success Rate</p>
+        </div>
+    </section>
+    <section class="achievements">
+        <h2>Achievements:</h2>
+        <div class="achievement">
+            Implemented CI/CD pipelines using Jenkins, resulting in a 40% reduction in deployment time.
+        </div>
+        <div class="achievement">
+            Designed and deployed a Kubernetes cluster for a high-traffic web application, achieving 99.99% uptime.
+        </div>
+    </section>
+    <section class="projects">
+        <h2>Notable Projects:</h2>
+        <div class="project">
+            Developed a cloud-based monitoring system using Prometheus and Grafana, improving response times to incidents by 30%.
+        </div>
+        <div class="project">
+            Led the migration of a legacy application to a microservices architecture using Docker and AWS ECS, reducing costs by 25%.
+        </div>
+    </section>
+</div>
+<footer>
+    <p>&copy; 2023 DevOps Engineer. All rights reserved.</p>
+</footer>
+
+<script>
+    // Example JavaScript code to dynamically update the stats section
+    document.addEventListener("DOMContentLoaded", function() {
+        const statElements = document.querySelectorAll(".stat h2");
+        // Simulating dynamic data, in a real scenario, this could come from an API or database.
+        const data = [15, 75, 95]; // Years of experience, successful projects, success rate
+        statElements.forEach((element, index) => {
+            element.textContent = data[index];
+        });
+    });
+</script>
+</body>
+</html>
