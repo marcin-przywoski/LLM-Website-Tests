@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DevOps Engineer — Resume</title>
+  <meta name="description" content="DevOps Engineer resume showcasing skills, metrics, projects and achievements." />
+  <style>
+    :root{
+      --bg:#071029; --card:#07182a; --muted:#9fb0c8; --text:#e6f0fb; --accent:#56d4a3; --accent-2:#5fb3ff; --glass:rgba(255,255,255,0.04);
+      --radius:12px; --gap:18px; --max-width:1100px; --shadow: 0 10px 30px rgba(2,6,23,0.7);
+    }
+    [data-theme="light"]{ --bg:#f6fbff; --card:#ffffff; --muted:#556a7a; --text:#0b1b2b; --accent:#00796b; --accent-2:#0b66ff; --glass:rgba(2,6,23,0.03); }
+    html,body{height:100%;}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--text);background:radial-gradient(1200px 400px at 10% 10%, rgba(16,88,112,0.08), transparent), linear-gradient(180deg, #031226 0%, var(--bg) 100%);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding:28px;}
+    .wrap{max-width:var(--max-width);margin:0 auto;border-radius:16px;box-shadow:var(--shadow);overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:grid;grid-template-columns:320px 1fr;gap:0}
+    @media (max-width:880px){.wrap{grid-template-columns:1fr;padding:0}.sidebar{order:2}.main{order:1}}
+    .sidebar{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;min-height:100%;border-right:1px solid rgba(255,255,255,0.03)}
+    .profile{display:flex;gap:18px;align-items:center}
+    .avatar{width:92px;height:92px;border-radius:20px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;color:#04202a}
+    h1{margin:0;font-size:20px}
+    .role{font-size:13px;color:var(--muted);margin-top:6px}
+    .contact{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+    .contact a{color:var(--text);text-decoration:none;font-size:13px;display:flex;gap:10px;align-items:center}
+    .chip{display:inline-flex;gap:8px;align-items:center;background:var(--glass);padding:8px 10px;border-radius:999px;font-size:12px;color:var(--text)}
+    .section{padding:22px 28px;border-bottom:1px dashed rgba(255,255,255,0.02)}
+    .muted{color:var(--muted)}
+    .stats{display:flex;gap:12px;margin-top:14px}
+    .stat{flex:1;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:12px;border-radius:10px;text-align:center}
+    .stat .num{font-size:20px;font-weight:700}
+    .skill-list{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+    .skill{display:flex;flex-direction:column;gap:6px}
+    .bar{background:rgba(255,255,255,0.04);height:10px;border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:999px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .tag{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--text)}
+    .main{padding:28px}
+    .header-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .title{display:flex;flex-direction:column}
+    .title h2{margin:0;font-size:22px}
+    .title p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+    .actions{display:flex;gap:8px}
+    button{background:var(--glass);border:1px solid rgba(255,255,255,0.04);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer;font-size:13px}
+    button:focus{outline:3px solid rgba(85,181,136,0.14)}
+    .summary{margin-top:16px;color:var(--muted);line-height:1.5}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:14px;border-radius:12px}
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    @media (max-width:880px){.grid{grid-template-columns:repeat(2,1fr)}.skills-grid{grid-template-columns:repeat(2,1fr)}}
+    .project{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02))}
+    .muted-line{color:var(--muted);font-size:13px;margin-top:8px}
+    .timeline{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+    .entry{padding:12px;border-left:3px solid rgba(255,255,255,0.03);background:transparent;border-radius:6px}
+    .entry h4{margin:0;font-size:15px}
+    .entry p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+    .tech{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .reveal{opacity:1;transform:none;transition:all 700ms cubic-bezier(.2,.9,.3,1)}
+    .to-reveal{opacity:0;transform:translateY(14px)}
+    .radial{width:72px;height:72px}
+    .footer{margin-top:20px;padding-top:10px;border-top:1px dashed rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px}
+    @media print{body{background:#fff;color:#000} .actions, .sidebar .chip, .sidebar .contact, button{display:none} .wrap{box-shadow:none;border-radius:0} }
+    :focus{outline: none}
+  </style>
+</head>
+<body>
+  <div class="wrap" id="resume" data-theme="dark">
+    <aside class="sidebar">
+      <div class="profile">
+        <div class="avatar" aria-hidden="true">YN</div>
+        <div>
+          <h1>YOUR NAME</h1>
+          <div class="role">Senior DevOps Engineer — Cloud, Automation & Reliability</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="contact">
+          <a href="mailto:you@example.com" aria-label="Email">✉️ you@example.com</a>
+          <a href="#" aria-label="Location">📍 Remote / Warsaw, PL</a>
+          <a href="https://github.com" target="_blank" rel="noopener">🐙 github.com/username</a>
+          <a href="#" aria-label="LinkedIn">🔗 linkedin.com/in/username</a>
+        </div>
+        <div style="margin-top:14px">
+          <div class="chip">Open to: Full-time & Contract</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="muted">Key skills</div>
+        <div class="skill-list">
+          <div class="skill"><div class="muted">Infrastructure as Code</div><div class="bar"><i data-level="92"></i></div></div>
+          <div class="skill"><div class="muted">Containers & Orchestration</div><div class="bar"><i data-level="90"></i></div></div>
+          <div class="skill"><div class="muted">CI/CD & Automation</div><div class="bar"><i data-level="95"></i></div></div>
+          <div class="skill"><div class="muted">Observability & SRE</div><div class="bar"><i data-level="85"></i></div></div>
+        </div>
+        <div class="muted" style="margin-top:12px">Technologies</div>
+        <div class="tags">
+          <span class="tag">AWS</span><span class="tag">Terraform</span><span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">Prometheus</span><span class="tag">Ansible</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="muted">Certifications</div>
+        <div class="muted-line">AWS Certified: DevOps Engineer — Professional</div>
+        <div class="muted-line">CKA — Certified Kubernetes Administrator</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="header-top">
+        <div class="title">
+          <h2>DevOps Engineer</h2>
+          <p class="muted">Bringing automation, observability and secure CI/CD to cloud-native platforms.</p>
+        </div>
+        <div class="actions">
+          <button id="printBtn" class="no-print" aria-label="Print resume">Print / Save PDF</button>
+          <button id="themeBtn" class="no-print" aria-pressed="false" aria-label="Toggle theme">Toggle theme</button>
+        </div>
+      </div>
+
+      <p class="summary">DevOps engineer focused on building reliable, repeatable delivery platforms. I design infrastructure-as-code pipelines, automate runbooks, and improve service SLOs through monitoring and incident response practices.</p>
+
+      <div class="grid to-reveal">
+        <div class="card">
+          <div class="muted">Years experience</div>
+          <div class="num stat-num" data-target="9">0</div>
+          <div class="muted-line">Large-scale production systems, multi-cloud</div>
+        </div>
+        <div class="card">
+          <div class="muted">Projects delivered</div>
+          <div class="num stat-num" data-target="42">0</div>
+          <div class="muted-line">Automated deployments, infra-as-code</div>
+        </div>
+        <div class="card">
+          <div class="muted">CI/CD pipelines</div>
+          <div class="num stat-num" data-target="120">0</div>
+          <div class="muted-line">Pipelines authored / maintained</div>
+        </div>
+      </div>
+
+      <section class="section to-reveal" aria-labelledby="skills">
+        <h3 id="skills">Technical expertise</h3>
+        <div class="skills-grid">
+          <div class="card project">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div>
+                <strong>Docker + Kubernetes</strong>
+                <div class="muted-line">Cluster design, GitOps, autoscaling</div>
+              </div>
+              <svg class="radial" viewBox="0 0 40 40" data-pct="90" aria-hidden>
+                <circle cx="20" cy="20" r="16" stroke="rgba(255,255,255,0.06)" stroke-width="6" fill="none"></circle>
+                <circle cx="20" cy="20" r="16" stroke="url(#grad1)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100"></circle>
+              </svg>
+            </div>
+            <div class="tech"><span class="tag">Helm</span><span class="tag">Flux</span></div>
+          </div>
+
+          <div class="card project">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div>
+                <strong>Terraform & IaC</strong>
+                <div class="muted-line">Modules, state management, drift testing</div>
+              </div>
+              <svg class="radial" viewBox="0 0 40 40" data-pct="88" aria-hidden>
+                <circle cx="20" cy="20" r="16" stroke="rgba(255,255,255,0.06)" stroke-width="6" fill="none"></circle>
+                <circle cx="20" cy="20" r="16" stroke="url(#grad2)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100"></circle>
+              </svg>
+            </div>
+            <div class="tech"><span class="tag">Terragrunt</span><span class="tag">Statefiles</span></div>
+          </div>
+
+          <div class="card project">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div>
+                <strong>CI/CD & Automation</strong>
+                <div class="muted-line">Pipelines, testing, canary rollouts</div>
+              </div>
+              <svg class="radial" viewBox="0 0 40 40" data-pct="95" aria-hidden>
+                <circle cx="20" cy="20" r="16" stroke="rgba(255,255,255,0.06)" stroke-width="6" fill="none"></circle>
+                <circle cx="20" cy="20" r="16" stroke="url(#grad3)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100"></circle>
+              </svg>
+            </div>
+            <div class="tech"><span class="tag">Github Actions</span><span class="tag">Argo</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section to-reveal" aria-labelledby="experience">
+        <h3 id="experience">Experience</h3>
+        <div class="timeline">
+          <div class="entry">
+            <h4>Senior DevOps Engineer — Acme Cloud</h4>
+            <div class="muted-line">2021 — Present</div>
+            <p>Designed multi-account AWS landing zone using IaC and implemented GitOps workflows. Reduced deployment time by 72% and improved mean-time-to-recover (MTTR) through runbook automation.</p>
+          </div>
+
+          <div class="entry">
+            <h4>Platform Engineer — ByteScale</h4>
+            <div class="muted-line">2018 — 2021</div>
+            <p>Built a container platform on Kubernetes with automated CI/CD, integrated observability stack (Prometheus, Grafana, Loki) and implemented proactive alerting and SLOs.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section to-reveal" aria-labelledby="projects">
+        <h3 id="projects">Selected projects</h3>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px">
+          <div class="project">
+            <strong>Multi-region Failover Automation</strong>
+            <div class="muted-line">Automated failover using DNS + Terraform; RTO < 5min</div>
+            <div class="tech"><span class="tag">Route53</span><span class="tag">Terraform</span></div>
+          </div>
+          <div class="project">
+            <strong>Secrets-as-a-Service</strong>
+            <div class="muted-line">Centralized secrets management and access controls integrated into CI pipelines.</div>
+            <div class="tech"><span class="tag">HashiCorp Vault</span><span class="tag">KMS</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section to-reveal" aria-labelledby="education">
+        <h3 id="education">Education & Training</h3>
+        <div class="muted-line">B.Sc. Computer Science — University</div>
+        <div class="muted-line">AWS & Kubernetes certifications (see sidebar)</div>
+      </section>
+
+      <div class="footer">
+        <div>Available for hire — open to remote roles</div>
+        <div class="muted">Last updated: May 2026</div>
+      </div>
+    </main>
+  </div>
+
+  <svg style="display:none">
+    <defs>
+      <linearGradient id="grad1" x1="0" x2="1"><stop offset="0%" stop-color="#56d4a3"/><stop offset="100%" stop-color="#5fb3ff"/></linearGradient>
+      <linearGradient id="grad2" x1="0" x2="1"><stop offset="0%" stop-color="#ffd166"/><stop offset="100%" stop-color="#ff7ab6"/></linearGradient>
+      <linearGradient id="grad3" x1="0" x2="1"><stop offset="0%" stop-color="#8bd3ff"/><stop offset="100%" stop-color="#6ee7b7"/></linearGradient>
+    </defs>
+  </svg>
+
+  <script>
+    (function(){
+      const root = document.getElementById('resume');
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+      const initial = stored || (prefersDark ? 'dark' : 'light');
+      root.setAttribute('data-theme', initial === 'dark' ? 'dark' : 'light');
+
+      document.getElementById('themeBtn').addEventListener('click', ()=>{
+        const now = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', now);
+        localStorage.setItem('theme', now);
+      });
+
+      document.getElementById('printBtn').addEventListener('click', ()=>window.print());
+
+      function animateCounters(){
+        document.querySelectorAll('.stat-num').forEach(el=>{
+          const target = +el.dataset.target || 0; let start = 0; const duration = 1200; const startTime = performance.now();
+          function step(now){
+            const progress = Math.min((now - startTime)/duration,1);
+            el.textContent = Math.floor(progress * target + (1-progress)*start);
+            if(progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+      }
+
+      function animateBars(){
+        document.querySelectorAll('.bar > i').forEach(i=>{
+          const lvl = i.dataset.level || 0; i.style.width = '0%';
+          requestAnimationFrame(()=>{ i.style.transition = 'width 900ms cubic-bezier(.2,.9,.3,1)'; i.style.width = lvl + '%'; });
+        });
+      }
+
+      function animateRadials(){
+        document.querySelectorAll('.radial').forEach(svg=>{
+          const pct = +svg.dataset.pct || 0; const c = svg.querySelectorAll('circle')[1];
+          const r = c.getAttribute('r'); const len = 2 * Math.PI * r; c.style.strokeDasharray = len; c.style.strokeDashoffset = len;
+          requestAnimationFrame(()=>{ c.style.transition = 'stroke-dashoffset 1100ms ease-out'; c.style.strokeDashoffset = Math.max(0, len * (1 - pct/100)); });
+        });
+      }
+
+      function revealOnScroll(){
+        const io = new IntersectionObserver(entries=>{
+          entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('reveal'); });
+        },{threshold:0.12});
+        document.querySelectorAll('.to-reveal').forEach(el=>io.observe(el));
+      }
+
+      document.addEventListener('DOMContentLoaded', ()=>{
+        animateCounters(); animateBars(); animateRadials(); revealOnScroll();
+      });
+    })();
+  </script>
+</body>
+</html>
