@@ -61,6 +61,17 @@
     @media print{body{background:#fff;color:#000} .actions, .sidebar .chip, .sidebar .contact, button{display:none} .wrap{box-shadow:none;border-radius:0} }
     :focus{outline: none}
 
+    /* Accessible helpers */
+    .skip-link{
+      position:fixed;left:12px;top:12px;background:var(--accent);color:#04202a;padding:8px 12px;border-radius:8px;z-index:9999;transform:translateY(-120%);transition:transform 180ms ease,opacity 180ms ease;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.35)
+    }
+    .skip-link:focus{transform:translateY(0);outline:none;box-shadow:0 8px 22px rgba(0,0,0,0.5)}
+
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+    a:focus-visible,button:focus-visible,.card:focus-visible{outline:3px solid rgba(90,173,255,0.18);outline-offset:2px;border-radius:8px}
+    .card:focus{--ty:-10px;--rx:4deg;--ry:-6deg;box-shadow:0 25px 50px rgba(7,24,38,0.6)}
+
     /* Enhanced animations & visual effects */
     #bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:0.85;mix-blend-mode:screen;transition:opacity 0.6s ease}
     .bg-glow{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(circle at 10% 10%, rgba(86,212,163,0.06), transparent 8%), radial-gradient(circle at 92% 80%, rgba(95,179,255,0.04), transparent 10%);transition:opacity 0.8s ease}
@@ -94,10 +105,12 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="a11y-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <div class="bg-glow" aria-hidden="true"></div>
   <div class="wrap" id="resume" data-theme="dark">
-    <aside class="sidebar">
+    <aside class="sidebar" role="complementary" aria-label="Profile">
       <div class="profile">
         <div class="avatar" aria-hidden="true">YN</div>
         <div>
@@ -106,12 +119,12 @@
         </div>
       </div>
       <div class="section">
-        <div class="contact">
+        <nav class="contact" aria-label="Contact information">
           <a href="mailto:you@example.com" aria-label="Email">✉️ you@example.com</a>
           <a href="#" aria-label="Location">📍 Remote / Warsaw, PL</a>
-          <a href="https://github.com" target="_blank" rel="noopener">🐙 github.com/username</a>
-          <a href="#" aria-label="LinkedIn">🔗 linkedin.com/in/username</a>
-        </div>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in new tab)">🐙 github.com/username</a>
+          <a href="#" aria-label="LinkedIn profile">🔗 linkedin.com/in/username</a>
+        </nav>
         <div style="margin-top:14px">
           <div class="chip">Open to: Full-time & Contract</div>
         </div>
@@ -138,7 +151,7 @@
       </div>
     </aside>
 
-    <main class="main">
+    <main class="main" id="main-content" role="main" tabindex="-1">
       <div class="header-top">
         <div class="title">
           <h2>DevOps Engineer</h2>
@@ -153,19 +166,19 @@
       <p class="summary">DevOps engineer focused on building reliable, repeatable delivery platforms. I design infrastructure-as-code pipelines, automate runbooks, and improve service SLOs through monitoring and incident response practices.</p>
 
       <div class="grid to-reveal">
-        <div class="card">
+        <div class="card" tabindex="0" role="article" aria-label="Years experience">
           <div class="muted">Years experience</div>
-          <div class="num stat-num" data-target="9">0</div>
+            <div class="num stat-num" data-target="9" role="status" aria-live="polite" aria-atomic="true">0</div>
           <div class="muted-line">Large-scale production systems, multi-cloud</div>
         </div>
-        <div class="card">
+        <div class="card" tabindex="0" role="article" aria-label="Projects delivered">
           <div class="muted">Projects delivered</div>
-          <div class="num stat-num" data-target="42">0</div>
+          <div class="num stat-num" data-target="42" role="status" aria-live="polite" aria-atomic="true">0</div>
           <div class="muted-line">Automated deployments, infra-as-code</div>
         </div>
-        <div class="card">
+        <div class="card" tabindex="0" role="article" aria-label="CI/CD pipelines">
           <div class="muted">CI/CD pipelines</div>
-          <div class="num stat-num" data-target="120">0</div>
+          <div class="num stat-num" data-target="120" role="status" aria-live="polite" aria-atomic="true">0</div>
           <div class="muted-line">Pipelines authored / maintained</div>
         </div>
       </div>
@@ -173,7 +186,7 @@
       <section class="section to-reveal" aria-labelledby="skills">
         <h3 id="skills">Technical expertise</h3>
         <div class="skills-grid">
-          <div class="card project">
+          <div class="card project" tabindex="0" role="article" aria-label="Docker and Kubernetes — Cluster design, GitOps, autoscaling">
             <div style="display:flex;align-items:center;justify-content:space-between">
               <div>
                 <strong>Docker + Kubernetes</strong>
@@ -187,7 +200,7 @@
             <div class="tech"><span class="tag">Helm</span><span class="tag">Flux</span></div>
           </div>
 
-          <div class="card project">
+          <div class="card project" tabindex="0" role="article" aria-label="Terraform and IaC — Modules, state management, drift testing">
             <div style="display:flex;align-items:center;justify-content:space-between">
               <div>
                 <strong>Terraform & IaC</strong>
@@ -201,7 +214,7 @@
             <div class="tech"><span class="tag">Terragrunt</span><span class="tag">Statefiles</span></div>
           </div>
 
-          <div class="card project">
+          <div class="card project" tabindex="0" role="article" aria-label="CI/CD and Automation — Pipelines, testing, canary rollouts">
             <div style="display:flex;align-items:center;justify-content:space-between">
               <div>
                 <strong>CI/CD & Automation</strong>
@@ -220,15 +233,15 @@
       <section class="section to-reveal" aria-labelledby="experience">
         <h3 id="experience">Experience</h3>
         <div class="timeline">
-          <div class="entry">
-            <h4>Senior DevOps Engineer — Acme Cloud</h4>
-            <div class="muted-line">2021 — Present</div>
+          <div class="entry" role="article" aria-labelledby="exp-acme">
+            <h4 id="exp-acme">Senior DevOps Engineer — Acme Cloud</h4>
+            <div class="muted-line"><time datetime="2021">2021</time> — <time datetime="2026">Present</time></div>
             <p>Designed multi-account AWS landing zone using IaC and implemented GitOps workflows. Reduced deployment time by 72% and improved mean-time-to-recover (MTTR) through runbook automation.</p>
           </div>
 
-          <div class="entry">
-            <h4>Platform Engineer — ByteScale</h4>
-            <div class="muted-line">2018 — 2021</div>
+          <div class="entry" role="article" aria-labelledby="exp-bytescale">
+            <h4 id="exp-bytescale">Platform Engineer — ByteScale</h4>
+            <div class="muted-line"><time datetime="2018">2018</time> — <time datetime="2021">2021</time></div>
             <p>Built a container platform on Kubernetes with automated CI/CD, integrated observability stack (Prometheus, Grafana, Loki) and implemented proactive alerting and SLOs.</p>
           </div>
         </div>
@@ -237,12 +250,12 @@
       <section class="section to-reveal" aria-labelledby="projects">
         <h3 id="projects">Selected projects</h3>
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px">
-          <div class="project">
+          <div class="project" tabindex="0" role="article" aria-label="Multi-region Failover Automation — Automated failover using DNS and Terraform; RTO under 5 minutes">
             <strong>Multi-region Failover Automation</strong>
-            <div class="muted-line">Automated failover using DNS + Terraform; RTO < 5min</div>
+            <div class="muted-line">Automated failover using DNS + Terraform; RTO under 5 minutes</div>
             <div class="tech"><span class="tag">Route53</span><span class="tag">Terraform</span></div>
           </div>
-          <div class="project">
+          <div class="project" tabindex="0" role="article" aria-label="Secrets-as-a-Service — Centralized secrets management and access controls integrated into CI pipelines">
             <strong>Secrets-as-a-Service</strong>
             <div class="muted-line">Centralized secrets management and access controls integrated into CI pipelines.</div>
             <div class="tech"><span class="tag">HashiCorp Vault</span><span class="tag">KMS</span></div>
@@ -281,15 +294,34 @@
       const initial = stored || (prefersDark ? 'dark' : 'light');
       root.setAttribute('data-theme', initial === 'dark' ? 'dark' : 'light');
 
+      const a11yStatus = document.getElementById('a11y-status');
       const themeBtn = document.getElementById('themeBtn');
-      if (themeBtn) themeBtn.addEventListener('click', ()=>{
-        const now = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', now);
-        localStorage.setItem('theme', now);
-      });
+      if (themeBtn){
+        const isDark = root.getAttribute('data-theme') === 'dark';
+        themeBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        themeBtn.addEventListener('click', ()=>{
+          const now = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', now);
+          localStorage.setItem('theme', now);
+          themeBtn.setAttribute('aria-pressed', now === 'dark' ? 'true' : 'false');
+          if (a11yStatus) a11yStatus.textContent = `Theme switched to ${now} mode.`;
+          themeBtn.focus();
+        });
+      }
 
       const printBtn = document.getElementById('printBtn');
-      if (printBtn) printBtn.addEventListener('click', ()=>window.print());
+      if (printBtn) printBtn.addEventListener('click', ()=>{
+        if (a11yStatus) a11yStatus.textContent = 'Opening print dialog';
+        window.print();
+      });
+
+      const skipLink = document.querySelector('.skip-link');
+      if (skipLink){
+        skipLink.addEventListener('click', ()=>{
+          const main = document.getElementById('main-content');
+          if (main) setTimeout(()=> main.focus(), 50);
+        });
+      }
 
       function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
 
