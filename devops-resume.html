@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Senior DevOps Engineer Resume - Cloud Infrastructure, CI/CD, and Automation Expert">
+    <meta name="theme-color" content="#2563eb">
     <title>Alex Morgan - Senior DevOps Engineer</title>
     <style>
         * {
@@ -1110,75 +1111,149 @@
 
         /* Focus visible for keyboard navigation */
         *:focus-visible {
-            outline: 2px solid var(--color-primary);
-            outline-offset: 2px;
+            outline: 3px solid var(--color-secondary);
+            outline-offset: 3px;
             border-radius: 4px;
+            box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Skip to content link */
+        .skip-link {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 10000;
+            transition: top 0.3s ease;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .skip-link:focus {
+            top: var(--spacing-md);
+            outline: 3px solid var(--color-secondary);
+            outline-offset: 3px;
+        }
+
+        /* Screen reader only text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --color-border: #94a3b8;
+            }
+            .stat-card,
+            .timeline-item,
+            .project-card,
+            .skill-category,
+            .cert-card {
+                border-width: 2px;
+            }
+        }
+
+        /* Focus within for interactive cards */
+        .stat-card:focus-within,
+        .project-card:focus-within,
+        .cert-card:focus-within,
+        .timeline-item:focus-within {
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Ensure sufficient touch targets (minimum 44x44px) */
+        .contact-item,
+        .skill-tag,
+        .tech-badge {
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Particles Background -->
-    <div id="particles"></div>
+    <div id="particles" role="presentation" aria-hidden="true"></div>
 
     <div class="container">
         <!-- Header -->
-        <header class="header">
-            <div class="profile-image">AM</div>
+        <header class="header" role="banner">
+            <div class="profile-image" role="img" aria-label="Alex Morgan profile">AM</div>
             <h1>Alex Morgan</h1>
             <p class="title">Senior DevOps Engineer & Cloud Architect</p>
-            <nav class="contact-info">
-                <a href="mailto:alex.morgan@email.com" class="contact-item" aria-label="Email">
-                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <nav class="contact-info" aria-label="Contact information">
+                <a href="mailto:alex.morgan@email.com" class="contact-item">
+                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
                     </svg>
-                    alex.morgan@email.com
+                    <span>Email: alex.morgan@email.com</span>
                 </a>
-                <a href="tel:+1234567890" class="contact-item" aria-label="Phone">
-                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <a href="tel:+1234567890" class="contact-item">
+                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                         <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
                     </svg>
-                    +1 (234) 567-890
+                    <span>Phone: +1 (234) 567-890</span>
                 </a>
-                <a href="https://linkedin.com/in/alexmorgan" class="contact-item" aria-label="LinkedIn">
-                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <a href="https://linkedin.com/in/alexmorgan" class="contact-item" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                         <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"/>
                     </svg>
-                    LinkedIn
+                    <span>LinkedIn<span class="sr-only"> (opens in new tab)</span></span>
                 </a>
-                <a href="https://github.com/alexmorgan" class="contact-item" aria-label="GitHub">
-                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <a href="https://github.com/alexmorgan" class="contact-item" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                         <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"/>
                     </svg>
-                    GitHub
+                    <span>GitHub<span class="sr-only"> (opens in new tab)</span></span>
                 </a>
             </nav>
         </header>
 
         <!-- Stats -->
-        <section class="stats">
-            <div class="stat-card">
-                <span class="stat-number" data-target="8">0</span>
+        <section class="stats" aria-label="Key statistics" role="region">
+            <div class="stat-card" role="article">
+                <span class="stat-number" data-target="8" aria-live="polite" aria-atomic="true">0</span>
                 <span class="stat-label">Years Experience</span>
             </div>
-            <div class="stat-card">
-                <span class="stat-number" data-target="500">0</span>
+            <div class="stat-card" role="article">
+                <span class="stat-number" data-target="500" aria-live="polite" aria-atomic="true">0</span>
                 <span class="stat-label">Deployments/Month</span>
             </div>
-            <div class="stat-card">
-                <span class="stat-number" data-target="99.99">0</span>
+            <div class="stat-card" role="article">
+                <span class="stat-number" data-target="99.99" aria-live="polite" aria-atomic="true">0</span>
                 <span class="stat-label">% Uptime</span>
             </div>
-            <div class="stat-card">
-                <span class="stat-number" data-target="45">0</span>
+            <div class="stat-card" role="article">
+                <span class="stat-number" data-target="45" aria-live="polite" aria-atomic="true">0</span>
                 <span class="stat-label">% Cost Reduction</span>
             </div>
         </section>
 
         <!-- Summary -->
-        <section class="section">
-            <h2 class="section-title">Professional Summary</h2>
-            <div class="timeline-item" style="margin-left: 0;">
+        <section class="section" id="main-content" role="region" aria-labelledby="summary-heading">
+            <h2 class="section-title" id="summary-heading">Professional Summary</h2>
+            <div class="timeline-item" role="article">
                 <p class="timeline-description">
                     Results-driven Senior DevOps Engineer with 8+ years of experience designing and implementing scalable cloud infrastructure solutions. 
                     Proven track record of reducing deployment times by 75%, cutting infrastructure costs by 45%, and maintaining 99.99% uptime across 
@@ -1189,11 +1264,11 @@
         </section>
 
         <!-- Skills -->
-        <section class="section">
-            <h2 class="section-title">Technical Skills</h2>
+        <section class="section" role="region" aria-labelledby="skills-heading">
+            <h2 class="section-title" id="skills-heading">Technical Skills</h2>
             <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>☁️ Cloud Platforms</h3>
+                <div class="skill-category" role="article">
+                    <h3 id="cloud-platforms"><span role="img" aria-label="Cloud">☁️</span> Cloud Platforms</h3>
                     <div class="skill-list">
                         <span class="skill-tag">AWS</span>
                         <span class="skill-tag">Azure</span>
@@ -1201,8 +1276,8 @@
                         <span class="skill-tag">DigitalOcean</span>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3>🐳 Containerization</h3>
+                <div class="skill-category" role="article">
+                    <h3 id="containerization"><span role="img" aria-label="Docker">🐳</span> Containerization</h3>
                     <div class="skill-list">
                         <span class="skill-tag">Docker</span>
                         <span class="skill-tag">Kubernetes</span>
@@ -1211,8 +1286,8 @@
                         <span class="skill-tag">AKS</span>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3>🔄 CI/CD</h3>
+                <div class="skill-category" role="article">
+                    <h3 id="cicd"><span role="img" aria-label="CI/CD">🔄</span> CI/CD</h3>
                     <div class="skill-list">
                         <span class="skill-tag">Jenkins</span>
                         <span class="skill-tag">GitLab CI</span>
@@ -1221,8 +1296,8 @@
                         <span class="skill-tag">ArgoCD</span>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3>🏗️ Infrastructure as Code</h3>
+                <div class="skill-category" role="article">
+                    <h3 id="iac"><span role="img" aria-label="Infrastructure">🏗️</span> Infrastructure as Code</h3>
                     <div class="skill-list">
                         <span class="skill-tag">Terraform</span>
                         <span class="skill-tag">CloudFormation</span>
@@ -1230,8 +1305,8 @@
                         <span class="skill-tag">Pulumi</span>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3>📊 Monitoring & Logging</h3>
+                <div class="skill-category" role="article">
+                    <h3 id="monitoring"><span role="img" aria-label="Monitoring">📊</span> Monitoring & Logging</h3>
                     <div class="skill-list">
                         <span class="skill-tag">Prometheus</span>
                         <span class="skill-tag">Grafana</span>
@@ -1240,8 +1315,8 @@
                         <span class="skill-tag">New Relic</span>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3>💻 Programming</h3>
+                <div class="skill-category" role="article">
+                    <h3 id="programming"><span role="img" aria-label="Programming">💻</span> Programming</h3>
                     <div class="skill-list">
                         <span class="skill-tag">Python</span>
                         <span class="skill-tag">Bash</span>
@@ -1254,10 +1329,10 @@
         </section>
 
         <!-- Experience -->
-        <section class="section">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
+        <section class="section" role="region" aria-labelledby="experience-heading">
+            <h2 class="section-title" id="experience-heading">Professional Experience</h2>
+            <div class="timeline" role="list" aria-label="Work experience timeline">
+                <div class="timeline-item" role="listitem" tabindex="0">
                     <div class="timeline-header">
                         <div>
                             <h3 class="timeline-title">Senior DevOps Engineer</h3>
@@ -1309,7 +1384,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item" role="listitem" tabindex="0">
                     <div class="timeline-header">
                         <div>
                             <h3 class="timeline-title">Systems Administrator</h3>
@@ -1335,11 +1410,11 @@
         </section>
 
         <!-- Key Projects -->
-        <section class="section">
-            <h2 class="section-title">Key Projects</h2>
+        <section class="section" role="region" aria-labelledby="projects-heading">
+            <h2 class="section-title" id="projects-heading">Key Projects</h2>
             <div class="projects-grid">
-                <div class="project-card">
-                    <h3 class="project-title">🚀 Kubernetes Platform Migration</h3>
+                <div class="project-card" role="article" tabindex="0">
+                    <h3 class="project-title"><span role="img" aria-label="Rocket">🚀</span> Kubernetes Platform Migration</h3>
                     <p class="project-description">
                         Led enterprise-wide migration from EC2-based deployments to Kubernetes (EKS), handling 50+ microservices 
                         with zero downtime. Implemented service mesh using Istio and automated scaling policies.
@@ -1357,8 +1432,8 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3 class="project-title">🔄 Multi-Cloud Disaster Recovery</h3>
+                <div class="project-card" role="article" tabindex="0">
+                    <h3 class="project-title"><span role="img" aria-label="Cycle">🔄</span> Multi-Cloud Disaster Recovery</h3>
                     <p class="project-description">
                         Designed and implemented active-active disaster recovery solution across AWS and Azure, ensuring business 
                         continuity with RTO of 5 minutes and RPO of 1 minute for mission-critical systems.
@@ -1376,8 +1451,8 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3 class="project-title">📊 Observability Platform</h3>
+                <div class="project-card" role="article" tabindex="0">
+                    <h3 class="project-title"><span role="img" aria-label="Chart">📊</span> Observability Platform</h3>
                     <p class="project-description">
                         Built comprehensive observability solution using Prometheus, Grafana, and ELK stack. Created 75+ custom 
                         dashboards and alerting rules, reducing MTTR by 60% and improving incident response.
@@ -1395,8 +1470,8 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3 class="project-title">🔐 Security & Compliance Automation</h3>
+                <div class="project-card" role="article" tabindex="0">
+                    <h3 class="project-title"><span role="img" aria-label="Security">🔐</span> Security & Compliance Automation</h3>
                     <p class="project-description">
                         Implemented automated security scanning and compliance checking in CI/CD pipeline. Integrated tools for 
                         vulnerability scanning, secrets detection, and infrastructure compliance validation.
@@ -1414,8 +1489,8 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3 class="project-title">🤖 Infrastructure Automation Framework</h3>
+                <div class="project-card" role="article" tabindex="0">
+                    <h3 class="project-title"><span role="img" aria-label="Robot">🤖</span> Infrastructure Automation Framework</h3>
                     <p class="project-description">
                         Developed reusable Terraform modules and Ansible playbooks for standardized infrastructure provisioning 
                         across 20+ projects, reducing deployment time by 70% and ensuring consistency.
@@ -1433,8 +1508,8 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <h3 class="project-title">💰 Cost Optimization Initiative</h3>
+                <div class="project-card" role="article" tabindex="0">
+                    <h3 class="project-title"><span role="img" aria-label="Money">💰</span> Cost Optimization Initiative</h3>
                     <p class="project-description">
                         Conducted comprehensive cloud cost analysis and implemented optimization strategies including reserved 
                         instances, spot instances, and resource rightsizing, achieving 45% cost reduction.
@@ -1454,32 +1529,32 @@
         </section>
 
         <!-- Certifications -->
-        <section class="section">
-            <h2 class="section-title">Certifications</h2>
+        <section class="section" role="region" aria-labelledby="certifications-heading">
+            <h2 class="section-title" id="certifications-heading">Certifications</h2>
             <div class="cert-grid">
-                <div class="cert-card">
-                    <div class="cert-icon">☁️</div>
+                <div class="cert-card" role="article" tabindex="0">
+                    <div class="cert-icon" role="img" aria-label="Cloud certification"><span aria-hidden="true">☁️</span></div>
                     <div class="cert-info">
                         <h4>AWS Certified Solutions Architect - Professional</h4>
                         <p>Amazon Web Services - 2024</p>
                     </div>
                 </div>
-                <div class="cert-card">
-                    <div class="cert-icon">⚡</div>
+                <div class="cert-card" role="article" tabindex="0">
+                    <div class="cert-icon" role="img" aria-label="Kubernetes certification"><span aria-hidden="true">⚡</span></div>
                     <div class="cert-info">
                         <h4>Certified Kubernetes Administrator (CKA)</h4>
                         <p>Cloud Native Computing Foundation - 2023</p>
                     </div>
                 </div>
-                <div class="cert-card">
-                    <div class="cert-icon">🔷</div>
+                <div class="cert-card" role="article" tabindex="0">
+                    <div class="cert-icon" role="img" aria-label="Azure certification"><span aria-hidden="true">🔷</span></div>
                     <div class="cert-info">
                         <h4>Microsoft Certified: Azure Solutions Architect</h4>
                         <p>Microsoft - 2023</p>
                     </div>
                 </div>
-                <div class="cert-card">
-                    <div class="cert-icon">🏗️</div>
+                <div class="cert-card" role="article" tabindex="0">
+                    <div class="cert-icon" role="img" aria-label="Terraform certification"><span aria-hidden="true">🏗️</span></div>
                     <div class="cert-info">
                         <h4>HashiCorp Certified: Terraform Associate</h4>
                         <p>HashiCorp - 2024</p>
@@ -1489,8 +1564,8 @@
         </section>
 
         <!-- Footer -->
-        <footer class="footer">
-            <p>&copy; 2026 Alex Morgan. All rights reserved. | Built with ❤️ and modern web technologies</p>
+        <footer class="footer" role="contentinfo">
+            <p>&copy; <span id="current-year">2026</span> Alex Morgan. All rights reserved. | Built with <span role="img" aria-label="love">❤️</span> and modern web technologies</p>
         </footer>
     </div>
 
@@ -1507,6 +1582,8 @@
                 if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
                     current = end;
                     clearInterval(timer);
+                    // Announce completion for screen readers
+                    element.setAttribute('aria-label', `${isDecimal ? current.toFixed(2) : Math.floor(current)} ${element.nextElementSibling.textContent}`);
                 }
                 element.textContent = isDecimal ? current.toFixed(2) : Math.floor(current);
             }, 16);
@@ -1624,6 +1701,11 @@
         function createWaveEffect(container) {
             const tags = container.querySelectorAll('.skill-tag');
             tags.forEach((tag, index) => {
+                // Make tags keyboard accessible
+                tag.setAttribute('tabindex', '0');
+                tag.setAttribute('role', 'button');
+                tag.setAttribute('aria-label', `Technology: ${tag.textContent}`);
+                
                 tag.addEventListener('mouseenter', () => {
                     tags.forEach((t, i) => {
                         const distance = Math.abs(i - index);
@@ -1638,6 +1720,17 @@
                             }, distance * 50);
                         }
                     });
+                });
+                
+                // Keyboard support
+                tag.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        tag.style.transform = 'translateY(-4px) scale(1.05)';
+                        setTimeout(() => {
+                            tag.style.transform = '';
+                        }, 200);
+                    }
                 });
             });
         }
@@ -1706,6 +1799,21 @@
                     card.style.setProperty('--mouse-x', '50%');
                     card.style.setProperty('--mouse-y', '50%');
                 });
+                
+                // Enhanced keyboard navigation
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        card.style.transform = 'translateY(-8px) rotateX(2deg)';
+                        card.style.borderColor = 'var(--color-primary)';
+                        setTimeout(() => {
+                            if (!card.matches(':hover')) {
+                                card.style.transform = '';
+                                card.style.borderColor = '';
+                            }
+                        }, 300);
+                    }
+                });
             });
 
             // Cursor trail effect
@@ -1731,6 +1839,11 @@
                 if (e.key === 'Tab') {
                     document.body.classList.add('keyboard-nav');
                 }
+                
+                // Add Escape key to close/reset focused elements
+                if (e.key === 'Escape') {
+                    document.activeElement.blur();
+                }
             });
 
             document.addEventListener('mousedown', () => {
@@ -1746,9 +1859,9 @@
 
             // Update footer year
             const currentYear = new Date().getFullYear();
-            const footerText = document.querySelector('.footer p');
-            if (footerText) {
-                footerText.textContent = footerText.textContent.replace('2026', currentYear);
+            const yearElement = document.getElementById('current-year');
+            if (yearElement) {
+                yearElement.textContent = currentYear;
             }
 
             // Performance monitoring
@@ -1793,6 +1906,17 @@
                     this.style.color = 'var(--color-text-muted)';
                     this.style.transform = 'translateX(0)';
                 });
+                
+                // Keyboard support
+                achievement.setAttribute('tabindex', '0');
+                achievement.addEventListener('focus', function() {
+                    this.style.color = 'var(--color-text)';
+                    this.style.transform = 'translateX(5px)';
+                });
+                achievement.addEventListener('blur', function() {
+                    this.style.color = 'var(--color-text-muted)';
+                    this.style.transform = 'translateX(0)';
+                });
             });
 
             // Metric badges pulse on hover
@@ -1804,11 +1928,58 @@
                     }
                 });
             });
+            
+            // Add keyboard support for timeline items
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        item.style.transform = 'translateX(8px) scale(1.01)';
+                        setTimeout(() => {
+                            if (!item.matches(':hover') && document.activeElement !== item) {
+                                item.style.transform = '';
+                            }
+                        }, 300);
+                    }
+                });
+            });
+            
+            // Add keyboard support for certification cards
+            document.querySelectorAll('.cert-card').forEach(cert => {
+                cert.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        cert.style.transform = 'translateY(-4px) scale(1.02)';
+                        const icon = cert.querySelector('.cert-icon');
+                        if (icon) {
+                            icon.style.transform = 'rotateY(360deg) scale(1.1)';
+                        }
+                        setTimeout(() => {
+                            if (!cert.matches(':hover') && document.activeElement !== cert) {
+                                cert.style.transform = '';
+                                if (icon) icon.style.transform = '';
+                            }
+                        }, 600);
+                    }
+                });
+            });
 
             // Add loading state
             document.body.classList.add('loaded');
             
-            console.log('🚀 DevOps Resume loaded with EPIC visual effects!');
+            // Announce page ready for screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('role', 'status');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.className = 'sr-only';
+            announcement.textContent = 'Resume page loaded successfully. Use Tab to navigate through sections.';
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                announcement.remove();
+            }, 3000);
+            
+            console.log('🚀 DevOps Resume loaded with EPIC visual effects and full accessibility support!');
         });
 
         // Handle reduced motion preferences
