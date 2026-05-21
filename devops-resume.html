@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Senior DevOps Engineer Resume - Cloud Infrastructure, CI/CD, and Automation Expert">
+    <title>Alex Morgan - Senior DevOps Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #2563eb;
+            --color-primary-dark: #1e40af;
+            --color-secondary: #10b981;
+            --color-accent: #f59e0b;
+            --color-bg: #0f172a;
+            --color-surface: #1e293b;
+            --color-surface-light: #334155;
+            --color-text: #f1f5f9;
+            --color-text-muted: #94a3b8;
+            --color-border: #475569;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --border-radius: 0.75rem;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--color-bg) 0%, #1a2332 100%);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-lg);
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+            position: relative;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            border-radius: 2px;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            margin: var(--spacing-xl) auto var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: var(--shadow-xl), 0 0 0 8px rgba(37, 99, 235, 0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.02em;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            color: var(--color-text-muted);
+            font-weight: 400;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--color-text-muted);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .contact-item:hover {
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-2xl) 0;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-primary);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            display: block;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .stat-label {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Section Styles */
+        .section {
+            margin: var(--spacing-2xl) 0;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+            padding-left: var(--spacing-lg);
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 2rem;
+            background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+            border-radius: 2px;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .skill-category {
+            background: var(--color-surface);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skill-category h3 {
+            font-size: 1.25rem;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .skill-tag {
+            background: var(--color-surface-light);
+            color: var(--color-text);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Experience & Projects */
+        .timeline {
+            position: relative;
+            padding-left: var(--spacing-xl);
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--spacing-2xl);
+            background: var(--color-surface);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -29px;
+            top: var(--spacing-xl);
+            width: 14px;
+            height: 14px;
+            background: var(--color-primary);
+            border: 3px solid var(--color-bg);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--color-surface);
+        }
+
+        .timeline-item:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateX(4px);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-md);
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .timeline-company {
+            color: var(--color-secondary);
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .timeline-date {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: var(--color-surface-light);
+            border-radius: 4px;
+        }
+
+        .timeline-description {
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.7;
+        }
+
+        .achievements {
+            list-style: none;
+        }
+
+        .achievement {
+            padding-left: var(--spacing-lg);
+            position: relative;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-muted);
+        }
+
+        .achievement::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--color-secondary);
+            font-size: 1.2rem;
+        }
+
+        .metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .metric {
+            background: var(--color-surface-light);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .metric-value {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .project-card {
+            background: var(--color-surface);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-xl);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-primary);
+        }
+
+        .project-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text);
+        }
+
+        .project-description {
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .tech-badge {
+            background: var(--color-surface-light);
+            color: var(--color-primary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid var(--color-border);
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .cert-card {
+            background: var(--color-surface);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .cert-card:hover {
+            border-color: var(--color-secondary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .cert-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .cert-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--color-text);
+        }
+
+        .cert-info p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+            margin-top: var(--spacing-2xl);
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .title {
+                font-size: 1.25rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .timeline {
+                padding-left: var(--spacing-md);
+            }
+
+            .timeline-item::before {
+                left: -21px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .stat-card, .timeline-item, .project-card, .skill-category {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus visible for keyboard navigation */
+        *:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="profile-image">AM</div>
+            <h1>Alex Morgan</h1>
+            <p class="title">Senior DevOps Engineer & Cloud Architect</p>
+            <nav class="contact-info">
+                <a href="mailto:alex.morgan@email.com" class="contact-item" aria-label="Email">
+                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                    </svg>
+                    alex.morgan@email.com
+                </a>
+                <a href="tel:+1234567890" class="contact-item" aria-label="Phone">
+                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                    +1 (234) 567-890
+                </a>
+                <a href="https://linkedin.com/in/alexmorgan" class="contact-item" aria-label="LinkedIn">
+                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/alexmorgan" class="contact-item" aria-label="GitHub">
+                    <svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"/>
+                    </svg>
+                    GitHub
+                </a>
+            </nav>
+        </header>
+
+        <!-- Stats -->
+        <section class="stats">
+            <div class="stat-card">
+                <span class="stat-number" data-target="8">0</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" data-target="500">0</span>
+                <span class="stat-label">Deployments/Month</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" data-target="99.99">0</span>
+                <span class="stat-label">% Uptime</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" data-target="45">0</span>
+                <span class="stat-label">% Cost Reduction</span>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="timeline-item" style="margin-left: 0;">
+                <p class="timeline-description">
+                    Results-driven Senior DevOps Engineer with 8+ years of experience designing and implementing scalable cloud infrastructure solutions. 
+                    Proven track record of reducing deployment times by 75%, cutting infrastructure costs by 45%, and maintaining 99.99% uptime across 
+                    mission-critical applications. Expert in containerization, CI/CD automation, and cloud-native architectures across AWS, Azure, and GCP. 
+                    Passionate about building resilient systems and fostering DevOps culture through automation and collaboration.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>☁️ Cloud Platforms</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Google Cloud</span>
+                        <span class="skill-tag">DigitalOcean</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🐳 Containerization</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Helm</span>
+                        <span class="skill-tag">ECS/EKS</span>
+                        <span class="skill-tag">AKS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🔄 CI/CD</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">GitLab CI</span>
+                        <span class="skill-tag">GitHub Actions</span>
+                        <span class="skill-tag">CircleCI</span>
+                        <span class="skill-tag">ArgoCD</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>🏗️ Infrastructure as Code</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">CloudFormation</span>
+                        <span class="skill-tag">Ansible</span>
+                        <span class="skill-tag">Pulumi</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>📊 Monitoring & Logging</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Prometheus</span>
+                        <span class="skill-tag">Grafana</span>
+                        <span class="skill-tag">ELK Stack</span>
+                        <span class="skill-tag">Datadog</span>
+                        <span class="skill-tag">New Relic</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>💻 Programming</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">Go</span>
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">YAML</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <h3 class="timeline-title">Senior DevOps Engineer</h3>
+                            <p class="timeline-company">TechCorp Solutions</p>
+                        </div>
+                        <span class="timeline-date">2022 - Present</span>
+                    </div>
+                    <p class="timeline-description">
+                        Leading DevOps initiatives for a high-traffic SaaS platform serving 2M+ users, focusing on infrastructure automation, 
+                        cost optimization, and reliability engineering.
+                    </p>
+                    <ul class="achievements">
+                        <li class="achievement">Architected and deployed Kubernetes-based microservices platform handling 10M+ requests/day</li>
+                        <li class="achievement">Reduced infrastructure costs by $180K annually through auto-scaling optimization and resource rightsizing</li>
+                        <li class="achievement">Implemented GitOps workflow with ArgoCD, reducing deployment time from 2 hours to 15 minutes</li>
+                        <li class="achievement">Built comprehensive monitoring system using Prometheus/Grafana with 50+ custom dashboards</li>
+                        <li class="achievement">Achieved 99.99% uptime SLA through chaos engineering and disaster recovery planning</li>
+                    </ul>
+                    <div class="metrics">
+                        <span class="metric">Deployments: <span class="metric-value">500+/month</span></span>
+                        <span class="metric">Cost Savings: <span class="metric-value">$180K/year</span></span>
+                        <span class="metric">Uptime: <span class="metric-value">99.99%</span></span>
+                        <span class="metric">MTTR: <span class="metric-value">< 10min</span></span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <h3 class="timeline-title">DevOps Engineer</h3>
+                            <p class="timeline-company">CloudNative Inc.</p>
+                        </div>
+                        <span class="timeline-date">2019 - 2022</span>
+                    </div>
+                    <p class="timeline-description">
+                        Designed and maintained cloud infrastructure for multiple client projects, specializing in AWS and Azure solutions.
+                    </p>
+                    <ul class="achievements">
+                        <li class="achievement">Migrated legacy monolithic applications to containerized microservices on AWS EKS</li>
+                        <li class="achievement">Implemented Infrastructure as Code using Terraform, managing 200+ cloud resources</li>
+                        <li class="achievement">Created CI/CD pipelines using Jenkins and GitLab, reducing release cycle from weekly to daily</li>
+                        <li class="achievement">Designed multi-region disaster recovery solution with RTO < 15 minutes</li>
+                        <li class="achievement">Mentored team of 4 junior engineers on DevOps best practices and cloud technologies</li>
+                    </ul>
+                    <div class="metrics">
+                        <span class="metric">Migrations: <span class="metric-value">15 apps</span></span>
+                        <span class="metric">Pipeline Speed: <span class="metric-value">75% faster</span></span>
+                        <span class="metric">Infrastructure: <span class="metric-value">200+ resources</span></span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <h3 class="timeline-title">Systems Administrator</h3>
+                            <p class="timeline-company">DataSystems Corp</p>
+                        </div>
+                        <span class="timeline-date">2018 - 2019</span>
+                    </div>
+                    <p class="timeline-description">
+                        Managed on-premise infrastructure and initiated cloud migration projects, focusing on automation and monitoring.
+                    </p>
+                    <ul class="achievements">
+                        <li class="achievement">Automated server provisioning with Ansible, reducing setup time from 4 hours to 30 minutes</li>
+                        <li class="achievement">Implemented centralized logging system using ELK stack for 100+ servers</li>
+                        <li class="achievement">Developed Python scripts for automated backup and monitoring tasks</li>
+                        <li class="achievement">Led successful migration of critical workloads from on-premise to AWS cloud</li>
+                    </ul>
+                    <div class="metrics">
+                        <span class="metric">Automation: <span class="metric-value">80% tasks</span></span>
+                        <span class="metric">Servers Managed: <span class="metric-value">100+</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Projects -->
+        <section class="section">
+            <h2 class="section-title">Key Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">🚀 Kubernetes Platform Migration</h3>
+                    <p class="project-description">
+                        Led enterprise-wide migration from EC2-based deployments to Kubernetes (EKS), handling 50+ microservices 
+                        with zero downtime. Implemented service mesh using Istio and automated scaling policies.
+                    </p>
+                    <div class="metrics">
+                        <span class="metric">Impact: <span class="metric-value">$200K saved</span></span>
+                        <span class="metric">Performance: <span class="metric-value">40% faster</span></span>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-badge">Kubernetes</span>
+                        <span class="tech-badge">AWS EKS</span>
+                        <span class="tech-badge">Istio</span>
+                        <span class="tech-badge">Helm</span>
+                        <span class="tech-badge">Terraform</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">🔄 Multi-Cloud Disaster Recovery</h3>
+                    <p class="project-description">
+                        Designed and implemented active-active disaster recovery solution across AWS and Azure, ensuring business 
+                        continuity with RTO of 5 minutes and RPO of 1 minute for mission-critical systems.
+                    </p>
+                    <div class="metrics">
+                        <span class="metric">RTO: <span class="metric-value">5 min</span></span>
+                        <span class="metric">RPO: <span class="metric-value">1 min</span></span>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-badge">AWS</span>
+                        <span class="tech-badge">Azure</span>
+                        <span class="tech-badge">Terraform</span>
+                        <span class="tech-badge">Route53</span>
+                        <span class="tech-badge">CloudWatch</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">📊 Observability Platform</h3>
+                    <p class="project-description">
+                        Built comprehensive observability solution using Prometheus, Grafana, and ELK stack. Created 75+ custom 
+                        dashboards and alerting rules, reducing MTTR by 60% and improving incident response.
+                    </p>
+                    <div class="metrics">
+                        <span class="metric">MTTR: <span class="metric-value">60% reduction</span></span>
+                        <span class="metric">Dashboards: <span class="metric-value">75+</span></span>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-badge">Prometheus</span>
+                        <span class="tech-badge">Grafana</span>
+                        <span class="tech-badge">Elasticsearch</span>
+                        <span class="tech-badge">Kibana</span>
+                        <span class="tech-badge">Fluentd</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">🔐 Security & Compliance Automation</h3>
+                    <p class="project-description">
+                        Implemented automated security scanning and compliance checking in CI/CD pipeline. Integrated tools for 
+                        vulnerability scanning, secrets detection, and infrastructure compliance validation.
+                    </p>
+                    <div class="metrics">
+                        <span class="metric">Security Checks: <span class="metric-value">100% automated</span></span>
+                        <span class="metric">Vulnerabilities: <span class="metric-value">85% reduction</span></span>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-badge">Trivy</span>
+                        <span class="tech-badge">SonarQube</span>
+                        <span class="tech-badge">Vault</span>
+                        <span class="tech-badge">OPA</span>
+                        <span class="tech-badge">GitLab CI</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">🤖 Infrastructure Automation Framework</h3>
+                    <p class="project-description">
+                        Developed reusable Terraform modules and Ansible playbooks for standardized infrastructure provisioning 
+                        across 20+ projects, reducing deployment time by 70% and ensuring consistency.
+                    </p>
+                    <div class="metrics">
+                        <span class="metric">Time Saved: <span class="metric-value">70%</span></span>
+                        <span class="metric">Projects: <span class="metric-value">20+</span></span>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-badge">Terraform</span>
+                        <span class="tech-badge">Ansible</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">AWS</span>
+                        <span class="tech-badge">GitLab</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">💰 Cost Optimization Initiative</h3>
+                    <p class="project-description">
+                        Conducted comprehensive cloud cost analysis and implemented optimization strategies including reserved 
+                        instances, spot instances, and resource rightsizing, achieving 45% cost reduction.
+                    </p>
+                    <div class="metrics">
+                        <span class="metric">Savings: <span class="metric-value">$250K/year</span></span>
+                        <span class="metric">Reduction: <span class="metric-value">45%</span></span>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-badge">AWS Cost Explorer</span>
+                        <span class="tech-badge">CloudHealth</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Lambda</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">☁️</div>
+                    <div class="cert-info">
+                        <h4>AWS Certified Solutions Architect - Professional</h4>
+                        <p>Amazon Web Services - 2024</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">⚡</div>
+                    <div class="cert-info">
+                        <h4>Certified Kubernetes Administrator (CKA)</h4>
+                        <p>Cloud Native Computing Foundation - 2023</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🔷</div>
+                    <div class="cert-info">
+                        <h4>Microsoft Certified: Azure Solutions Architect</h4>
+                        <p>Microsoft - 2023</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🏗️</div>
+                    <div class="cert-info">
+                        <h4>HashiCorp Certified: Terraform Associate</h4>
+                        <p>HashiCorp - 2024</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Alex Morgan. All rights reserved. | Built with ❤️ and modern web technologies</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animated counter for statistics
+        function animateValue(element, start, end, duration) {
+            const isDecimal = end.toString().includes('.');
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                element.textContent = isDecimal ? current.toFixed(2) : Math.floor(current);
+            }, 16);
+        }
+
+        // Intersection Observer for animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${index * 0.1}s`;
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger counter animation for stats
+                    if (entry.target.classList.contains('stat-card')) {
+                        const number = entry.target.querySelector('.stat-number');
+                        const target = parseFloat(number.getAttribute('data-target'));
+                        animateValue(number, 0, target, 2000);
+                    }
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.section, .stat-card, .timeline-item, .project-card');
+            elements.forEach(el => observer.observe(el));
+
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(anchor.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Add hover effect sound feedback (optional, can be customized)
+            const interactiveElements = document.querySelectorAll('.skill-tag, .stat-card, .project-card, .cert-card');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
+
+            // Keyboard navigation enhancement
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    document.body.classList.add('keyboard-nav');
+                }
+            });
+
+            document.addEventListener('mousedown', () => {
+                document.body.classList.remove('keyboard-nav');
+            });
+
+            // Print optimization
+            window.addEventListener('beforeprint', () => {
+                document.querySelectorAll('.stat-number').forEach(el => {
+                    el.textContent = el.getAttribute('data-target');
+                });
+            });
+
+            // Add dynamic year to footer
+            const currentYear = new Date().getFullYear();
+            const footerText = document.querySelector('.footer p');
+            if (footerText) {
+                footerText.textContent = footerText.textContent.replace('2026', currentYear);
+            }
+
+            // Performance monitoring (optional)
+            if ('performance' in window) {
+                window.addEventListener('load', () => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    console.log('Page load time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
+                });
+            }
+        });
+
+        // Parallax effect for header (subtle)
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const header = document.querySelector('.header');
+            
+            if (header && currentScrollY < 500) {
+                const scrollDiff = currentScrollY - lastScrollY;
+                const currentTransform = getComputedStyle(header).transform;
+                let currentY = 0;
+                
+                if (currentTransform !== 'none') {
+                    const matrix = currentTransform.match(/matrix.*\((.+)\)/);
+                    if (matrix) {
+                        currentY = parseFloat(matrix[1].split(', ')[5]);
+                    }
+                }
+                
+                header.style.transform = `translateY(${currentY - scrollDiff * 0.3}px)`;
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+
+        // Add loading state management
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        // Handle reduced motion preferences
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.style.scrollBehavior = 'auto';
+        }
+    </script>
+</body>
+</html>
