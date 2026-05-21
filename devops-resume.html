@@ -45,12 +45,105 @@
             font-size: 16px;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+            animation: backgroundPulse 10s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite, scanLine 4s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        @keyframes scanLine {
+            0% {
+                background-position: 0 0, 0 -100vh;
+            }
+            100% {
+                background-position: 50px 50px, 0 100vh;
+            }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: var(--spacing-xl) var(--spacing-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Particle Container */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(37, 99, 235, 0.5);
+            border-radius: 50%;
+            animation: particleFloat linear infinite;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
         }
 
         /* Header Section */
@@ -69,8 +162,11 @@
             transform: translateX(-50%);
             width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            background-size: 200% 100%;
             border-radius: 2px;
+            animation: gradientFlow 2s linear infinite;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.6);
         }
 
         .profile-image {
@@ -85,19 +181,59 @@
             font-size: 4rem;
             font-weight: 700;
             color: white;
-            box-shadow: var(--shadow-xl), 0 0 0 8px rgba(37, 99, 235, 0.1);
-            animation: float 3s ease-in-out infinite;
+            box-shadow: var(--shadow-xl), 0 0 0 8px rgba(37, 99, 235, 0.1), 0 0 60px rgba(37, 99, 235, 0.4);
+            animation: float 3s ease-in-out infinite, profileGlow 2s ease-in-out infinite alternate;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: var(--transition);
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            opacity: 0.5;
+            filter: blur(20px);
+            animation: rotate 4s linear infinite;
+            z-index: -1;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.1) rotateY(10deg);
+            box-shadow: var(--shadow-xl), 0 0 0 12px rgba(37, 99, 235, 0.2), 0 0 80px rgba(37, 99, 235, 0.6);
+        }
+
+        @keyframes profileGlow {
+            0% { filter: brightness(1) drop-shadow(0 0 20px rgba(37, 99, 235, 0.5)); }
+            100% { filter: brightness(1.2) drop-shadow(0 0 40px rgba(16, 185, 129, 0.8)); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         h1 {
             font-size: 3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: var(--spacing-sm);
             letter-spacing: -0.02em;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
+            filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.3));
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .title {
@@ -105,6 +241,20 @@
             color: var(--color-text-muted);
             font-weight: 400;
             margin-bottom: var(--spacing-lg);
+            position: relative;
+            display: inline-block;
+        }
+
+        .title.typing::after {
+            content: '|';
+            color: var(--color-secondary);
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .contact-info {
@@ -122,17 +272,42 @@
             color: var(--color-text-muted);
             transition: var(--transition);
             text-decoration: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
         }
 
         .contact-item:hover {
             color: var(--color-primary);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            background: rgba(37, 99, 235, 0.1);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .contact-item:hover::before {
+            transform: translateX(100%);
+        }
+
+        .contact-item:hover .icon {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.8));
         }
 
         .icon {
             width: 20px;
             height: 20px;
             fill: currentColor;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         /* Stats Section */
@@ -153,6 +328,7 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
         }
 
         .stat-card::before {
@@ -167,14 +343,32 @@
             transition: var(--transition);
         }
 
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
         .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(37, 99, 235, 0.3);
             border-color: var(--color-primary);
         }
 
         .stat-card:hover::before {
             transform: scaleX(1);
+        }
+
+        .stat-card:hover::after {
+            width: 300px;
+            height: 300px;
         }
 
         .stat-number {
@@ -183,6 +377,15 @@
             color: var(--color-secondary);
             display: block;
             margin-bottom: var(--spacing-sm);
+            animation: numberPulse 2s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .stat-label {
@@ -216,6 +419,19 @@
             height: 2rem;
             background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
             border-radius: 2px;
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.8);
+            animation: sectionBarPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes sectionBarPulse {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(37, 99, 235, 0.8);
+                height: 2rem;
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(16, 185, 129, 0.9);
+                height: 2.5rem;
+            }
         }
 
         /* Skills */
@@ -231,11 +447,32 @@
             border-radius: var(--border-radius);
             border: 1px solid var(--color-border);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
         }
 
         .skill-category:hover {
             border-color: var(--color-primary);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-lg), 0 0 30px rgba(37, 99, 235, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .skill-category:hover::before {
+            opacity: 1;
+            animation: rotate 8s linear infinite;
         }
 
         .skill-category h3 {
@@ -245,6 +482,19 @@
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
+            text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+            animation: headerGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes headerGlow {
+            0% { 
+                text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+                transform: translateX(0);
+            }
+            100% { 
+                text-shadow: 0 0 20px rgba(16, 185, 129, 0.5), 0 0 30px rgba(16, 185, 129, 0.3);
+                transform: translateX(2px);
+            }
         }
 
         .skill-list {
@@ -262,13 +512,30 @@
             border: 1px solid transparent;
             transition: var(--transition);
             cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.3), transparent);
+            transition: left 0.5s ease;
         }
 
         .skill-tag:hover {
             background: var(--color-primary);
             border-color: var(--color-primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-md), 0 0 20px rgba(37, 99, 235, 0.5);
+        }
+
+        .skill-tag:hover::before {
+            left: 100%;
         }
 
         /* Experience & Projects */
@@ -284,7 +551,18 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+            background: linear-gradient(180deg, 
+                var(--color-primary) 0%, 
+                var(--color-secondary) 50%, 
+                var(--color-accent) 100%);
+            background-size: 100% 200%;
+            animation: timelineFlow 3s linear infinite;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        }
+
+        @keyframes timelineFlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 0% 100%; }
         }
 
         .timeline-item {
@@ -295,6 +573,7 @@
             border-radius: var(--border-radius);
             border: 1px solid var(--color-border);
             transition: var(--transition);
+            overflow: hidden;
         }
 
         .timeline-item::before {
@@ -307,13 +586,40 @@
             background: var(--color-primary);
             border: 3px solid var(--color-bg);
             border-radius: 50%;
-            box-shadow: 0 0 0 4px var(--color-surface);
+            box-shadow: 0 0 0 4px var(--color-surface), 0 0 20px rgba(37, 99, 235, 0.6);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: left 0.8s ease;
         }
 
         .timeline-item:hover {
             border-color: var(--color-primary);
-            box-shadow: var(--shadow-lg);
-            transform: translateX(4px);
+            box-shadow: var(--shadow-lg), -5px 0 30px rgba(37, 99, 235, 0.2);
+            transform: translateX(8px) scale(1.01);
+        }
+
+        .timeline-item:hover::after {
+            left: 100%;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 4px var(--color-surface), 0 0 20px rgba(37, 99, 235, 0.6);
+            }
+            50% {
+                transform: scale(1.2);
+                box-shadow: 0 0 0 8px var(--color-surface), 0 0 30px rgba(37, 99, 235, 0.9);
+            }
         }
 
         .timeline-header {
@@ -329,12 +635,28 @@
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--color-text);
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .timeline-item:hover .timeline-title {
+            color: var(--color-secondary);
+            text-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+            transform: translateX(5px);
         }
 
         .timeline-company {
             color: var(--color-secondary);
             font-size: 1.125rem;
             font-weight: 500;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-company {
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+            transform: scale(1.05);
         }
 
         .timeline-date {
@@ -343,6 +665,16 @@
             padding: var(--spacing-xs) var(--spacing-md);
             background: var(--color-surface-light);
             border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .timeline-item:hover .timeline-date {
+            background: var(--color-primary);
+            color: var(--color-text);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+            transform: scale(1.05);
         }
 
         .timeline-description {
@@ -360,6 +692,8 @@
             position: relative;
             margin-bottom: var(--spacing-md);
             color: var(--color-text-muted);
+            transition: all 0.3s ease;
+            cursor: default;
         }
 
         .achievement::before {
@@ -368,6 +702,26 @@
             left: 0;
             color: var(--color-secondary);
             font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            animation: achievementGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes achievementGlow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+                transform: translateX(0);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(16, 185, 129, 0.8), 0 0 30px rgba(16, 185, 129, 0.4);
+                transform: translateX(3px);
+            }
+        }
+
+        .achievement:hover::before {
+            transform: scale(1.3) translateX(5px);
+            color: var(--color-accent);
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.9);
         }
 
         .metrics {
@@ -383,11 +737,36 @@
             border-radius: 6px;
             font-size: 0.875rem;
             border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(245, 158, 11, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .metric:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-accent);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .metric:hover::before {
+            transform: translateX(100%);
         }
 
         .metric-value {
             color: var(--color-accent);
             font-weight: 600;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
         }
 
         /* Projects */
@@ -405,6 +784,16 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(37, 99, 235, 0.15), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .project-card::after {
@@ -414,19 +803,30 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            background-size: 200% 100%;
             transform: scaleX(0);
             transition: var(--transition);
+            animation: gradientFlow 3s linear infinite;
         }
 
         .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: var(--shadow-xl), 0 20px 60px rgba(37, 99, 235, 0.3);
             border-color: var(--color-primary);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
         }
 
         .project-card:hover::after {
             transform: scaleX(1);
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
         .project-title {
@@ -434,6 +834,15 @@
             font-weight: 600;
             margin-bottom: var(--spacing-md);
             color: var(--color-text);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card:hover .project-title {
+            color: var(--color-secondary);
+            text-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+            transform: translateX(5px);
         }
 
         .project-description {
@@ -457,6 +866,34 @@
             font-size: 0.75rem;
             font-weight: 500;
             border: 1px solid var(--color-border);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-badge::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-2px) scale(1.1);
+            border-color: var(--color-primary);
+            color: var(--color-text);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .tech-badge:hover::before {
+            width: 200px;
+            height: 200px;
         }
 
         /* Certifications */
@@ -479,8 +916,13 @@
 
         .cert-card:hover {
             border-color: var(--color-secondary);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
+            box-shadow: var(--shadow-md), 0 0 30px rgba(16, 185, 129, 0.3);
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .cert-card:hover .cert-icon {
+            transform: rotateY(360deg) scale(1.1);
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
         }
 
         .cert-icon {
@@ -493,6 +935,8 @@
             justify-content: center;
             font-size: 1.5rem;
             flex-shrink: 0;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
         }
 
         .cert-info h4 {
@@ -541,10 +985,58 @@
 
         @keyframes float {
             0%, 100% {
-                transform: translateY(0);
+                transform: translateY(0) rotate(0deg);
             }
-            50% {
-                transform: translateY(-10px);
+            25% {
+                transform: translateY(-5px) rotate(2deg);
+            }
+            75% {
+                transform: translateY(-15px) rotate(-2deg);
+            }
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glowing text effect */
+        .glow-text {
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 5px rgba(37, 99, 235, 0.5), 0 0 10px rgba(37, 99, 235, 0.3);
+            }
+            to {
+                text-shadow: 0 0 10px rgba(16, 185, 129, 0.8), 0 0 20px rgba(16, 185, 129, 0.4), 0 0 30px rgba(16, 185, 129, 0.2);
+            }
+        }
+
+        /* Cursor trail effect */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.6), transparent);
+            pointer-events: none;
+            z-index: 9999;
+            animation: cursorFade 1s ease-out forwards;
+        }
+
+        @keyframes cursorFade {
+            to {
+                transform: scale(2);
+                opacity: 0;
             }
         }
 
@@ -625,6 +1117,9 @@
     </style>
 </head>
 <body>
+    <!-- Particles Background -->
+    <div id="particles"></div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -1017,7 +1512,59 @@
             }, 16);
         }
 
-        // Intersection Observer for animations on scroll
+        // Create particle system
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.width = particle.style.height = (Math.random() * 3 + 1) + 'px';
+                
+                // Random colors
+                const colors = [
+                    'rgba(37, 99, 235, 0.5)',
+                    'rgba(16, 185, 129, 0.5)',
+                    'rgba(245, 158, 11, 0.5)'
+                ];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Cursor trail effect
+        let cursorTrailTimeout;
+        function createCursorTrail(e) {
+            clearTimeout(cursorTrailTimeout);
+            
+            if (Math.random() > 0.7) {  // Create trail randomly to avoid performance issues
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.left = e.pageX + 'px';
+                trail.style.top = e.pageY + 'px';
+                document.body.appendChild(trail);
+                
+                setTimeout(() => trail.remove(), 1000);
+            }
+        }
+
+        // Mouse tracking for project cards
+        function handleMouseMove(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            card.style.setProperty('--mouse-x', x + '%');
+            card.style.setProperty('--mouse-y', y + '%');
+        }
+
+        // Enhanced intersection observer with stagger effect
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1026,27 +1573,117 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = `${index * 0.1}s`;
-                    entry.target.classList.add('visible');
-                    
-                    // Trigger counter animation for stats
-                    if (entry.target.classList.contains('stat-card')) {
-                        const number = entry.target.querySelector('.stat-number');
-                        const target = parseFloat(number.getAttribute('data-target'));
-                        animateValue(number, 0, target, 2000);
-                    }
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                        
+                        // Trigger counter animation for stats
+                        if (entry.target.classList.contains('stat-card')) {
+                            const number = entry.target.querySelector('.stat-number');
+                            const target = parseFloat(number.getAttribute('data-target'));
+                            animateValue(number, 0, target, 2000);
+                        }
+                    }, index * 100);
                     
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        // Observe all sections and cards
-        document.addEventListener('DOMContentLoaded', () => {
-            const elements = document.querySelectorAll('.section, .stat-card, .timeline-item, .project-card');
-            elements.forEach(el => observer.observe(el));
+        // Parallax scroll effect for sections
+        let ticking = false;
+        function handleScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    
+                    // Parallax effect for header
+                    const header = document.querySelector('.header');
+                    if (header && scrolled < 500) {
+                        header.style.transform = `translateY(${scrolled * 0.5}px)`;
+                        header.style.opacity = 1 - (scrolled / 500);
+                    }
+                    
+                    // Parallax for stat cards
+                    const statCards = document.querySelectorAll('.stat-card');
+                    statCards.forEach((card, index) => {
+                        const rect = card.getBoundingClientRect();
+                        if (rect.top < window.innerHeight && rect.bottom > 0) {
+                            const offset = (window.innerHeight - rect.top) * 0.1;
+                            card.style.transform = `translateY(-${offset}px)`;
+                        }
+                    });
+                    
+                    ticking = false;
+                });
+                
+                ticking = true;
+            }
+        }
 
-            // Add smooth scrolling for anchor links
+        // Add wave effect on skill tags
+        function createWaveEffect(container) {
+            const tags = container.querySelectorAll('.skill-tag');
+            tags.forEach((tag, index) => {
+                tag.addEventListener('mouseenter', () => {
+                    tags.forEach((t, i) => {
+                        const distance = Math.abs(i - index);
+                        if (distance <= 2) {
+                            setTimeout(() => {
+                                t.style.transform = 'translateY(-4px) scale(1.05)';
+                                setTimeout(() => {
+                                    if (!t.matches(':hover')) {
+                                        t.style.transform = '';
+                                    }
+                                }, 200);
+                            }, distance * 50);
+                        }
+                    });
+                });
+            });
+        }
+
+        // Typing effect for title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.textContent = '';
+            element.classList.add('typing');
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Remove typing cursor after completion
+                    setTimeout(() => {
+                        element.classList.remove('typing');
+                    }, 1000);
+                }
+            }
+            
+            type();
+        }
+
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create particles
+            createParticles();
+            
+            // Add reveal class to sections
+            const revealElements = document.querySelectorAll('.section, .stat-card, .timeline-item, .project-card');
+            revealElements.forEach(el => {
+                el.classList.add('reveal');
+                observer.observe(el);
+            });
+
+            // Typing effect for title
+            const titleElement = document.querySelector('.title');
+            if (titleElement) {
+                const originalText = titleElement.textContent;
+                setTimeout(() => typeWriter(titleElement, originalText, 80), 500);
+            }
+
+            // Smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1057,13 +1694,37 @@
                 });
             });
 
-            // Add hover effect sound feedback (optional, can be customized)
-            const interactiveElements = document.querySelectorAll('.skill-tag, .stat-card, .project-card, .cert-card');
-            interactiveElements.forEach(element => {
-                element.addEventListener('mouseenter', () => {
-                    element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            // Wave effect on skill categories
+            document.querySelectorAll('.skill-category').forEach(category => {
+                createWaveEffect(category);
+            });
+
+            // Mouse tracking for project cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => handleMouseMove(e, card));
+                card.addEventListener('mouseleave', () => {
+                    card.style.setProperty('--mouse-x', '50%');
+                    card.style.setProperty('--mouse-y', '50%');
                 });
             });
+
+            // Cursor trail effect
+            document.addEventListener('mousemove', createCursorTrail);
+
+            // Parallax scroll effect
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Add glow to section titles on scroll
+            const sectionTitles = document.querySelectorAll('.section-title');
+            const titleObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('glow-text');
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            sectionTitles.forEach(title => titleObserver.observe(title));
 
             // Keyboard navigation enhancement
             document.addEventListener('keydown', (e) => {
@@ -1083,55 +1744,90 @@
                 });
             });
 
-            // Add dynamic year to footer
+            // Update footer year
             const currentYear = new Date().getFullYear();
             const footerText = document.querySelector('.footer p');
             if (footerText) {
                 footerText.textContent = footerText.textContent.replace('2026', currentYear);
             }
 
-            // Performance monitoring (optional)
+            // Performance monitoring
             if ('performance' in window) {
                 window.addEventListener('load', () => {
                     const perfData = performance.getEntriesByType('navigation')[0];
-                    console.log('Page load time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
+                    console.log('✨ Page loaded with epic effects in:', 
+                        Math.round(perfData.loadEventEnd - perfData.fetchStart), 'ms');
                 });
             }
-        });
 
-        // Parallax effect for header (subtle)
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            const header = document.querySelector('.header');
-            
-            if (header && currentScrollY < 500) {
-                const scrollDiff = currentScrollY - lastScrollY;
-                const currentTransform = getComputedStyle(header).transform;
-                let currentY = 0;
-                
-                if (currentTransform !== 'none') {
-                    const matrix = currentTransform.match(/matrix.*\((.+)\)/);
-                    if (matrix) {
-                        currentY = parseFloat(matrix[1].split(', ')[5]);
-                    }
+            // Add entrance animation to stats
+            setTimeout(() => {
+                document.querySelectorAll('.stat-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.animation = `fadeInUp 0.8s ease-out forwards, float 3s ease-in-out ${index * 0.2}s infinite`;
+                    }, index * 150);
+                });
+            }, 300);
+
+            // Dynamic timeline pulse
+            setInterval(() => {
+                const timelineItems = document.querySelectorAll('.timeline-item');
+                const randomItem = timelineItems[Math.floor(Math.random() * timelineItems.length)];
+                if (randomItem) {
+                    randomItem.style.animation = 'none';
+                    setTimeout(() => {
+                        randomItem.style.animation = '';
+                    }, 10);
                 }
-                
-                header.style.transform = `translateY(${currentY - scrollDiff * 0.3}px)`;
-            }
-            
-            lastScrollY = currentScrollY;
-        });
+            }, 5000);
 
-        // Add loading state management
-        window.addEventListener('load', () => {
+            // Add sparkle effect on achievement hover
+            document.querySelectorAll('.achievement').forEach(achievement => {
+                achievement.addEventListener('mouseenter', function() {
+                    this.style.color = 'var(--color-text)';
+                    this.style.transform = 'translateX(5px)';
+                    this.style.transition = 'all 0.3s ease';
+                });
+                
+                achievement.addEventListener('mouseleave', function() {
+                    this.style.color = 'var(--color-text-muted)';
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+
+            // Metric badges pulse on hover
+            document.querySelectorAll('.metric').forEach(metric => {
+                metric.addEventListener('mouseenter', function() {
+                    const value = this.querySelector('.metric-value');
+                    if (value) {
+                        value.style.animation = 'numberPulse 0.5s ease-in-out 2';
+                    }
+                });
+            });
+
+            // Add loading state
             document.body.classList.add('loaded');
+            
+            console.log('🚀 DevOps Resume loaded with EPIC visual effects!');
         });
 
         // Handle reduced motion preferences
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             document.documentElement.style.scrollBehavior = 'auto';
+            // Disable particles for reduced motion
+            document.getElementById('particles').style.display = 'none';
         }
+
+        // Add shimmer effect to profile on interval
+        setInterval(() => {
+            const profile = document.querySelector('.profile-image');
+            if (profile && !profile.matches(':hover')) {
+                profile.style.animation = 'none';
+                setTimeout(() => {
+                    profile.style.animation = 'float 3s ease-in-out infinite, profileGlow 2s ease-in-out infinite alternate';
+                }, 10);
+            }
+        }, 8000);
     </script>
 </body>
 </html>
