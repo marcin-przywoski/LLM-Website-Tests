@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Carter - Senior DevOps Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #00bcd4;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-color: #4caf50;
+            --warning-color: #ff9800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .title {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        .sidebar {
+            background-color: var(--surface-color);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            border: 1px solid #333;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        section {
+            background-color: var(--surface-color);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #333;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 i {
+            font-size: 1.2rem;
+        }
+
+        /* Contact info styles */
+        .contact-info ul {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            margin-right: 12px;
+            color: var(--secondary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-info a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Skills styles */
+        .skills {
+            margin-top: 25px;
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-weight: 500;
+        }
+
+        .skill-percent {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background-color: #2d2d2d;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Stats styles */
+        .stats {
+            margin-top: 25px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-item {
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Experience styles */
+        .job {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #333;
+        }
+
+        .job:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .job-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .job-company {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .job-period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        .job-location {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .job-description {
+            margin-top: 10px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .job-achievement {
+            margin-top: 10px;
+            margin-left: 20px;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .job-achievement::before {
+            content: "▹";
+            color: var(--primary-color);
+            position: absolute;
+            left: -15px;
+        }
+
+        .job-achievement strong {
+            color: var(--text-primary);
+        }
+
+        /* Projects styles */
+        .project {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #2d2d2d;
+            border-radius: 6px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+
+        .project-period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .project-description {
+            margin-top: 10px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+
+        /* Education and Certifications */
+        .education-item, .certification-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .education-item:last-child, .certification-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .education-degree {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .education-school {
+            color: var(--text-secondary);
+        }
+
+        .education-period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .certification-name {
+            font-weight: 600;
+        }
+
+        .certification-body {
+            color: var(--text-secondary);
+        }
+
+        .certification-period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .stat-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .title {
+                font-size: 1rem;
+            }
+
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .job-period {
+                text-align: left;
+                margin-top: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        section:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Alex Carter</h1>
+            <p class="title">Senior DevOps Engineer | Cloud Architect | CI/CD Specialist</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Contact Info -->
+                <section class="contact-info">
+                    <h2><i class="fas fa-user"></i> Contact</h2>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i><a href="mailto:alex.carter@devops.com">alex.carter@devops.com</a></li>
+                        <li><i class="fas fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                        <li><i class="fas fa-globe"></i><a href="https://alexcarter.dev" target="_blank">alexcarter.dev</a></li>
+                        <li><i class="fab fa-linkedin"></i><a href="https://linkedin.com/in/alexcarterdevops" target="_blank">linkedin.com/in/alexcarterdevops</a></li>
+                        <li><i class="fab fa-github"></i><a href="https://github.com/alexcarter" target="_blank">github.com/alexcarter</a></li>
+                    </ul>
+                </section>
+
+                <!-- Skills -->
+                <section class="skills">
+                    <h2><i class="fas fa-cogs"></i> Technical Skills</h2>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Cloud Platforms (AWS/GCP)</span>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95%" style="width: 0%; background-color: var(--primary-color);"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Kubernetes & Docker</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90%" style="width: 0%; background-color: var(--secondary-color);"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">CI/CD Pipelines</span>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95%" style="width: 0%; background-color: var(--accent-color);"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Infrastructure as Code</span>
+                            <span class="skill-percent">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88%" style="width: 0%; background-color: var(--warning-color);"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Monitoring & Logging</span>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%" style="width: 0%; background-color: #9c27b0;"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Scripting (Python/Bash)</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80%" style="width: 0%; background-color: #ff5722;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stats -->
+                <section class="stats">
+                    <h2><i class="fas fa-chart-line"></i> By The Numbers</h2>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">8+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Deployments</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">$2.5M</div>
+                            <div class="stat-label">Cost Saved</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">99.99%</div>
+                            <div class="stat-label">Uptime</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">30%</div>
+                            <div class="stat-label">Efficiency Gain</div>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="content">
+                <!-- Professional Summary -->
+                <section class="summary">
+                    <h2><i class="fas fa-user-tie"></i> Professional Summary</h2>
+                    <p>Results-driven DevOps Engineer with 8+ years of experience designing, implementing, and managing cloud infrastructure and CI/CD pipelines. Proven track record of improving deployment frequency by 400% and reducing infrastructure costs by 30% through automation and optimization. Expertise in AWS, Kubernetes, Terraform, and monitoring tools with a passion for building scalable, secure, and highly available systems.</p>
+                    <p>Strong advocate for DevOps culture, bridging the gap between development and operations to deliver high-quality software at velocity. Certified AWS DevOps Engineer and Kubernetes Administrator with experience leading cross-functional teams in agile environments.</p>
+                </section>
+
+                <!-- Work Experience -->
+                <section class="experience">
+                    <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Lead DevOps Engineer</div>
+                                <div class="job-company">CloudNative Solutions</div>
+                            </div>
+                            <div class="job-period">2020 - Present</div>
+                        </div>
+                        <div class="job-location">San Francisco, CA</div>
+                        <div class="job-description">
+                            Leading the DevOps transformation for a SaaS platform serving 1M+ users, managing a team of 5 engineers and overseeing all aspects of cloud infrastructure, CI/CD, and monitoring.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Architected and migrated</strong> the entire infrastructure to AWS EKS, reducing operational costs by <strong>35%</strong> while improving scalability and reliability.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Implemented GitOps workflows</strong> using ArgoCD, reducing deployment time from 30 minutes to <strong>under 2 minutes</strong> and increasing deployment frequency from weekly to multiple times per day.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Designed and implemented</strong> a multi-region disaster recovery solution, achieving <strong>99.99% uptime</strong> and reducing recovery time objective (RTO) from 4 hours to <strong>15 minutes</strong>.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Developed custom monitoring dashboards</strong> using Prometheus and Grafana, reducing mean time to detection (MTTD) of incidents by <strong>60%</strong>.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Automated infrastructure provisioning</strong> using Terraform, reducing manual errors by <strong>90%</strong> and accelerating environment setup from days to hours.
+                        </div>
+                    </div>
+
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">Senior DevOps Engineer</div>
+                                <div class="job-company">TechInnovate Inc.</div>
+                            </div>
+                            <div class="job-period">2016 - 2020</div>
+                        </div>
+                        <div class="job-location">Seattle, WA</div>
+                        <div class="job-description">
+                            Responsible for building and maintaining CI/CD pipelines, cloud infrastructure, and monitoring systems for a high-traffic e-commerce platform.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Led the migration</strong> from on-premises data centers to AWS, resulting in <strong>$1.2M annual savings</strong> and improved scalability.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Implemented Docker and Kubernetes</strong> for container orchestration, reducing server costs by <strong>40%</strong> through improved resource utilization.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Built a comprehensive CI/CD pipeline</strong> using Jenkins, SonarQube, and Nexus, reducing software release cycles from months to <strong>weeks</strong>.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Developed automated testing frameworks</strong> that increased test coverage from 40% to <strong>90%</strong>, significantly improving software quality.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Implemented Infrastructure as Code</strong> using Ansible and Terraform, reducing configuration drift and improving consistency across environments.
+                        </div>
+                    </div>
+
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <div class="job-title">DevOps Engineer</div>
+                                <div class="job-company">Digital Horizon</div>
+                            </div>
+                            <div class="job-period">2014 - 2016</div>
+                        </div>
+                        <div class="job-location">Austin, TX</div>
+                        <div class="job-description">
+                            Started as a System Administrator and transitioned to DevOps role, introducing automation and cloud technologies to the organization.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Introduced configuration management</strong> using Puppet, reducing server setup time by <strong>70%</strong>.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Implemented continuous integration</strong> with Jenkins, reducing build times by <strong>50%</strong> and catching bugs earlier in the development cycle.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Migrated legacy applications</strong> to cloud-based virtual machines, improving reliability and reducing maintenance overhead.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Established monitoring and alerting</strong> using Nagios and ELK stack, reducing downtime by <strong>40%</strong>.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projects -->
+                <section class="projects">
+                    <h2><i class="fas fa-project-diagram"></i> Key Projects</h2>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <div class="project-title">Automated Multi-Cloud Deployment Platform</div>
+                            <div class="project-period">2022 - Present</div>
+                        </div>
+                        <div class="project-description">
+                            Developed a platform that allows seamless deployment of applications across AWS, GCP, and Azure using Terraform and Kubernetes. The system includes automated scaling, monitoring, and cost optimization features.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Reduced deployment time</strong> across multiple clouds by <strong>60%</strong> and enabled <strong>20% cost savings</strong> through intelligent resource allocation.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Terraform</span>
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">GCP</span>
+                            <span class="tech-tag">Azure</span>
+                            <span class="tech-tag">Go</span>
+                            <span class="tech-tag">Prometheus</span>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <div class="project-title">Self-Healing Infrastructure System</div>
+                            <div class="project-period">2021 - 2022</div>
+                        </div>
+                        <div class="project-description">
+                            Designed and implemented an automated system that detects and remediates infrastructure issues without human intervention. The system uses custom health checks, automated rollbacks, and predictive scaling.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Improved system availability</strong> from 99.9% to <strong>99.99%</strong> and reduced on-call incidents by <strong>75%</strong>.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">Prometheus</span>
+                            <span class="tech-tag">Grafana</span>
+                            <span class="tech-tag">Ansible</span>
+                            <span class="tech-tag">ELK Stack</span>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <div class="project-title">Enterprise CI/CD Pipeline Overhaul</div>
+                            <div class="project-period">2019 - 2020</div>
+                        </div>
+                        <div class="project-description">
+                            Completely redesigned the CI/CD pipeline for a large enterprise, replacing legacy Jenkins scripts with a modern, scalable solution using GitLab CI, ArgoCD, and custom tools for artifact management and security scanning.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Reduced pipeline execution time</strong> from 45 minutes to <strong>8 minutes</strong> and increased deployment frequency from weekly to <strong>multiple times per day</strong>.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">GitLab CI</span>
+                            <span class="tech-tag">ArgoCD</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Helm</span>
+                            <span class="tech-tag">SonarQube</span>
+                            <span class="tech-tag">Trivy</span>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <div class="project-title">Infrastructure Cost Optimization Tool</div>
+                            <div class="project-period">2018</div>
+                        </div>
+                        <div class="project-description">
+                            Developed an internal tool that analyzes cloud resource usage and provides recommendations for cost optimization, including rightsizing, reserved instances, and unused resource identification.
+                        </div>
+                        <div class="job-achievement">
+                            <strong>Saved $800K annually</strong> in cloud costs and provided actionable insights that led to a <strong>25% reduction</strong> in overall cloud spending.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">AWS Cost Explorer API</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">React</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Education -->
+                <section class="education">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+
+                    <div class="education-item">
+                        <div class="education-degree">Master of Science in Computer Science</div>
+                        <div class="education-school">Stanford University</div>
+                        <div class="education-period">2012 - 2014</div>
+                        <div style="margin-top: 8px; color: var(--text-secondary); font-size: 0.95rem;">
+                            Specialization: Distributed Systems and Cloud Computing
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-degree">Bachelor of Science in Computer Engineering</div>
+                        <div class="education-school">University of California, Berkeley</div>
+                        <div class="education-period">2008 - 2012</div>
+                        <div style="margin-top: 8px; color: var(--text-secondary); font-size: 0.95rem;">
+                            Honors: Summa Cum Laude
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Certifications -->
+                <section class="certifications">
+                    <h2><i class="fas fa-certificate"></i> Certifications</h2>
+
+                    <div class="certification-item">
+                        <div class="certification-name">AWS Certified DevOps Engineer - Professional</div>
+                        <div class="certification-body">Amazon Web Services</div>
+                        <div class="certification-period">2023 - 2026</div>
+                    </div>
+
+                    <div class="certification-item">
+                        <div class="certification-name">Certified Kubernetes Administrator (CKA)</div>
+                        <div class="certification-body">Cloud Native Computing Foundation</div>
+                        <div class="certification-period">2022 - 2025</div>
+                    </div>
+
+                    <div class="certification-item">
+                        <div class="certification-name">Google Professional Cloud DevOps Engineer</div>
+                        <div class="certification-body">Google Cloud</div>
+                        <div class="certification-period">2021 - 2024</div>
+                    </div>
+
+                    <div class="certification-item">
+                        <div class="certification-name">Terraform Associate (HashiCorp Certified)</div>
+                        <div class="certification-body">HashiCorp</div>
+                        <div class="certification-period">2020 - 2023</div>
+                    </div>
+
+                    <div class="certification-item">
+                        <div class="certification-name">Red Hat Certified Engineer (RHCE)</div>
+                        <div class="certification-body">Red Hat</div>
+                        <div class="certification-period">2017 - 2020</div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate skill bars on scroll
+            const skillBars = document.querySelectorAll('.skill-progress');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        const width = bar.dataset.width;
+                        bar.style.width = width;
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            skillBars.forEach(bar => {
+                observer.observe(bar);
+            });
+
+            // Add scroll animation to sections
+            const sections = document.querySelectorAll('section');
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                sectionObserver.observe(section);
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add hover effect to project cards
+            const projects = document.querySelectorAll('.project');
+            projects.forEach(project => {
+                project.addEventListener('mouseenter', function() {
+                    this.style.borderLeft = '4px solid var(--primary-color)';
+                });
+                project.addEventListener('mouseleave', function() {
+                    this.style.borderLeft = '4px solid var(--secondary-color)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
