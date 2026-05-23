@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Carter - Senior DevOps Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Alex Carter - Senior DevOps Engineer | Epic Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4285f4;
-            --secondary-color: #00bcd4;
-            --background-color: #121212;
-            --surface-color: #1e1e1e;
+            --primary-color: #00d4ff;
+            --secondary-color: #00ff88;
+            --accent-color: #ff00aa;
+            --warning-color: #ffaa00;
+            --background-color: #0a0a0f;
+            --surface-color: #12121a;
+            --surface-color-2: #1a1a25;
             --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --accent-color: #4caf50;
-            --warning-color: #ff9800;
+            --text-secondary: #a0a0b0;
+            --text-tertiary: #606070;
+            --glow-primary: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
+            --glow-secondary: 0 0 10px rgba(0, 255, 136, 0.5), 0 0 20px rgba(0, 255, 136, 0.3);
+            --glow-accent: 0 0 10px rgba(255, 0, 170, 0.5), 0 0 20px rgba(255, 0, 170, 0.3);
         }
 
         * {
@@ -24,89 +29,236 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: var(--background-color);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Particle background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Loading screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-terminal {
+            background-color: var(--surface-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
             padding: 20px;
+            width: 300px;
+            box-shadow: var(--glow-primary);
         }
 
+        .loader-terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .loader-terminal-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .loader-terminal-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .loader-terminal-dots .red { background-color: #ff5f56; }
+        .loader-terminal-dots .yellow { background-color: #ffbd2e; }
+        .loader-terminal-dots .green { background-color: #27ca40; }
+
+        .loader-terminal-title {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .loader-text {
+            color: var(--primary-color);
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2rem;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .loader-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #333;
+            margin-top: 15px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loader-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            border-radius: 2px;
+            transition: width 0.5s;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header with typewriter effect */
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #333;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
             position: relative;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
         }
 
         .header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: var(--primary-color);
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%;
         }
 
         .title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--text-secondary);
             font-weight: 300;
+            position: relative;
+            display: inline-block;
         }
 
+        .title::after {
+            content: '|';
+            color: var(--primary-color);
+            animation: blink 1s step-end infinite;
+            position: absolute;
+            right: -15px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Main content layout */
         .main-content {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
+            position: relative;
         }
 
+        /* Sidebar */
         .sidebar {
-            background-color: var(--surface-color);
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             position: sticky;
-            top: 20px;
+            top: 30px;
             height: fit-content;
-            border: 1px solid #333;
+            z-index: 2;
         }
 
-        .content {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+        .sidebar-content {
+            background: linear-gradient(145deg, var(--surface-color), var(--surface-color-2));
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        section {
-            background-color: var(--surface-color);
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border: 1px solid #333;
+        .sidebar-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
         }
 
-        h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-color);
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .sidebar-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 212, 255, 0.2);
         }
 
-        h2 i {
-            font-size: 1.2rem;
+        /* Contact info */
+        .contact-info {
+            margin-bottom: 30px;
         }
 
-        /* Contact info styles */
         .contact-info ul {
             list-style: none;
         }
@@ -115,28 +267,134 @@
             margin-bottom: 15px;
             display: flex;
             align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .contact-info li:hover {
+            transform: translateX(5px);
         }
 
         .contact-info i {
             margin-right: 12px;
-            color: var(--secondary-color);
+            color: var(--primary-color);
             width: 20px;
             text-align: center;
+            font-size: 1.1rem;
         }
 
         .contact-info a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
         }
 
         .contact-info a:hover {
             color: var(--primary-color);
         }
 
-        /* Skills styles */
+        .contact-info a:hover::after {
+            width: 100%;
+        }
+
+        /* Stats with animated counters */
+        .stats {
+            margin-top: 30px;
+        }
+
+        .stats-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: var(--glow-primary);
+        }
+
+        .stat-item:hover::before {
+            left: 100%;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .stat-number::after {
+            content: '+';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Skills with animated bars */
         .skills {
-            margin-top: 25px;
+            margin-top: 30px;
+        }
+
+        .skills-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .skill-item {
@@ -151,6 +409,7 @@
 
         .skill-name {
             font-weight: 500;
+            color: var(--text-primary);
         }
 
         .skill-percent {
@@ -159,64 +418,111 @@
         }
 
         .skill-bar {
-            height: 10px;
-            background-color: #2d2d2d;
-            border-radius: 5px;
+            height: 12px;
+            background: linear-gradient(90deg, #1a1a25, #252535);
+            border-radius: 6px;
             overflow: hidden;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .skill-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            pointer-events: none;
         }
 
         .skill-progress {
             height: 100%;
-            border-radius: 5px;
-            transition: width 1.5s ease-out;
-        }
-
-        /* Stats styles */
-        .stats {
-            margin-top: 25px;
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .stat-item {
-            background-color: #2d2d2d;
-            padding: 15px;
             border-radius: 6px;
-            text-align: center;
-            border: 1px solid #333;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .stat-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 1s;
         }
 
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--accent-color);
+        .skill-progress:hover::after {
+            left: 100%;
+        }
+
+        /* Main content sections */
+        section {
+            background: linear-gradient(145deg, var(--surface-color), var(--surface-color-2));
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        section:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 15px 50px rgba(0, 212, 255, 0.1);
+        }
+
+        h2 {
             font-family: 'Montserrat', sans-serif;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Experience styles */
-        .job {
+            color: var(--primary-color);
             margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        h2 i {
+            font-size: 1.3rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 1px;
+        }
+
+        /* Work Experience */
+        .job {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
 
         .job:last-child {
@@ -225,74 +531,150 @@
             padding-bottom: 0;
         }
 
+        .job::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+        }
+
         .job-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
         }
 
         .job-title {
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--primary-color);
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .job-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            box-shadow: var(--glow-primary);
         }
 
         .job-company {
             color: var(--text-secondary);
             font-size: 1rem;
+            margin-left: 15px;
         }
 
         .job-period {
             color: var(--text-secondary);
             font-size: 0.9rem;
-            text-align: right;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-style: italic;
         }
 
         .job-location {
-            color: var(--text-secondary);
+            color: var(--text-tertiary);
             font-size: 0.9rem;
-            margin-left: 10px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .job-location i {
+            color: var(--secondary-color);
         }
 
         .job-description {
-            margin-top: 10px;
+            margin: 15px 0;
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.8;
+            padding-left: 15px;
         }
 
         .job-achievement {
-            margin-top: 10px;
-            margin-left: 20px;
+            margin: 10px 0;
+            margin-left: 30px;
             position: relative;
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.8;
+            padding: 8px 15px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 5px;
+            border-left: 3px solid var(--primary-color);
+            transition: all 0.3s;
+        }
+
+        .job-achievement:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(5px);
         }
 
         .job-achievement::before {
-            content: "▹";
-            color: var(--primary-color);
+            content: "✓";
+            color: var(--secondary-color);
             position: absolute;
-            left: -15px;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
         }
 
         .job-achievement strong {
             color: var(--text-primary);
         }
 
-        /* Projects styles */
+        /* Projects with 3D effect */
+        .projects {
+            position: relative;
+        }
+
         .project {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #2d2d2d;
-            border-radius: 6px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
             border-left: 4px solid var(--secondary-color);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .project:hover {
-            transform: translateX(5px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transform: translateX(10px) translateY(-5px) scale(1.02);
+            border-left-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .project:hover::before {
+            opacity: 1;
         }
 
         .project-header {
@@ -300,143 +682,243 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
         }
 
         .project-title {
             font-weight: 600;
             color: var(--secondary-color);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .project-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 60%;
+            background-color: var(--secondary-color);
+            border-radius: 3px;
         }
 
         .project-period {
-            color: var(--text-secondary);
+            color: var(--text-tertiary);
             font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3px 10px;
+            border-radius: 20px;
         }
 
         .project-description {
-            margin-top: 10px;
+            margin: 10px 0;
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
         }
 
         .project-tech {
-            margin-top: 10px;
+            margin-top: 15px;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            position: relative;
+            z-index: 1;
         }
 
         .tech-tag {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 3px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--background-color);
+            padding: 4px 10px;
+            border-radius: 20px;
             font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .tech-tag::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--surface-color-2);
+            color: var(--text-primary);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+
+        .tech-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3);
+        }
+
+        .tech-tag:hover::after {
+            opacity: 1;
+            visibility: visible;
+            bottom: calc(100% + 10px);
         }
 
         /* Education and Certifications */
         .education-item, .certification-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s;
         }
 
-        .education-item:last-child, .certification-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
+        .education-item:hover, .certification-item:hover {
+            background: rgba(0, 0, 0, 0.2);
+            transform: translateX(5px);
+            border-left-color: var(--primary-color);
         }
 
-        .education-degree {
+        .education-degree, .certification-name {
             font-weight: 600;
             color: var(--primary-color);
+            margin-bottom: 5px;
         }
 
-        .education-school {
+        .education-school, .certification-body {
             color: var(--text-secondary);
+            margin-bottom: 5px;
         }
 
-        .education-period {
-            color: var(--text-secondary);
+        .education-period, .certification-period {
+            color: var(--text-tertiary);
             font-size: 0.9rem;
-            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .certification-name {
-            font-weight: 600;
+        /* Terminal effect for summary */
+        .summary {
+            position: relative;
+            padding: 25px;
+            cursor: pointer;
         }
 
-        .certification-body {
+        .summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .summary p {
+            margin-bottom: 15px;
             color: var(--text-secondary);
+            line-height: 1.8;
         }
 
-        .certification-period {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-left: 10px;
+        .summary p:first-child {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .summary:hover {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
         }
 
         /* Responsive design */
-        @media (max-width: 900px) {
+        @media (max-width: 1200px) {
             .main-content {
                 grid-template-columns: 1fr;
             }
 
             .sidebar {
                 position: static;
-                margin-bottom: 20px;
+                margin-bottom: 30px;
+            }
+
+            .sidebar-content {
+                max-width: 400px;
+                margin: 0 auto;
             }
 
             .header h1 {
-                font-size: 2rem;
-            }
-
-            .stat-grid {
-                grid-template-columns: repeat(4, 1fr);
+                font-size: 2.8rem;
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
             .header h1 {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
             }
 
             .title {
-                font-size: 1rem;
+                font-size: 1.1rem;
+            }
+
+            .stat-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .job-period {
+                align-self: flex-start;
+            }
+
+            .job-location {
+                margin-left: 0;
+            }
+
+            .job-achievement {
+                margin-left: 15px;
+            }
+
+            .job-achievement::before {
+                left: -20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
             }
 
             .stat-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .job-header {
-                flex-direction: column;
-                align-items: flex-start;
+            .stat-number {
+                font-size: 1.5rem;
             }
 
-            .job-period {
-                text-align: left;
-                margin-top: 5px;
+            section {
+                padding: 20px;
             }
         }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        section {
-            animation: fadeIn 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        section:nth-child(1) { animation-delay: 0.1s; }
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.3s; }
-        section:nth-child(4) { animation-delay: 0.4s; }
-        section:nth-child(5) { animation-delay: 0.5s; }
-        section:nth-child(6) { animation-delay: 0.6s; }
 
         /* Scrollbar styling */
         ::-webkit-scrollbar {
@@ -444,20 +926,250 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #1a1a1a;
+            background: #0a0a0f;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #333;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
             border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #444;
+            background: linear-gradient(180deg, var(--secondary-color), var(--primary-color));
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Animation classes */
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animate-fade-in-down {
+            animation: fadeInDown 0.6s ease-out forwards;
+        }
+
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.6s ease-out forwards;
+        }
+
+        .animate-fade-in-right {
+            animation: fadeInRight 0.6s ease-out forwards;
+        }
+
+        /* Glow effect for icons */
+        .icon-glow {
+            position: relative;
+        }
+
+        .icon-glow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .icon-glow:hover::after {
+            opacity: 0.5;
+        }
+
+        /* Terminal modal */
+        .terminal-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background: var(--surface-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 10000;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            font-family: 'Fira Code', monospace;
+            color: var(--text-primary);
+            max-height: 80vh;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .terminal-modal.active {
+            display: block;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .terminal-title {
+            color: var(--primary-color);
+        }
+
+        .terminal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .terminal-content {
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .terminal-line {
+            margin-bottom: 5px;
+        }
+
+        .terminal-prompt {
+            color: var(--secondary-color);
+        }
+
+        .terminal-output {
+            color: var(--text-secondary);
+        }
+
+        .terminal-success {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .terminal-warning {
+            color: var(--warning-color);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: none;
+        }
+
+        .modal-overlay.active {
+            display: block;
         }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-terminal">
+                <div class="loader-terminal-header">
+                    <div class="loader-terminal-dots">
+                        <span class="red"></span>
+                        <span class="yellow"></span>
+                        <span class="green"></span>
+                    </div>
+                    <div class="loader-terminal-title">DevOps Terminal</div>
+                </div>
+                <div class="loader-text" id="loader-text">Initializing resume...</div>
+                <div class="loader-bar">
+                    <div class="loader-bar-fill" id="loader-bar-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+    <!-- Terminal Modal -->
+    <div class="terminal-modal" id="terminal-modal">
+        <div class="terminal-header">
+            <div class="terminal-title">DevOps Terminal</div>
+            <button class="terminal-close" id="terminal-close">&times;</button>
+        </div>
+        <div class="terminal-content" id="terminal-content">
+            <!-- Content will be added by JavaScript -->
+        </div>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -468,128 +1180,141 @@
         <div class="main-content">
             <!-- Sidebar -->
             <aside class="sidebar">
-                <!-- Contact Info -->
-                <section class="contact-info">
-                    <h2><i class="fas fa-user"></i> Contact</h2>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i><a href="mailto:alex.carter@devops.com">alex.carter@devops.com</a></li>
-                        <li><i class="fas fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
-                        <li><i class="fas fa-globe"></i><a href="https://alexcarter.dev" target="_blank">alexcarter.dev</a></li>
-                        <li><i class="fab fa-linkedin"></i><a href="https://linkedin.com/in/alexcarterdevops" target="_blank">linkedin.com/in/alexcarterdevops</a></li>
-                        <li><i class="fab fa-github"></i><a href="https://github.com/alexcarter" target="_blank">github.com/alexcarter</a></li>
-                    </ul>
-                </section>
+                <div class="sidebar-content">
+                    <!-- Contact Info -->
+                    <section class="contact-info">
+                        <div class="stats-header">
+                            <i class="fas fa-user icon-glow"></i>
+                            <h2>Contact</h2>
+                        </div>
+                        <ul>
+                            <li><i class="fas fa-envelope"></i><a href="mailto:alex.carter@devops.com">alex.carter@devops.com</a></li>
+                            <li><i class="fas fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
+                            <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                            <li><i class="fas fa-globe"></i><a href="https://alexcarter.dev" target="_blank">alexcarter.dev</a></li>
+                            <li><i class="fab fa-linkedin"></i><a href="https://linkedin.com/in/alexcarterdevops" target="_blank">linkedin.com/in/alexcarter</a></li>
+                            <li><i class="fab fa-github"></i><a href="https://github.com/alexcarter" target="_blank">github.com/alexcarter</a></li>
+                        </ul>
+                    </section>
 
-                <!-- Skills -->
-                <section class="skills">
-                    <h2><i class="fas fa-cogs"></i> Technical Skills</h2>
+                    <!-- Stats -->
+                    <section class="stats">
+                        <div class="stats-header">
+                            <i class="fas fa-chart-line icon-glow"></i>
+                            <h2>By The Numbers</h2>
+                        </div>
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="8">0</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="150">0</div>
+                                <div class="stat-label">Deployments</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="2.5">0</div>
+                                <div class="stat-label">M Cost Saved</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="99.99">0</div>
+                                <div class="stat-label">% Uptime</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="50">0</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="30">0</div>
+                                <div class="stat-label">% Efficiency Gain</div>
+                            </div>
+                        </div>
+                    </section>
 
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Cloud Platforms (AWS/GCP)</span>
-                            <span class="skill-percent">95%</span>
+                    <!-- Skills -->
+                    <section class="skills">
+                        <div class="skills-header">
+                            <i class="fas fa-cogs icon-glow"></i>
+                            <h2>Technical Skills</h2>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="95%" style="width: 0%; background-color: var(--primary-color);"></div>
-                        </div>
-                    </div>
 
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Kubernetes & Docker</span>
-                            <span class="skill-percent">90%</span>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Cloud Platforms (AWS/GCP)</span>
+                                <span class="skill-percent">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95%" style="width: 0%; background: linear-gradient(90deg, #00d4ff, #00ff88);"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90%" style="width: 0%; background-color: var(--secondary-color);"></div>
-                        </div>
-                    </div>
 
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">CI/CD Pipelines</span>
-                            <span class="skill-percent">95%</span>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Kubernetes & Docker</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%" style="width: 0%; background: linear-gradient(90deg, #00ff88, #ff00aa);"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="95%" style="width: 0%; background-color: var(--accent-color);"></div>
-                        </div>
-                    </div>
 
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Infrastructure as Code</span>
-                            <span class="skill-percent">88%</span>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">CI/CD Pipelines</span>
+                                <span class="skill-percent">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95%" style="width: 0%; background: linear-gradient(90deg, #ff00aa, #ffaa00);"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="88%" style="width: 0%; background-color: var(--warning-color);"></div>
-                        </div>
-                    </div>
 
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Monitoring & Logging</span>
-                            <span class="skill-percent">85%</span>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Infrastructure as Code</span>
+                                <span class="skill-percent">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88%" style="width: 0%; background: linear-gradient(90deg, #ffaa00, #00d4ff);"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85%" style="width: 0%; background-color: #9c27b0;"></div>
-                        </div>
-                    </div>
 
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Scripting (Python/Bash)</span>
-                            <span class="skill-percent">80%</span>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Monitoring & Logging</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%" style="width: 0%; background: linear-gradient(90deg, #9c27b0, #00ff88);"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="80%" style="width: 0%; background-color: #ff5722;"></div>
-                        </div>
-                    </div>
-                </section>
 
-                <!-- Stats -->
-                <section class="stats">
-                    <h2><i class="fas fa-chart-line"></i> By The Numbers</h2>
-                    <div class="stat-grid">
-                        <div class="stat-item">
-                            <div class="stat-number">8+</div>
-                            <div class="stat-label">Years Experience</div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Scripting (Python/Bash)</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%" style="width: 0%; background: linear-gradient(90deg, #ff5722, #ff00aa);"></div>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">150+</div>
-                            <div class="stat-label">Deployments</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">$2.5M</div>
-                            <div class="stat-label">Cost Saved</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">99.99%</div>
-                            <div class="stat-label">Uptime</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Projects</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">30%</div>
-                            <div class="stat-label">Efficiency Gain</div>
-                        </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </aside>
 
             <!-- Main Content -->
             <main class="content">
                 <!-- Professional Summary -->
                 <section class="summary">
-                    <h2><i class="fas fa-user-tie"></i> Professional Summary</h2>
-                    <p>Results-driven DevOps Engineer with 8+ years of experience designing, implementing, and managing cloud infrastructure and CI/CD pipelines. Proven track record of improving deployment frequency by 400% and reducing infrastructure costs by 30% through automation and optimization. Expertise in AWS, Kubernetes, Terraform, and monitoring tools with a passion for building scalable, secure, and highly available systems.</p>
-                    <p>Strong advocate for DevOps culture, bridging the gap between development and operations to deliver high-quality software at velocity. Certified AWS DevOps Engineer and Kubernetes Administrator with experience leading cross-functional teams in agile environments.</p>
+                    <h2><i class="fas fa-terminal icon-glow"></i> Professional Summary</h2>
+                    <p><strong>Results-driven DevOps Engineer</strong> with 8+ years of experience designing, implementing, and managing cloud infrastructure and CI/CD pipelines. Proven track record of improving deployment frequency by <strong>400%</strong> and reducing infrastructure costs by <strong>30%</strong> through automation and optimization.</p>
+                    <p>Expertise in AWS, Kubernetes, Terraform, and monitoring tools with a passion for building <strong>scalable, secure, and highly available systems</strong>. Certified AWS DevOps Engineer and Kubernetes Administrator with experience leading cross-functional teams in agile environments.</p>
+                    <p>Strong advocate for DevOps culture, bridging the gap between development and operations to <strong>deliver high-quality software at velocity</strong>.</p>
+                    <p style="margin-top: 15px; color: var(--text-tertiary); font-size: 0.9rem;"><i class="fas fa-lightbulb"></i> Click this section to open a terminal with more details!</p>
                 </section>
 
                 <!-- Work Experience -->
                 <section class="experience">
-                    <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+                    <h2><i class="fas fa-briefcase icon-glow"></i> Work Experience</h2>
 
                     <div class="job">
                         <div class="job-header">
@@ -599,7 +1324,7 @@
                             </div>
                             <div class="job-period">2020 - Present</div>
                         </div>
-                        <div class="job-location">San Francisco, CA</div>
+                        <div class="job-location"><i class="fas fa-map-marker-alt"></i> San Francisco, CA</div>
                         <div class="job-description">
                             Leading the DevOps transformation for a SaaS platform serving 1M+ users, managing a team of 5 engineers and overseeing all aspects of cloud infrastructure, CI/CD, and monitoring.
                         </div>
@@ -628,7 +1353,7 @@
                             </div>
                             <div class="job-period">2016 - 2020</div>
                         </div>
-                        <div class="job-location">Seattle, WA</div>
+                        <div class="job-location"><i class="fas fa-map-marker-alt"></i> Seattle, WA</div>
                         <div class="job-description">
                             Responsible for building and maintaining CI/CD pipelines, cloud infrastructure, and monitoring systems for a high-traffic e-commerce platform.
                         </div>
@@ -657,7 +1382,7 @@
                             </div>
                             <div class="job-period">2014 - 2016</div>
                         </div>
-                        <div class="job-location">Austin, TX</div>
+                        <div class="job-location"><i class="fas fa-map-marker-alt"></i> Austin, TX</div>
                         <div class="job-description">
                             Started as a System Administrator and transitioned to DevOps role, introducing automation and cloud technologies to the organization.
                         </div>
@@ -678,7 +1403,7 @@
 
                 <!-- Projects -->
                 <section class="projects">
-                    <h2><i class="fas fa-project-diagram"></i> Key Projects</h2>
+                    <h2><i class="fas fa-project-diagram icon-glow"></i> Key Projects</h2>
 
                     <div class="project">
                         <div class="project-header">
@@ -692,13 +1417,13 @@
                             <strong>Reduced deployment time</strong> across multiple clouds by <strong>60%</strong> and enabled <strong>20% cost savings</strong> through intelligent resource allocation.
                         </div>
                         <div class="project-tech">
-                            <span class="tech-tag">Terraform</span>
-                            <span class="tech-tag">Kubernetes</span>
-                            <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">GCP</span>
-                            <span class="tech-tag">Azure</span>
-                            <span class="tech-tag">Go</span>
-                            <span class="tech-tag">Prometheus</span>
+                            <span class="tech-tag" data-tooltip="Infrastructure as Code">Terraform</span>
+                            <span class="tech-tag" data-tooltip="Container Orchestration">Kubernetes</span>
+                            <span class="tech-tag" data-tooltip="Cloud Provider">AWS</span>
+                            <span class="tech-tag" data-tooltip="Cloud Provider">GCP</span>
+                            <span class="tech-tag" data-tooltip="Cloud Provider">Azure</span>
+                            <span class="tech-tag" data-tooltip="Programming Language">Go</span>
+                            <span class="tech-tag" data-tooltip="Monitoring">Prometheus</span>
                         </div>
                     </div>
 
@@ -714,12 +1439,12 @@
                             <strong>Improved system availability</strong> from 99.9% to <strong>99.99%</strong> and reduced on-call incidents by <strong>75%</strong>.
                         </div>
                         <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Kubernetes</span>
-                            <span class="tech-tag">Prometheus</span>
-                            <span class="tech-tag">Grafana</span>
-                            <span class="tech-tag">Ansible</span>
-                            <span class="tech-tag">ELK Stack</span>
+                            <span class="tech-tag" data-tooltip="Programming Language">Python</span>
+                            <span class="tech-tag" data-tooltip="Container Orchestration">Kubernetes</span>
+                            <span class="tech-tag" data-tooltip="Monitoring">Prometheus</span>
+                            <span class="tech-tag" data-tooltip="Visualization">Grafana</span>
+                            <span class="tech-tag" data-tooltip="Configuration Management">Ansible</span>
+                            <span class="tech-tag" data-tooltip="Logging">ELK Stack</span>
                         </div>
                     </div>
 
@@ -735,12 +1460,12 @@
                             <strong>Reduced pipeline execution time</strong> from 45 minutes to <strong>8 minutes</strong> and increased deployment frequency from weekly to <strong>multiple times per day</strong>.
                         </div>
                         <div class="project-tech">
-                            <span class="tech-tag">GitLab CI</span>
-                            <span class="tech-tag">ArgoCD</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Helm</span>
-                            <span class="tech-tag">SonarQube</span>
-                            <span class="tech-tag">Trivy</span>
+                            <span class="tech-tag" data-tooltip="CI/CD">GitLab CI</span>
+                            <span class="tech-tag" data-tooltip="GitOps">ArgoCD</span>
+                            <span class="tech-tag" data-tooltip="Containers">Docker</span>
+                            <span class="tech-tag" data-tooltip="Package Manager">Helm</span>
+                            <span class="tech-tag" data-tooltip="Code Quality">SonarQube</span>
+                            <span class="tech-tag" data-tooltip="Security">Trivy</span>
                         </div>
                     </div>
 
@@ -756,24 +1481,25 @@
                             <strong>Saved $800K annually</strong> in cloud costs and provided actionable insights that led to a <strong>25% reduction</strong> in overall cloud spending.
                         </div>
                         <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">AWS Cost Explorer API</span>
-                            <span class="tech-tag">Pandas</span>
-                            <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">React</span>
+                            <span class="tech-tag" data-tooltip="Programming Language">Python</span>
+                            <span class="tech-tag" data-tooltip="AWS API">AWS Cost Explorer API</span>
+                            <span class="tech-tag" data-tooltip="Data Analysis">Pandas</span>
+                            <span class="tech-tag" data-tooltip="Web Framework">Flask</span>
+                            <span class="tech-tag" data-tooltip="Frontend">React</span>
                         </div>
                     </div>
                 </section>
 
                 <!-- Education -->
                 <section class="education">
-                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    <h2><i class="fas fa-graduation-cap icon-glow"></i> Education</h2>
 
                     <div class="education-item">
                         <div class="education-degree">Master of Science in Computer Science</div>
                         <div class="education-school">Stanford University</div>
-                        <div class="education-period">2012 - 2014</div>
-                        <div style="margin-top: 8px; color: var(--text-secondary); font-size: 0.95rem;">
+                        <div class="education-period"><i class="fas fa-calendar-alt"></i> 2012 - 2014</div>
+                        <div style="margin-top: 10px; color: var(--text-secondary); font-size: 0.95rem;">
+                            <i class="fas fa-star" style="color: var(--secondary-color); margin-right: 5px;"></i>
                             Specialization: Distributed Systems and Cloud Computing
                         </div>
                     </div>
@@ -781,8 +1507,9 @@
                     <div class="education-item">
                         <div class="education-degree">Bachelor of Science in Computer Engineering</div>
                         <div class="education-school">University of California, Berkeley</div>
-                        <div class="education-period">2008 - 2012</div>
-                        <div style="margin-top: 8px; color: var(--text-secondary); font-size: 0.95rem;">
+                        <div class="education-period"><i class="fas fa-calendar-alt"></i> 2008 - 2012</div>
+                        <div style="margin-top: 10px; color: var(--text-secondary); font-size: 0.95rem;">
+                            <i class="fas fa-award" style="color: var(--accent-color); margin-right: 5px;"></i>
                             Honors: Summa Cum Laude
                         </div>
                     </div>
@@ -790,36 +1517,36 @@
 
                 <!-- Certifications -->
                 <section class="certifications">
-                    <h2><i class="fas fa-certificate"></i> Certifications</h2>
+                    <h2><i class="fas fa-certificate icon-glow"></i> Certifications</h2>
 
                     <div class="certification-item">
                         <div class="certification-name">AWS Certified DevOps Engineer - Professional</div>
                         <div class="certification-body">Amazon Web Services</div>
-                        <div class="certification-period">2023 - 2026</div>
+                        <div class="certification-period"><i class="fas fa-calendar-check"></i> 2023 - 2026</div>
                     </div>
 
                     <div class="certification-item">
                         <div class="certification-name">Certified Kubernetes Administrator (CKA)</div>
                         <div class="certification-body">Cloud Native Computing Foundation</div>
-                        <div class="certification-period">2022 - 2025</div>
+                        <div class="certification-period"><i class="fas fa-calendar-check"></i> 2022 - 2025</div>
                     </div>
 
                     <div class="certification-item">
                         <div class="certification-name">Google Professional Cloud DevOps Engineer</div>
                         <div class="certification-body">Google Cloud</div>
-                        <div class="certification-period">2021 - 2024</div>
+                        <div class="certification-period"><i class="fas fa-calendar-check"></i> 2021 - 2024</div>
                     </div>
 
                     <div class="certification-item">
                         <div class="certification-name">Terraform Associate (HashiCorp Certified)</div>
                         <div class="certification-body">HashiCorp</div>
-                        <div class="certification-period">2020 - 2023</div>
+                        <div class="certification-period"><i class="fas fa-calendar-check"></i> 2020 - 2023</div>
                     </div>
 
                     <div class="certification-item">
                         <div class="certification-name">Red Hat Certified Engineer (RHCE)</div>
                         <div class="certification-body">Red Hat</div>
-                        <div class="certification-period">2017 - 2020</div>
+                        <div class="certification-period"><i class="fas fa-calendar-check"></i> 2017 - 2020</div>
                     </div>
                 </section>
             </main>
@@ -828,65 +1555,510 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Animate skill bars on scroll
-            const skillBars = document.querySelectorAll('.skill-progress');
+            // Loading screen animation
+            const loader = document.getElementById('loader');
+            const loaderText = document.getElementById('loader-text');
+            const loaderBarFill = document.getElementById('loader-bar-fill');
+            const messages = [
+                "Initializing resume...",
+                "Loading DevOps expertise...",
+                "Compiling cloud skills...",
+                "Deploying achievements...",
+                "Optimizing performance...",
+                "Starting Kubernetes pods...",
+                "Configuring CI/CD pipelines...",
+                "Almost there...",
+                "Welcome to my resume!"
+            ];
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const bar = entry.target;
-                        const width = bar.dataset.width;
-                        bar.style.width = width;
-                    }
+            let currentMessage = 0;
+            let progress = 0;
+
+            const typeWriter = (text, i = 0) => {
+                if (i < text.length) {
+                    loaderText.textContent = text.substring(0, i + 1);
+                    setTimeout(() => typeWriter(text, i + 1), 50);
+                } else {
+                    setTimeout(() => {
+                        currentMessage = (currentMessage + 1) % messages.length;
+                        typeWriter(messages[currentMessage]);
+                    }, 1000);
+                }
+            };
+
+            const loadingInterval = setInterval(() => {
+                progress += Math.random() * 5;
+                if (progress >= 100) {
+                    progress = 100;
+                    loaderBarFill.style.width = '100%';
+                    clearInterval(loadingInterval);
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                        initAnimations();
+                    }, 500);
+                } else {
+                    loaderBarFill.style.width = `${progress}%`;
+                }
+            }, 100);
+
+            typeWriter(messages[currentMessage]);
+
+            // Initialize animations after loading
+            function initAnimations() {
+                // Animate skill bars on scroll
+                const skillBars = document.querySelectorAll('.skill-progress');
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const bar = entry.target;
+                            const width = bar.dataset.width;
+                            bar.style.width = width;
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                skillBars.forEach(bar => {
+                    observer.observe(bar);
                 });
-            }, { threshold: 0.5 });
 
-            skillBars.forEach(bar => {
-                observer.observe(bar);
-            });
+                // Animate statistics counters
+                const statNumbers = document.querySelectorAll('.stat-number');
 
-            // Add scroll animation to sections
-            const sections = document.querySelectorAll('section');
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
+                const statObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const stat = entry.target;
+                            const target = parseFloat(stat.dataset.target);
+                            const isDecimal = target.toString().includes('.');
+                            let current = 0;
+                            const increment = target / 100;
+
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if ((isDecimal && current >= target) || (!isDecimal && current >= target - increment)) {
+                                    current = target;
+                                    clearInterval(timer);
+                                }
+                                stat.textContent = current.toFixed(isDecimal ? 2 : 0);
+                            }, 20);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                statNumbers.forEach(stat => {
+                    statObserver.observe(stat);
                 });
-            }, { threshold: 0.1 });
 
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                sectionObserver.observe(section);
-            });
+                // Scroll animations for sections
+                const sections = document.querySelectorAll('section, .job, .project, .education-item, .certification-item');
 
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+                const sectionObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-fade-in-up');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                sections.forEach(section => {
+                    section.style.opacity = '0';
+                    sectionObserver.observe(section);
+                });
+
+                // Add delay to header animation
+                setTimeout(() => {
+                    document.querySelector('.header').style.opacity = '1';
+                }, 100);
+
+                // Parallax effect for particles
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const particles = document.getElementById('particles-js');
+                    particles.style.transform = `translateY(${scrolled * 0.5}px)`;
+                });
+
+                // Add mouse move effect to projects
+                const projects = document.querySelectorAll('.project');
+                projects.forEach(project => {
+                    project.addEventListener('mousemove', (e) => {
+                        const rect = project.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        project.style.setProperty('--mouse-x', `${x}px`);
+                        project.style.setProperty('--mouse-y', `${y}px`);
+                    });
+                });
+
+                // Add glow effect on hover for icons
+                const icons = document.querySelectorAll('.icon-glow');
+                icons.forEach(icon => {
+                    icon.addEventListener('mouseenter', () => {
+                        icon.style.transform = 'scale(1.2)';
+                    });
+                    icon.addEventListener('mouseleave', () => {
+                        icon.style.transform = 'scale(1)';
+                    });
+                });
+
+                // Add floating animation to stat items
+                const statItems = document.querySelectorAll('.stat-item');
+                statItems.forEach((item, index) => {
+                    item.style.animationDelay = `${index * 0.1}s`;
+                });
+
+                // Terminal modal functionality
+                const summary = document.querySelector('.summary');
+                const terminalModal = document.getElementById('terminal-modal');
+                const modalOverlay = document.getElementById('modal-overlay');
+                const terminalClose = document.getElementById('terminal-close');
+                const terminalContent = document.getElementById('terminal-content');
+
+                summary.addEventListener('click', () => {
+                    terminalModal.classList.add('active');
+                    modalOverlay.classList.add('active');
+
+                    // Clear previous content
+                    terminalContent.innerHTML = '';
+
+                    // Add terminal content with animation
+                    const commands = [
+                        { text: "$ whoami", class: "terminal-prompt", delay: 0 },
+                        { text: "Alex Carter - Senior DevOps Engineer", class: "terminal-success", delay: 200 },
+                        { text: "", delay: 400 },
+                        { text: "$ ls -l skills/", class: "terminal-prompt", delay: 600 },
+                        { text: "drwxr-xr-x 2 alex alex 4096 Jan 1 10:00 AWS/", class: "terminal-output", delay: 800 },
+                        { text: "drwxr-xr-x 2 alex alex 4096 Jan 1 10:00 Kubernetes/", class: "terminal-output", delay: 1000 },
+                        { text: "drwxr-xr-x 2 alex alex 4096 Jan 1 10:00 CI-CD/", class: "terminal-output", delay: 1200 },
+                        { text: "drwxr-xr-x 2 alex alex 4096 Jan 1 10:00 Terraform/", class: "terminal-output", delay: 1400 },
+                        { text: "drwxr-xr-x 2 alex alex 4096 Jan 1 10:00 Monitoring/", class: "terminal-output", delay: 1600 },
+                        { text: "", delay: 1800 },
+                        { text: "$ cat experience.txt", class: "terminal-prompt", delay: 2000 },
+                        { text: "8+ years in DevOps | 150+ deployments | $2.5M cost savings", class: "terminal-success", delay: 2200 },
+                        { text: "", delay: 2400 },
+                        { text: "$ uptime", class: "terminal-prompt", delay: 2600 },
+                        { text: "System uptime: 99.99%", class: "terminal-success", delay: 2800 },
+                        { text: "", delay: 3000 },
+                        { text: "$ echo 'Let\\'s build something amazing!'", class: "terminal-prompt", delay: 3200 },
+                        { text: "Let's build something amazing!", class: "terminal-success", delay: 3400 }
+                    ];
+
+                    commands.forEach(cmd => {
+                        setTimeout(() => {
+                            const line = document.createElement('div');
+                            line.className = `terminal-line ${cmd.class}`;
+                            line.textContent = cmd.text;
+                            terminalContent.appendChild(line);
+                            terminalContent.scrollTop = terminalContent.scrollHeight;
+                        }, cmd.delay);
+                    });
+                });
+
+                terminalClose.addEventListener('click', () => {
+                    terminalModal.classList.remove('active');
+                    modalOverlay.classList.remove('active');
+                });
+
+                modalOverlay.addEventListener('click', () => {
+                    terminalModal.classList.remove('active');
+                    modalOverlay.classList.remove('active');
+                });
+
+                // Add scroll progress indicator
+                const progressBar = document.createElement('div');
+                progressBar.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    height: 3px;
+                    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+                    width: 0%;
+                    z-index: 1000;
+                    transition: width 0.3s;
+                `;
+                document.body.appendChild(progressBar);
+
+                window.addEventListener('scroll', () => {
+                    const scrollTop = document.documentElement.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrollProgress = (scrollTop / scrollHeight) * 100;
+                    progressBar.style.width = `${scrollProgress}%`;
+                });
+
+                // Add random floating particles
+                setInterval(() => {
+                    const particle = document.createElement('div');
+                    particle.style.cssText = `
+                        position: fixed;
+                        width: ${Math.random() * 5 + 2}px;
+                        height: ${Math.random() * 5 + 2}px;
+                        background: ${['#00d4ff', '#00ff88', '#ff00aa', '#ffaa00'][Math.floor(Math.random() * 4)]};;
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: -1;
+                        left: ${Math.random() * 100}vw;
+                        top: -10px;
+                        animation: floatUp ${Math.random() * 5 + 5}s linear forwards;
+                    `;
+
+                    document.body.appendChild(particle);
+
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 10000);
+                }, 2000);
+
+                // Add CSS for floating particles
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes floatUp {
+                        0% {
+                            transform: translateY(0) rotate(0deg);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translateY(-100vh) rotate(360deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                // Add custom cursor
+                const cursor = document.createElement('div');
+                cursor.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background: radial-gradient(circle, rgba(0,212,255,0.8) 0%, rgba(0,212,255,0.2) 70%);
+                    pointer-events: none;
+                    z-index: 9999;
+                    transition: transform 0.1s, opacity 0.1s;
+                    transform: translate(-50%, -50%);
+                    mix-blend-mode: screen;
+                `;
+                document.body.appendChild(cursor);
+
+                const cursorDot = document.createElement('div');
+                cursorDot.style.cssText = `
+                    position: fixed;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background-color: #00d4ff;
+                    pointer-events: none;
+                    z-index: 9999;
+                    transform: translate(-50%, -50%);
+                `;
+                document.body.appendChild(cursorDot);
+
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = `${e.clientX}px`;
+                    cursor.style.top = `${e.clientY}px`;
+                    cursorDot.style.left = `${e.clientX}px`;
+                    cursorDot.style.top = `${e.clientY}px`;
+                });
+
+                // Change cursor on hover
+                const interactiveElements = document.querySelectorAll('a, button, .project, .job-achievement, .tech-tag, .stat-item, .education-item, .certification-item');
+                interactiveElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                        cursor.style.background = 'radial-gradient(circle, rgba(0,255,136,0.8) 0%, rgba(0,255,136,0.2) 70%)';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                        cursor.style.background = 'radial-gradient(circle, rgba(0,212,255,0.8) 0%, rgba(0,212,255,0.2) 70%)';
+                    });
+                });
+
+                // Add background color shift on scroll
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    document.body.style.background = `linear-gradient(180deg, #0a0a0f 0%, #12121a ${scrolled * 0.1}%, #0a0a0f 100%)`;
+                });
+
+                // Add pulse animation to header on scroll
+                let lastScrollTop = 0;
+                window.addEventListener('scroll', function() {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > lastScrollTop && scrollTop > 100) {
+                        // Scrolling down
+                        document.querySelector('.header h1').style.transform = 'scale(0.95)';
+                    } else {
+                        // Scrolling up
+                        document.querySelector('.header h1').style.transform = 'scale(1)';
+                    }
+                    lastScrollTop = scrollTop;
+                });
+            }
+
+            // Particle system implementation
+            (function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const particles = [];
+                const particleCount = 80;
+                const colors = ['#00d4ff', '#00ff88', '#ff00aa', '#ffaa00'];
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+
+                function Particle() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = Math.random() * 2 - 1;
+                    this.speedY = Math.random() * 2 - 1;
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.targetSize = Math.random() * 3 + 1;
+                    this.baseX = this.x;
+                    this.baseY = this.y;
+                    this.wanderOffset = Math.random() * 100;
+                }
+
+                Particle.prototype.update = function() {
+                    // Add some wandering behavior
+                    this.wanderOffset += 0.01;
+                    this.x = this.baseX + Math.sin(this.wanderOffset) * 50;
+                    this.y = this.baseY + Math.cos(this.wanderOffset * 0.7) * 30;
+
+                    // Gentle drift
+                    this.baseX += this.speedX * 0.1;
+                    this.baseY += this.speedY * 0.1;
+
+                    if (this.size < this.targetSize) {
+                        this.size += 0.05;
+                    } else if (this.size > this.targetSize) {
+                        this.size -= 0.05;
+                    }
+
+                    if (this.x < 0) {
+                        this.x = canvas.width;
+                        this.baseX = canvas.width;
+                    } else if (this.x > canvas.width) {
+                        this.x = 0;
+                        this.baseX = 0;
+                    }
+
+                    if (this.y < 0) {
+                        this.y = canvas.height;
+                        this.baseY = canvas.height;
+                    } else if (this.y > canvas.height) {
+                        this.y = 0;
+                        this.baseY = 0;
+                    }
+                };
+
+                Particle.prototype.draw = function() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+
+                    // Draw glow
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+                    const colorParts = hexToRgb(this.color);
+                    ctx.fillStyle = `rgba(${colorParts.r}, ${colorParts.g}, ${colorParts.b}, 0.2)`;
+                    ctx.fill();
+                };
+
+                function hexToRgb(hex) {
+                    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                    return result ? {
+                        r: parseInt(result[1], 16),
+                        g: parseInt(result[2], 16),
+                        b: parseInt(result[3], 16)
+                    } : null;
+                }
+
+                function init() {
+                    for (let i = 0; i < particleCount; i++) {
+                        particles.push(new Particle());
+                    }
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    for (let i = 0; i < particles.length; i++) {
+                        particles[i].update();
+                        particles[i].draw();
+
+                        // Draw connections between close particles
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const dx = particles[i].x - particles[j].x;
+                            const dy = particles[i].y - particles[j].y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+
+                            if (distance < 100) {
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.strokeStyle = `rgba(0, 212, 255, ${1 - distance / 100})`;
+                                ctx.strokeWidth = 0.5;
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+                }
+
+                const particlesContainer = document.getElementById('particles-js');
+                particlesContainer.appendChild(canvas);
+
+                resizeCanvas();
+                init();
+                animate();
+
+                window.addEventListener('resize', resizeCanvas);
+            })();
+
+            // Add keyboard shortcut to open terminal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 't' && e.ctrlKey) {
                     e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+                    document.querySelector('.summary').click();
+                }
             });
 
-            // Add hover effect to project cards
-            const projects = document.querySelectorAll('.project');
-            projects.forEach(project => {
-                project.addEventListener('mouseenter', function() {
-                    this.style.borderLeft = '4px solid var(--primary-color)';
-                });
-                project.addEventListener('mouseleave', function() {
-                    this.style.borderLeft = '4px solid var(--secondary-color)';
-                });
+            // Add Easter egg - konami code
+            const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+            let konamiIndex = 0;
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === konamiCode[konamiIndex]) {
+                    konamiIndex++;
+                    if (konamiIndex === konamiCode.length) {
+                        // Trigger special animation
+                        document.body.style.animation = 'konamiShake 0.5s';
+                        setTimeout(() => {
+                            document.body.style.animation = '';
+                            alert('🎉 DevOps Easter Egg Activated! 🎉\n\nYou found the secret code! Here\'s a bonus fact:\n\nI once reduced a company\'s cloud bill by 40% in a single weekend by identifying and terminating zombie resources!');
+                        }, 500);
+                        konamiIndex = 0;
+                    }
+                } else {
+                    konamiIndex = 0;
+                }
             });
+
+            // Add konami shake animation
+            const konamiStyle = document.createElement('style');
+            konamiStyle.textContent = `
+                @keyframes konamiShake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(konamiStyle);
         });
     </script>
 </body>
