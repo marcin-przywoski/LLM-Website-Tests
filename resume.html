@@ -173,38 +173,43 @@
                 flex-direction: column;
             }
         }
+
+        .contact-info a:focus, .job:focus, .project:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <main class="container">
         <header>
             <h1>John Doe</h1>
             <p>DevOps Engineer</p>
-            <div class="contact-info">
+            <nav class="contact-info" aria-label="Contact Information">
                 <a href="mailto:john.doe@example.com">john.doe@example.com</a> |
                 <a href="https://linkedin.com/in/johndoe" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
                 <a href="https://github.com/johndoe" target="_blank" rel="noopener noreferrer">GitHub</a>
-            </div>
+            </nav>
         </header>
 
-        <div class="section">
-            <h2>Summary</h2>
+        <section class="section" aria-labelledby="summary-heading">
+            <h2 id="summary-heading">Summary</h2>
             <p>Results-driven DevOps Engineer with 8+ years of experience in automating, building, and scaling infrastructure. Proven ability to reduce deployment times by 75% and improve system reliability by 40% through strategic implementation of CI/CD pipelines and monitoring solutions. Passionate about leveraging technology to solve complex problems and enhance operational efficiency.</p>
-        </div>
+        </section>
 
-        <div class="section">
-            <h2>Skills & Proficiency</h2>
+        <section class="section" aria-labelledby="skills-heading">
+            <h2 id="skills-heading">Skills & Proficiency</h2>
             <div class="skills-container">
                 <div class="skills-chart">
-                    <canvas id="skillsChart"></canvas>
+                    <canvas id="skillsChart" role="img" aria-label="A radar chart showing proficiency in skills: AWS at 90%, Kubernetes at 85%, Docker at 95%, Terraform at 80%, Python at 88%, and CI/CD at 92%."></canvas>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
-            <h2>Experience</h2>
-            <div class="job">
+        <section class="section" aria-labelledby="experience-heading">
+            <h2 id="experience-heading">Experience</h2>
+            <article class="job" tabindex="0">
                 <h3>Senior DevOps Engineer, Tech Innovators Inc.</h3>
                 <p>2020 - Present</p>
                 <ul>
@@ -212,8 +217,8 @@
                     <li>Led the CI/CD pipeline optimization project, which cut down build and deployment times from 45 minutes to 10 minutes.</li>
                     <li>Managed a fleet of 500+ servers on AWS, achieving 99.99% uptime.</li>
                 </ul>
-            </div>
-            <div class="job">
+            </article>
+            <article class="job" tabindex="0">
                 <h3>DevOps Engineer, Creative Solutions</h3>
                 <p>2016 - 2020</p>
                 <ul>
@@ -221,30 +226,30 @@
                     <li>Implemented monitoring and alerting with Prometheus and Grafana, improving incident response time by 60%.</li>
                     <li>Collaborated with development teams to containerize legacy applications using Docker.</li>
                 </ul>
-            </div>
-        </div>
+            </article>
+        </section>
 
-        <div class="section">
-            <h2>Projects & Achievements</h2>
-            <div class="project">
+        <section class="section" aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Projects & Achievements</h2>
+            <article class="project" tabindex="0">
                 <h3>Project: Cloud Migration Initiative</h3>
                 <p>Successfully migrated 20+ applications from on-premise data centers to AWS with zero downtime. This resulted in an annual saving of $200,000.</p>
-            </div>
-            <div class="project">
+            </article>
+            <article class="project" tabindex="0">
                 <h3>Achievement: 'Innovator of the Year' Award</h3>
                 <p>Awarded for developing an internal tool that automated security compliance checks, reducing audit preparation time by 80%.</p>
-            </div>
-        </div>
+            </article>
+        </section>
 
-        <div class="section">
-            <h2>Education</h2>
+        <section class="section" aria-labelledby="education-heading">
+            <h2 id="education-heading">Education</h2>
             <p><strong>Bachelor of Science in Computer Science</strong> - University of Technology (2012-2016)</p>
-        </div>
+        </section>
 
         <footer>
             <p>&copy; 2024 John Doe. All rights reserved.</p>
         </footer>
-    </div>
+    </main>
 
     <script>
         const ctx = document.getElementById('skillsChart').getContext('2d');
