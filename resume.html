@@ -173,6 +173,34 @@
       color: var(--muted);
     }
 
+    .skip-link{
+      position:absolute;
+      left:-999px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+    }
+    .skip-link:focus{
+      left:1rem;
+      top:1rem;
+      width:auto;
+      height:auto;
+      padding:0.5rem 1rem;
+      background:var(--primary);
+      color:#fff;
+      border-radius:var(--radius);
+      z-index:1000;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      *{
+        animation:none!important;
+        transition:none!important;
+      }
+    }
+
     /* Responsive tweaks */
     @media (max-width: 480px) {
       header h1 {
@@ -201,11 +229,12 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <div class="container">
     <header>
       <h1>Alex Johnson</h1>
       <p class="title">Senior DevOps Engineer</p>
-      <div class="contact">
+      <div class="contact" role="navigation" aria-label="Contact links">
         <span>alex.johnson@example.com</span>
         <span>+1 (555) 123-4567</span>
         <span>Seattle, WA</span>
@@ -213,6 +242,7 @@
         <span><a href="https://linkedin.com/in/alexjohnson" target="_blank" rel="noopener">LinkedIn</a></span>
       </div>
     </header>
+    <main id="main" role="main">
 
     <!-- Summary -->
     <section>
@@ -344,6 +374,7 @@
         </div>
       </div>
     </section>
+    </main>
   </div>
 
   <script>
@@ -361,7 +392,9 @@
 
     window.addEventListener('load', animateProgressBars);
     window.addEventListener('scroll', animateProgressBars);
-      // ---- Epic Animations ----
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reducedMotion) {
+    // ---- Epic Animations ----
     // Add fade-in-up class to elements
     document.querySelectorAll('section, .card, .stat-card').forEach(el => el.classList.add('fade-in-up'));
 
@@ -417,6 +450,7 @@
         card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) scale(1)';
       });
     });
+}
   </script>
 </body>
 </html>
