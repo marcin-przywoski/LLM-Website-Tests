@@ -179,6 +179,25 @@
         font-size: 2rem;
       }
     }
+      /* ---------- Epic Enhancements ---------- */
+    .card,
+    .stat-card {
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .card:hover,
+    .stat-card:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all .8s cubic-bezier(.2,.6,.2,1);
+    }
   </style>
 </head>
 <body>
@@ -342,6 +361,62 @@
 
     window.addEventListener('load', animateProgressBars);
     window.addEventListener('scroll', animateProgressBars);
+      // ---- Epic Animations ----
+    // Add fade-in-up class to elements
+    document.querySelectorAll('section, .card, .stat-card').forEach(el => el.classList.add('fade-in-up'));
+
+    // Intersection Observer to reveal elements
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // Count-up animation for stats
+          if (entry.target.classList.contains('stat-card') && !entry.target.dataset.counted) {
+            entry.target.dataset.counted = 'true';
+            const numEl = entry.target.querySelector('h3');
+            const rawText = numEl.textContent.trim();
+            const isPercent = rawText.endsWith('%');
+            const targetNum = parseFloat(rawText.replace('%', ''));
+            animateCountUp(numEl, targetNum, 1200, isPercent);
+          }
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+    // Count-up helper
+    function animateCountUp(element, target, duration, addPercent = false) {
+      let start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        const progress = Math.min((ts - start) / duration, 1);
+        const value = Math.round(progress * target);
+        element.textContent = value + (addPercent ? '%' : '');
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          element.textContent = target + (addPercent ? '%' : '');
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    // Tilt effect for stat cards
+    document.querySelectorAll('.stat-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(600px) rotateX(${ -y * 10 }deg) rotateY(${ x * 10 }deg) scale(1.05)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) scale(1)';
+      });
+    });
   </script>
 </body>
 </html>
