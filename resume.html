@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - DevOps Engineer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #00a8ff;
+            --secondary-color: #e0e0e0;
+            --background-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --card-background: #2a2a2a;
+            --header-text-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: var(--card-background);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            color: var(--header-text-color);
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 5px 0;
+            font-size: 1.2em;
+            color: var(--primary-color);
+        }
+
+        .contact-info a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 30px;
+            font-size: 1.8em;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .skills-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .skills-chart {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+
+        .job, .project {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .job h3, .project h3 {
+            margin: 0;
+            color: var(--header-text-color);
+            font-size: 1.4em;
+        }
+
+        .job p, .project p {
+            margin: 5px 0;
+            font-style: italic;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--secondary-color);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            .skills-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>John Doe</h1>
+            <p>DevOps Engineer</p>
+            <div class="contact-info">
+                <a href="mailto:john.doe@example.com">john.doe@example.com</a> |
+                <a href="https://linkedin.com/in/johndoe" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+                <a href="https://github.com/johndoe" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </header>
+
+        <div class="section">
+            <h2>Summary</h2>
+            <p>Results-driven DevOps Engineer with 8+ years of experience in automating, building, and scaling infrastructure. Proven ability to reduce deployment times by 75% and improve system reliability by 40% through strategic implementation of CI/CD pipelines and monitoring solutions. Passionate about leveraging technology to solve complex problems and enhance operational efficiency.</p>
+        </div>
+
+        <div class="section">
+            <h2>Skills & Proficiency</h2>
+            <div class="skills-container">
+                <div class="skills-chart">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Experience</h2>
+            <div class="job">
+                <h3>Senior DevOps Engineer, Tech Innovators Inc.</h3>
+                <p>2020 - Present</p>
+                <ul>
+                    <li>Architected and implemented a Kubernetes-based platform, leading to a 50% reduction in infrastructure costs.</li>
+                    <li>Led the CI/CD pipeline optimization project, which cut down build and deployment times from 45 minutes to 10 minutes.</li>
+                    <li>Managed a fleet of 500+ servers on AWS, achieving 99.99% uptime.</li>
+                </ul>
+            </div>
+            <div class="job">
+                <h3>DevOps Engineer, Creative Solutions</h3>
+                <p>2016 - 2020</p>
+                <ul>
+                    <li>Automated application deployments using Jenkins and Ansible, reducing manual deployment errors by 95%.</li>
+                    <li>Implemented monitoring and alerting with Prometheus and Grafana, improving incident response time by 60%.</li>
+                    <li>Collaborated with development teams to containerize legacy applications using Docker.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Projects & Achievements</h2>
+            <div class="project">
+                <h3>Project: Cloud Migration Initiative</h3>
+                <p>Successfully migrated 20+ applications from on-premise data centers to AWS with zero downtime. This resulted in an annual saving of $200,000.</p>
+            </div>
+            <div class="project">
+                <h3>Achievement: 'Innovator of the Year' Award</h3>
+                <p>Awarded for developing an internal tool that automated security compliance checks, reducing audit preparation time by 80%.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <p><strong>Bachelor of Science in Computer Science</strong> - University of Technology (2012-2016)</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 John Doe. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('skillsChart').getContext('2d');
+        const skillsChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['AWS', 'Kubernetes', 'Docker', 'Terraform', 'Python', 'CI/CD'],
+                datasets: [{
+                    label: 'Proficiency',
+                    data: [90, 85, 95, 80, 88, 92],
+                    backgroundColor: 'rgba(0, 168, 255, 0.2)',
+                    borderColor: 'rgba(0, 168, 255, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(0, 168, 255, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(0, 168, 255, 1)'
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        },
+                        pointLabels: {
+                            color: '#f0f0f0',
+                            font: {
+                                size: 14
+                            }
+                        },
+                        ticks: {
+                            color: '#f0f0f0',
+                            backdropColor: 'rgba(0, 0, 0, 0)',
+                            stepSize: 20
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#f0f0f0'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
