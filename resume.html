@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevOps Engineer – Resume</title>
+  <!-- Google Fonts for typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* CSS Variables */
+    :root {
+      --bg: #f7f9fc;
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --secondary: #0f172a;
+      --text: #1e293b;
+      --muted: #64748b;
+      --card-bg: #ffffff;
+      --radius: 0.75rem;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 0.25rem;
+    }
+
+    header p.title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Skills */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-name {
+      font-weight: 500;
+    }
+
+    .progress {
+      height: 0.5rem;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 0.35rem;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: var(--primary);
+      transition: width 1.2s ease;
+    }
+
+    /* Experience & Projects list */
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .item-header h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .item-header span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    ul.responsibilities {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+      list-style-type: disc;
+    }
+
+    /* Achievements */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    .stat-card h3 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Alex Johnson</h1>
+      <p class="title">Senior DevOps Engineer</p>
+      <div class="contact">
+        <span>alex.johnson@example.com</span>
+        <span>+1 (555) 123-4567</span>
+        <span>Seattle, WA</span>
+        <span><a href="https://github.com/alexjohnson" target="_blank" rel="noopener">github.com/alexjohnson</a></span>
+        <span><a href="https://linkedin.com/in/alexjohnson" target="_blank" rel="noopener">LinkedIn</a></span>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section>
+      <h2>Professional Summary</h2>
+      <p class="card">
+        Passionate DevOps Engineer with 8+ years of experience designing cloud architectures, automating CI/CD pipelines, and leading cross-functional teams to deliver highly scalable SaaS products. Proven track record of reducing deployment time by 70% and infrastructure costs by 35% through automation and optimization.
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2>Core Skills</h2>
+      <div class="skills">
+        <div class="card">
+          <span class="skill-name">AWS & Azure</span>
+          <div class="progress" aria-label="AWS and Azure proficiency">
+            <div class="progress-bar" data-width="90"></div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="skill-name">Kubernetes & Docker</span>
+          <div class="progress" aria-label="Kubernetes and Docker proficiency">
+            <div class="progress-bar" data-width="85"></div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="skill-name">CI/CD (Jenkins, GitHub Actions)</span>
+          <div class="progress">
+            <div class="progress-bar" data-width="92"></div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="skill-name">Infrastructure as Code (Terraform)</span>
+          <div class="progress">
+            <div class="progress-bar" data-width="88"></div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="skill-name">Monitoring & Observability</span>
+          <div class="progress">
+            <div class="progress-bar" data-width="80"></div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="skill-name">Python & Go Scripting</span>
+          <div class="progress">
+            <div class="progress-bar" data-width="75"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2>Professional Experience</h2>
+      <div class="card">
+        <div class="item-header">
+          <h3>Lead DevOps Engineer – TechNova Corp</h3>
+          <span>2021 – Present</span>
+        </div>
+        <ul class="responsibilities">
+          <li>Architected a multi-region AWS EKS cluster serving 10M+ monthly users with <strong>99.99% uptime</strong>.</li>
+          <li>Implemented GitOps with Argo CD, reducing deployment rollback time by 90%.</li>
+          <li>Optimized Terraform modules to cut infrastructure spend by <strong>$420k / year</strong>.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="item-header">
+          <h3>DevOps Engineer – CloudWorks LLC</h3>
+          <span>2017 – 2021</span>
+        </div>
+        <ul class="responsibilities">
+          <li>Built a scalable CI/CD platform using Jenkins pipelines and Docker containers, shrinking release cycle from bi-weekly to daily.</li>
+          <li>Migrated on-prem apps to Azure, leveraging AKS and Azure DevOps; achieved 30% cost reduction.</li>
+          <li>Implemented centralized logging and metrics with ELK and Prometheus-Grafana.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <h2>Highlighted Projects</h2>
+      <div class="card">
+        <div class="item-header">
+          <h3>Real-Time Deployment Dashboard</h3>
+          <span>2023</span>
+        </div>
+        <p>Developed a React-based dashboard integrating with GitHub Actions API and Prometheus to visualize deployment health across 200+ microservices.</p>
+      </div>
+      <div class="card">
+        <div class="item-header">
+          <h3>Serverless Image Processing Pipeline</h3>
+          <span>2022</span>
+        </div>
+        <p>Designed an AWS Lambda + S3 pipeline processing 3M images/day with end-to-end latency under 500 ms.</p>
+      </div>
+    </section>
+
+    <!-- Achievements / Stats -->
+    <section>
+      <h2>Key Achievements</h2>
+      <div class="stats">
+        <div class="stat-card">
+          <h3>70%</h3>
+          <p>Deployment Time Reduced</p>
+        </div>
+        <div class="stat-card">
+          <h3>35%</h3>
+          <p>Infra Cost Savings</p>
+        </div>
+        <div class="stat-card">
+          <h3>99.99%</h3>
+          <p>System Uptime</p>
+        </div>
+        <div class="stat-card">
+          <h3>30+</h3>
+          <p>Engineers Mentored</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h2>Education</h2>
+      <div class="card">
+        <div class="item-header">
+          <h3>B.S. Computer Science – University of Washington</h3>
+          <span>2013 – 2017</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Animate skill bars when they enter viewport
+    function animateProgressBars() {
+      const bars = document.querySelectorAll('.progress-bar');
+      const triggerBottom = window.innerHeight * 0.9;
+      bars.forEach(bar => {
+        const rect = bar.getBoundingClientRect();
+        if (rect.top < triggerBottom && bar.style.width === '') {
+          bar.style.width = bar.dataset.width + '%';
+        }
+      });
+    }
+
+    window.addEventListener('load', animateProgressBars);
+    window.addEventListener('scroll', animateProgressBars);
+  </script>
+</body>
+</html>
