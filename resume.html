@@ -762,9 +762,508 @@
             body { background: #fff; color: #000; }
             section { opacity: 1; transform: none; }
         }
+
+        /* ========== SCROLL PROGRESS ========== */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #00b4d8, #a855f7, var(--accent));
+            background-size: 300% 100%;
+            animation: gradient-shift 3s linear infinite;
+            z-index: 9999;
+            width: 0%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
+
+        /* ========== PARTICLE CANVAS ========== */
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========== GLITCH EFFECT ========== */
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .glitch::before {
+            color: #ff00ff;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .glitch::after {
+            color: #00ffff;
+            z-index: -2;
+            opacity: 0;
+        }
+
+        .glitch.active::before {
+            animation: glitch-1 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        .glitch.active::after {
+            animation: glitch-2 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        @keyframes glitch-1 {
+            0% { opacity: 0.8; transform: translate(0); clip-path: inset(40% 0 61% 0); }
+            20% { opacity: 0.8; transform: translate(-4px, 2px); clip-path: inset(10% 0 85% 0); }
+            40% { opacity: 0.8; transform: translate(4px, -2px); clip-path: inset(80% 0 5% 0); }
+            60% { opacity: 0.8; transform: translate(-2px, 4px); clip-path: inset(50% 0 30% 0); }
+            80% { opacity: 0.8; transform: translate(2px, -4px); clip-path: inset(20% 0 60% 0); }
+            100% { opacity: 0; transform: translate(0); clip-path: inset(0); }
+        }
+
+        @keyframes glitch-2 {
+            0% { opacity: 0.8; transform: translate(0); clip-path: inset(65% 0 13% 0); }
+            20% { opacity: 0.8; transform: translate(3px, -3px); clip-path: inset(15% 0 75% 0); }
+            40% { opacity: 0.8; transform: translate(-3px, 3px); clip-path: inset(90% 0 2% 0); }
+            60% { opacity: 0.8; transform: translate(4px, 2px); clip-path: inset(35% 0 50% 0); }
+            80% { opacity: 0.8; transform: translate(-4px, -2px); clip-path: inset(70% 0 15% 0); }
+            100% { opacity: 0; transform: translate(0); clip-path: inset(0); }
+        }
+
+        /* ========== 3D TILT CARDS ========== */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+
+        .tilt-inner {
+            transition: transform 0.15s ease-out;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .tilt-shine {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: var(--radius);
+            background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 3;
+        }
+
+        .tilt-card:hover .tilt-shine {
+            opacity: 1;
+        }
+
+        /* ========== SCAN LINE ========== */
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .tilt-card:hover .scan-line {
+            opacity: 1;
+            animation: scan 2s ease-in-out infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* ========== NEON PULSE ========== */
+        .timeline-dot {
+            animation: neon-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes neon-pulse {
+            0%, 100% { box-shadow: 0 0 4px var(--accent-glow); }
+            50% { box-shadow: 0 0 16px var(--accent-glow), 0 0 32px rgba(0,212,170,0.15); }
+        }
+
+        /* ========== ANIMATED GRADIENT TEXT ========== */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--accent), #00b4d8, #a855f7, var(--accent));
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-text-shift 6s ease infinite;
+        }
+
+        @keyframes gradient-text-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ========== SHIMMER EFFECT ========== */
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+            pointer-events: none;
+        }
+
+        .shimmer:hover::after {
+            animation: shimmer-sweep 0.8s ease;
+        }
+
+        @keyframes shimmer-sweep {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        /* ========== FLOATING SHAPES ========== */
+        .floating-shapes {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border: 1px solid rgba(0, 212, 170, 0.08);
+            background: rgba(0, 212, 170, 0.02);
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 80px; height: 80px; top: 15%; left: 8%;
+            border-radius: 50%;
+            animation: float-1 18s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 60px; height: 60px; top: 55%; left: 88%;
+            border-radius: 8px;
+            animation: float-2 22s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 120px; height: 120px; top: 75%; left: 12%;
+            border-radius: 50%;
+            animation: float-3 25s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(4) {
+            width: 40px; height: 40px; top: 25%; left: 78%;
+            border-radius: 4px;
+            animation: float-4 16s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(5) {
+            width: 90px; height: 90px; top: 45%; left: 45%;
+            border-radius: 50%;
+            animation: float-5 20s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(6) {
+            width: 30px; height: 30px; top: 85%; left: 70%;
+            border-radius: 50%;
+            animation: float-6 14s ease-in-out infinite;
+        }
+
+        @keyframes float-1 {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
+            25% { transform: translateY(-40px) rotate(90deg) scale(1.1); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(180deg) scale(1); opacity: 0.3; }
+            75% { transform: translateY(-50px) rotate(270deg) scale(0.9); opacity: 0.5; }
+        }
+
+        @keyframes float-2 {
+            0%, 100% { transform: translateY(0) rotate(45deg) scale(1); opacity: 0.4; }
+            33% { transform: translateY(-35px) rotate(135deg) scale(1.15); opacity: 0.7; }
+            66% { transform: translateY(-15px) rotate(225deg) scale(0.95); opacity: 0.3; }
+        }
+
+        @keyframes float-3 {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+            33% { transform: translate(30px, -40px) scale(1.1); opacity: 0.5; }
+            66% { transform: translate(-20px, -20px) scale(0.9); opacity: 0.3; }
+        }
+
+        @keyframes float-4 {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+            50% { transform: translateY(-60px) rotate(180deg); opacity: 0.8; }
+        }
+
+        @keyframes float-5 {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.25; }
+            25% { transform: translate(-20px, -30px) scale(1.05); opacity: 0.5; }
+            50% { transform: translate(20px, -15px) scale(0.95); opacity: 0.3; }
+            75% { transform: translate(-10px, -45px) scale(1.1); opacity: 0.45; }
+        }
+
+        @keyframes float-6 {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+            50% { transform: translateY(-50px) scale(1.2); opacity: 0.7; }
+        }
+
+        /* ========== STAGGER REVEAL ========== */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(24px) scale(0.97);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ========== ENHANCED STAT GLOW ========== */
+        .stat-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--accent), #00b4d8);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s;
+        }
+
+        .stat-item:hover::before {
+            opacity: 0.2;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--accent), transparent, transparent);
+            opacity: 0;
+            animation: stat-rotate 4s linear infinite;
+            z-index: -2;
+        }
+
+        .stat-item:hover::after {
+            opacity: 0.1;
+        }
+
+        @keyframes stat-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ========== MORPHING BLOB ========== */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            animation: blob-morph 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes blob-morph {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 20px) scale(0.9); }
+            100% { transform: translate(20px, -10px) scale(1.05); }
+        }
+
+        /* ========== ENHANCED SKILL BAR GLOW ========== */
+        .skill-bar {
+            box-shadow: 0 0 8px rgba(0, 212, 170, 0.2);
+            position: relative;
+        }
+
+        .skill-bar::after {
+            content: '';
+            position: absolute;
+            right: 0; top: -2px;
+            width: 4px; height: 10px;
+            background: var(--accent);
+            border-radius: 2px;
+            box-shadow: 0 0 8px var(--accent-glow);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-bar[data-animated="1"]::after {
+            opacity: 1;
+        }
+
+        /* ========== TAG HOVER ========== */
+        .tag {
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .tag:hover {
+            background: rgba(0, 212, 170, 0.3);
+            border-color: var(--accent);
+            transform: scale(1.08);
+            box-shadow: 0 0 12px rgba(0, 212, 170, 0.2);
+        }
+
+        /* ========== ACHIEVEMENT ICON ANIMATION ========== */
+        .achievement-icon {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+        }
+
+        .achievement-card:hover .achievement-icon {
+            transform: scale(1.2) rotate(10deg);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* ========== PROJECT BANNER ANIMATION ========== */
+        .project-banner {
+            background-size: 200% 100%;
+            animation: banner-flow 3s linear infinite;
+        }
+
+        @keyframes banner-flow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        /* ========== CERT BADGE GLOW ========== */
+        .cert-badge {
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .cert-card:hover .cert-badge {
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: scale(1.1);
+        }
+
+        /* ========== CONTACT ICON BOUNCE ========== */
+        .contact-icon {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.25);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        /* ========== SECTION DIVIDER ========== */
+        section:not(:last-of-type):not(.hero)::after {
+            content: '';
+            display: block;
+            max-width: 200px;
+            height: 1px;
+            margin: 0 auto;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.3;
+        }
+
+        /* ========== HERO BADGE ENHANCED ========== */
+        .hero-badge {
+            animation: badge-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes badge-glow {
+            0%, 100% { box-shadow: 0 0 0 rgba(0,212,170,0); }
+            50% { box-shadow: 0 0 20px rgba(0,212,170,0.15); }
+        }
+
+        /* ========== BTN RIPPLE ========== */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: scale(0);
+            animation: ripple-effect 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-effect {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* ========== TIMELINE LINE GRADIENT ========== */
+        .timeline::before {
+            background: linear-gradient(to bottom, var(--accent), rgba(0,212,170,0.1));
+            width: 2px;
+        }
+
+        /* ========== STATUS DOT PULSE ========== */
+        .status-live {
+            animation: status-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes status-pulse {
+            0%, 100% { box-shadow: 0 0 4px var(--accent-glow); }
+            50% { box-shadow: 0 0 12px var(--accent-glow), 0 0 24px rgba(0,212,170,0.2); }
+        }
+
+        /* ========== HERO ENTRY ANIMATION ========== */
+        .hero-badge, .hero h1, .hero-subtitle, .hero-actions, .stats-bar {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: hero-entry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-badge { animation-delay: 0.2s; }
+        .hero h1 { animation-delay: 0.4s; }
+        .hero-subtitle { animation-delay: 0.6s; }
+        .hero-actions { animation-delay: 0.8s; }
+        .stats-bar { animation-delay: 1s; }
+
+        @keyframes hero-entry {
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <!-- ========== NAVIGATION ========== -->
 <nav class="nav" id="nav">
@@ -783,12 +1282,21 @@
 
 <!-- ========== HERO ========== -->
 <section class="hero visible" id="about">
+    <canvas id="particles"></canvas>
+    <div class="floating-shapes">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
     <div class="container hero-content">
         <div class="hero-badge">
             <span class="pulse"></span>
             Open to opportunities
         </div>
-        <h1>Alex <span class="highlight">Chen</span></h1>
+        <h1>Alex <span class="highlight glitch" data-text="Chen" id="glitch-name">Chen</span></h1>
         <p class="hero-subtitle">
             <span id="typed-text"></span><span class="typed-cursor"></span>
         </p>
@@ -821,7 +1329,7 @@
 <section id="skills">
     <div class="container">
         <div class="section-label">Technical Stack</div>
-        <h2 class="section-title">Skills &amp; Expertise</h2>
+        <h2 class="section-title gradient-text">Skills &amp; Expertise</h2>
         <div class="skills-grid">
 
             <div class="skill-category">
@@ -1024,7 +1532,7 @@
 <section id="experience">
     <div class="container">
         <div class="section-label">Career Path</div>
-        <h2 class="section-title">Professional Experience</h2>
+        <h2 class="section-title gradient-text">Professional Experience</h2>
         <div class="timeline">
 
             <div class="timeline-item">
@@ -1106,7 +1614,7 @@
 <section id="projects">
     <div class="container">
         <div class="section-label">Featured Work</div>
-        <h2 class="section-title">Key Projects</h2>
+        <h2 class="section-title gradient-text">Key Projects</h2>
         <div class="projects-grid">
 
             <div class="project-card">
@@ -1253,7 +1761,7 @@
 <section id="achievements">
     <div class="container">
         <div class="section-label">Impact</div>
-        <h2 class="section-title">Achievements</h2>
+        <h2 class="section-title gradient-text">Achievements</h2>
         <div class="achievements-grid">
 
             <div class="achievement-card">
@@ -1312,7 +1820,7 @@
 <section id="certifications">
     <div class="container">
         <div class="section-label">Credentials</div>
-        <h2 class="section-title">Certifications</h2>
+        <h2 class="section-title gradient-text">Certifications</h2>
         <div class="certs-grid">
             <div class="cert-card">
                 <div class="cert-badge">☁️</div>
@@ -1364,7 +1872,7 @@
 <section id="contact">
     <div class="container">
         <div class="section-label">Let's Connect</div>
-        <h2 class="section-title">Get in Touch</h2>
+        <h2 class="section-title gradient-text">Get in Touch</h2>
         <div class="contact-grid">
             <a href="mailto:alex.chen@email.com" class="contact-card">
                 <div class="contact-icon">📧</div>
@@ -1446,6 +1954,211 @@
     }
     typeLoop();
 
+    // ===== GLITCH EFFECT =====
+    const glitchEl = document.getElementById('glitch-name');
+    function triggerGlitch() {
+        if (!glitchEl) return;
+        glitchEl.classList.add('active');
+        setTimeout(() => glitchEl.classList.remove('active'), 400);
+    }
+    setInterval(() => {
+        if (Math.random() < 0.4) triggerGlitch();
+    }, 3000);
+
+    // ===== PARTICLE NETWORK =====
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouseX = -1000, mouseY = -1000;
+    const PARTICLE_COUNT = 60;
+    const CONNECTION_DIST = 120;
+    const MOUSE_DIST = 150;
+
+    function resizeCanvas() {
+        const hero = document.querySelector('.hero');
+        canvas.width = hero.offsetWidth;
+        canvas.height = hero.offsetHeight;
+    }
+
+    function createParticles() {
+        particles = [];
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 1,
+                opacity: Math.random() * 0.5 + 0.2
+            });
+        }
+    }
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < CONNECTION_DIST) {
+                    const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
+                    ctx.strokeStyle = 'rgba(0, 212, 170, ' + alpha + ')';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Draw mouse connections
+        const heroRect = canvas.getBoundingClientRect();
+        const mx = mouseX - heroRect.left;
+        const my = mouseY - heroRect.top;
+
+        for (let i = 0; i < particles.length; i++) {
+            const dx = particles[i].x - mx;
+            const dy = particles[i].y - my;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < MOUSE_DIST) {
+                const alpha = (1 - dist / MOUSE_DIST) * 0.4;
+                ctx.strokeStyle = 'rgba(0, 212, 170, ' + alpha + ')';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(mx, my);
+                ctx.stroke();
+            }
+        }
+
+        // Draw particles
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            ctx.fillStyle = 'rgba(0, 212, 170, ' + p.opacity + ')';
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Move
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // Bounce
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+            // Mouse repel
+            const dx = p.x - mx;
+            const dy = p.y - my;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < MOUSE_DIST && dist > 0) {
+                const force = (MOUSE_DIST - dist) / MOUSE_DIST * 0.02;
+                p.vx += (dx / dist) * force;
+                p.vy += (dy / dist) * force;
+            }
+
+            // Dampen
+            p.vx *= 0.999;
+            p.vy *= 0.999;
+        }
+
+        requestAnimationFrame(drawParticles);
+    }
+
+    resizeCanvas();
+    createParticles();
+    drawParticles();
+    window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
+
+    document.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    // ===== MOUSE PARALLAX ON HERO =====
+    const heroContent = document.querySelector('.hero-content');
+    document.querySelector('.hero').addEventListener('mousemove', e => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        heroContent.style.transform = 'translate(' + (x * -12) + 'px, ' + (y * -8) + 'px)';
+    });
+
+    document.querySelector('.hero').addEventListener('mouseleave', () => {
+        heroContent.style.transform = 'translate(0, 0)';
+    });
+
+    // ===== 3D TILT CARDS =====
+    function initTiltCards() {
+        const cards = document.querySelectorAll('.skill-category, .project-card, .achievement-card, .cert-card, .timeline-card, .stat-item');
+        cards.forEach(card => {
+            card.classList.add('tilt-card', 'shimmer');
+
+            // Wrap content in tilt-inner
+            const inner = document.createElement('div');
+            inner.className = 'tilt-inner';
+
+            // Move all children into inner
+            while (card.firstChild) {
+                inner.appendChild(card.firstChild);
+            }
+
+            // Add shine and scan line
+            const shine = document.createElement('div');
+            shine.className = 'tilt-shine';
+            inner.appendChild(shine);
+
+            const scanLine = document.createElement('div');
+            scanLine.className = 'scan-line';
+            inner.appendChild(scanLine);
+
+            card.appendChild(inner);
+
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+                const rotateX = (0.5 - y) * 12;
+                const rotateY = (x - 0.5) * 12;
+
+                inner.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                shine.style.setProperty('--shine-x', (x * 100) + '%');
+                shine.style.setProperty('--shine-y', (y * 100) + '%');
+            });
+
+            card.addEventListener('mouseleave', () => {
+                inner.style.transform = 'rotateX(0) rotateY(0)';
+            });
+        });
+    }
+    initTiltCards();
+
+    // ===== STAGGER REVEAL =====
+    function initStaggerItems() {
+        const grids = document.querySelectorAll('.skills-grid, .projects-grid, .achievements-grid, .certs-grid, .contact-grid, .stats-bar, .timeline');
+        grids.forEach(grid => {
+            const items = grid.children;
+            for (let i = 0; i < items.length; i++) {
+                items[i].classList.add('stagger-item');
+                items[i].style.transitionDelay = (i * 0.08) + 's';
+            }
+        });
+    }
+    initStaggerItems();
+
+    function revealStaggerItems() {
+        document.querySelectorAll('.stagger-item').forEach(item => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+                item.classList.add('visible');
+            }
+        });
+    }
+
     // ===== COUNTER ANIMATION =====
     function animateCounters() {
         document.querySelectorAll('.stat-value[data-target]').forEach(el => {
@@ -1455,7 +2168,7 @@
             el.dataset.animated = '1';
             const target = parseInt(el.dataset.target, 10);
             const suffix = el.dataset.suffix || '';
-            const duration = 1500;
+            const duration = 2000;
             const start = performance.now();
 
             function tick(now) {
@@ -1463,7 +2176,13 @@
                 const eased = 1 - Math.pow(1 - progress, 3);
                 const val = Math.round(eased * target);
                 el.textContent = val + suffix;
-                if (progress < 1) requestAnimationFrame(tick);
+                // Add glow pulse when counting
+                if (progress < 1) {
+                    el.style.textShadow = '0 0 ' + (20 * (1 - progress)) + 'px rgba(0,212,170,0.5)';
+                    requestAnimationFrame(tick);
+                } else {
+                    el.style.textShadow = 'none';
+                }
             }
             requestAnimationFrame(tick);
         });
@@ -1490,6 +2209,15 @@
         });
     }
 
+    // ===== SCROLL PROGRESS =====
+    function updateScrollProgress() {
+        const bar = document.getElementById('scroll-progress');
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = progress + '%';
+    }
+
     // ===== NAV HIDE ON SCROLL DOWN =====
     let lastScroll = 0;
     function handleNav() {
@@ -1514,12 +2242,29 @@
         });
     }
 
+    // ===== BUTTON RIPPLE =====
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            const rect = this.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+
     // ===== SCROLL HANDLER =====
     function onScroll() {
         revealSections();
+        revealStaggerItems();
         animateCounters();
         animateSkillBars();
         handleNav();
+        updateScrollProgress();
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -1534,6 +2279,23 @@
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+        });
+    });
+
+    // ===== MAGNETIC HOVER ON NAV LINKS =====
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('mousemove', e => {
+            const rect = link.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            link.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)';
+        });
+        link.addEventListener('mouseleave', () => {
+            link.style.transform = 'translate(0, 0)';
+            link.style.transition = 'transform 0.3s ease, color 0.2s';
+        });
+        link.addEventListener('mouseenter', () => {
+            link.style.transition = 'color 0.2s';
         });
     });
 
