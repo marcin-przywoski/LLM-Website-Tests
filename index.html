@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
 
-  <title>DevOps Engineer Resume | Mark Heheszkin</title>
+  <title>DevOps Engineer Resume | Marcin Przywoski</title>
   <meta name="description" content="DevOps Engineer resume — cloud, CI/CD, Kubernetes, automation, observability, and measurable delivery impact." />
 
   <!--
@@ -63,6 +63,12 @@
     * { box-sizing: border-box; }
     html, body { height: 100%; }
 
+    html { scroll-behavior: smooth; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
     body {
       margin: 0;
       font-family: var(--sans);
@@ -72,6 +78,57 @@
         radial-gradient(900px 520px at 88% 18%, rgba(167, 139, 250, 0.18), transparent 55%),
         linear-gradient(160deg, var(--bg), var(--bg2));
       line-height: 1.55;
+    }
+
+    /* Epic but subtle ambient motion layer (respects prefers-reduced-motion). */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -40vmax;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.55;
+      filter: blur(26px) saturate(120%);
+      transform: translate3d(0, 0, 0);
+    }
+
+    body::before {
+      background:
+        radial-gradient(closest-side at 30% 30%, rgba(125, 211, 252, 0.22), transparent 68%),
+        radial-gradient(closest-side at 70% 38%, rgba(167, 139, 250, 0.18), transparent 70%),
+        radial-gradient(closest-side at 58% 78%, rgba(134, 239, 172, 0.12), transparent 72%);
+      animation: drift 18s ease-in-out infinite;
+    }
+
+    /* Cursor spotlight (updated via JS). */
+    body::after {
+      opacity: 0.40;
+      background:
+        radial-gradient(420px 260px at var(--mx, 20%) var(--my, 20%), rgba(125, 211, 252, 0.16), transparent 70%),
+        radial-gradient(360px 220px at calc(var(--mx, 20%) + 12%) calc(var(--my, 20%) + 10%), rgba(167, 139, 250, 0.12), transparent 72%);
+      animation: drift2 22s ease-in-out infinite;
+    }
+
+    @keyframes drift {
+      0% { transform: translate3d(-2%, -2%, 0) scale(1.02); }
+      50% { transform: translate3d(2%, 2%, 0) scale(1.04); }
+      100% { transform: translate3d(-2%, -2%, 0) scale(1.02); }
+    }
+
+    @keyframes drift2 {
+      0% { transform: translate3d(2%, -1%, 0) scale(1.03); }
+      50% { transform: translate3d(-2%, 2%, 0) scale(1.06); }
+      100% { transform: translate3d(2%, -1%, 0) scale(1.03); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before,
+      body::after {
+        animation: none !important;
+        filter: blur(24px);
+        opacity: 0.35;
+      }
     }
 
     a { color: inherit; text-decoration: none; }
@@ -105,10 +162,39 @@
       gap: 14px;
       padding: 18px;
       border-radius: var(--radius);
-      background: linear-gradient(180deg, var(--surface-2), var(--surface));
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04)) padding-box,
+        linear-gradient(120deg, rgba(125, 211, 252, 0.30), rgba(167, 139, 250, 0.24), rgba(134, 239, 172, 0.16)) border-box;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topbar > * { position: relative; z-index: 1; }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background:
+        radial-gradient(460px 240px at 18% 20%, rgba(125, 211, 252, 0.20), transparent 70%),
+        radial-gradient(520px 260px at 82% 30%, rgba(167, 139, 250, 0.18), transparent 72%);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+      transform: translate3d(0,0,0);
+      animation: shimmer 9s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { transform: translate3d(-1%, -1%, 0); opacity: 0.30; }
+      50% { transform: translate3d(1%, 1%, 0); opacity: 0.42; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .topbar::after { animation: none !important; }
     }
 
     .titleblock { min-width: 260px; }
@@ -118,6 +204,23 @@
       font-size: clamp(26px, 3.2vw, 38px);
       letter-spacing: -0.02em;
       line-height: 1.1;
+    }
+
+    /* Subtle gradient highlight for the name (falls back naturally). */
+    h1 {
+      background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(125, 211, 252, 0.92), rgba(167, 139, 250, 0.92), rgba(255,255,255,0.92));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @media print {
+      h1 { background: none; color: var(--text); }
+    }
+
+    @media (forced-colors: active) {
+      h1 { background: none; color: CanvasText; }
+      .metric .k { background: none; color: CanvasText; }
     }
 
     .role {
@@ -249,6 +352,13 @@
       color: var(--text);
     }
 
+    .navlist a[aria-current="true"] {
+      text-decoration: none;
+      background: linear-gradient(90deg, rgba(125, 211, 252, 0.14), rgba(167, 139, 250, 0.12));
+      border-color: rgba(125, 211, 252, 0.22);
+      color: var(--text);
+    }
+
     .panel {
       border-radius: var(--radius);
       border: 1px solid var(--border);
@@ -275,6 +385,24 @@
       letter-spacing: 0.02em;
       text-transform: uppercase;
       color: var(--faint);
+    }
+
+    /* Section title accent line */
+    .section h2 {
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .section h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 120px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(125, 211, 252, 0.70), rgba(167, 139, 250, 0.62), rgba(134, 239, 172, 0.45));
+      opacity: 0.7;
+      transform-origin: left center;
     }
 
     h3 {
@@ -310,6 +438,22 @@
       display: grid;
       gap: 6px;
       align-content: start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(240px 140px at 20% 20%, rgba(125, 211, 252, 0.14), transparent 62%);
+      opacity: 0.0;
+      transition: opacity 200ms ease;
+      pointer-events: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .metric:hover::before { opacity: 1; }
     }
 
     .metric .k {
@@ -317,6 +461,17 @@
       font-size: 20px;
       color: var(--text);
       letter-spacing: -0.02em;
+    }
+
+    .metric .k {
+      background: linear-gradient(90deg, rgba(255,255,255,0.96), rgba(125, 211, 252, 0.95), rgba(167, 139, 250, 0.90));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @media print {
+      .metric .k { background: none; color: var(--text); }
     }
 
     .metric .label { color: var(--muted); font-size: 13px; }
@@ -359,6 +514,45 @@
       border-radius: var(--radius-sm);
       padding: 14px;
       background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* Interactive elevation (motion-safe). */
+    @media (hover: hover) and (pointer: fine) {
+      .section,
+      .item {
+        transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      }
+
+      .section:hover,
+      .item:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.055);
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+    }
+
+    /* Scroll reveal (enabled only when JS is present). */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(10px);
+      filter: blur(6px);
+      transition: opacity 520ms ease, transform 520ms ease, filter 520ms ease;
+      will-change: opacity, transform, filter;
+    }
+
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .js .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+      }
     }
 
     .item-head {
@@ -463,6 +657,8 @@
       }
 
       body { background: #fff; }
+      body::before, body::after { display: none !important; }
+      .topbar::after { display: none !important; }
       .wrap { padding: 0; }
       .topbar, .section, nav { box-shadow: none; backdrop-filter: none; }
       nav, .btn { display: none !important; }
@@ -470,6 +666,9 @@
       a { text-decoration: none; }
       .section + .section { margin-top: 10px; }
       .metric, .item { break-inside: avoid; }
+
+      /* Printing should never depend on having scrolled. */
+      .js .reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
     }
   </style>
 </head>
@@ -480,7 +679,7 @@
   <div class="wrap">
     <header class="topbar" role="banner">
       <div class="titleblock">
-        <h1>Mark Heheszkin <span class="sr-only">DevOps Engineer resume</span></h1>
+        <h1>Marcin Przywoski <span class="sr-only">DevOps Engineer resume</span></h1>
         <div class="role">
           <span class="badge" title="EDIT ME">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -518,10 +717,10 @@
 
       <div class="contact" aria-label="Contact">
         <div class="contact-row">
-          <a class="chip" href="mailto:mark@example.com" title="EDIT ME">
-            <strong>Email</strong> Mark@example.com
+          <a class="chip" href="mailto:marcin@example.com" title="EDIT ME">
+            <strong>Email</strong> marcin@example.com
           </a>
-          <button class="btn" type="button" id="copyEmailBtn" data-copy="mark@example.com" aria-label="Copy email to clipboard" title="Copy email">
+          <button class="btn" type="button" id="copyEmailBtn" data-copy="marcin@example.com" aria-label="Copy email to clipboard" title="Copy email">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M8 8h10v12H8z" stroke="currentColor" opacity="0.9" />
               <path d="M6 16H5a1 1 0 01-1-1V5a1 1 0 011-1h10a1 1 0 011 1v1" stroke="currentColor" opacity="0.9" />
@@ -562,7 +761,7 @@
       </nav>
 
       <main id="main" aria-label="Resume">
-        <section class="section" id="impact" aria-label="Impact at a glance">
+        <section class="section reveal" id="impact" aria-label="Impact at a glance">
           <h2>Impact at a glance</h2>
           <div class="grid metrics" role="list">
             <div class="metric" role="listitem">
@@ -588,7 +787,7 @@
           </div>
 
           <div class="two" style="margin-top: 12px;">
-            <div class="item">
+            <div class="item reveal">
               <div class="item-head">
                 <h3>What I deliver</h3>
                 <span class="meta">Platform • Release • Reliability</span>
@@ -600,7 +799,7 @@
                 <li>Actionable observability (logs, metrics, traces) and alerting aligned to SLOs.</li>
               </ul>
             </div>
-            <div class="item">
+            <div class="item reveal">
               <div class="item-head">
                 <h3>How I work</h3>
                 <span class="meta">Pragmatic • Measurable • Collaborative</span>
@@ -615,11 +814,11 @@
           </div>
         </section>
 
-        <section class="section" id="skills" aria-label="Skills and tooling">
+        <section class="section reveal" id="skills" aria-label="Skills and tooling">
           <h2>Skills & tooling</h2>
 
           <div class="split">
-            <div class="item">
+            <div class="item reveal">
               <div class="item-head">
                 <h3>Core</h3>
                 <span class="meta">platform engineering</span>
@@ -637,7 +836,7 @@
               <p class="note-mini">Tip: tailor this list to the job description (EDIT ME).</p>
             </div>
 
-            <div class="item">
+            <div class="item reveal">
               <div class="item-head">
                 <h3>Automation</h3>
                 <span class="meta">make it repeatable</span>
@@ -655,10 +854,10 @@
           </div>
         </section>
 
-        <section class="section" id="experience" aria-label="Work experience">
+        <section class="section reveal" id="experience" aria-label="Work experience">
           <h2>Experience</h2>
 
-          <article class="item" aria-label="Experience item">
+          <article class="item reveal" aria-label="Experience item">
             <div class="item-head">
               <h3>Senior DevOps / Platform Engineer — Example Company</h3>
               <span class="meta">2023–Present • Hybrid</span>
@@ -683,7 +882,7 @@
             </div>
           </article>
 
-          <article class="item" aria-label="Experience item" style="margin-top: 12px;">
+          <article class="item reveal" aria-label="Experience item" style="margin-top: 12px;">
             <div class="item-head">
               <h3>DevOps Engineer — Example Product Team</h3>
               <span class="meta">2020–2023 • Remote</span>
@@ -708,11 +907,11 @@
           </article>
         </section>
 
-        <section class="section" id="projects" aria-label="Projects">
+        <section class="section reveal" id="projects" aria-label="Projects">
           <h2>Projects</h2>
 
           <div class="split">
-            <article class="item" aria-label="Project">
+            <article class="item reveal" aria-label="Project">
               <div class="item-head">
                 <h3>Golden Pipeline Templates</h3>
                 <span class="meta">CI/CD • Reusability</span>
@@ -734,7 +933,7 @@
               </div>
             </article>
 
-            <article class="item" aria-label="Project">
+            <article class="item reveal" aria-label="Project">
               <div class="item-head">
                 <h3>Kubernetes Reliability Toolkit</h3>
                 <span class="meta">SRE • Observability</span>
@@ -756,7 +955,7 @@
             </article>
           </div>
 
-          <article class="item" aria-label="Project" style="margin-top: 12px;">
+          <article class="item reveal" aria-label="Project" style="margin-top: 12px;">
             <div class="item-head">
               <h3>Cost & Capacity Automation</h3>
               <span class="meta">FinOps • Scaling</span>
@@ -778,10 +977,10 @@
           </article>
         </section>
 
-        <section class="section" id="certs" aria-label="Certifications">
+        <section class="section reveal" id="certs" aria-label="Certifications">
           <h2>Certifications</h2>
           <div class="split">
-            <div class="item">
+            <div class="item reveal">
               <div class="item-head">
                 <h3>Cloud</h3>
                 <span class="meta">EDIT ME</span>
@@ -791,7 +990,7 @@
                 <li>Azure Administrator Associate (example)</li>
               </ul>
             </div>
-            <div class="item">
+            <div class="item reveal">
               <div class="item-head">
                 <h3>Kubernetes & Security</h3>
                 <span class="meta">EDIT ME</span>
@@ -805,9 +1004,9 @@
           <p class="note-mini">Replace examples with your real certs, or remove this section.</p>
         </section>
 
-        <section class="section" id="education" aria-label="Education">
+        <section class="section reveal" id="education" aria-label="Education">
           <h2>Education</h2>
-          <div class="item">
+          <div class="item reveal">
             <div class="item-head">
               <h3>BSc / MSc — Computer Science (EDIT ME)</h3>
               <span class="meta">University Name • 2016–2020</span>
@@ -829,10 +1028,14 @@
 
   <script>
     (function () {
+      document.documentElement.classList.add('js');
+
       const copyBtn = document.getElementById('copyEmailBtn');
       const status = document.getElementById('copyStatus');
       const lastUpdated = document.getElementById('lastUpdated');
       const emailLink = document.querySelector('a[href^="mailto:"]');
+
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // Set last updated to today's date (local).
       try {
@@ -898,6 +1101,102 @@
           }
         });
       }
+
+      // Scroll reveal.
+      (function setupReveal() {
+        const nodes = Array.from(document.querySelectorAll('.reveal'));
+        if (!nodes.length) return;
+
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+          nodes.forEach((n) => n.classList.add('is-visible'));
+          return;
+        }
+
+        const io = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        }, {
+          root: null,
+          threshold: 0.16,
+          rootMargin: '80px 0px -40px 0px'
+        });
+
+        nodes.forEach((n) => io.observe(n));
+      })();
+
+      // Active section highlight in the nav.
+      (function setupScrollSpy() {
+        const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+        if (!navLinks.length) return;
+
+        const sections = navLinks
+          .map((a) => {
+            const href = a.getAttribute('href') || '';
+            const id = href.startsWith('#') ? href.slice(1) : '';
+            const el = id ? document.getElementById(id) : null;
+            return el ? { id, el, link: a } : null;
+          })
+          .filter(Boolean);
+
+        if (!sections.length) return;
+
+        function setCurrent(id) {
+          for (const s of sections) {
+            if (s.id === id) s.link.setAttribute('aria-current', 'true');
+            else s.link.removeAttribute('aria-current');
+          }
+        }
+
+        // Default to the first section.
+        setCurrent(sections[0].id);
+
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+
+        const io = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0));
+          if (!visible.length) return;
+          const id = visible[0].target && visible[0].target.id;
+          if (id) setCurrent(id);
+        }, {
+          threshold: [0.12, 0.18, 0.25, 0.35, 0.5],
+          rootMargin: '-10% 0px -70% 0px'
+        });
+
+        sections.forEach((s) => io.observe(s.el));
+      })();
+
+      // Cursor spotlight (updates CSS vars for the background). Motion-safe & pointer-safe.
+      (function setupSpotlight() {
+        if (prefersReducedMotion) return;
+        if (!window.matchMedia) return;
+
+        const okPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (!okPointer) return;
+
+        let raf = 0;
+        let lastX = 0;
+        let lastY = 0;
+
+        function apply() {
+          raf = 0;
+          const x = Math.max(0, Math.min(1, lastX / window.innerWidth));
+          const y = Math.max(0, Math.min(1, lastY / window.innerHeight));
+          document.documentElement.style.setProperty('--mx', `${(x * 100).toFixed(2)}%`);
+          document.documentElement.style.setProperty('--my', `${(y * 100).toFixed(2)}%`);
+        }
+
+        window.addEventListener('pointermove', (e) => {
+          lastX = e.clientX;
+          lastY = e.clientY;
+          if (raf) return;
+          raf = window.requestAnimationFrame(apply);
+        }, { passive: true });
+      })();
 
     })();
   </script>
