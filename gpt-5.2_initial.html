@@ -1,0 +1,967 @@
+<!doctype html>
+<!--
+  Single-file DevOps Engineer resume webpage.
+  Replace the placeholder content (name, links, experience) with your own.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>DevOps Engineer Resume — Single-file HTML</title>
+    <meta
+      name="description"
+      content="DevOps Engineer resume: cloud infrastructure, CI/CD, platform engineering, reliability, and measurable outcomes." />
+
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg2: #070a14;
+        --panel: rgba(255, 255, 255, 0.06);
+        --panel2: rgba(255, 255, 255, 0.085);
+        --border: rgba(255, 255, 255, 0.12);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.7);
+        --subtle: rgba(255, 255, 255, 0.55);
+        --accent: #6ee7ff;
+        --accent2: #a78bfa;
+        --ok: #34d399;
+        --warn: #fbbf24;
+        --bad: #fb7185;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+        --radius: 18px;
+        --radius2: 14px;
+        --max: 1120px;
+        --focus: 0 0 0 3px rgba(110, 231, 255, 0.35), 0 0 0 1px rgba(110, 231, 255, 0.25) inset;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+          monospace;
+        --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f7f8fb;
+          --bg2: #eff3fb;
+          --panel: rgba(255, 255, 255, 0.8);
+          --panel2: rgba(255, 255, 255, 0.92);
+          --border: rgba(15, 23, 42, 0.12);
+          --text: rgba(15, 23, 42, 0.92);
+          --muted: rgba(15, 23, 42, 0.7);
+          --subtle: rgba(15, 23, 42, 0.55);
+          --shadow: 0 16px 46px rgba(2, 6, 23, 0.12);
+          --focus: 0 0 0 3px rgba(2, 132, 199, 0.22), 0 0 0 1px rgba(2, 132, 199, 0.14) inset;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--sans);
+        color: var(--text);
+        background: radial-gradient(900px 600px at 10% 10%, rgba(110, 231, 255, 0.22), transparent 60%),
+          radial-gradient(1000px 700px at 90% 15%, rgba(167, 139, 250, 0.18), transparent 60%),
+          radial-gradient(1000px 700px at 50% 110%, rgba(52, 211, 153, 0.12), transparent 58%),
+          linear-gradient(180deg, var(--bg), var(--bg2));
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+
+      :focus-visible {
+        outline: none;
+        box-shadow: var(--focus);
+        border-radius: 10px;
+      }
+
+      .skip {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        background: var(--panel2);
+        border-radius: 12px;
+        transform: translateY(-140%);
+        transition: transform 180ms ease;
+        z-index: 50;
+      }
+      .skip:focus {
+        transform: translateY(0);
+      }
+
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 26px 18px 48px;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 22px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+
+      .topline {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .name {
+        display: grid;
+        gap: 6px;
+        min-width: 280px;
+      }
+
+      .name h1 {
+        margin: 0;
+        font-size: clamp(28px, 2.4vw + 16px, 42px);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+      }
+
+      .role {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        background: var(--panel2);
+        border-radius: 999px;
+        font-size: 13px;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .pill .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+      }
+
+      .contact {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .btn {
+        border: 1px solid var(--border);
+        background: var(--panel2);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 12px;
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 13px;
+        cursor: pointer;
+        transition: transform 120ms ease, background 120ms ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        background: color-mix(in oklab, var(--panel2), rgba(110, 231, 255, 0.06) 40%);
+      }
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn code {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .kicker {
+        display: grid;
+        gap: 10px;
+      }
+
+      .summary {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      .summary strong {
+        color: var(--text);
+        font-weight: 650;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      @media (min-width: 960px) {
+        header {
+          padding: 24px;
+        }
+        .grid {
+          grid-template-columns: 0.95fr 1.45fr;
+          align-items: start;
+        }
+      }
+
+      .panel {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+
+      .panel .inner {
+        padding: 18px;
+      }
+      @media (min-width: 960px) {
+        .panel .inner {
+          padding: 18px 18px 20px;
+        }
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--subtle);
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: -0.01em;
+      }
+
+      .sub {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .chiprow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        border: 1px solid var(--border);
+        background: var(--panel2);
+        border-radius: 999px;
+        padding: 8px 10px;
+        font-size: 13px;
+        line-height: 1;
+        color: var(--muted);
+      }
+
+      .chip strong {
+        color: var(--text);
+        font-weight: 650;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric {
+        border: 1px solid var(--border);
+        background: var(--panel2);
+        border-radius: var(--radius2);
+        padding: 12px;
+        display: grid;
+        gap: 6px;
+      }
+
+      .metric .v {
+        font-family: var(--mono);
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .metric .k {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.25;
+      }
+
+      .spark {
+        height: 8px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+        overflow: hidden;
+      }
+      .spark > span {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        width: 0;
+        transition: width 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 12px;
+      }
+
+      .entry {
+        border: 1px solid var(--border);
+        background: var(--panel2);
+        border-radius: var(--radius2);
+        padding: 14px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .entry .hdr {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .meta {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .bullets {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 14px;
+      }
+      .bullets li {
+        margin: 6px 0;
+      }
+
+      .tagline {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.08);
+        border-radius: 999px;
+        padding: 6px 8px;
+      }
+      @media (prefers-color-scheme: light) {
+        .tag {
+          background: rgba(2, 6, 23, 0.04);
+        }
+      }
+
+      .note {
+        margin: 0;
+        color: var(--subtle);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      footer {
+        margin-top: 16px;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: 14px;
+        color: var(--subtle);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        transform: translateX(-50%);
+        background: color-mix(in oklab, var(--panel2), rgba(0, 0, 0, 0.08) 35%);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms ease, transform 180ms ease;
+        z-index: 100;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-4px);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto !important;
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff !important;
+          color: #000 !important;
+        }
+        .panel,
+        header,
+        footer {
+          box-shadow: none !important;
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+          background: #fff !important;
+          border-color: #ccc !important;
+        }
+        .btn,
+        .toast,
+        .spark {
+          display: none !important;
+        }
+        a {
+          text-decoration: none !important;
+        }
+        .tag {
+          background: #f3f4f6 !important;
+          border-color: #ddd !important;
+          color: #111 !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+
+    <div class="wrap">
+      <header aria-label="Resume header">
+        <div class="topline">
+          <div class="name">
+            <h1>Alex Nowak</h1>
+            <div class="role">
+              <span class="pill"><span class="dot" aria-hidden="true"></span>DevOps / Platform Engineer</span>
+              <span class="pill" title="Primary focus areas">AWS · Kubernetes · CI/CD · Reliability</span>
+              <span class="pill" title="Work preference">Open to remote / hybrid</span>
+            </div>
+          </div>
+
+          <div class="contact" aria-label="Contact actions">
+            <button class="btn" type="button" data-copy="alex.nowak@example.com" aria-label="Copy email">
+              <span aria-hidden="true">Email</span><code>alex.nowak@example.com</code>
+            </button>
+            <button class="btn" type="button" data-copy="+48 600 000 000" aria-label="Copy phone">
+              <span aria-hidden="true">Phone</span><code>+48 600 000 000</code>
+            </button>
+            <a class="btn" href="https://github.com/" target="_blank" rel="noreferrer noopener" aria-label="Open GitHub profile">
+              <span aria-hidden="true">GitHub</span><code>github.com/your-handle</code>
+            </a>
+            <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener" aria-label="Open LinkedIn profile">
+              <span aria-hidden="true">LinkedIn</span><code>linkedin.com/in/your-handle</code>
+            </a>
+          </div>
+        </div>
+
+        <div class="kicker">
+          <p class="summary" id="content">
+            Platform-oriented DevOps engineer who builds <strong>secure, observable, and cost-efficient</strong> cloud
+            infrastructure. I focus on turning delivery pipelines into reliable product capabilities: predictable lead
+            time, fast MTTR, tight IAM, and infra that engineers can change safely.
+          </p>
+
+          <div class="chiprow" aria-label="Highlights">
+            <span class="chip"><strong>10+</strong> production services onboarded to Kubernetes</span>
+            <span class="chip"><strong>99.95%</strong> SLO achieved across tier-1 workloads</span>
+            <span class="chip"><strong>35%</strong> cloud cost reduction via FinOps controls</span>
+            <span class="chip"><strong>&lt; 15 min</strong> median incident triage time</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="grid" aria-label="Resume content">
+        <section class="panel" aria-label="Left column">
+          <div class="inner">
+            <h2>Technical Snapshot</h2>
+
+            <div class="metrics" id="metrics" aria-label="Key metrics">
+              <div class="metric" data-metric>
+                <div class="v" data-count="4200" data-suffix="+" data-duration="1100">0</div>
+                <div class="k">Deployments/year across microservices</div>
+                <div class="spark" aria-hidden="true"><span data-spark="86"></span></div>
+              </div>
+              <div class="metric" data-metric>
+                <div class="v" data-count="12" data-suffix=" min" data-duration="900">0</div>
+                <div class="k">p95 pipeline time (build → deploy)</div>
+                <div class="spark" aria-hidden="true"><span data-spark="78"></span></div>
+              </div>
+              <div class="metric" data-metric>
+                <div class="v" data-count="9" data-prefix="$" data-suffix="k/mo" data-duration="1000">0</div>
+                <div class="k">Recurring savings with guardrails &amp; rightsizing</div>
+                <div class="spark" aria-hidden="true"><span data-spark="64"></span></div>
+              </div>
+              <div class="metric" data-metric>
+                <div class="v" data-count="28" data-suffix=" min" data-duration="950">0</div>
+                <div class="k">MTTR on-call playbooks + alert tuning</div>
+                <div class="spark" aria-hidden="true"><span data-spark="72"></span></div>
+              </div>
+            </div>
+
+            <p class="note">
+              Numbers are illustrative, meant to demonstrate a metrics-driven DevOps portfolio.
+            </p>
+          </div>
+
+          <div class="inner">
+            <h2>Core Skills</h2>
+            <ul class="list" aria-label="Core skills list">
+              <li class="entry">
+                <div class="hdr">
+                  <h3>Cloud &amp; Security</h3>
+                  <div class="meta">AWS · IAM · KMS · VPC · WAF</div>
+                </div>
+                <div class="tagline" aria-label="Cloud skills">
+                  <span class="tag">least-privilege</span>
+                  <span class="tag">secrets management</span>
+                  <span class="tag">threat modeling</span>
+                  <span class="tag">policy-as-code</span>
+                </div>
+              </li>
+
+              <li class="entry">
+                <div class="hdr">
+                  <h3>Platform &amp; Runtime</h3>
+                  <div class="meta">Kubernetes · Helm · Docker · Linux</div>
+                </div>
+                <div class="tagline" aria-label="Platform skills">
+                  <span class="tag">ingress + TLS</span>
+                  <span class="tag">autoscaling</span>
+                  <span class="tag">blue/green</span>
+                  <span class="tag">SLO-driven reliability</span>
+                </div>
+              </li>
+
+              <li class="entry">
+                <div class="hdr">
+                  <h3>CI/CD &amp; IaC</h3>
+                  <div class="meta">GitHub Actions · Terraform · Argo CD</div>
+                </div>
+                <div class="tagline" aria-label="Automation skills">
+                  <span class="tag">change validation</span>
+                  <span class="tag">preview environments</span>
+                  <span class="tag">supply-chain security</span>
+                  <span class="tag">drift detection</span>
+                </div>
+              </li>
+
+              <li class="entry">
+                <div class="hdr">
+                  <h3>Observability</h3>
+                  <div class="meta">OpenTelemetry · Prometheus · Grafana</div>
+                </div>
+                <div class="tagline" aria-label="Observability skills">
+                  <span class="tag">golden signals</span>
+                  <span class="tag">structured logs</span>
+                  <span class="tag">alert hygiene</span>
+                  <span class="tag">runbooks</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="inner">
+            <h2>Certifications</h2>
+            <ul class="list" aria-label="Certifications">
+              <li class="entry">
+                <div class="hdr">
+                  <h3>AWS Certified Solutions Architect</h3>
+                  <div class="meta">Associate · 2025</div>
+                </div>
+                <p class="sub">Designed fault-tolerant architectures, networking, security, and cost controls.</p>
+              </li>
+              <li class="entry">
+                <div class="hdr">
+                  <h3>CKA / CKAD (or equivalent)</h3>
+                  <div class="meta">Kubernetes · 2024</div>
+                </div>
+                <p class="sub">Production-grade operations, workloads, troubleshooting, and best practices.</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="panel" aria-label="Right column">
+          <div class="inner">
+            <h2>Experience</h2>
+            <div class="timeline" aria-label="Experience timeline">
+              <article class="entry">
+                <div class="hdr">
+                  <h3>Senior DevOps / Platform Engineer — Product SaaS</h3>
+                  <div class="meta">2023 — Present · Warsaw / Remote</div>
+                </div>
+                <p class="sub">Owner of delivery platform, cluster runtime, and reliability practices.</p>
+                <ul class="bullets">
+                  <li>
+                    Built a paved road for services: GitHub Actions templates + Terraform modules + Argo CD;
+                    reduced deployment failures by ~40%.
+                  </li>
+                  <li>
+                    Introduced OTel tracing + SLO dashboards; improved incident detection and cut MTTR from hours to
+                    &lt; 30 minutes.
+                  </li>
+                  <li>
+                    Implemented workload isolation, network policies, and secret rotation; raised baseline security
+                    with minimal developer friction.
+                  </li>
+                  <li>
+                    FinOps guardrails: budgets, anomaly detection, rightsizing automation; achieved ~35% cost reduction.
+                  </li>
+                </ul>
+                <div class="tagline" aria-label="Tech used">
+                  <span class="tag">AWS</span>
+                  <span class="tag">EKS</span>
+                  <span class="tag">Terraform</span>
+                  <span class="tag">Argo CD</span>
+                  <span class="tag">GitHub Actions</span>
+                  <span class="tag">OpenTelemetry</span>
+                </div>
+              </article>
+
+              <article class="entry">
+                <div class="hdr">
+                  <h3>DevOps Engineer — FinTech / Regulated</h3>
+                  <div class="meta">2020 — 2023 · Hybrid</div>
+                </div>
+                <p class="sub">Infrastructure automation and compliance-friendly SDLC.</p>
+                <ul class="bullets">
+                  <li>
+                    Standardized immutable builds (container + SBOM) and vulnerability gating; reduced high-severity
+                    findings leaking to prod.
+                  </li>
+                  <li>
+                    Designed multi-account AWS landing zone with SCPs and IAM boundaries; simplified audits and
+                    improved blast-radius control.
+                  </li>
+                  <li>
+                    Migrated legacy Jenkins pipelines to GitHub Actions; shortened lead time and reduced maintenance.
+                  </li>
+                </ul>
+                <div class="tagline" aria-label="Tech used">
+                  <span class="tag">AWS Organizations</span>
+                  <span class="tag">IAM</span>
+                  <span class="tag">GitHub Actions</span>
+                  <span class="tag">Trivy</span>
+                  <span class="tag">Snyk</span>
+                  <span class="tag">Vault</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="inner">
+            <h2>Selected Projects</h2>
+            <div class="timeline" aria-label="Projects">
+              <article class="entry">
+                <div class="hdr">
+                  <h3>Golden CI/CD Templates</h3>
+                  <div class="meta">Reusable pipelines</div>
+                </div>
+                <ul class="bullets">
+                  <li>Centralized workflows: build, test, scan, sign, deploy with safe defaults.</li>
+                  <li>Policy checks: branch protection, required reviewers, environment approvals, OIDC to cloud.</li>
+                  <li>Outcome: consistent release quality and lower cognitive load for product teams.</li>
+                </ul>
+                <div class="tagline" aria-label="Project tech">
+                  <span class="tag">GitHub Actions</span>
+                  <span class="tag">OIDC</span>
+                  <span class="tag">Cosign</span>
+                  <span class="tag">SBOM</span>
+                </div>
+              </article>
+
+              <article class="entry">
+                <div class="hdr">
+                  <h3>Observability Baseline</h3>
+                  <div class="meta">Tracing + Metrics + Logs</div>
+                </div>
+                <ul class="bullets">
+                  <li>Instrumented services with OpenTelemetry and standardized log fields for fast correlation.</li>
+                  <li>Dashboards by user journey + SLO burn rates; alerts tuned to reduce noise.</li>
+                  <li>Outcome: shorter incident response and safer on-call rotations.</li>
+                </ul>
+                <div class="tagline" aria-label="Project tech">
+                  <span class="tag">OpenTelemetry</span>
+                  <span class="tag">Prometheus</span>
+                  <span class="tag">Grafana</span>
+                  <span class="tag">Loki</span>
+                </div>
+              </article>
+
+              <article class="entry">
+                <div class="hdr">
+                  <h3>Infrastructure as Product</h3>
+                  <div class="meta">Terraform modules</div>
+                </div>
+                <ul class="bullets">
+                  <li>Opinionated modules with guardrails: tagging, encryption, least privilege, and logging defaults.</li>
+                  <li>Drift detection and automated PRs to keep infra aligned with intent.</li>
+                  <li>Outcome: faster provisioning with predictable and auditable outcomes.</li>
+                </ul>
+                <div class="tagline" aria-label="Project tech">
+                  <span class="tag">Terraform</span>
+                  <span class="tag">OPA / Conftest</span>
+                  <span class="tag">AWS Config</span>
+                  <span class="tag">CloudTrail</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="inner">
+            <h2>Achievements</h2>
+            <div class="timeline" aria-label="Achievements">
+              <article class="entry">
+                <div class="hdr">
+                  <h3>Reliability</h3>
+                  <div class="meta">SLOs · Runbooks · Postmortems</div>
+                </div>
+                <ul class="bullets">
+                  <li>Established SLOs for tier-1 APIs; linked alerts to actionable runbooks.</li>
+                  <li>Introduced blameless postmortems with follow-ups tracked as engineering work.</li>
+                </ul>
+              </article>
+
+              <article class="entry">
+                <div class="hdr">
+                  <h3>Security</h3>
+                  <div class="meta">Supply chain hardening</div>
+                </div>
+                <ul class="bullets">
+                  <li>Added artifact signing and provenance; tightened deployment permissions with OIDC federation.</li>
+                  <li>Implemented secret rotation patterns and least-privilege IAM with short-lived credentials.</li>
+                </ul>
+              </article>
+
+              <article class="entry">
+                <div class="hdr">
+                  <h3>Developer Experience</h3>
+                  <div class="meta">Paved roads</div>
+                </div>
+                <ul class="bullets">
+                  <li>Standardized service templates and golden paths; reduced onboarding from days to hours.</li>
+                  <li>Documented platform contracts and SLIs/SLOs in a single source of truth.</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <div class="inner">
+            <h2>Education</h2>
+            <div class="timeline" aria-label="Education">
+              <article class="entry">
+                <div class="hdr">
+                  <h3>B.Sc. Computer Science</h3>
+                  <div class="meta">2016 — 2020</div>
+                </div>
+                <p class="sub">Systems, networking, distributed computing, and software engineering.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer aria-label="Footer">
+        <div>
+          Tip: open this file in a browser or use VS Code “Open with Live Server”.
+          <span aria-hidden="true">·</span>
+          <span id="year"></span>
+        </div>
+      </footer>
+    </div>
+
+    <output class="toast" aria-live="polite" aria-atomic="true" id="toast"></output>
+
+    <script>
+      (function () {
+        "use strict";
+
+        const toastEl = document.getElementById("toast");
+        const yearEl = document.getElementById("year");
+
+        function showToast(message) {
+          if (!toastEl) return;
+          toastEl.textContent = message;
+          toastEl.classList.add("show");
+          globalThis.clearTimeout(showToast._t);
+          showToast._t = globalThis.setTimeout(() => toastEl.classList.remove("show"), 1600);
+        }
+
+        async function copyText(value) {
+          try {
+            if (navigator.clipboard?.writeText) {
+              await navigator.clipboard.writeText(value);
+            } else {
+              const t = document.createElement("textarea");
+              t.value = value;
+              t.setAttribute("readonly", "");
+              t.style.position = "fixed";
+              t.style.left = "-9999px";
+              document.body.appendChild(t);
+              t.select();
+              document.execCommand("copy");
+              t.remove();
+            }
+            showToast("Copied: " + value);
+          } catch {
+            showToast("Copy failed");
+          }
+        }
+
+        // Copy buttons
+        document.addEventListener("click", (e) => {
+          const target = e.target instanceof Element ? e.target.closest("[data-copy]") : null;
+          if (!target) return;
+          const value = target instanceof HTMLElement ? target.dataset.copy : null;
+          if (!value) return;
+          copyText(value);
+        });
+
+        if (yearEl) {
+          yearEl.textContent = "© " + new Date().getFullYear() + " — Single-file resume";
+        }
+
+        // Animate metric counters + sparklines when in view (respects reduced motion).
+        const prefersReducedMotion = globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+        const metrics = Array.from(document.querySelectorAll("[data-metric]"));
+
+        function formatNumber(n) {
+          // Keep it readable at-a-glance (4,200 not 4200)
+          return new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(n);
+        }
+
+        function animateCount(el) {
+          const countTo = Number(el.dataset.count) || 0;
+          const prefix = el.dataset.prefix || "";
+          const suffix = el.dataset.suffix || "";
+          const duration = Math.max(200, Number(el.dataset.duration) || 900);
+
+          if (prefersReducedMotion) {
+            el.textContent = prefix + formatNumber(countTo) + suffix;
+            return;
+          }
+
+          const start = performance.now();
+          function tick(now) {
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+            const value = Math.round(countTo * eased);
+            el.textContent = prefix + formatNumber(value) + suffix;
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+
+        function animateSparks(container) {
+          const sparks = container.querySelectorAll("[data-spark]");
+          for (const s of sparks) {
+            const pct = Math.max(0, Math.min(100, Number(s.dataset.spark) || 0));
+            s.style.width = pct + "%";
+          }
+        }
+
+        function runAnimationsOnce() {
+          for (const card of metrics) {
+            const v = card.querySelector("[data-count]");
+            if (v && !(v instanceof HTMLElement)) continue;
+            if (v && !v.dataset.done) {
+              v.dataset.done = "1";
+              animateCount(v);
+            }
+            animateSparks(card);
+          }
+        }
+
+        if (metrics.length === 0) return;
+        if (prefersReducedMotion || !("IntersectionObserver" in globalThis)) {
+          runAnimationsOnce();
+          return;
+        }
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                runAnimationsOnce();
+                io.disconnect();
+                break;
+              }
+            }
+          },
+          { threshold: 0.25 }
+        );
+        io.observe(document.getElementById("metrics"));
+      })();
+    </script>
+  </body>
+</html>
