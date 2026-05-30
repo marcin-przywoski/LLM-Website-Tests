@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+
+  <title>DevOps Engineer Resume | Mark Heheszkin</title>
+  <meta name="description" content="DevOps Engineer resume — cloud, CI/CD, Kubernetes, automation, observability, and measurable delivery impact." />
+
+  <!--
+    Single-file resume (HTML + CSS + JS).
+
+    Quick customization guide:
+    - Search for "EDIT ME" and replace placeholders (name, links, metrics).
+    - Keep the metrics truthful; numbers below are examples.
+    - If you remove sections, also remove them from the navigation.
+  -->
+
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg2: #0a1a2c;
+      --surface: rgba(255, 255, 255, 0.06);
+      --surface-2: rgba(255, 255, 255, 0.09);
+      --border: rgba(255, 255, 255, 0.14);
+      --text: rgba(255, 255, 255, 0.92);
+      --muted: rgba(255, 255, 255, 0.70);
+      --faint: rgba(255, 255, 255, 0.55);
+      --accent: #7dd3fc; /* sky-300 */
+      --accent-2: #a78bfa; /* violet-400 */
+      --ok: #86efac; /* green-300 */
+      --warn: #fbbf24; /* amber-400 */
+      --danger: #fda4af; /* rose-300 */
+
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+
+      --maxw: 1100px;
+      --pad: 18px;
+      --pad-lg: 26px;
+      --gap: 16px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f6f7fb;
+        --bg2: #eef2ff;
+        --surface: rgba(0, 0, 0, 0.03);
+        --surface-2: rgba(0, 0, 0, 0.06);
+        --border: rgba(15, 23, 42, 0.12);
+        --text: rgba(15, 23, 42, 0.92);
+        --muted: rgba(15, 23, 42, 0.72);
+        --faint: rgba(15, 23, 42, 0.55);
+        --shadow: 0 12px 26px rgba(2, 6, 23, 0.10);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1100px 560px at 18% 10%, rgba(125, 211, 252, 0.22), transparent 55%),
+        radial-gradient(900px 520px at 88% 18%, rgba(167, 139, 250, 0.18), transparent 55%),
+        linear-gradient(160deg, var(--bg), var(--bg2));
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .skip-link {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      transform: translateY(-140%);
+      transition: transform 140ms ease;
+      box-shadow: var(--shadow);
+      z-index: 999;
+    }
+    .skip-link:focus { transform: translateY(0); outline: none; }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 34px 16px 54px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .titleblock { min-width: 260px; }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 3.2vw, 38px);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .role {
+      margin-top: 8px;
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.08);
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    @media (prefers-color-scheme: light) {
+      .badge { background: rgba(255,255,255,0.66); }
+    }
+
+    .contact {
+      display: grid;
+      gap: 10px;
+      justify-items: end;
+      align-content: start;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .chip strong { color: var(--text); font-weight: 650; }
+
+    .btn {
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      padding: 9px 11px;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 120ms ease, background 120ms ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); background: rgba(255, 255, 255, 0.09); }
+    .btn:active { transform: translateY(0); }
+    .btn:focus-visible { outline: 3px solid rgba(125, 211, 252, 0.40); outline-offset: 2px; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+      margin-top: 18px;
+    }
+
+    @media (min-width: 980px) {
+      .layout { grid-template-columns: 340px 1fr; align-items: start; }
+    }
+
+    nav {
+      position: sticky;
+      top: 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface-2), var(--surface));
+      box-shadow: var(--shadow);
+      padding: 14px;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-title {
+      margin: 6px 8px 10px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--faint);
+    }
+
+    .navlist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 6px;
+    }
+
+    .navlist a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 10px;
+      border-radius: 12px;
+      color: var(--muted);
+      border: 1px solid transparent;
+    }
+
+    .navlist a:hover {
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .panel {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface-2), var(--surface));
+      box-shadow: var(--shadow);
+      padding: var(--pad-lg);
+      backdrop-filter: blur(10px);
+    }
+
+    .section {
+      padding: var(--pad-lg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .section + .section { margin-top: var(--gap); }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    p { margin: 0.6rem 0; color: var(--muted); }
+
+    .lead {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (min-width: 680px) {
+      .grid.metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    .metric {
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      min-height: 96px;
+      display: grid;
+      gap: 6px;
+      align-content: start;
+    }
+
+    .metric .k {
+      font-family: var(--mono);
+      font-size: 20px;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .metric .label { color: var(--muted); font-size: 13px; }
+
+    .metric .note {
+      color: var(--faint);
+      font-size: 12px;
+    }
+
+    .pillrow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .pill strong { color: var(--text); font-weight: 650; }
+
+    .split {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 760px) {
+      .split { grid-template-columns: 1fr 1fr; }
+    }
+
+    .item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .item-head {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .meta {
+      display: inline-flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      color: var(--faint);
+      font-size: 12px;
+      font-family: var(--mono);
+    }
+
+    .list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .list li { margin: 6px 0; }
+
+    .callout {
+      margin-top: 12px;
+      border-left: 3px solid rgba(125, 211, 252, 0.55);
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(125, 211, 252, 0.06);
+      color: var(--muted);
+    }
+
+    .two {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 860px) {
+      .two { grid-template-columns: 1.2fr 0.8fr; }
+    }
+
+    .tagline {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(167, 139, 250, 0.08);
+      border: 1px solid rgba(167, 139, 250, 0.22);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .tag svg { opacity: 0.85; }
+
+    .footer {
+      margin-top: 16px;
+      color: var(--faint);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .note-mini { color: var(--faint); font-size: 12px; }
+
+    @media print {
+      :root {
+        --bg: #ffffff;
+        --bg2: #ffffff;
+        --surface: #ffffff;
+        --surface-2: #ffffff;
+        --border: rgba(0,0,0,0.18);
+        --text: #0f172a;
+        --muted: rgba(15, 23, 42, 0.82);
+        --faint: rgba(15, 23, 42, 0.60);
+        --shadow: none;
+      }
+
+      body { background: #fff; }
+      .wrap { padding: 0; }
+      .topbar, .section, nav { box-shadow: none; backdrop-filter: none; }
+      nav, .btn { display: none !important; }
+      .layout { grid-template-columns: 1fr; }
+      a { text-decoration: none; }
+      .section + .section { margin-top: 10px; }
+      .metric, .item { break-inside: avoid; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="wrap">
+    <header class="topbar" role="banner">
+      <div class="titleblock">
+        <h1>Mark Heheszkin <span class="sr-only">DevOps Engineer resume</span></h1>
+        <div class="role">
+          <span class="badge" title="EDIT ME">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7z" stroke="currentColor" opacity="0.9" />
+            </svg>
+            DevOps / Platform Engineer
+          </span>
+          <span class="badge" title="EDIT ME">Warsaw, PL • Remote-friendly</span>
+        </div>
+        <p class="lead">
+          Builds reliable delivery systems: cloud infrastructure, CI/CD, Kubernetes, IaC, security guardrails, and observability.
+          Focused on measurable outcomes: faster lead time, safer deployments, and lower cloud spend.
+        </p>
+        <div class="tagline" aria-label="Specialties">
+          <span class="tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M8 21h8m-8-4h8M12 3a6 6 0 016 6c0 2.2-1.2 3.9-2.3 5.2-.8 1-1.4 1.7-1.7 2.8h-4c-.3-1.1-.9-1.8-1.7-2.8C7.2 12.9 6 11.2 6 9a6 6 0 016-6z" stroke="currentColor" opacity="0.9" />
+            </svg>
+            Cloud & IaC
+          </span>
+          <span class="tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" opacity="0.9" />
+            </svg>
+            CI/CD & Release Engineering
+          </span>
+          <span class="tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-6z" stroke="currentColor" opacity="0.9" />
+            </svg>
+            Observability & Reliability
+          </span>
+        </div>
+      </div>
+
+      <div class="contact" aria-label="Contact">
+        <div class="contact-row">
+          <a class="chip" href="mailto:mark@example.com" title="EDIT ME">
+            <strong>Email</strong> Mark@example.com
+          </a>
+          <button class="btn" type="button" id="copyEmailBtn" data-copy="mark@example.com" aria-label="Copy email to clipboard" title="Copy email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M8 8h10v12H8z" stroke="currentColor" opacity="0.9" />
+              <path d="M6 16H5a1 1 0 01-1-1V5a1 1 0 011-1h10a1 1 0 011 1v1" stroke="currentColor" opacity="0.9" />
+            </svg>
+            Copy
+          </button>
+        </div>
+        <div class="contact-row">
+          <a class="chip" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer" title="EDIT ME">
+            <strong>LinkedIn</strong> /in/your-handle
+          </a>
+          <a class="chip" href="https://github.com/your-handle" target="_blank" rel="noreferrer" title="EDIT ME">
+            <strong>GitHub</strong> @your-handle
+          </a>
+        </div>
+        <div class="contact-row">
+          <span class="chip" title="EDIT ME"><strong>Phone</strong> +48 000 000 000</span>
+          <span class="chip" title="EDIT ME"><strong>Website</strong> yourdomain.dev</span>
+        </div>
+        <div class="note-mini" id="copyStatus" aria-live="polite"></div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav aria-label="Resume sections">
+        <div class="nav-title">Navigate</div>
+        <ul class="navlist">
+          <li><a href="#impact"><span>Impact at a glance</span></a></li>
+          <li><a href="#skills"><span>Skills & tooling</span></a></li>
+          <li><a href="#experience"><span>Experience</span></a></li>
+          <li><a href="#projects"><span>Projects</span></a></li>
+          <li><a href="#certs"><span>Certifications</span></a></li>
+          <li><a href="#education"><span>Education</span></a></li>
+        </ul>
+        <div class="callout" role="note">
+          Designed for fast scanning: measurable impact first, details second. Print-friendly.
+        </div>
+      </nav>
+
+      <main id="main" aria-label="Resume">
+        <section class="section" id="impact" aria-label="Impact at a glance">
+          <h2>Impact at a glance</h2>
+          <div class="grid metrics" role="list">
+            <div class="metric" role="listitem">
+              <div class="k">-45%</div>
+              <div class="label">CI duration</div>
+              <div class="note">Example: caching + parallelization (EDIT ME)</div>
+            </div>
+            <div class="metric" role="listitem">
+              <div class="k">+3x</div>
+              <div class="label">Deployment frequency</div>
+              <div class="note">Example: trunk-based + progressive delivery</div>
+            </div>
+            <div class="metric" role="listitem">
+              <div class="k">-28%</div>
+              <div class="label">Cloud spend</div>
+              <div class="note">Example: rightsizing + autoscaling tuning</div>
+            </div>
+            <div class="metric" role="listitem">
+              <div class="k">99.95%</div>
+              <div class="label">Service availability</div>
+              <div class="note">Example: SLOs + alert hygiene (EDIT ME)</div>
+            </div>
+          </div>
+
+          <div class="two" style="margin-top: 12px;">
+            <div class="item">
+              <div class="item-head">
+                <h3>What I deliver</h3>
+                <span class="meta">Platform • Release • Reliability</span>
+              </div>
+              <ul class="list">
+                <li>Cloud landing zones and secure-by-default infrastructure using IaC (Terraform / Pulumi / Bicep).</li>
+                <li>CI/CD pipelines that are fast, deterministic, and observable; minimal manual steps.</li>
+                <li>Kubernetes and container platforms with guardrails (policy, quotas, RBAC), and safe deployment patterns.</li>
+                <li>Actionable observability (logs, metrics, traces) and alerting aligned to SLOs.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <div class="item-head">
+                <h3>How I work</h3>
+                <span class="meta">Pragmatic • Measurable • Collaborative</span>
+              </div>
+              <ul class="list">
+                <li>Start with a baseline: DORA metrics, error budgets, cost reports, pipeline timings.</li>
+                <li>Automate safely: least-privilege IAM, code reviews, policy-as-code, and secrets hygiene.</li>
+                <li>Design for operators: runbooks, sane dashboards, and on-call-friendly alerting.</li>
+                <li>Optimize continuously: remove toil, reduce blast radius, and shorten feedback loops.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="skills" aria-label="Skills and tooling">
+          <h2>Skills & tooling</h2>
+
+          <div class="split">
+            <div class="item">
+              <div class="item-head">
+                <h3>Core</h3>
+                <span class="meta">platform engineering</span>
+              </div>
+              <div class="pillrow" aria-label="Core skills">
+                <span class="pill"><strong>Cloud</strong> AWS / Azure / GCP</span>
+                <span class="pill"><strong>IaC</strong> Terraform, Pulumi, Bicep</span>
+                <span class="pill"><strong>Containers</strong> Docker, OCI</span>
+                <span class="pill"><strong>Kubernetes</strong> EKS/AKS/GKE, Helm, Kustomize</span>
+                <span class="pill"><strong>CI/CD</strong> GitHub Actions, GitLab CI, Azure DevOps</span>
+                <span class="pill"><strong>Observability</strong> Prometheus, Grafana, OpenTelemetry</span>
+                <span class="pill"><strong>Logging</strong> Loki/ELK, structured logs</span>
+                <span class="pill"><strong>Security</strong> IAM, SAST/DAST, SBOM, supply chain</span>
+              </div>
+              <p class="note-mini">Tip: tailor this list to the job description (EDIT ME).</p>
+            </div>
+
+            <div class="item">
+              <div class="item-head">
+                <h3>Automation</h3>
+                <span class="meta">make it repeatable</span>
+              </div>
+              <div class="pillrow" aria-label="Automation skills">
+                <span class="pill"><strong>Scripting</strong> Bash, PowerShell, Python</span>
+                <span class="pill"><strong>Config</strong> Ansible, Packer</span>
+                <span class="pill"><strong>Git</strong> branching strategy, reviews, CODEOWNERS</span>
+                <span class="pill"><strong>Policy</strong> OPA/Gatekeeper, Kyverno</span>
+                <span class="pill"><strong>Secrets</strong> Vault, cloud KMS, SOPS</span>
+                <span class="pill"><strong>Artifacts</strong> OCI registries, Nexus/Artifactory</span>
+              </div>
+              <p class="note-mini">Bias toward boring, documented, on-call-safe solutions.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="experience" aria-label="Work experience">
+          <h2>Experience</h2>
+
+          <article class="item" aria-label="Experience item">
+            <div class="item-head">
+              <h3>Senior DevOps / Platform Engineer — Example Company</h3>
+              <span class="meta">2023–Present • Hybrid</span>
+            </div>
+            <p>
+              Led platform improvements for a microservices environment supporting customer-facing workloads. Owned CI/CD reliability,
+              Kubernetes operations, and delivery governance.
+            </p>
+            <ul class="list">
+              <li>Cut average pipeline duration by <strong>45%</strong> by introducing build caching, parallel test stages, and reusable workflow templates.</li>
+              <li>Raised deployment frequency from <strong>biweekly</strong> to <strong>multiple deploys/week</strong> by standardizing release pipelines and adding automated rollbacks.</li>
+              <li>Reduced cloud spend by <strong>~28%</strong> through rightsizing, autoscaling targets, and eliminating idle environments.</li>
+              <li>Improved reliability to <strong>99.95%</strong> by implementing SLOs, alert deduplication, and incident learnings into runbooks (EDIT ME).</li>
+              <li>Hardened supply chain: SBOM generation, container image signing, and CI policy gates for critical repos.</li>
+            </ul>
+            <div class="pillrow" aria-label="Tech used">
+              <span class="pill">Kubernetes</span>
+              <span class="pill">Terraform</span>
+              <span class="pill">GitHub Actions</span>
+              <span class="pill">Prometheus/Grafana</span>
+              <span class="pill">OpenTelemetry</span>
+            </div>
+          </article>
+
+          <article class="item" aria-label="Experience item" style="margin-top: 12px;">
+            <div class="item-head">
+              <h3>DevOps Engineer — Example Product Team</h3>
+              <span class="meta">2020–2023 • Remote</span>
+            </div>
+            <p>
+              Built CI/CD for a product team moving from VM-based deployments to containers. Partnered with developers to reduce toil and
+              improve on-call experience.
+            </p>
+            <ul class="list">
+              <li>Introduced infrastructure-as-code and environment parity across dev/stage/prod; reduced drift-related incidents.</li>
+              <li>Implemented canary deployments for critical services; lowered incident severity by reducing blast radius.</li>
+              <li>Standardized observability: dashboards per service, golden signals, and actionable alerts aligned to user impact.</li>
+              <li>Created internal templates (pipelines + Helm charts) adopted by <strong>10+</strong> teams (EDIT ME).</li>
+            </ul>
+            <div class="pillrow" aria-label="Tech used">
+              <span class="pill">Azure DevOps</span>
+              <span class="pill">Helm</span>
+              <span class="pill">Ansible</span>
+              <span class="pill">ELK</span>
+              <span class="pill">Docker</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="section" id="projects" aria-label="Projects">
+          <h2>Projects</h2>
+
+          <div class="split">
+            <article class="item" aria-label="Project">
+              <div class="item-head">
+                <h3>Golden Pipeline Templates</h3>
+                <span class="meta">CI/CD • Reusability</span>
+              </div>
+              <p>
+                Built reusable pipeline templates with guardrails (linting, testing, security scanning, provenance) to standardize delivery
+                across repositories.
+              </p>
+              <ul class="list">
+                <li>Reduced setup time for new services from days to <strong>&lt;1 hour</strong> (EDIT ME).</li>
+                <li>Improved consistency: versioned workflows, shared actions, and well-defined inputs/outputs.</li>
+                <li>Included quality gates: SBOM, dependency auditing, and policy checks.</li>
+              </ul>
+              <div class="pillrow">
+                <span class="pill">GitHub Actions</span>
+                <span class="pill">Docker</span>
+                <span class="pill">Trivy</span>
+                <span class="pill">Cosign</span>
+              </div>
+            </article>
+
+            <article class="item" aria-label="Project">
+              <div class="item-head">
+                <h3>Kubernetes Reliability Toolkit</h3>
+                <span class="meta">SRE • Observability</span>
+              </div>
+              <p>
+                Implemented an opinionated set of dashboards, alerts, and runbooks aligned to SLOs for services running on Kubernetes.
+              </p>
+              <ul class="list">
+                <li>Introduced service-level error budget reporting and incident postmortem templates.</li>
+                <li>Lowered noisy alerts by <strong>~60%</strong> via dedupe and symptom-based rules (EDIT ME).</li>
+                <li>Improved MTTR with standard on-call views and actionable alert payloads.</li>
+              </ul>
+              <div class="pillrow">
+                <span class="pill">Prometheus</span>
+                <span class="pill">Grafana</span>
+                <span class="pill">OpenTelemetry</span>
+                <span class="pill">Loki/ELK</span>
+              </div>
+            </article>
+          </div>
+
+          <article class="item" aria-label="Project" style="margin-top: 12px;">
+            <div class="item-head">
+              <h3>Cost & Capacity Automation</h3>
+              <span class="meta">FinOps • Scaling</span>
+            </div>
+            <p>
+              Automated cost visibility and capacity right-sizing across multiple environments to keep spend proportional to usage.
+            </p>
+            <ul class="list">
+              <li>Daily reporting for top cost drivers; alerting on anomalous spend.</li>
+              <li>Automated cleanup of ephemeral environments and unused resources (stale disks, orphaned load balancers).</li>
+              <li>Right-sizing recommendations based on utilization and SLO risk thresholds.</li>
+            </ul>
+            <div class="pillrow">
+              <span class="pill">Cloud Cost APIs</span>
+              <span class="pill">Python</span>
+              <span class="pill">Terraform</span>
+              <span class="pill">Kubernetes autoscaling</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="section" id="certs" aria-label="Certifications">
+          <h2>Certifications</h2>
+          <div class="split">
+            <div class="item">
+              <div class="item-head">
+                <h3>Cloud</h3>
+                <span class="meta">EDIT ME</span>
+              </div>
+              <ul class="list">
+                <li>AWS Certified Solutions Architect — Associate (example)</li>
+                <li>Azure Administrator Associate (example)</li>
+              </ul>
+            </div>
+            <div class="item">
+              <div class="item-head">
+                <h3>Kubernetes & Security</h3>
+                <span class="meta">EDIT ME</span>
+              </div>
+              <ul class="list">
+                <li>CKA / CKAD (example)</li>
+                <li>Security fundamentals (example)</li>
+              </ul>
+            </div>
+          </div>
+          <p class="note-mini">Replace examples with your real certs, or remove this section.</p>
+        </section>
+
+        <section class="section" id="education" aria-label="Education">
+          <h2>Education</h2>
+          <div class="item">
+            <div class="item-head">
+              <h3>BSc / MSc — Computer Science (EDIT ME)</h3>
+              <span class="meta">University Name • 2016–2020</span>
+            </div>
+            <p>
+              Relevant coursework: distributed systems, operating systems, networking, and security. (EDIT ME)
+            </p>
+          </div>
+        </section>
+
+        <div class="footer" aria-label="Footer">
+          <span>Last updated: </span><span id="lastUpdated">2026-05-30</span>
+          <span aria-hidden="true"> • </span>
+          <span>Built as a single-file HTML resume.</span>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const copyBtn = document.getElementById('copyEmailBtn');
+      const status = document.getElementById('copyStatus');
+      const lastUpdated = document.getElementById('lastUpdated');
+      const emailLink = document.querySelector('a[href^="mailto:"]');
+
+      // Set last updated to today's date (local).
+      try {
+        const now = new Date();
+        const yyyy = String(now.getFullYear());
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        lastUpdated.textContent = `${yyyy}-${mm}-${dd}`;
+      } catch {
+        // Ignore
+      }
+
+      async function copyText(text) {
+        if (!text) return false;
+
+        // Prefer the Clipboard API when available.
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+
+        // Fallback: temporary textarea.
+        const el = document.createElement('textarea');
+        el.value = text;
+        el.setAttribute('readonly', '');
+        el.style.position = 'fixed';
+        el.style.top = '-1000px';
+        el.style.left = '-1000px';
+        document.body.appendChild(el);
+        el.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(el);
+        return ok;
+      }
+
+      function setStatus(message, tone) {
+        status.textContent = message;
+        status.style.color = tone === 'ok' ? 'var(--ok)' : 'var(--faint)';
+        window.clearTimeout(setStatus._t);
+        setStatus._t = window.setTimeout(() => {
+          status.textContent = '';
+          status.style.color = '';
+        }, 2200);
+      }
+
+      if (copyBtn) {
+        // Keep copy value in sync with the mailto link so there's only one place to edit.
+        try {
+          const href = emailLink && emailLink.getAttribute('href');
+          const email = href ? href.replace(/^mailto:/i, '').trim() : '';
+          if (email) copyBtn.setAttribute('data-copy', email);
+        } catch {
+          // Ignore
+        }
+
+        copyBtn.addEventListener('click', async () => {
+          const email = copyBtn.getAttribute('data-copy');
+          try {
+            const ok = await copyText(email);
+            setStatus(ok ? 'Copied email to clipboard.' : 'Copy not supported in this browser.', ok ? 'ok' : 'info');
+          } catch {
+            setStatus('Copy failed. You can still select and copy manually.', 'info');
+          }
+        });
+      }
+
+    })();
+  </script>
+</body>
+</html>
+
+
