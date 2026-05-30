@@ -252,7 +252,30 @@
       gap: 10px;
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     .contact a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 12px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .contact .row {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -266,6 +289,15 @@
     .contact a:hover {
       background: rgba(255, 255, 255, 0.06);
       text-decoration: none;
+    }
+
+    .contact .row:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .row-link {
+      flex: 1;
+      min-width: 0;
     }
 
     .contact .label {
@@ -295,6 +327,32 @@
       flex: 0 0 auto;
       font-family: var(--mono);
     }
+
+    .mini-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      font-size: 12px;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      white-space: nowrap;
+    }
+
+    .mini-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(124, 92, 255, 0.35);
+    }
+
+    .mini-btn:active { transform: translateY(0); }
 
     nav {
       margin-top: 16px;
@@ -767,18 +825,21 @@
 
         <aside class="card" aria-label="Contact">
           <div class="contact">
-            <a href="mailto:alex.nowak@example.com" id="emailLink">
-              <div class="label">
-                <span>Email</span>
-                <span>alex.nowak@example.com</span>
-              </div>
-              <div class="hint" aria-hidden="true">copy</div>
-            </a>
+            <div class="row" aria-label="Email">
+              <a href="mailto:alex.nowak@example.com" id="emailLink" class="row-link">
+                <div class="label">
+                  <span>Email</span>
+                  <span id="emailText">alex.nowak@example.com</span>
+                </div>
+              </a>
+              <button class="mini-btn" type="button" id="copyEmailBtn">Copy</button>
+            </div>
             <a href="https://www.linkedin.com/in/alex-nowak" target="_blank" rel="noreferrer noopener">
               <div class="label">
                 <span>LinkedIn</span>
                 <span>linkedin.com/in/alex-nowak</span>
               </div>
+              <span class="sr-only"> (opens in a new tab)</span>
               <div class="hint" aria-hidden="true">open</div>
             </a>
             <a href="https://github.com/alex-nowak" target="_blank" rel="noreferrer noopener">
@@ -786,6 +847,7 @@
                 <span>GitHub</span>
                 <span>github.com/alex-nowak</span>
               </div>
+              <span class="sr-only"> (opens in a new tab)</span>
               <div class="hint" aria-hidden="true">open</div>
             </a>
             <hr class="divider" aria-hidden="true" />
@@ -799,6 +861,7 @@
                 <span class="kv-val">AWS • Kubernetes • Terraform</span>
               </div>
             </div>
+            <output id="a11yStatus" class="sr-only" aria-live="polite"></output>
           </div>
         </aside>
       </div>
@@ -1166,20 +1229,30 @@
       };
 
       const initCopyEmail = () => {
-        const emailLink = document.getElementById('emailLink');
-        if (!emailLink) return;
+        const btn = document.getElementById('copyEmailBtn');
+        const emailText = document.getElementById('emailText');
+        const status = document.getElementById('a11yStatus');
+        if (!btn || !emailText) return;
 
-        emailLink.addEventListener('click', async (e) => {
-          const email = (emailLink.querySelector('.label span:last-child')?.textContent || '').trim();
+        const setStatus = (msg) => {
+          if (!status) return;
+          status.textContent = msg;
+          globalThis.setTimeout(() => { status.textContent = ''; }, 1200);
+        };
+
+        btn.addEventListener('click', async () => {
+          const email = (emailText.textContent || '').trim();
           try {
             if (navigator.clipboard && globalThis.isSecureContext) {
-              e.preventDefault();
               await navigator.clipboard.writeText(email);
-              emailLink.querySelector('.hint').textContent = 'copied';
-              globalThis.setTimeout(() => { emailLink.querySelector('.hint').textContent = 'copy'; }, 1200);
+              setStatus('Email copied to clipboard');
+              btn.textContent = 'Copied';
+              globalThis.setTimeout(() => { btn.textContent = 'Copy'; }, 1200);
+            } else {
+              setStatus('Clipboard not available');
             }
           } catch {
-            // If clipboard fails, default mailto will work.
+            setStatus('Copy failed');
           }
         });
       };
