@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
 
-  <title>DevOps Engineer Resume | Marcin Przywoski</title>
+  <title>DevOps Engineer Resume | Mark Heheszki</title>
   <meta name="description" content="DevOps Engineer resume — cloud, CI/CD, Kubernetes, automation, observability, and measurable delivery impact." />
 
   <!--
@@ -25,8 +25,8 @@
       --surface-2: rgba(255, 255, 255, 0.09);
       --border: rgba(255, 255, 255, 0.14);
       --text: rgba(255, 255, 255, 0.92);
-      --muted: rgba(255, 255, 255, 0.70);
-      --faint: rgba(255, 255, 255, 0.55);
+      --muted: rgba(255, 255, 255, 0.74);
+      --faint: rgba(255, 255, 255, 0.62);
       --accent: #7dd3fc; /* sky-300 */
       --accent-2: #a78bfa; /* violet-400 */
       --ok: #86efac; /* green-300 */
@@ -54,8 +54,8 @@
         --surface-2: rgba(0, 0, 0, 0.06);
         --border: rgba(15, 23, 42, 0.12);
         --text: rgba(15, 23, 42, 0.92);
-        --muted: rgba(15, 23, 42, 0.72);
-        --faint: rgba(15, 23, 42, 0.55);
+        --muted: rgba(15, 23, 42, 0.78);
+        --faint: rgba(15, 23, 42, 0.64);
         --shadow: 0 12px 26px rgba(2, 6, 23, 0.10);
       }
     }
@@ -134,6 +134,19 @@
     a { color: inherit; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
+    /* Consistent, high-visibility keyboard focus across all controls. */
+    :focus { outline: none; }
+    :focus-visible {
+      outline: 3px solid rgba(125, 211, 252, 0.50);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-contrast: more) {
+      :focus-visible {
+        outline-color: rgba(125, 211, 252, 0.85);
+      }
+    }
+
     .skip-link {
       position: absolute;
       top: 8px;
@@ -167,6 +180,7 @@
         linear-gradient(120deg, rgba(125, 211, 252, 0.30), rgba(167, 139, 250, 0.24), rgba(134, 239, 172, 0.16)) border-box;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
@@ -204,10 +218,7 @@
       font-size: clamp(26px, 3.2vw, 38px);
       letter-spacing: -0.02em;
       line-height: 1.1;
-    }
-
-    /* Subtle gradient highlight for the name (falls back naturally). */
-    h1 {
+      /* Subtle gradient highlight for the name (falls back naturally). */
       background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(125, 211, 252, 0.92), rgba(167, 139, 250, 0.92), rgba(255,255,255,0.92));
       -webkit-background-clip: text;
       background-clip: text;
@@ -269,6 +280,7 @@
       align-items: center;
       gap: 8px;
       padding: 9px 11px;
+      min-height: 44px;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.04);
@@ -284,6 +296,7 @@
       background: rgba(255, 255, 255, 0.06);
       color: var(--text);
       padding: 9px 11px;
+      min-height: 44px;
       border-radius: 999px;
       font: inherit;
       font-size: 13px;
@@ -295,7 +308,7 @@
 
     .btn:hover { transform: translateY(-1px); background: rgba(255, 255, 255, 0.09); }
     .btn:active { transform: translateY(0); }
-    .btn:focus-visible { outline: 3px solid rgba(125, 211, 252, 0.40); outline-offset: 2px; }
+    .btn:focus-visible { outline-offset: 3px; }
 
     .layout {
       display: grid;
@@ -316,6 +329,7 @@
       background: linear-gradient(180deg, var(--surface-2), var(--surface));
       box-shadow: var(--shadow);
       padding: 14px;
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
 
@@ -340,6 +354,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 10px;
+      min-height: 44px;
       border-radius: 12px;
       color: var(--muted);
       border: 1px solid transparent;
@@ -359,12 +374,43 @@
       color: var(--text);
     }
 
+    /* Reduced transparency: remove heavy blur layers for readability. */
+    @media (prefers-reduced-transparency: reduce) {
+      .topbar,
+      nav,
+      .section {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+
+      .topbar { background: rgba(255, 255, 255, 0.08); }
+      nav { background: rgba(255, 255, 255, 0.06); }
+      .section { background: rgba(255, 255, 255, 0.06); }
+    }
+
+    @media (prefers-contrast: more) {
+      :root {
+        --border: rgba(255, 255, 255, 0.22);
+        --surface: rgba(255, 255, 255, 0.08);
+        --surface-2: rgba(255, 255, 255, 0.12);
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --border: rgba(15, 23, 42, 0.22);
+          --surface: rgba(0, 0, 0, 0.05);
+          --surface-2: rgba(0, 0, 0, 0.08);
+        }
+      }
+    }
+
     .panel {
       border-radius: var(--radius);
       border: 1px solid var(--border);
       background: linear-gradient(180deg, var(--surface-2), var(--surface));
       box-shadow: var(--shadow);
       padding: var(--pad-lg);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
 
@@ -374,8 +420,11 @@
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.04);
       box-shadow: var(--shadow);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
+
+    .spacer-top { margin-top: 12px; }
 
     .section + .section { margin-top: var(--gap); }
 
@@ -459,15 +508,23 @@
     .metric .k {
       font-family: var(--mono);
       font-size: 20px;
-      color: var(--text);
       letter-spacing: -0.02em;
+      color: var(--text);
     }
 
-    .metric .k {
-      background: linear-gradient(90deg, rgba(255,255,255,0.96), rgba(125, 211, 252, 0.95), rgba(167, 139, 250, 0.90));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+      .metric .k {
+        background: linear-gradient(90deg, rgba(255,255,255,0.96), rgba(125, 211, 252, 0.95), rgba(167, 139, 250, 0.90));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+    }
+
+    .metrics-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
 
     @media print {
@@ -660,7 +717,7 @@
       body::before, body::after { display: none !important; }
       .topbar::after { display: none !important; }
       .wrap { padding: 0; }
-      .topbar, .section, nav { box-shadow: none; backdrop-filter: none; }
+      .topbar, .section, nav { box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
       nav, .btn { display: none !important; }
       .layout { grid-template-columns: 1fr; }
       a { text-decoration: none; }
@@ -679,7 +736,7 @@
   <div class="wrap">
     <header class="topbar" role="banner">
       <div class="titleblock">
-        <h1>Marcin Przywoski <span class="sr-only">DevOps Engineer resume</span></h1>
+        <h1>Mark Heheszki <span class="sr-only">DevOps Engineer resume</span></h1>
         <div class="role">
           <span class="badge" title="EDIT ME">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -717,10 +774,10 @@
 
       <div class="contact" aria-label="Contact">
         <div class="contact-row">
-          <a class="chip" href="mailto:marcin@example.com" title="EDIT ME">
-            <strong>Email</strong> marcin@example.com
+          <a class="chip" href="mailto:mark@example.com" title="EDIT ME">
+            <strong>Email</strong> mark@example.com
           </a>
-          <button class="btn" type="button" id="copyEmailBtn" data-copy="marcin@example.com" aria-label="Copy email to clipboard" title="Copy email">
+          <button class="btn" type="button" id="copyEmailBtn" data-copy="mark@example.com" aria-label="Copy email to clipboard" title="Copy email">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M8 8h10v12H8z" stroke="currentColor" opacity="0.9" />
               <path d="M6 16H5a1 1 0 01-1-1V5a1 1 0 011-1h10a1 1 0 011 1v1" stroke="currentColor" opacity="0.9" />
@@ -729,10 +786,10 @@
           </button>
         </div>
         <div class="contact-row">
-          <a class="chip" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer" title="EDIT ME">
+          <a class="chip" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener noreferrer" title="EDIT ME">
             <strong>LinkedIn</strong> /in/your-handle
           </a>
-          <a class="chip" href="https://github.com/your-handle" target="_blank" rel="noreferrer" title="EDIT ME">
+          <a class="chip" href="https://github.com/your-handle" target="_blank" rel="noopener noreferrer" title="EDIT ME">
             <strong>GitHub</strong> @your-handle
           </a>
         </div>
@@ -763,30 +820,30 @@
       <main id="main" aria-label="Resume">
         <section class="section reveal" id="impact" aria-label="Impact at a glance">
           <h2>Impact at a glance</h2>
-          <div class="grid metrics" role="list">
-            <div class="metric" role="listitem">
+          <ul class="grid metrics metrics-list" aria-label="Key impact metrics">
+            <li class="metric">
               <div class="k">-45%</div>
               <div class="label">CI duration</div>
               <div class="note">Example: caching + parallelization (EDIT ME)</div>
-            </div>
-            <div class="metric" role="listitem">
+            </li>
+            <li class="metric">
               <div class="k">+3x</div>
               <div class="label">Deployment frequency</div>
               <div class="note">Example: trunk-based + progressive delivery</div>
-            </div>
-            <div class="metric" role="listitem">
+            </li>
+            <li class="metric">
               <div class="k">-28%</div>
               <div class="label">Cloud spend</div>
               <div class="note">Example: rightsizing + autoscaling tuning</div>
-            </div>
-            <div class="metric" role="listitem">
+            </li>
+            <li class="metric">
               <div class="k">99.95%</div>
               <div class="label">Service availability</div>
               <div class="note">Example: SLOs + alert hygiene (EDIT ME)</div>
-            </div>
-          </div>
+            </li>
+          </ul>
 
-          <div class="two" style="margin-top: 12px;">
+          <div class="two spacer-top">
             <div class="item reveal">
               <div class="item-head">
                 <h3>What I deliver</h3>
@@ -882,7 +939,7 @@
             </div>
           </article>
 
-          <article class="item reveal" aria-label="Experience item" style="margin-top: 12px;">
+          <article class="item reveal spacer-top" aria-label="Experience item">
             <div class="item-head">
               <h3>DevOps Engineer — Example Product Team</h3>
               <span class="meta">2020–2023 • Remote</span>
@@ -955,7 +1012,7 @@
             </article>
           </div>
 
-          <article class="item reveal" aria-label="Project" style="margin-top: 12px;">
+          <article class="item reveal spacer-top" aria-label="Project">
             <div class="item-head">
               <h3>Cost & Capacity Automation</h3>
               <span class="meta">FinOps • Scaling</span>
@@ -1028,6 +1085,7 @@
 
   <script>
     (function () {
+      const g = globalThis;
       document.documentElement.classList.add('js');
 
       const copyBtn = document.getElementById('copyEmailBtn');
@@ -1035,7 +1093,7 @@
       const lastUpdated = document.getElementById('lastUpdated');
       const emailLink = document.querySelector('a[href^="mailto:"]');
 
-      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const prefersReducedMotion = !!(g.matchMedia && g.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
       // Set last updated to today's date (local).
       try {
@@ -1043,7 +1101,7 @@
         const yyyy = String(now.getFullYear());
         const mm = String(now.getMonth() + 1).padStart(2, '0');
         const dd = String(now.getDate()).padStart(2, '0');
-        lastUpdated.textContent = `${yyyy}-${mm}-${dd}`;
+        if (lastUpdated) lastUpdated.textContent = `${yyyy}-${mm}-${dd}`;
       } catch {
         // Ignore
       }
@@ -1052,8 +1110,8 @@
         if (!text) return false;
 
         // Prefer the Clipboard API when available.
-        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-          await navigator.clipboard.writeText(text);
+        if (g.navigator && g.navigator.clipboard && typeof g.navigator.clipboard.writeText === 'function') {
+          await g.navigator.clipboard.writeText(text);
           return true;
         }
 
@@ -1067,15 +1125,16 @@
         document.body.appendChild(el);
         el.select();
         const ok = document.execCommand('copy');
-        document.body.removeChild(el);
+        el.remove();
         return ok;
       }
 
       function setStatus(message, tone) {
+        if (!status) return;
         status.textContent = message;
         status.style.color = tone === 'ok' ? 'var(--ok)' : 'var(--faint)';
-        window.clearTimeout(setStatus._t);
-        setStatus._t = window.setTimeout(() => {
+        g.clearTimeout(setStatus._t);
+        setStatus._t = g.setTimeout(() => {
           status.textContent = '';
           status.style.color = '';
         }, 2200);
@@ -1086,13 +1145,13 @@
         try {
           const href = emailLink && emailLink.getAttribute('href');
           const email = href ? href.replace(/^mailto:/i, '').trim() : '';
-          if (email) copyBtn.setAttribute('data-copy', email);
+          if (email) copyBtn.dataset.copy = email;
         } catch {
           // Ignore
         }
 
         copyBtn.addEventListener('click', async () => {
-          const email = copyBtn.getAttribute('data-copy');
+          const email = copyBtn.dataset.copy;
           try {
             const ok = await copyText(email);
             setStatus(ok ? 'Copied email to clipboard.' : 'Copy not supported in this browser.', ok ? 'ok' : 'info');
@@ -1107,7 +1166,7 @@
         const nodes = Array.from(document.querySelectorAll('.reveal'));
         if (!nodes.length) return;
 
-        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        if (prefersReducedMotion || !('IntersectionObserver' in g)) {
           nodes.forEach((n) => n.classList.add('is-visible'));
           return;
         }
@@ -1150,10 +1209,30 @@
           }
         }
 
-        // Default to the first section.
-        setCurrent(sections[0].id);
+        function currentFromHash() {
+          const hash = (g.location && g.location.hash) ? g.location.hash : '';
+          const id = hash.startsWith('#') ? hash.slice(1) : '';
+          return id && document.getElementById(id) ? id : '';
+        }
 
-        if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+        // Default to hash (if valid) otherwise the first section.
+        setCurrent(currentFromHash() || sections[0].id);
+
+        // Always keep nav state in sync on click/hashchange.
+        navLinks.forEach((a) => {
+          a.addEventListener('click', () => {
+            const href = a.getAttribute('href') || '';
+            const id = href.startsWith('#') ? href.slice(1) : '';
+            if (id) setCurrent(id);
+          });
+        });
+
+        g.addEventListener('hashchange', () => {
+          const id = currentFromHash();
+          if (id) setCurrent(id);
+        });
+
+        if (!('IntersectionObserver' in g)) return;
 
         const io = new IntersectionObserver((entries) => {
           const visible = entries
@@ -1173,9 +1252,9 @@
       // Cursor spotlight (updates CSS vars for the background). Motion-safe & pointer-safe.
       (function setupSpotlight() {
         if (prefersReducedMotion) return;
-        if (!window.matchMedia) return;
+        if (!g.matchMedia) return;
 
-        const okPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const okPointer = g.matchMedia('(hover: hover) and (pointer: fine)').matches;
         if (!okPointer) return;
 
         let raf = 0;
@@ -1184,17 +1263,17 @@
 
         function apply() {
           raf = 0;
-          const x = Math.max(0, Math.min(1, lastX / window.innerWidth));
-          const y = Math.max(0, Math.min(1, lastY / window.innerHeight));
+          const x = Math.max(0, Math.min(1, lastX / g.innerWidth));
+          const y = Math.max(0, Math.min(1, lastY / g.innerHeight));
           document.documentElement.style.setProperty('--mx', `${(x * 100).toFixed(2)}%`);
           document.documentElement.style.setProperty('--my', `${(y * 100).toFixed(2)}%`);
         }
 
-        window.addEventListener('pointermove', (e) => {
+        g.addEventListener('pointermove', (e) => {
           lastX = e.clientX;
           lastY = e.clientY;
           if (raf) return;
-          raf = window.requestAnimationFrame(apply);
+          raf = g.requestAnimationFrame(apply);
         }, { passive: true });
       })();
 
