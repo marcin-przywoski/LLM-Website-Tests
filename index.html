@@ -22,12 +22,21 @@
       --line-strong: oklch(0.85 0.018 80 / 0.95);
       --line-soft: oklch(0.86 0.016 84);
       --line-topbar: oklch(0.82 0.015 80 / 0.7);
+      --line-orbit: oklch(0.8 0.03 75 / 0.7);
+      --line-orbit-inner: oklch(0.74 0.04 215 / 0.55);
+      --line-hover-warm: oklch(0.76 0.05 48 / 0.65);
+      --line-hover-cool: oklch(0.73 0.05 210 / 0.55);
+      --line-hover-neutral: oklch(0.76 0.04 65 / 0.65);
+      --line-hover-project: oklch(0.76 0.05 55 / 0.65);
       --accent: oklch(0.56 0.17 38);
       --accent-soft: oklch(0.92 0.05 38);
+      --accent-deep: oklch(0.48 0.15 28);
       --accent-alt: oklch(0.42 0.11 215);
+      --accent-alt-soft: oklch(0.8 0.04 220 / 0.25);
       --success: oklch(0.62 0.13 150);
       --success-text: oklch(0.39 0.09 150);
       --shadow: 0 24px 80px oklch(0.32 0.04 45 / 0.14);
+      --shadow-lift: 0 32px 100px oklch(0.28 0.05 36 / 0.18);
       --radius-lg: 28px;
       --radius-md: 18px;
       --radius-sm: 12px;
@@ -55,6 +64,7 @@
         linear-gradient(180deg, var(--bg), oklch(0.95 0.015 88));
       min-height: 100vh;
       line-height: 1.55;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -68,6 +78,20 @@
       background-size: 44px 44px;
       -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 88%);
       mask-image: radial-gradient(circle at center, black 40%, transparent 88%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 22%, oklch(0.82 0.08 40 / 0.18), transparent 20%),
+        radial-gradient(circle at 75% 18%, oklch(0.84 0.05 220 / 0.18), transparent 24%),
+        radial-gradient(circle at 55% 75%, oklch(0.8 0.05 120 / 0.12), transparent 20%);
+      transform: translate3d(var(--cursor-x, 0px), var(--cursor-y, 0px), 0);
+      transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: 0.95;
     }
 
     a {
@@ -182,10 +206,55 @@
       border-radius: var(--radius-lg);
     }
 
+    .hero-copy,
+    .hero-panel,
+    .surface,
+    .timeline-item,
+    .project,
+    .cta-panel,
+    .mini-stat,
+    .ops-list li,
+    .stack li,
+    .tags li,
+    .button,
+    .button-secondary {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-copy::before,
+    .hero-panel::before,
+    .surface::before,
+    .timeline-item::before,
+    .project::before,
+    .cta-panel::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      pointer-events: none;
+      background: radial-gradient(circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), oklch(0.99 0.03 85 / 0.42), transparent 32%);
+      opacity: 0;
+      transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: -1;
+    }
+
+    .hero-copy:hover::before,
+    .hero-panel:hover::before,
+    .surface:hover::before,
+    .timeline-item:hover::before,
+    .project:hover::before,
+    .cta-panel:hover::before {
+      opacity: 1;
+    }
+
     .hero-copy {
       padding: clamp(1.5rem, 3vw, 3rem);
       position: relative;
-      overflow: hidden;
+      min-height: 100%;
+      background:
+        linear-gradient(135deg, oklch(0.995 0.007 95 / 0.95), oklch(0.95 0.022 80 / 0.95)),
+        var(--panel);
     }
 
     .hero-copy::after {
@@ -195,6 +264,58 @@
       height: 18rem;
       background: radial-gradient(circle, oklch(0.76 0.08 30 / 0.24), transparent 70%);
       pointer-events: none;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      right: clamp(-2.5rem, -2vw, -1rem);
+      top: clamp(1rem, 4vw, 2rem);
+      width: min(28vw, 18rem);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid var(--line-orbit);
+      opacity: 0.9;
+      pointer-events: none;
+      animation: spin 24s linear infinite;
+    }
+
+    .hero-orbit::before,
+    .hero-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .hero-orbit::before {
+      inset: 13%;
+      border: 1px dashed var(--line-orbit-inner);
+    }
+
+    .hero-orbit::after {
+      width: 1rem;
+      height: 1rem;
+      top: 8%;
+      left: 52%;
+      background: linear-gradient(135deg, var(--accent-alt), var(--accent));
+      box-shadow: 0 0 0 0.5rem oklch(0.79 0.05 220 / 0.16);
+    }
+
+    .hero-badge-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.3rem;
+    }
+
+    .hero-badge-strip span {
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      background: oklch(0.97 0.015 84 / 0.92);
+      border: 1px solid var(--line-soft);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 12px 24px oklch(0.35 0.03 40 / 0.08);
     }
 
     .eyebrow {
@@ -258,12 +379,23 @@
       padding: 0.95rem 1.3rem;
       border-radius: 999px;
       font-weight: 700;
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
+    }
+
+    .button::before,
+    .button-secondary::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, oklch(1 0 0 / 0.35), transparent 58%);
+      transform: translateX(-120%);
+      transition: transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
     }
 
     .button {
       color: var(--text-inverse);
-      background: linear-gradient(135deg, var(--accent-alt), var(--accent));
+      background: linear-gradient(135deg, var(--accent-alt), var(--accent), var(--accent-deep));
       box-shadow: 0 18px 36px oklch(0.43 0.07 35 / 0.24);
     }
 
@@ -278,7 +410,15 @@
     .button-secondary:hover,
     .button-secondary:focus-visible {
       transform: translateY(-2px);
+      box-shadow: var(--shadow-lift);
       outline: none;
+    }
+
+    .button:hover::before,
+    .button:focus-visible::before,
+    .button-secondary:hover::before,
+    .button-secondary:focus-visible::before {
+      transform: translateX(120%);
     }
 
     .hero-grid {
@@ -293,6 +433,13 @@
       border-radius: var(--radius-md);
       background: oklch(0.985 0.008 88 / 0.92);
       border: 1px solid var(--line-soft);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .mini-stat:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 44px oklch(0.3 0.04 40 / 0.14);
+      border-color: var(--line-hover-warm);
     }
 
     .mini-stat strong,
@@ -326,6 +473,13 @@
       background:
         linear-gradient(180deg, oklch(0.985 0.008 88 / 0.96), oklch(0.95 0.02 84 / 0.95)),
         var(--panel);
+      transform: translateY(0);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .hero-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lift);
     }
 
     .hero-panel-header {
@@ -371,6 +525,13 @@
       justify-content: space-between;
       gap: 1rem;
       align-items: baseline;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .ops-list li:hover {
+      transform: translateX(6px);
+      border-color: var(--line-hover-cool);
+      box-shadow: 0 20px 36px oklch(0.32 0.03 40 / 0.12);
     }
 
     .ops-list span {
@@ -408,6 +569,13 @@
 
     .surface {
       padding: 1.3rem;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .surface:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lift);
+      border-color: var(--line-hover-neutral);
     }
 
     .metric-value {
@@ -440,7 +608,7 @@
     .timeline-item {
       padding: 1.4rem;
       position: relative;
-      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
     }
 
     .timeline-item::after {
@@ -450,6 +618,13 @@
       width: 6px;
       background: linear-gradient(180deg, var(--accent-alt), var(--accent));
       opacity: 0.9;
+    }
+
+    .timeline-item:hover,
+    .project:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lift);
+      border-color: var(--line-hover-project);
     }
 
     .timeline-meta {
@@ -513,6 +688,7 @@
       padding: 1.4rem;
       display: grid;
       gap: 0.95rem;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
     }
 
     .project-header {
@@ -563,6 +739,12 @@
       background:
         linear-gradient(135deg, oklch(0.96 0.03 82 / 0.94), oklch(0.92 0.04 55 / 0.92)),
         var(--panel);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .cta-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lift);
     }
 
     .cta-panel h2 {
@@ -585,9 +767,42 @@
       transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1), transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    .reveal[data-reveal-delay="1"] {
+      transition-delay: 80ms;
+    }
+
+    .reveal[data-reveal-delay="2"] {
+      transition-delay: 160ms;
+    }
+
+    .reveal[data-reveal-delay="3"] {
+      transition-delay: 240ms;
+    }
+
     .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
     }
 
     @media (max-width: 1080px) {
@@ -681,33 +896,39 @@
     <div class="shell">
       <section class="hero">
         <div class="hero-copy reveal">
+          <div class="hero-orbit" aria-hidden="true"></div>
           <span class="eyebrow">Available for platform leadership</span>
           <h1>Alex Mercer</h1>
           <p>
             Senior DevOps engineer focused on resilient cloud platforms, delivery acceleration, and measurable reliability.
             I build Azure and Kubernetes foundations that reduce release friction, tame operational noise, and make engineering teams faster without trading away compliance.
           </p>
+          <div class="hero-badge-strip" aria-label="Core focus areas">
+            <span>Multi-region resilience</span>
+            <span>Platform guardrails</span>
+            <span>Release acceleration</span>
+          </div>
           <div class="hero-actions">
             <a class="button" href="mailto:alex.mercer.devops@example.com">alex.mercer.devops@example.com</a>
             <a class="button-secondary" href="#projects">See flagship projects</a>
           </div>
           <div class="hero-grid" aria-label="Headline statistics">
-            <article class="mini-stat">
+            <article class="mini-stat" data-reveal-delay="1">
               <strong>11+</strong>
               <span>years across cloud operations, CI/CD, and platform engineering</span>
             </article>
-            <article class="mini-stat">
+            <article class="mini-stat" data-reveal-delay="2">
               <strong>240+</strong>
               <span>production services standardized through reusable pipelines</span>
             </article>
-            <article class="mini-stat">
+            <article class="mini-stat" data-reveal-delay="3">
               <strong>99.97%</strong>
               <span>measured availability after multi-region recovery redesign</span>
             </article>
           </div>
         </div>
 
-        <aside class="hero-panel reveal" aria-labelledby="platform-scorecard-title">
+        <aside class="hero-panel reveal" data-reveal-delay="1" aria-labelledby="platform-scorecard-title">
           <div class="hero-panel-header">
             <div>
               <h2 id="platform-scorecard-title">Platform Scorecard</h2>
@@ -749,22 +970,22 @@
           </p>
         </div>
         <div class="metrics">
-          <article class="surface reveal">
+          <article class="surface reveal" data-reveal-delay="1">
             <strong class="metric-value" data-counter="420">0</strong>
             <span class="metric-label">monthly production deployments</span>
             <p class="metric-detail">Scaled from 90 after introducing environment promotion rules and GitOps-based rollout controls.</p>
           </article>
-          <article class="surface reveal">
+          <article class="surface reveal" data-reveal-delay="2">
             <strong class="metric-value" data-counter="14">0</strong>
             <span class="metric-label">minutes mean time to recovery</span>
             <p class="metric-detail">Down from 61 minutes through runbook automation, service templates, and richer telemetry.</p>
           </article>
-          <article class="surface reveal">
+          <article class="surface reveal" data-reveal-delay="3">
             <strong class="metric-value" data-counter="93">0</strong>
             <span class="metric-label">percent IaC coverage</span>
             <p class="metric-detail">Brought drift-heavy cloud estate under Terraform modules and policy validation in CI.</p>
           </article>
-          <article class="surface reveal">
+          <article class="surface reveal" data-reveal-delay="1">
             <strong class="metric-value" data-counter="7">0</strong>
             <span class="metric-label">regulated environments delivered</span>
             <p class="metric-detail">Including PCI-aligned payment flows, audit-ready logging, and secret rotation baselines.</p>
@@ -783,7 +1004,7 @@
         </div>
         <div class="content-grid">
           <div class="timeline">
-            <article class="timeline-item reveal">
+            <article class="timeline-item reveal" data-reveal-delay="1">
               <div class="timeline-meta">
                 <span>Principal DevOps Engineer, Northstar Commerce</span>
                 <span>2022 to present</span>
@@ -807,7 +1028,7 @@
               </ul>
             </article>
 
-            <article class="timeline-item reveal">
+            <article class="timeline-item reveal" data-reveal-delay="2">
               <div class="timeline-meta">
                 <span>Senior Site Reliability Engineer, Helix Health</span>
                 <span>2018 to 2022</span>
@@ -832,7 +1053,7 @@
             </article>
           </div>
 
-          <aside class="surface reveal" aria-labelledby="profile-summary-title">
+          <aside class="surface reveal" data-reveal-delay="3" aria-labelledby="profile-summary-title">
             <h3 id="profile-summary-title">What I bring</h3>
             <p>
               A practical blend of platform architecture, automation, and incident literacy. I like systems that are legible, composable, and difficult to misconfigure.
@@ -873,7 +1094,7 @@
           </p>
         </div>
         <div class="projects">
-          <article class="project reveal">
+          <article class="project reveal" data-reveal-delay="1">
             <div class="project-header">
               <div>
                 <h3>Golden Pipeline Framework</h3>
@@ -894,7 +1115,7 @@
             </ul>
           </article>
 
-          <article class="project reveal">
+          <article class="project reveal" data-reveal-delay="2">
             <div class="project-header">
               <div>
                 <h3>FinOps Capacity Optimizer</h3>
@@ -915,7 +1136,7 @@
             </ul>
           </article>
 
-          <article class="project reveal">
+          <article class="project reveal" data-reveal-delay="3">
             <div class="project-header">
               <div>
                 <h3>Disaster Recovery Game Day Program</h3>
@@ -948,15 +1169,15 @@
           </p>
         </div>
         <div class="skills-grid">
-          <article class="surface reveal">
+          <article class="surface reveal" data-reveal-delay="1">
             <h3>Cloud and infrastructure</h3>
             <p>Azure architecture, network segmentation, landing zones, AKS operations, Terraform module design, policy as code, backup and DR planning.</p>
           </article>
-          <article class="surface reveal">
+          <article class="surface reveal" data-reveal-delay="2">
             <h3>Delivery and automation</h3>
             <p>GitHub Actions, Azure DevOps, release orchestration, GitOps workflows, container build systems, secretless auth, pipeline governance.</p>
           </article>
-          <article class="surface reveal">
+          <article class="surface reveal" data-reveal-delay="3">
             <h3>Observability and resilience</h3>
             <p>Prometheus, Grafana, OpenTelemetry, distributed tracing, SLO design, incident response, alert tuning, post-incident systems improvement.</p>
           </article>
@@ -993,6 +1214,28 @@
       const navLinks = document.querySelectorAll('.nav a');
       const sections = document.querySelectorAll('main section[id]');
       const counters = document.querySelectorAll('[data-counter]');
+      const spotlights = document.querySelectorAll('.hero-copy, .hero-panel, .surface, .timeline-item, .project, .cta-panel');
+
+      const syncSpotlight = (event, element) => {
+        const rect = element.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        element.style.setProperty('--spotlight-x', x + '%');
+        element.style.setProperty('--spotlight-y', y + '%');
+      };
+
+      if (!reducedMotion) {
+        document.addEventListener('pointermove', (event) => {
+          const x = (event.clientX / globalThis.innerWidth - 0.5) * 36;
+          const y = (event.clientY / globalThis.innerHeight - 0.5) * 36;
+          document.body.style.setProperty('--cursor-x', x.toFixed(2) + 'px');
+          document.body.style.setProperty('--cursor-y', y.toFixed(2) + 'px');
+        }, { passive: true });
+
+        spotlights.forEach((element) => {
+          element.addEventListener('pointermove', (event) => syncSpotlight(event, element), { passive: true });
+        });
+      }
 
       if (reducedMotion) {
         revealElements.forEach((element) => element.classList.add('is-visible'));
