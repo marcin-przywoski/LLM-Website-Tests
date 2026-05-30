@@ -20,6 +20,8 @@
             --accent: #c27a33;
             --accent-soft: #f6eadb;
             --success: #168f83;
+            --glow-blue: rgba(79, 123, 204, 0.24);
+            --glow-gold: rgba(194, 122, 51, 0.18);
             --shadow: 0 20px 60px rgba(49, 59, 71, 0.12);
             --radius-lg: 28px;
             --radius-md: 18px;
@@ -60,6 +62,20 @@
             z-index: -2;
         }
 
+        body::after {
+            content: "";
+            position: fixed;
+            inset: -10%;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 16% 18%, rgba(102, 140, 217, 0.2), transparent 22%),
+                radial-gradient(circle at 84% 16%, rgba(194, 122, 51, 0.16), transparent 22%),
+                radial-gradient(circle at 72% 64%, rgba(61, 105, 182, 0.14), transparent 24%);
+            filter: blur(24px);
+            animation: auroraDrift 16s ease-in-out infinite alternate;
+            z-index: -3;
+        }
+
         a {
             color: inherit;
         }
@@ -92,6 +108,7 @@
         }
 
         .shell {
+            position: relative;
             width: min(calc(100% - 32px), var(--max-width));
             margin: 0 auto;
             padding: 24px 0 48px;
@@ -123,6 +140,7 @@
         }
 
         .brand-mark {
+            position: relative;
             display: grid;
             place-items: center;
             width: 42px;
@@ -134,6 +152,16 @@
             font-size: 0.94rem;
             font-weight: 700;
             letter-spacing: 0.04em;
+            box-shadow: 0 10px 22px rgba(36, 74, 147, 0.26);
+        }
+
+        .brand-mark::after {
+            content: "";
+            position: absolute;
+            inset: -6px;
+            border-radius: 18px;
+            border: 1px solid rgba(54, 95, 183, 0.2);
+            animation: pulseRing 3.8s ease-out infinite;
         }
 
         .brand-copy {
@@ -182,6 +210,25 @@
             cursor: pointer;
         }
 
+        .nav-links a,
+        .nav-links button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::after,
+        .nav-links button::after {
+            content: "";
+            position: absolute;
+            inset: auto -20% -140% auto;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(54, 95, 183, 0.18), transparent 68%);
+            opacity: 0;
+            transition: opacity 220ms ease;
+        }
+
         .nav-links a:hover,
         .nav-links button:hover,
         .action-link:hover,
@@ -192,6 +239,13 @@
             background: var(--surface);
             border-color: var(--line);
             color: var(--ink);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links button:hover::after,
+        .nav-links a:focus-visible::after,
+        .nav-links button:focus-visible::after {
+            opacity: 1;
         }
 
         .nav-links a.is-active {
@@ -222,10 +276,23 @@
             top: 98px;
             border-radius: clamp(28px, 4vw, 34px);
             overflow: hidden;
+            isolation: isolate;
+        }
+
+        .rail::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(125deg, transparent 0%, rgba(54, 95, 183, 0.08) 38%, transparent 62%);
+            transform: translateX(-100%);
+            animation: railSweep 10s linear infinite;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .rail-header {
             position: relative;
+            z-index: 1;
             padding: 32px 28px 26px;
             background:
                 radial-gradient(circle at top left, rgba(218, 229, 249, 0.9) 0, transparent 44%),
@@ -296,6 +363,8 @@
         }
 
         .rail-body {
+            position: relative;
+            z-index: 1;
             padding: 24px 28px 28px;
             display: grid;
             gap: 24px;
@@ -400,15 +469,31 @@
             overflow: hidden;
             height: 10px;
             border-radius: 999px;
-            background: oklch(0.9 0.01 250);
+            background: #e6ebf2;
         }
 
         .meter > span {
             position: absolute;
             inset: 0 auto 0 0;
-            width: var(--level);
+            width: 100%;
             border-radius: inherit;
-            background: linear-gradient(90deg, var(--primary), oklch(0.63 0.11 205));
+            background: linear-gradient(90deg, var(--primary), #4e82cc);
+            transform-origin: left center;
+            transform: scaleX(0);
+            transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .rail.is-visible .meter > span {
+            transform: scaleX(1);
+        }
+
+        .meter > span::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.66), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2.8s linear infinite;
         }
 
         .cert-list,
@@ -441,6 +526,10 @@
             overflow: hidden;
             border-radius: clamp(28px, 4vw, 40px);
             padding: 34px;
+            isolation: isolate;
+            transform-style: preserve-3d;
+            --hero-tilt-x: 0deg;
+            --hero-tilt-y: 0deg;
         }
 
         .hero::before,
@@ -453,19 +542,36 @@
         }
 
         .hero::before {
-            width: 280px;
-            height: 280px;
-            right: -80px;
-            top: -70px;
+            width: 340px;
+            height: 340px;
+            right: -90px;
+            top: -100px;
             background: radial-gradient(circle, rgba(208, 222, 248, 0.9), transparent 68%);
+            animation: floatOrb 9s ease-in-out infinite;
         }
 
         .hero::after {
-            width: 220px;
-            height: 220px;
-            right: 80px;
-            bottom: -100px;
+            width: 280px;
+            height: 280px;
+            right: 60px;
+            bottom: -120px;
             background: radial-gradient(circle, rgba(237, 208, 176, 0.55), transparent 70%);
+            animation: floatOrb 11s ease-in-out infinite reverse;
+        }
+
+        .hero::selection,
+        .hero *::selection {
+            background: rgba(54, 95, 183, 0.18);
+        }
+
+        .hero::marker {
+            content: none;
+        }
+
+        .hero::before,
+        .hero::after,
+        .hero-grid {
+            will-change: transform;
         }
 
         .hero-grid {
@@ -474,7 +580,128 @@
             grid-template-columns: minmax(0, 1.3fr) minmax(280px, 360px);
             gap: 28px;
             align-items: end;
+            z-index: 2;
+            transform: perspective(1200px) rotateX(var(--hero-tilt-x)) rotateY(var(--hero-tilt-y));
+            transition: transform 220ms ease-out;
         }
+
+        .hero-telemetry {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .telemetry-pill {
+            position: absolute;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 253, 248, 0.78);
+            border: 1px solid rgba(207, 216, 230, 0.9);
+            color: var(--muted);
+            font-family: "Cascadia Mono", "Consolas", monospace;
+            font-size: 0.74rem;
+            letter-spacing: 0.04em;
+            box-shadow: 0 16px 40px rgba(44, 61, 82, 0.08);
+            animation: floatLabel 8s ease-in-out infinite;
+        }
+
+        .telemetry-pill::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+
+        .telemetry-pill.one {
+            top: 24px;
+            right: 28px;
+        }
+
+        .telemetry-pill.two {
+            top: 116px;
+            right: 340px;
+            animation-delay: -2.4s;
+        }
+
+        .telemetry-pill.three {
+            bottom: 32px;
+            left: 28px;
+            animation-delay: -1.1s;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 2;
+        }
+
+        .signal-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .signal-card {
+            position: relative;
+            overflow: hidden;
+            padding: 16px 16px 14px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(255, 253, 249, 0.88), rgba(232, 238, 248, 0.78));
+            border: 1px solid rgba(214, 221, 231, 0.9);
+            box-shadow: 0 16px 40px rgba(49, 59, 71, 0.08);
+        }
+
+        .signal-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 18%, rgba(255, 255, 255, 0.62) 50%, transparent 82%);
+            transform: translateX(-120%);
+            animation: sweepCard 7s ease-in-out infinite;
+        }
+
+        .signal-label {
+            display: block;
+            margin-bottom: 10px;
+            font-family: "Cascadia Mono", "Consolas", monospace;
+            font-size: 0.74rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .signal-value {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 1.46rem;
+            letter-spacing: -0.05em;
+        }
+
+        .signal-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            height: 32px;
+        }
+
+        .signal-bars span {
+            flex: 1;
+            border-radius: 999px 999px 4px 4px;
+            background: linear-gradient(180deg, rgba(54, 95, 183, 0.26), rgba(54, 95, 183, 0.86));
+            animation: pulseBars 2.8s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        .signal-bars span:nth-child(1) { height: 36%; }
+        .signal-bars span:nth-child(2) { height: 58%; animation-delay: -0.2s; }
+        .signal-bars span:nth-child(3) { height: 82%; animation-delay: -0.4s; }
+        .signal-bars span:nth-child(4) { height: 64%; animation-delay: -0.6s; }
+        .signal-bars span:nth-child(5) { height: 92%; animation-delay: -0.8s; }
 
         .eyebrow {
             display: inline-flex;
@@ -523,6 +750,8 @@
             border-radius: var(--radius-lg);
             background: linear-gradient(180deg, rgba(255, 253, 249, 0.92), rgba(233, 239, 248, 0.85));
             border: 1px solid rgba(217, 223, 230, 0.9);
+            box-shadow: 0 28px 60px rgba(49, 59, 71, 0.16);
+            transform: translateZ(36px);
         }
 
         .hero-panel::before {
@@ -532,6 +761,15 @@
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--muted);
+        }
+
+        .hero-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), transparent 38%, rgba(54, 95, 183, 0.08) 100%);
+            pointer-events: none;
         }
 
         .stat-grid {
@@ -547,6 +785,18 @@
             border-radius: var(--radius-md);
             background: rgba(255, 253, 248, 0.72);
             border: 1px solid rgba(219, 224, 232, 0.9);
+            position: relative;
+            overflow: hidden;
+            transition: transform 220ms ease, box-shadow 220ms ease;
+        }
+
+        .stat::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), transparent 34%, rgba(54, 95, 183, 0.08) 100%);
+            opacity: 0;
+            transition: opacity 220ms ease;
         }
 
         .stat strong {
@@ -559,6 +809,15 @@
             color: var(--muted);
             font-size: 0.86rem;
             line-height: 1.5;
+        }
+
+        .stat:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 28px rgba(49, 59, 71, 0.1);
+        }
+
+        .stat:hover::after {
+            opacity: 1;
         }
 
         .content section {
@@ -592,6 +851,23 @@
             gap: 24px;
             padding: 24px 0;
             border-top: 1px solid var(--line);
+            position: relative;
+        }
+
+        .timeline-item::after {
+            content: "";
+            position: absolute;
+            left: 150px;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(54, 95, 183, 0.24), transparent 70%);
+            opacity: 0;
+            transition: opacity 220ms ease;
+        }
+
+        .timeline-item:hover::after {
+            opacity: 1;
         }
 
         .timeline-item:first-child {
@@ -650,6 +926,7 @@
             height: 7px;
             border-radius: 50%;
             background: var(--accent);
+            box-shadow: 0 0 0 6px rgba(194, 122, 51, 0.12);
         }
 
         .tool-tags {
@@ -669,6 +946,13 @@
             color: var(--primary);
             font-size: 0.82rem;
             border: 1px solid #d2dcfb;
+            transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+        }
+
+        .tool-tags span:hover,
+        .project-stack span:hover {
+            transform: translateY(-2px);
+            background: rgba(54, 95, 183, 0.14);
         }
 
         .stats-board {
@@ -688,6 +972,17 @@
             border: 1px solid var(--line);
             border-radius: var(--radius-md);
             background: linear-gradient(180deg, #fffdfa, #f2ede5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -20% -38px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(54, 95, 183, 0.14), transparent 64%);
+            pointer-events: none;
         }
 
         .kpi-card strong {
@@ -746,6 +1041,9 @@
             top: 0;
             bottom: 0;
             border-radius: inherit;
+            transform-origin: left center;
+            transform: scaleX(0);
+            transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .comparison-before {
@@ -759,6 +1057,11 @@
             background: linear-gradient(90deg, var(--accent), var(--primary));
         }
 
+        .reveal.is-visible .comparison-before,
+        .reveal.is-visible .comparison-after {
+            transform: scaleX(1);
+        }
+
         .project-list {
             display: grid;
             gap: 18px;
@@ -769,11 +1072,16 @@
             gap: 14px;
             padding: 20px 0;
             border-top: 1px solid var(--line);
+            transition: transform 220ms ease;
         }
 
         .project-item:first-child {
             padding-top: 0;
             border-top: 0;
+        }
+
+        .project-item:hover {
+            transform: translateX(4px);
         }
 
         .project-topline {
@@ -801,6 +1109,56 @@
             line-height: 1.75;
         }
 
+        .project-visual {
+            display: grid;
+            grid-template-columns: 110px minmax(0, 1fr);
+            gap: 14px;
+            align-items: center;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255, 253, 248, 0.82), rgba(232, 238, 248, 0.72));
+            border: 1px solid rgba(217, 223, 230, 0.92);
+        }
+
+        .project-visual strong {
+            font-size: 1.5rem;
+            letter-spacing: -0.05em;
+        }
+
+        .project-visual span {
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .project-track {
+            position: relative;
+            height: 12px;
+            border-radius: 999px;
+            background: rgba(212, 219, 228, 0.8);
+            overflow: hidden;
+        }
+
+        .project-track::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            width: var(--track-level);
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: inherit;
+            transform-origin: left center;
+            transform: scaleX(0);
+            transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.is-visible .project-track::before {
+            transform: scaleX(1);
+        }
+
+        .project-track.track-88 { --track-level: 88%; }
+        .project-track.track-84 { --track-level: 84%; }
+        .project-track.track-78 { --track-level: 78%; }
+        .project-track.track-72 { --track-level: 72%; }
+
         .project-stack {
             display: flex;
             gap: 8px;
@@ -821,7 +1179,7 @@
         .reveal {
             opacity: 0;
             transform: translateY(18px);
-            transition: opacity 500ms ease, transform 500ms ease;
+            transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .reveal.is-visible {
@@ -854,10 +1212,51 @@
         .comparison-after.w-29 { width: 29%; }
         .comparison-after.w-15 { width: 15%; }
 
+        @keyframes auroraDrift {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(1.8%, -1.4%, 0) scale(1.06); }
+        }
+
+        @keyframes pulseRing {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.06); opacity: 0.2; }
+        }
+
+        @keyframes railSweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(135%); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, 18px, 0); }
+        }
+
+        @keyframes floatLabel {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -8px, 0); }
+        }
+
+        @keyframes pulseBars {
+            0%, 100% { transform: scaleY(0.92); }
+            50% { transform: scaleY(1.08); }
+        }
+
+        @keyframes sweepCard {
+            0%, 70%, 100% { transform: translateX(-120%); }
+            88% { transform: translateX(120%); }
+        }
+
         @media (max-width: 1080px) {
             .layout,
             .hero-grid,
-            .stats-board {
+            .stats-board,
+            .signal-strip {
                 grid-template-columns: 1fr;
             }
 
@@ -867,6 +1266,11 @@
 
             .headline {
                 max-width: 14ch;
+            }
+
+            .telemetry-pill.two {
+                right: 24px;
+                top: 160px;
             }
         }
 
@@ -913,6 +1317,22 @@
                 grid-template-columns: 1fr;
             }
 
+            .telemetry-pill {
+                position: static;
+                margin-bottom: 10px;
+            }
+
+            .hero-telemetry {
+                position: relative;
+                display: grid;
+                gap: 8px;
+                margin-bottom: 18px;
+            }
+
+            .project-visual {
+                grid-template-columns: 1fr;
+            }
+
             .headline {
                 font-size: clamp(2.35rem, 14vw, 4rem);
             }
@@ -935,6 +1355,18 @@
             .reveal {
                 opacity: 1;
                 transform: none;
+            }
+
+            .hero-grid,
+            .telemetry-pill,
+            .brand-mark::after,
+            .meter > span::after,
+            .signal-card::after,
+            body::after,
+            .rail::before,
+            .hero::before,
+            .hero::after {
+                animation: none !important;
             }
         }
     </style>
@@ -1055,12 +1487,40 @@
             </aside>
 
             <main class="content" id="main-content">
-                <section class="hero reveal" aria-labelledby="hero-heading">
+                <section class="hero reveal" aria-labelledby="hero-heading" id="top">
+                    <div class="hero-telemetry" aria-hidden="true">
+                        <span class="telemetry-pill one">mttr 18m</span>
+                        <span class="telemetry-pill two">deploys 280+</span>
+                        <span class="telemetry-pill three">cost -42%</span>
+                    </div>
                     <div class="hero-grid">
-                        <div>
+                        <div class="hero-copy">
                             <div class="eyebrow">Platform engineering resume</div>
                             <h2 class="headline" id="hero-heading">Operational calm, <span>shipping speed</span>, provable outcomes.</h2>
                             <p class="lede">Senior DevOps engineer specializing in resilient delivery systems for regulated and high-growth products. Known for turning fragmented tooling into self-service platforms, bringing incident recovery under control, and making reliability visible through the right service-level metrics.</p>
+                            <div class="signal-strip" aria-label="Key technical signals">
+                                <article class="signal-card">
+                                    <span class="signal-label">Release Health</span>
+                                    <strong class="signal-value">97% success</strong>
+                                    <div class="signal-bars" aria-hidden="true">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                </article>
+                                <article class="signal-card">
+                                    <span class="signal-label">Availability</span>
+                                    <strong class="signal-value">99.96% uptime</strong>
+                                    <div class="signal-bars" aria-hidden="true">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                </article>
+                                <article class="signal-card">
+                                    <span class="signal-label">Spend Discipline</span>
+                                    <strong class="signal-value">EUR 410k saved</strong>
+                                    <div class="signal-bars" aria-hidden="true">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                </article>
+                            </div>
                         </div>
 
                         <div class="hero-panel" aria-label="Impact snapshot statistics">
@@ -1081,6 +1541,13 @@
                                     <strong data-counter="18" data-suffix=" min">0</strong>
                                     <span>Mean time to recovery on tier-one services</span>
                                 </div>
+                            </div>
+                            <div class="project-visual">
+                                <div>
+                                    <strong>Control Plane</strong>
+                                    <span>Delivery telemetry fused into one operating view</span>
+                                </div>
+                                <div class="project-track track-88"></div>
                             </div>
                         </div>
                     </div>
@@ -1243,6 +1710,13 @@
                                 <span class="project-metric">Provisioning time: 2 days, down from 6.2 days</span>
                             </div>
                             <p class="project-summary">Created a self-service platform blueprint for new services with opinionated Terraform modules, GitHub Actions templates, secret-management conventions, and baseline SLO dashboards. Adoption reached 31 services in the first six months because the paved road removed friction instead of adding review bureaucracy.</p>
+                            <div class="project-visual">
+                                <div>
+                                    <strong>31 services</strong>
+                                    <span>Adopted the paved road in the first 6 months</span>
+                                </div>
+                                <div class="project-track track-78"></div>
+                            </div>
                             <div class="project-stack" aria-label="Golden Path Platform stack">
                                 <span>Terraform Cloud</span>
                                 <span>GitHub Actions</span>
@@ -1257,6 +1731,13 @@
                                 <span class="project-metric">Change failure rate reduced by 73%</span>
                             </div>
                             <p class="project-summary">Introduced staged rollouts, automated rollback thresholds, and traffic analysis for customer-facing APIs. The system linked Argo Rollouts, Prometheus, and business-event metrics so deployment decisions reflected real customer impact, not just infrastructure telemetry.</p>
+                            <div class="project-visual">
+                                <div>
+                                    <strong>73% lower risk</strong>
+                                    <span>Rollback decisions driven by live health indicators</span>
+                                </div>
+                                <div class="project-track track-84"></div>
+                            </div>
                             <div class="project-stack" aria-label="Progressive Delivery Mesh stack">
                                 <span>Argo Rollouts</span>
                                 <span>Prometheus</span>
@@ -1271,6 +1752,13 @@
                                 <span class="project-metric">Annualized savings: EUR 410k</span>
                             </div>
                             <p class="project-summary">Built a cost-observability layer combining budget alerts, idle-resource reporting, rightsizing recommendations, and policy checks in pull requests. This moved cloud-cost ownership closer to engineering teams and made optimization part of normal delivery work.</p>
+                            <div class="project-visual">
+                                <div>
+                                    <strong>42% lower spend</strong>
+                                    <span>Optimization surfaced directly inside engineering workflows</span>
+                                </div>
+                                <div class="project-track track-72"></div>
+                            </div>
                             <div class="project-stack" aria-label="FinOps Guardrail Engine stack">
                                 <span>Azure Cost Management</span>
                                 <span>KEDA</span>
@@ -1325,6 +1813,7 @@
             const sections = Array.from(document.querySelectorAll("main section[id]"));
             const copyStatus = document.getElementById("copy-status");
             const emailValue = "aleksander.krawczyk.devops@example.com";
+            const hero = document.querySelector(".hero");
 
             function formatCounterValue(target) {
                 const isFloat = String(target).includes(".");
@@ -1387,6 +1876,28 @@
             } else {
                 revealElements.forEach((element) => element.classList.add("is-visible"));
                 counterElements.forEach(animateCounter);
+            }
+
+            if (hero && !prefersReducedMotion) {
+                const maxTilt = 4;
+
+                function resetHeroTilt() {
+                    hero.style.setProperty("--hero-tilt-x", "0deg");
+                    hero.style.setProperty("--hero-tilt-y", "0deg");
+                }
+
+                hero.addEventListener("pointermove", (event) => {
+                    const rect = hero.getBoundingClientRect();
+                    const relativeX = (event.clientX - rect.left) / rect.width;
+                    const relativeY = (event.clientY - rect.top) / rect.height;
+                    const tiltY = (relativeX - 0.5) * maxTilt * 2;
+                    const tiltX = (0.5 - relativeY) * maxTilt * 1.4;
+
+                    hero.style.setProperty("--hero-tilt-x", tiltX.toFixed(2) + "deg");
+                    hero.style.setProperty("--hero-tilt-y", tiltY.toFixed(2) + "deg");
+                });
+
+                hero.addEventListener("pointerleave", resetHeroTilt);
             }
 
             function updateActiveLink() {
