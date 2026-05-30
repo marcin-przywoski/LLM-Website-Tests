@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleksander Krawczyk | DevOps Engineer Resume</title>
+    <meta name="description" content="Single-file DevOps engineer resume with quantified impact, platform engineering projects, and responsive UX.">
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f4f0e8;
+            --bg-strong: #ebe6dd;
+            --surface: rgba(255, 251, 245, 0.88);
+            --surface-strong: rgba(244, 240, 233, 0.96);
+            --ink: #1f2d3a;
+            --muted: #5b6775;
+            --line: #d9dfe6;
+            --primary: #365fb7;
+            --primary-soft: #e8eefc;
+            --accent: #c27a33;
+            --accent-soft: #f6eadb;
+            --success: #168f83;
+            --shadow: 0 20px 60px rgba(49, 59, 71, 0.12);
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --max-width: 1240px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Aptos", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(245, 226, 205, 0.88) 0, transparent 34%),
+                radial-gradient(circle at 90% 10%, rgba(212, 225, 249, 0.45) 0, transparent 28%),
+                linear-gradient(180deg, var(--bg) 0%, #faf7f1 100%);
+            color: var(--ink);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(transparent 96%, rgba(191, 200, 215, 0.18) 96%),
+                linear-gradient(90deg, transparent 96%, rgba(191, 200, 215, 0.16) 96%);
+            background-size: 56px 56px;
+            -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.08));
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.08));
+            z-index: -2;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: -48px;
+            background: var(--ink);
+            color: var(--surface);
+            padding: 10px 16px;
+            border-radius: 999px;
+            z-index: 20;
+            transition: top 180ms ease;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+        }
+
+        .shell {
+            width: min(calc(100% - 32px), var(--max-width));
+            margin: 0 auto;
+            padding: 24px 0 48px;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 14px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding: 14px 18px;
+            border: 1px solid rgba(217, 223, 230, 0.85);
+            border-radius: 999px;
+            background: rgba(255, 252, 247, 0.74);
+            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 12px 36px rgba(49, 59, 71, 0.08);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .brand-mark {
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #244a93, #3366ad);
+            color: #ffffff;
+            font-family: "Cascadia Mono", "Consolas", monospace;
+            font-size: 0.94rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .brand-copy {
+            min-width: 0;
+        }
+
+        .brand-copy strong,
+        .brand-copy span {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .brand-copy strong {
+            font-size: 0.98rem;
+        }
+
+        .brand-copy span {
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a,
+        .nav-links button,
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            padding: 10px 14px;
+            background: transparent;
+            color: var(--muted);
+            text-decoration: none;
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links button:hover,
+        .action-link:hover,
+        .nav-links a:focus-visible,
+        .nav-links button:focus-visible,
+        .action-link:focus-visible {
+            transform: translateY(-1px);
+            background: var(--surface);
+            border-color: var(--line);
+            color: var(--ink);
+        }
+
+        .nav-links a.is-active {
+            background: var(--primary-soft);
+            color: var(--primary);
+            border-color: #ccd8f7;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .rail,
+        .content section,
+        .hero {
+            border: 1px solid rgba(217, 223, 230, 0.85);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+        }
+
+        .rail {
+            position: sticky;
+            top: 98px;
+            border-radius: clamp(28px, 4vw, 34px);
+            overflow: hidden;
+        }
+
+        .rail-header {
+            position: relative;
+            padding: 32px 28px 26px;
+            background:
+                radial-gradient(circle at top left, rgba(218, 229, 249, 0.9) 0, transparent 44%),
+                linear-gradient(160deg, #fcfbf7, rgba(230, 237, 248, 0.72));
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: rgba(255, 251, 245, 0.92);
+            border: 1px solid rgba(213, 219, 229, 0.82);
+            color: var(--muted);
+            font-size: 0.79rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .status-pill::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 0 5px rgba(22, 143, 131, 0.2);
+        }
+
+        .hero-name {
+            margin: 18px 0 0;
+            font-size: clamp(2.6rem, 5vw, 4.1rem);
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-role {
+            margin: 16px 0 14px;
+            font-size: 1.02rem;
+            color: var(--muted);
+            max-width: 26ch;
+        }
+
+        .hero-summary {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #314151;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .primary-link {
+            background: var(--ink);
+            color: var(--surface);
+            text-decoration: none;
+        }
+
+        .secondary-link {
+            background: var(--surface);
+            border-color: var(--line);
+            text-decoration: none;
+        }
+
+        .rail-body {
+            padding: 24px 28px 28px;
+            display: grid;
+            gap: 24px;
+        }
+
+        .rail-section h2,
+        .content h2 {
+            margin: 0 0 14px;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .contact-list,
+        .meta-list,
+        .project-list,
+        .highlights-list,
+        .timeline-list,
+        .skill-groups,
+        .cert-list,
+        .achievement-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-list a,
+        .contact-list button {
+            width: 100%;
+            justify-content: space-between;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            text-align: left;
+            text-decoration: none;
+            background: var(--surface-strong);
+            color: var(--ink);
+        }
+
+        .contact-list span {
+            color: var(--muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .meta-card {
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(180deg, #fffdfa, #f2ede5);
+            border: 1px solid var(--line);
+        }
+
+        .meta-value {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1.45rem;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .meta-label {
+            color: var(--muted);
+            font-size: 0.84rem;
+            line-height: 1.4;
+        }
+
+        .skill-groups {
+            display: grid;
+            gap: 14px;
+        }
+
+        .skill-row {
+            display: grid;
+            gap: 8px;
+        }
+
+        .skill-topline {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 0.92rem;
+        }
+
+        .skill-topline span:last-child {
+            color: var(--muted);
+            font-family: "Cascadia Mono", "Consolas", monospace;
+            font-size: 0.82rem;
+        }
+
+        .meter {
+            position: relative;
+            overflow: hidden;
+            height: 10px;
+            border-radius: 999px;
+            background: oklch(0.9 0.01 250);
+        }
+
+        .meter > span {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: var(--level);
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--primary), oklch(0.63 0.11 205));
+        }
+
+        .cert-list,
+        .achievement-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .cert-list li,
+        .achievement-list li {
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--line);
+            background: var(--surface-strong);
+        }
+
+        .cert-list strong,
+        .achievement-list strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .content {
+            display: grid;
+            gap: 24px;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            border-radius: clamp(28px, 4vw, 40px);
+            padding: 34px;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(18px);
+            pointer-events: none;
+        }
+
+        .hero::before {
+            width: 280px;
+            height: 280px;
+            right: -80px;
+            top: -70px;
+            background: radial-gradient(circle, rgba(208, 222, 248, 0.9), transparent 68%);
+        }
+
+        .hero::after {
+            width: 220px;
+            height: 220px;
+            right: 80px;
+            bottom: -100px;
+            background: radial-gradient(circle, rgba(237, 208, 176, 0.55), transparent 70%);
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(280px, 360px);
+            gap: 28px;
+            align-items: end;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            font-family: "Cascadia Mono", "Consolas", monospace;
+            font-size: 0.83rem;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 36px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .headline {
+            margin: 0;
+            max-width: 11ch;
+            font-size: clamp(2.8rem, 5.2vw, 5.3rem);
+            line-height: 0.92;
+            letter-spacing: -0.06em;
+        }
+
+        .headline span {
+            color: var(--primary);
+        }
+
+        .lede {
+            margin: 22px 0 0;
+            max-width: 58ch;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #334252;
+        }
+
+        .hero-panel {
+            position: relative;
+            display: grid;
+            gap: 16px;
+            padding: 22px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(180deg, rgba(255, 253, 249, 0.92), rgba(233, 239, 248, 0.85));
+            border: 1px solid rgba(217, 223, 230, 0.9);
+        }
+
+        .hero-panel::before {
+            content: "impact snapshot";
+            font-family: "Cascadia Mono", "Consolas", monospace;
+            font-size: 0.74rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .stat {
+            display: grid;
+            gap: 6px;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 253, 248, 0.72);
+            border: 1px solid rgba(219, 224, 232, 0.9);
+        }
+
+        .stat strong {
+            font-size: 2rem;
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 0.86rem;
+            line-height: 1.5;
+        }
+
+        .content section {
+            border-radius: clamp(24px, 3vw, 32px);
+            padding: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            margin: 0;
+            max-width: 42ch;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .timeline-list {
+            display: grid;
+            gap: 0;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 150px minmax(0, 1fr);
+            gap: 24px;
+            padding: 24px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .timeline-item:first-child {
+            border-top: 0;
+            padding-top: 0;
+        }
+
+        .timeline-period {
+            font-family: "Cascadia Mono", "Consolas", monospace;
+            color: var(--muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+        }
+
+        .timeline-title {
+            margin: 0;
+            font-size: 1.4rem;
+            letter-spacing: -0.04em;
+        }
+
+        .timeline-title span {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.96rem;
+            color: var(--muted);
+            font-weight: 500;
+            letter-spacing: normal;
+        }
+
+        .timeline-copy {
+            margin: 16px 0 0;
+            color: #334252;
+            line-height: 1.75;
+            max-width: 64ch;
+        }
+
+        .highlights-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .highlights-list li {
+            position: relative;
+            padding-left: 18px;
+            line-height: 1.65;
+            color: #30404f;
+        }
+
+        .highlights-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.72em;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .tool-tags span,
+        .project-stack span {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 11px;
+            border-radius: 999px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-size: 0.82rem;
+            border: 1px solid #d2dcfb;
+        }
+
+        .stats-board {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(280px, 340px);
+            gap: 24px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .kpi-card {
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            background: linear-gradient(180deg, #fffdfa, #f2ede5);
+        }
+
+        .kpi-card strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1.85rem;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .kpi-card span {
+            color: var(--muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .comparison-panel {
+            display: grid;
+            gap: 14px;
+            padding: 22px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(180deg, rgba(237, 242, 251, 0.8), #fffdfa);
+            border: 1px solid var(--line);
+        }
+
+        .comparison-panel h3,
+        .projects h3 {
+            margin: 0;
+            font-size: 1.06rem;
+        }
+
+        .comparison-row {
+            display: grid;
+            gap: 8px;
+        }
+
+        .comparison-row header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .comparison-track {
+            position: relative;
+            height: 12px;
+            border-radius: 999px;
+            background: #e8edf3;
+            overflow: hidden;
+        }
+
+        .comparison-before,
+        .comparison-after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            border-radius: inherit;
+        }
+
+        .comparison-before {
+            left: 0;
+            background: #d8ab82;
+            opacity: 0.34;
+        }
+
+        .comparison-after {
+            left: 0;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+        }
+
+        .project-list {
+            display: grid;
+            gap: 18px;
+        }
+
+        .project-item {
+            display: grid;
+            gap: 14px;
+            padding: 20px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .project-item:first-child {
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .project-topline {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .project-topline strong {
+            font-size: 1.22rem;
+            letter-spacing: -0.03em;
+        }
+
+        .project-topline span,
+        .project-summary,
+        .project-metric {
+            color: var(--muted);
+        }
+
+        .project-summary {
+            margin: 0;
+            max-width: 64ch;
+            line-height: 1.75;
+        }
+
+        .project-stack {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .project-metric {
+            font-family: "Cascadia Mono", "Consolas", monospace;
+            font-size: 0.84rem;
+        }
+
+        .footer-note {
+            margin-top: 24px;
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 500ms ease, transform 500ms ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .live-status {
+            min-height: 1.4em;
+            color: var(--primary);
+            font-size: 0.84rem;
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(101, 150, 235, 0.5);
+            outline-offset: 3px;
+        }
+
+        .meter.level-94 > span { width: 94%; }
+        .meter.level-91 > span { width: 91%; }
+        .meter.level-96 > span { width: 96%; }
+        .meter.level-89 > span { width: 89%; }
+        .meter.level-95 > span { width: 95%; }
+        .comparison-before.w-100 { width: 100%; }
+        .comparison-before.w-92 { width: 92%; }
+        .comparison-before.w-86 { width: 86%; }
+        .comparison-before.w-78 { width: 78%; }
+        .comparison-after.w-48 { width: 48%; }
+        .comparison-after.w-42 { width: 42%; }
+        .comparison-after.w-29 { width: 29%; }
+        .comparison-after.w-15 { width: 15%; }
+
+        @media (max-width: 1080px) {
+            .layout,
+            .hero-grid,
+            .stats-board {
+                grid-template-columns: 1fr;
+            }
+
+            .rail {
+                position: static;
+            }
+
+            .headline {
+                max-width: 14ch;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .shell {
+                width: min(calc(100% - 20px), var(--max-width));
+                padding-top: 12px;
+            }
+
+            .topbar {
+                position: static;
+                border-radius: 24px;
+                padding: 16px;
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .hero,
+            .content section,
+            .rail {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .rail-header,
+            .rail-body,
+            .hero {
+                padding: 24px 20px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .stat-grid,
+            .meta-grid,
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .headline {
+                font-size: clamp(2.35rem, 14vw, 4rem);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div class="shell">
+        <header class="topbar" aria-label="Primary">
+            <div class="brand">
+                <div class="brand-mark" aria-hidden="true">AK</div>
+                <div class="brand-copy">
+                    <strong>Aleksander Krawczyk</strong>
+                    <span>DevOps Engineer, Platform Reliability and Delivery Systems</span>
+                </div>
+            </div>
+
+            <nav class="nav-links" aria-label="Section navigation">
+                <a href="#experience">Experience</a>
+                <a href="#impact">Impact</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <button type="button" id="copy-email">Copy email</button>
+            </nav>
+        </header>
+
+        <div class="layout">
+            <aside class="rail reveal" aria-label="Profile summary">
+                <div class="rail-header">
+                    <span class="status-pill">Available for senior platform roles</span>
+                    <h1 class="hero-name">Aleksander<br>Krawczyk</h1>
+                    <p class="hero-role">DevOps engineer shaping cloud platforms, deployment safety, and measurable reliability gains.</p>
+                    <p class="hero-summary">I design delivery systems that shorten lead time without making operations fragile. My work spans Kubernetes, IaC, observability, GitHub Actions, incident response, and cost governance.</p>
+                    <div class="hero-actions">
+                        <a class="action-link primary-link" href="mailto:aleksander.krawczyk.devops@example.com">aleksander.krawczyk.devops@example.com</a>
+                        <a class="action-link secondary-link" href="#projects">Selected projects</a>
+                    </div>
+                </div>
+
+                <div class="rail-body">
+                    <section class="rail-section" aria-labelledby="contact-heading">
+                        <h2 id="contact-heading">Connect</h2>
+                        <ul class="contact-list">
+                            <li><a class="action-link" href="tel:+48123456789"><strong>Phone</strong><span>+48 123 456 789</span></a></li>
+                            <li><a class="action-link" href="https://www.linkedin.com" target="_blank" rel="noreferrer noopener"><strong>LinkedIn</strong><span>linkedin.com/in/aleksanderkrawczyk</span></a></li>
+                            <li><a class="action-link" href="https://github.com" target="_blank" rel="noreferrer noopener"><strong>GitHub</strong><span>github.com/aleksander-platform</span></a></li>
+                            <li><button class="action-link" type="button" id="copy-email-rail"><strong>Email</strong><span>Copy to clipboard</span></button></li>
+                        </ul>
+                        <p class="live-status" id="copy-status" aria-live="polite"></p>
+                    </section>
+
+                    <section class="rail-section" aria-labelledby="facts-heading">
+                        <h2 id="facts-heading">Snapshot</h2>
+                        <div class="meta-grid">
+                            <div class="meta-card">
+                                <strong class="meta-value">10+</strong>
+                                <span class="meta-label">Years across cloud infrastructure, automation, and reliability engineering</span>
+                            </div>
+                            <div class="meta-card">
+                                <strong class="meta-value">4</strong>
+                                <span class="meta-label">Platform migrations delivered with zero critical launch regressions</span>
+                            </div>
+                            <div class="meta-card">
+                                <strong class="meta-value">36%</strong>
+                                <span class="meta-label">Average reduction in deployment lead time after workflow redesigns</span>
+                            </div>
+                            <div class="meta-card">
+                                <strong class="meta-value">ISO</strong>
+                                <span class="meta-label">Compliance-ready controls for audit, backup, secrets, and change visibility</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="rail-section" aria-labelledby="capabilities-heading">
+                        <h2 id="capabilities-heading">Capabilities</h2>
+                        <ul class="skill-groups">
+                            <li class="skill-row">
+                                <div class="skill-topline"><span>Cloud platform architecture</span><span>Azure, AWS</span></div>
+                                <div class="meter level-94"><span></span></div>
+                            </li>
+                            <li class="skill-row">
+                                <div class="skill-topline"><span>Kubernetes operations</span><span>AKS, EKS, Helm</span></div>
+                                <div class="meter level-91"><span></span></div>
+                            </li>
+                            <li class="skill-row">
+                                <div class="skill-topline"><span>CI/CD and release safety</span><span>GitHub Actions, Argo CD</span></div>
+                                <div class="meter level-96"><span></span></div>
+                            </li>
+                            <li class="skill-row">
+                                <div class="skill-topline"><span>Observability and SRE</span><span>Grafana, Prometheus, OTEL</span></div>
+                                <div class="meter level-89"><span></span></div>
+                            </li>
+                            <li class="skill-row">
+                                <div class="skill-topline"><span>Infrastructure as code</span><span>Terraform, Bicep</span></div>
+                                <div class="meter level-95"><span></span></div>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="rail-section" aria-labelledby="certifications-heading">
+                        <h2 id="certifications-heading">Certifications</h2>
+                        <ul class="cert-list">
+                            <li>
+                                <strong>Microsoft Certified: DevOps Engineer Expert</strong>
+                                <span>Azure administration, delivery pipelines, governance</span>
+                            </li>
+                            <li>
+                                <strong>CKA, Certified Kubernetes Administrator</strong>
+                                <span>Cluster operations, security, networking, troubleshooting</span>
+                            </li>
+                            <li>
+                                <strong>HashiCorp Certified: Terraform Associate</strong>
+                                <span>Composable infrastructure modules and policy guardrails</span>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+            </aside>
+
+            <main class="content" id="main-content">
+                <section class="hero reveal" aria-labelledby="hero-heading">
+                    <div class="hero-grid">
+                        <div>
+                            <div class="eyebrow">Platform engineering resume</div>
+                            <h2 class="headline" id="hero-heading">Operational calm, <span>shipping speed</span>, provable outcomes.</h2>
+                            <p class="lede">Senior DevOps engineer specializing in resilient delivery systems for regulated and high-growth products. Known for turning fragmented tooling into self-service platforms, bringing incident recovery under control, and making reliability visible through the right service-level metrics.</p>
+                        </div>
+
+                        <div class="hero-panel" aria-label="Impact snapshot statistics">
+                            <div class="stat-grid">
+                                <div class="stat">
+                                    <strong data-counter="99.96" data-suffix="%">0</strong>
+                                    <span>Platform availability across customer-facing workloads</span>
+                                </div>
+                                <div class="stat">
+                                    <strong data-counter="280" data-suffix="+">0</strong>
+                                    <span>Production deployments per month after pipeline redesign</span>
+                                </div>
+                                <div class="stat">
+                                    <strong data-counter="42" data-suffix="%">0</strong>
+                                    <span>Cloud spend reduced with autoscaling and rightsizing</span>
+                                </div>
+                                <div class="stat">
+                                    <strong data-counter="18" data-suffix=" min">0</strong>
+                                    <span>Mean time to recovery on tier-one services</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="experience" class="reveal" aria-labelledby="experience-heading">
+                    <div class="section-header">
+                        <div>
+                            <h2 id="experience-heading">Experience</h2>
+                        </div>
+                        <p>Recent roles focused on delivery resilience, platform abstraction, and cloud economics. Each engagement had measurable operational targets, not just infrastructure ownership.</p>
+                    </div>
+
+                    <ol class="timeline-list">
+                        <li class="timeline-item">
+                            <div class="timeline-period">2022 - Present</div>
+                            <div>
+                                <h3 class="timeline-title">Principal DevOps Engineer <span>Northbound Pay, fintech platform</span></h3>
+                                <p class="timeline-copy">Own the internal platform for 40+ engineers across payment APIs, compliance workflows, and real-time risk services. Rebuilt the delivery path around ephemeral preview environments, policy-tested infrastructure modules, and service-level objectives tied directly to incident review.</p>
+                                <ul class="highlights-list">
+                                    <li>Cut lead time from 3.4 days to 1.9 days by standardizing GitHub Actions templates, drift detection, and reusable Terraform modules.</li>
+                                    <li>Reduced paging noise by 58% after redesigning alert routing, SLO burn-rate alerts, and ownership metadata in Grafana OnCall.</li>
+                                    <li>Lowered Azure spend by 42% through workload scheduling, KEDA-based autoscaling, spot pool adoption, and storage lifecycle policies.</li>
+                                </ul>
+                                <div class="tool-tags" aria-label="Tools used at Northbound Pay">
+                                    <span>Azure</span>
+                                    <span>AKS</span>
+                                    <span>Terraform</span>
+                                    <span>GitHub Actions</span>
+                                    <span>Argo CD</span>
+                                    <span>OpenTelemetry</span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="timeline-item">
+                            <div class="timeline-period">2019 - 2022</div>
+                            <div>
+                                <h3 class="timeline-title">Senior Platform Engineer <span>Metric Harbor, B2B analytics SaaS</span></h3>
+                                <p class="timeline-copy">Led the shift from hand-managed virtual machines to a Kubernetes-based platform with progressive delivery, centralized observability, and runtime security controls. Partnered with development leads to make deployment safety part of the engineering culture rather than an operations gate.</p>
+                                <ul class="highlights-list">
+                                    <li>Moved 27 services into Kubernetes with zero sev-1 incidents during the migration window, using canary releases and traffic shadowing.</li>
+                                    <li>Improved build success rates from 84% to 97% by caching dependencies, parallelizing tests, and isolating flaky checks.</li>
+                                    <li>Introduced golden-path templates that cut onboarding time for new teams from 4 weeks to 8 days.</li>
+                                </ul>
+                                <div class="tool-tags" aria-label="Tools used at Metric Harbor">
+                                    <span>AWS</span>
+                                    <span>EKS</span>
+                                    <span>Helm</span>
+                                    <span>Argo Rollouts</span>
+                                    <span>Datadog</span>
+                                    <span>Vault</span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="timeline-item">
+                            <div class="timeline-period">2016 - 2019</div>
+                            <div>
+                                <h3 class="timeline-title">Infrastructure Automation Engineer <span>Atlas Commerce Group</span></h3>
+                                <p class="timeline-copy">Built automation around release packaging, Linux fleet hardening, and disaster recovery exercises for an e-commerce business with aggressive seasonal traffic peaks. That role grounded my operational habits in backup integrity, monitoring discipline, and repeatable change management.</p>
+                                <ul class="highlights-list">
+                                    <li>Automated release orchestration and rollback playbooks, shrinking midnight deployment windows by 63%.</li>
+                                    <li>Raised backup verification coverage to 100% with scripted restore drills and audit-ready reporting.</li>
+                                    <li>Converted manual server provisioning into Ansible roles and image pipelines, removing a persistent source of config drift.</li>
+                                </ul>
+                                <div class="tool-tags" aria-label="Tools used at Atlas Commerce Group">
+                                    <span>Linux</span>
+                                    <span>Ansible</span>
+                                    <span>Jenkins</span>
+                                    <span>Nginx</span>
+                                    <span>PostgreSQL</span>
+                                    <span>Bash</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </section>
+
+                <section id="impact" class="reveal" aria-labelledby="impact-heading">
+                    <div class="section-header">
+                        <div>
+                            <h2 id="impact-heading">Impact And Statistics</h2>
+                        </div>
+                        <p>Reliability work matters when it shifts a team’s delivery profile. These figures summarize recurring outcomes across the last three platform programs.</p>
+                    </div>
+
+                    <div class="stats-board">
+                        <div class="kpi-grid" aria-label="Operational impact key performance indicators">
+                            <article class="kpi-card">
+                                <strong data-counter="73" data-suffix="%">0</strong>
+                                <span>Change failure rate improvement after automated rollout verification and policy gates</span>
+                            </article>
+                            <article class="kpi-card">
+                                <strong data-counter="3.1" data-suffix="x">0</strong>
+                                <span>Faster environment provisioning using reusable modules and paved-road templates</span>
+                            </article>
+                            <article class="kpi-card">
+                                <strong data-counter="61" data-suffix="%">0</strong>
+                                <span>Reduction in recovery coordination time after incident command and runbook redesign</span>
+                            </article>
+                            <article class="kpi-card">
+                                <strong data-counter="94" data-suffix="%">0</strong>
+                                <span>Infrastructure changes applied through versioned, peer-reviewed automation</span>
+                            </article>
+                        </div>
+
+                        <aside class="comparison-panel" aria-labelledby="comparison-heading">
+                            <h3 id="comparison-heading">Before and after delivery health</h3>
+
+                            <div class="comparison-row">
+                                <header><span>Lead time</span><span>3.4 days to 1.9 days</span></header>
+                                <div class="comparison-track" aria-hidden="true">
+                                    <span class="comparison-before w-86"></span>
+                                    <span class="comparison-after w-48"></span>
+                                </div>
+                            </div>
+
+                            <div class="comparison-row">
+                                <header><span>Alert noise</span><span>100% baseline to 42%</span></header>
+                                <div class="comparison-track" aria-hidden="true">
+                                    <span class="comparison-before w-100"></span>
+                                    <span class="comparison-after w-42"></span>
+                                </div>
+                            </div>
+
+                            <div class="comparison-row">
+                                <header><span>Build failure rate</span><span>16% to 3%</span></header>
+                                <div class="comparison-track" aria-hidden="true">
+                                    <span class="comparison-before w-78"></span>
+                                    <span class="comparison-after w-15"></span>
+                                </div>
+                            </div>
+
+                            <div class="comparison-row">
+                                <header><span>Onboarding time</span><span>4 weeks to 8 days</span></header>
+                                <div class="comparison-track" aria-hidden="true">
+                                    <span class="comparison-before w-92"></span>
+                                    <span class="comparison-after w-29"></span>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+
+                    <p class="footer-note">Delivery metrics selected to reflect DORA-aligned changes, SLO health, and platform adoption rather than vanity infrastructure counts.</p>
+                </section>
+
+                <section id="projects" class="projects reveal" aria-labelledby="projects-heading">
+                    <div class="section-header">
+                        <div>
+                            <h2 id="projects-heading">Selected Projects</h2>
+                        </div>
+                        <p>Examples of platform work that combined architecture, automation, and adoption strategy. Each project was built to reduce future operational decision load.</p>
+                    </div>
+
+                    <ul class="project-list">
+                        <li class="project-item">
+                            <div class="project-topline">
+                                <strong>Golden Path Platform</strong>
+                                <span class="project-metric">Provisioning time: 2 days, down from 6.2 days</span>
+                            </div>
+                            <p class="project-summary">Created a self-service platform blueprint for new services with opinionated Terraform modules, GitHub Actions templates, secret-management conventions, and baseline SLO dashboards. Adoption reached 31 services in the first six months because the paved road removed friction instead of adding review bureaucracy.</p>
+                            <div class="project-stack" aria-label="Golden Path Platform stack">
+                                <span>Terraform Cloud</span>
+                                <span>GitHub Actions</span>
+                                <span>Backstage</span>
+                                <span>Grafana</span>
+                            </div>
+                        </li>
+
+                        <li class="project-item">
+                            <div class="project-topline">
+                                <strong>Progressive Delivery Mesh</strong>
+                                <span class="project-metric">Change failure rate reduced by 73%</span>
+                            </div>
+                            <p class="project-summary">Introduced staged rollouts, automated rollback thresholds, and traffic analysis for customer-facing APIs. The system linked Argo Rollouts, Prometheus, and business-event metrics so deployment decisions reflected real customer impact, not just infrastructure telemetry.</p>
+                            <div class="project-stack" aria-label="Progressive Delivery Mesh stack">
+                                <span>Argo Rollouts</span>
+                                <span>Prometheus</span>
+                                <span>OpenTelemetry</span>
+                                <span>Istio</span>
+                            </div>
+                        </li>
+
+                        <li class="project-item">
+                            <div class="project-topline">
+                                <strong>FinOps Guardrail Engine</strong>
+                                <span class="project-metric">Annualized savings: EUR 410k</span>
+                            </div>
+                            <p class="project-summary">Built a cost-observability layer combining budget alerts, idle-resource reporting, rightsizing recommendations, and policy checks in pull requests. This moved cloud-cost ownership closer to engineering teams and made optimization part of normal delivery work.</p>
+                            <div class="project-stack" aria-label="FinOps Guardrail Engine stack">
+                                <span>Azure Cost Management</span>
+                                <span>KEDA</span>
+                                <span>Policy as Code</span>
+                                <span>Power BI</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="skills" class="reveal" aria-labelledby="skills-heading">
+                    <div class="section-header">
+                        <div>
+                            <h2 id="skills-heading">Technical Expertise</h2>
+                        </div>
+                        <p>Depth in delivery systems comes from linking tools into operating models. The stack below reflects where I’ve led architecture, implementation, and standards.</p>
+                    </div>
+
+                    <ul class="achievement-list">
+                        <li>
+                            <strong>Cloud and platform engineering</strong>
+                            Azure, AWS, AKS, EKS, Kubernetes upgrades, service mesh, ingress, cluster autoscaling, runtime hardening, platform templates
+                        </li>
+                        <li>
+                            <strong>Infrastructure as code</strong>
+                            Terraform, Bicep, Helm, Ansible, policy as code, reusable modules, state strategy, environment promotion, drift detection
+                        </li>
+                        <li>
+                            <strong>Delivery engineering</strong>
+                            GitHub Actions, Azure DevOps, Jenkins, Argo CD, Argo Rollouts, branch protection, canaries, release governance, preview environments
+                        </li>
+                        <li>
+                            <strong>Observability and reliability</strong>
+                            OpenTelemetry, Prometheus, Grafana, Datadog, Loki, SLO design, burn-rate alerting, incident command, post-incident review facilitation
+                        </li>
+                        <li>
+                            <strong>Security and compliance</strong>
+                            Vault, workload identity, secret rotation, RBAC, network policies, audit evidence, CIS baselines, backup validation, disaster recovery drills
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const prefersReducedMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const counterElements = document.querySelectorAll("[data-counter]");
+            const revealElements = document.querySelectorAll(".reveal");
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            const sections = Array.from(document.querySelectorAll("main section[id]"));
+            const copyStatus = document.getElementById("copy-status");
+            const emailValue = "aleksander.krawczyk.devops@example.com";
+
+            function formatCounterValue(target) {
+                const isFloat = String(target).includes(".");
+                return isFloat ? target.toFixed(2).replace(/\.00$/, "") : Math.round(target).toString();
+            }
+
+            function animateCounter(element) {
+                const target = Number(element.dataset.counter);
+                const suffix = element.dataset.suffix || "";
+
+                if (prefersReducedMotion) {
+                    element.textContent = formatCounterValue(target) + suffix;
+                    return;
+                }
+
+                const startTime = performance.now();
+                const duration = 1400;
+
+                function frame(now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 4);
+                    const value = target * eased;
+
+                    element.textContent = formatCounterValue(value) + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(frame);
+                    }
+                }
+
+                requestAnimationFrame(frame);
+            }
+
+            if ("IntersectionObserver" in globalThis) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    });
+                }, { threshold: 0.16, rootMargin: "0px 0px -40px 0px" });
+
+                revealElements.forEach((element) => revealObserver.observe(element));
+
+                const counterObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        animateCounter(entry.target);
+                        observer.unobserve(entry.target);
+                    });
+                }, { threshold: 0.4 });
+
+                counterElements.forEach((element) => counterObserver.observe(element));
+            } else {
+                revealElements.forEach((element) => element.classList.add("is-visible"));
+                counterElements.forEach(animateCounter);
+            }
+
+            function updateActiveLink() {
+                const offset = globalThis.scrollY + 180;
+                let activeId = sections[0] ? sections[0].id : "";
+
+                sections.forEach((section) => {
+                    if (section.offsetTop <= offset) {
+                        activeId = section.id;
+                    }
+                });
+
+                navLinks.forEach((link) => {
+                    const isActive = link.getAttribute("href") === "#" + activeId;
+                    link.classList.toggle("is-active", isActive);
+                    if (isActive) {
+                        link.setAttribute("aria-current", "page");
+                    } else {
+                        link.removeAttribute("aria-current");
+                    }
+                });
+            }
+
+            updateActiveLink();
+            globalThis.addEventListener("scroll", updateActiveLink, { passive: true });
+
+            async function copyEmail() {
+                try {
+                    await navigator.clipboard.writeText(emailValue);
+                    copyStatus.textContent = "Email copied to clipboard.";
+                } catch {
+                    copyStatus.textContent = "Clipboard access is unavailable. Use the visible email link instead.";
+                }
+            }
+
+            document.getElementById("copy-email").addEventListener("click", copyEmail);
+            document.getElementById("copy-email-rail").addEventListener("click", copyEmail);
+        }());
+    </script>
+</body>
+</html>
