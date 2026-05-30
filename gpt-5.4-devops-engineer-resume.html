@@ -24,12 +24,16 @@
       --signal-soft: oklch(92% 0.05 55);
       --success: oklch(62% 0.14 150);
       --shadow: 0 24px 60px oklch(38% 0.03 250 / 0.12);
+      --shadow-strong: 0 34px 80px oklch(35% 0.045 250 / 0.18);
       --line-soft-rgb: rgba(197, 190, 177, 0.75);
       --line-accent-rgb: rgba(112, 171, 177, 0.55);
       --line-success-rgb: rgba(143, 183, 157, 0.65);
       --surface-border-rgb: rgba(197, 190, 177, 0.7);
       --skill-border-rgb: rgba(191, 183, 164, 0.55);
       --signal-border-rgb: rgba(214, 184, 143, 0.5);
+      --hero-blue-rgb: rgba(93, 191, 214, 0.22);
+      --hero-amber-rgb: rgba(237, 179, 101, 0.2);
+      --hero-ink-rgb: rgba(42, 56, 79, 0.12);
       --radius-xl: 28px;
       --radius-lg: 20px;
       --radius-md: 14px;
@@ -58,6 +62,7 @@
         linear-gradient(180deg, oklch(97% 0.018 85), oklch(94% 0.02 82));
       min-height: 100vh;
       line-height: 1.55;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -72,6 +77,23 @@
       -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
       mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
       z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -12% -8% auto;
+      height: 68vh;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 28%, var(--hero-blue-rgb), transparent 22%),
+        radial-gradient(circle at 74% 18%, var(--hero-amber-rgb), transparent 18%),
+        radial-gradient(circle at 52% 12%, rgba(140, 206, 219, 0.14), transparent 26%);
+      filter: blur(28px);
+      opacity: 0.95;
+      transform: translate3d(0, calc(var(--scroll-shift, 0px) * -0.28), 0);
+      animation: auroraDrift 20s linear infinite alternate;
+      z-index: -2;
     }
 
     a {
@@ -248,24 +270,84 @@
     }
 
     .panel {
+      --spot-x: 50%;
+      --spot-y: 50%;
       background: var(--surface);
       border: 1px solid var(--surface-border-rgb);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
       overflow: hidden;
+      transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), border-color 260ms var(--ease);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle 260px at var(--spot-x) var(--spot-y), rgba(255, 255, 255, 0.66), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 24%);
+      opacity: 0;
+      transition: opacity 240ms var(--ease);
+      z-index: 0;
+    }
+
+    .panel:hover,
+    .panel:focus-within {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(149, 189, 193, 0.9);
+    }
+
+    .panel:hover::before,
+    .panel:focus-within::before {
+      opacity: 1;
     }
 
     .hero {
+      position: relative;
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.9fr);
       gap: 2rem;
       padding: clamp(1.5rem, 2.6vw, 2.4rem);
+      min-height: min(82vh, 52rem);
       background:
         linear-gradient(135deg, oklch(97% 0.02 85 / 0.95), oklch(99% 0.005 85 / 0.9)),
         var(--surface);
     }
 
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      border-radius: 999px;
+      filter: blur(10px);
+      z-index: 0;
+    }
+
+    .hero::before {
+      width: 28rem;
+      height: 28rem;
+      top: -11rem;
+      right: -8rem;
+      background: radial-gradient(circle, rgba(95, 189, 214, 0.22), transparent 66%);
+      animation: haloPulse 11s var(--ease) infinite alternate;
+    }
+
+    .hero::after {
+      width: 24rem;
+      height: 24rem;
+      bottom: -10rem;
+      left: 18%;
+      background: radial-gradient(circle, rgba(237, 179, 101, 0.16), transparent 68%);
+      animation: haloPulse 13s var(--ease) infinite alternate-reverse;
+    }
+
     .hero-copy {
+      position: relative;
+      z-index: 1;
       display: grid;
       gap: 1.3rem;
       align-content: start;
@@ -285,6 +367,7 @@
       line-height: 0.95;
       letter-spacing: -0.05em;
       max-width: 10ch;
+      text-shadow: 0 16px 24px rgba(53, 64, 82, 0.08);
     }
 
     .hero-title span {
@@ -313,11 +396,34 @@
     .skill-badge,
     .project-meta span,
     .contact-card a {
+      position: relative;
+      overflow: hidden;
       padding: 0.52rem 0.84rem;
       background: oklch(94% 0.018 190 / 0.9);
       border: 1px solid var(--line-accent-rgb);
       color: var(--ink);
       font-size: 0.92rem;
+    }
+
+    .tag::after,
+    .button::after,
+    .contact-card a::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.55), transparent 76%);
+      transform: translateX(-140%);
+      transition: transform 520ms var(--ease);
+      pointer-events: none;
+    }
+
+    .tag:hover::after,
+    .button:hover::after,
+    .contact-card a:hover::after,
+    .tag:focus-visible::after,
+    .button:focus-visible::after,
+    .contact-card a:focus-visible::after {
+      transform: translateX(140%);
     }
 
     .hero-actions {
@@ -328,6 +434,8 @@
     }
 
     .button {
+      position: relative;
+      isolation: isolate;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -358,9 +466,195 @@
     }
 
     .hero-side {
+      position: relative;
+      z-index: 1;
       display: grid;
       gap: 1rem;
       align-content: start;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 18rem;
+      padding: 1.2rem;
+      border-radius: calc(var(--radius-xl) - 6px);
+      border: 1px solid rgba(113, 170, 180, 0.38);
+      background:
+        linear-gradient(160deg, rgba(250, 251, 247, 0.84), rgba(233, 244, 245, 0.9)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(250, 250, 246, 0.9));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+      overflow: hidden;
+      transform: perspective(1100px) rotateX(calc(var(--tilt-y, 0deg) * 0.35)) rotateY(calc(var(--tilt-x, 0deg) * 0.55));
+      transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+    }
+
+    .hero-visual:hover,
+    .hero-visual:focus-within {
+      box-shadow: 0 32px 64px rgba(48, 67, 93, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent),
+        repeating-linear-gradient(180deg, rgba(24, 56, 72, 0.03) 0 1px, transparent 1px 16px);
+      transform: translateX(calc(var(--scan-shift, -100%) + 0%));
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      width: 18rem;
+      height: 18rem;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(88, 190, 210, 0.14), transparent 62%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(103, 163, 181, 0.28);
+      transform: translate(-50%, -50%);
+      animation: ringRotate 18s linear infinite;
+    }
+
+    .orbit-ring.ring-one {
+      width: 11rem;
+      height: 11rem;
+    }
+
+    .orbit-ring.ring-two {
+      width: 15rem;
+      height: 15rem;
+      animation-duration: 28s;
+      animation-direction: reverse;
+    }
+
+    .orbit-ring.ring-three {
+      width: 19rem;
+      height: 19rem;
+      animation-duration: 34s;
+    }
+
+    .orbit-node {
+      position: absolute;
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(96, 186, 207, 0.92));
+      box-shadow: 0 0 0 0.32rem rgba(101, 179, 195, 0.14), 0 0 18px rgba(92, 185, 207, 0.36);
+      animation: nodePulse 3.2s var(--ease) infinite;
+    }
+
+    .node-one {
+      top: 18%;
+      left: 60%;
+    }
+
+    .node-two {
+      top: 62%;
+      left: 24%;
+      animation-delay: 0.9s;
+    }
+
+    .node-three {
+      top: 72%;
+      left: 72%;
+      animation-delay: 1.6s;
+    }
+
+    .signal-stack {
+      position: relative;
+      display: grid;
+      gap: 0.75rem;
+      z-index: 1;
+    }
+
+    .signal-card {
+      display: grid;
+      gap: 0.45rem;
+      padding: 0.95rem 1rem;
+      border-radius: 18px;
+      background: rgba(249, 251, 249, 0.8);
+      border: 1px solid rgba(123, 164, 173, 0.26);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 18px 40px rgba(68, 92, 115, 0.08);
+      transform: translate3d(0, 0, 0);
+      animation: floatCard 9s var(--ease) infinite alternate;
+    }
+
+    .signal-card:nth-child(2) {
+      margin-left: auto;
+      width: min(88%, 19rem);
+      animation-duration: 11s;
+      animation-delay: 1.2s;
+    }
+
+    .signal-card:nth-child(3) {
+      width: min(92%, 17rem);
+      animation-duration: 10s;
+      animation-delay: 0.6s;
+    }
+
+    .signal-card strong {
+      font-family: var(--display-font);
+      font-size: 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .signal-card small {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .signal-line {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: var(--mono-font);
+      font-size: 0.82rem;
+      color: #42536a;
+    }
+
+    .signal-line span:last-child {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .signal-track {
+      position: relative;
+      height: 0.45rem;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(140, 171, 177, 0.18);
+    }
+
+    .signal-track::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 72%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--signal));
+      animation: signalSweep 4.2s var(--ease) infinite alternate;
     }
 
     .highlight-card,
@@ -376,6 +670,7 @@
     }
 
     .highlight-card {
+      position: relative;
       padding: 1.1rem;
       border-radius: var(--radius-lg);
       display: grid;
@@ -414,9 +709,18 @@
     }
 
     .stat-chip {
+      position: relative;
       padding: 0.95rem;
       border-radius: var(--radius-md);
       background: oklch(98% 0.01 85 / 0.92);
+      transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), border-color 220ms var(--ease);
+    }
+
+    .stat-chip:hover,
+    .stat-chip:focus-within {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(69, 96, 116, 0.1);
+      border-color: rgba(111, 173, 188, 0.48);
     }
 
     .stat-chip strong {
@@ -439,6 +743,7 @@
       display: grid;
       gap: 0.65rem;
       background: oklch(97% 0.012 85 / 0.93);
+      position: relative;
     }
 
     .quote-card strong {
@@ -461,12 +766,41 @@
     }
 
     .metric {
+      position: relative;
       padding: 1.4rem 1.2rem;
       min-height: 10rem;
       display: grid;
       align-content: start;
       gap: 0.5rem;
       background: oklch(98% 0.012 85 / 0.95);
+      transition: transform 220ms var(--ease), background-color 220ms var(--ease);
+    }
+
+    .metric::after {
+      content: "";
+      position: absolute;
+      left: 1.2rem;
+      right: 1.2rem;
+      bottom: 1rem;
+      height: 0.22rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--signal));
+      opacity: 0.16;
+      transform: scaleX(0.45);
+      transform-origin: left center;
+      transition: transform 320ms var(--ease), opacity 320ms var(--ease);
+    }
+
+    .metric:hover,
+    .metric:focus-within {
+      transform: translateY(-3px);
+      background: oklch(99% 0.012 85 / 0.98);
+    }
+
+    .metric:hover::after,
+    .metric:focus-within::after {
+      opacity: 0.9;
+      transform: scaleX(1);
     }
 
     .metric strong {
@@ -527,11 +861,20 @@
     }
 
     .capability-card {
+      position: relative;
       border-radius: var(--radius-lg);
       padding: 1.2rem;
       display: grid;
       gap: 1rem;
       background: oklch(98% 0.008 85 / 0.95);
+      transition: transform 240ms var(--ease), box-shadow 240ms var(--ease), border-color 240ms var(--ease);
+    }
+
+    .capability-card:hover,
+    .capability-card:focus-within {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 44px rgba(56, 78, 96, 0.12);
+      border-color: rgba(117, 176, 188, 0.58);
     }
 
     .capability-card h3,
@@ -558,11 +901,24 @@
     }
 
     .timeline {
+      position: relative;
       display: grid;
       gap: 1rem;
     }
 
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 10.2rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(90, 181, 203, 0.12), rgba(90, 181, 203, 0.5), rgba(233, 177, 103, 0.26));
+      pointer-events: none;
+    }
+
     .timeline-item {
+      position: relative;
       display: grid;
       grid-template-columns: 11rem minmax(0, 1fr);
       gap: 1.2rem;
@@ -570,6 +926,26 @@
       border-radius: var(--radius-lg);
       background:
         linear-gradient(180deg, oklch(98% 0.008 85 / 0.96), oklch(96% 0.018 82 / 0.94));
+      transition: transform 240ms var(--ease), box-shadow 240ms var(--ease), border-color 240ms var(--ease);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 10rem;
+      top: 1.6rem;
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--signal), var(--accent));
+      box-shadow: 0 0 0 0.3rem rgba(114, 177, 188, 0.15);
+    }
+
+    .timeline-item:hover,
+    .timeline-item:focus-within {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 44px rgba(64, 83, 101, 0.12);
+      border-color: rgba(118, 176, 190, 0.56);
     }
 
     .timeline-meta {
@@ -606,12 +982,21 @@
     }
 
     .project-card {
+      position: relative;
       border-radius: var(--radius-lg);
       padding: 1.25rem;
       display: grid;
       gap: 0.95rem;
       background:
         linear-gradient(165deg, oklch(98% 0.008 85 / 0.96), oklch(96% 0.022 190 / 0.17));
+      transition: transform 240ms var(--ease), box-shadow 240ms var(--ease), border-color 240ms var(--ease);
+    }
+
+    .project-card:hover,
+    .project-card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 50px rgba(59, 79, 96, 0.13);
+      border-color: rgba(117, 179, 190, 0.62);
     }
 
     .project-kicker,
@@ -640,11 +1025,20 @@
     }
 
     .contact-card {
+      position: relative;
       border-radius: var(--radius-lg);
       padding: 1.3rem;
       display: grid;
       gap: 1rem;
       background: oklch(98% 0.01 85 / 0.95);
+      transition: transform 240ms var(--ease), box-shadow 240ms var(--ease), border-color 240ms var(--ease);
+    }
+
+    .contact-card:hover,
+    .contact-card:focus-within {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 44px rgba(63, 81, 97, 0.12);
+      border-color: rgba(119, 178, 188, 0.56);
     }
 
     .contact-grid {
@@ -689,6 +1083,14 @@
     .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .hero.reveal {
+      transform: translateY(30px) scale(0.985);
+    }
+
+    .hero.reveal.is-visible {
+      transform: translateY(0) scale(1);
     }
 
     .meter {
@@ -736,6 +1138,65 @@
       font-size: 0.9rem;
     }
 
+    @keyframes auroraDrift {
+      0% {
+        transform: translate3d(-1%, calc(var(--scroll-shift, 0px) * -0.28), 0) scale(1);
+      }
+      100% {
+        transform: translate3d(2%, calc(var(--scroll-shift, 0px) * -0.34), 0) scale(1.08);
+      }
+    }
+
+    @keyframes haloPulse {
+      0% {
+        transform: scale(0.92);
+        opacity: 0.72;
+      }
+      100% {
+        transform: scale(1.08);
+        opacity: 1;
+      }
+    }
+
+    @keyframes ringRotate {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    @keyframes nodePulse {
+      0%,
+      100% {
+        transform: scale(0.9);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.18);
+        opacity: 1;
+      }
+    }
+
+    @keyframes floatCard {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(0, -8px, 0);
+      }
+    }
+
+    @keyframes signalSweep {
+      0% {
+        width: 52%;
+      }
+      100% {
+        width: 86%;
+      }
+    }
+
     @media (max-width: 1080px) {
       .topbar,
       .hero,
@@ -753,6 +1214,11 @@
       .timeline-item,
       .contact-grid {
         grid-template-columns: 1fr;
+      }
+
+      .timeline::before,
+      .timeline-item::before {
+        display: none;
       }
 
       .metrics-band {
@@ -776,6 +1242,14 @@
 
       .hero-title {
         max-width: 100%;
+      }
+
+      .hero {
+        min-height: 0;
+      }
+
+      .hero-visual {
+        min-height: 15rem;
       }
 
       .availability-grid,
@@ -808,10 +1282,34 @@
         transform: none;
       }
 
+      body::after,
+      .hero::before,
+      .hero::after,
+      .orbit-ring,
+      .orbit-node,
+      .signal-card,
+      .signal-track::before {
+        animation: none !important;
+      }
+
       .meter-bar > span,
       .meter-row.is-visible .meter-bar > span {
         transform: none;
         opacity: 1;
+      }
+
+      .panel,
+      .panel:hover,
+      .panel:focus-within,
+      .capability-card:hover,
+      .project-card:hover,
+      .timeline-item:hover,
+      .contact-card:hover,
+      .metric:hover,
+      .stat-chip:hover,
+      .hero-visual,
+      .hero-visual:hover {
+        transform: none;
       }
     }
   </style>
@@ -862,6 +1360,46 @@
         </div>
 
         <aside class="hero-side" aria-label="Quick profile highlights">
+          <div class="hero-visual reveal" aria-hidden="true">
+            <div class="hero-orbit">
+              <div class="orbit-ring ring-one"></div>
+              <div class="orbit-ring ring-two"></div>
+              <div class="orbit-ring ring-three"></div>
+              <div class="orbit-node node-one"></div>
+              <div class="orbit-node node-two"></div>
+              <div class="orbit-node node-three"></div>
+            </div>
+            <div class="signal-stack">
+              <div class="signal-card">
+                <strong>Release orchestration</strong>
+                <div class="signal-line">
+                  <span>rollout score</span>
+                  <div class="signal-track"></div>
+                  <span>green</span>
+                </div>
+                <small>Policy gates, preview checks, and progressive delivery in one loop.</small>
+              </div>
+              <div class="signal-card">
+                <strong>Live reliability mesh</strong>
+                <div class="signal-line">
+                  <span>slo burn</span>
+                  <div class="signal-track"></div>
+                  <span>stable</span>
+                </div>
+                <small>Signals converge from telemetry, synthetics, and deployment events.</small>
+              </div>
+              <div class="signal-card">
+                <strong>Cost guardrails</strong>
+                <div class="signal-line">
+                  <span>unit cost</span>
+                  <div class="signal-track"></div>
+                  <span>tracked</span>
+                </div>
+                <small>Cloud spend stays visible to engineering before it becomes finance pain.</small>
+              </div>
+            </div>
+          </div>
+
           <div class="highlight-card">
             <div class="highlight-top">
               <strong>Operational snapshot</strong>
@@ -1189,10 +1727,13 @@
 
   <script>
     const runtime = globalThis;
+    const root = document.documentElement;
     const revealItems = document.querySelectorAll('.reveal, .meter-row');
     const counterItems = document.querySelectorAll('[data-counter]');
     const navLinks = document.querySelectorAll('.topnav a');
     const sections = Array.from(document.querySelectorAll('main section[id]'));
+    const interactivePanels = document.querySelectorAll('.panel, .hero-visual, .capability-card, .timeline-item, .project-card, .contact-card, .metric, .stat-chip');
+    const heroVisual = document.querySelector('.hero-visual');
     const prefersReducedMotion = runtime.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     document.querySelectorAll('.meter-bar > span[data-value]').forEach((bar) => {
@@ -1285,8 +1826,47 @@
       });
     };
 
+    const updateScrollEffects = () => {
+      root.style.setProperty('--scroll-shift', `${runtime.scrollY * 0.35}px`);
+      if (!prefersReducedMotion && heroVisual) {
+        heroVisual.style.setProperty('--scan-shift', `${(runtime.scrollY * 0.16) % 180 - 100}%`);
+      }
+    };
+
+    if (!prefersReducedMotion) {
+      interactivePanels.forEach((panel) => {
+        panel.addEventListener('pointermove', (event) => {
+          const rect = panel.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 100;
+          const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+          panel.style.setProperty('--spot-x', `${x}%`);
+          panel.style.setProperty('--spot-y', `${y}%`);
+
+          if (panel.classList.contains('hero-visual')) {
+            const tiltX = ((x - 50) / 50) * 5;
+            const tiltY = ((50 - y) / 50) * 4;
+            panel.style.setProperty('--tilt-x', `${tiltX}deg`);
+            panel.style.setProperty('--tilt-y', `${tiltY}deg`);
+          }
+        });
+
+        panel.addEventListener('pointerleave', () => {
+          panel.style.removeProperty('--spot-x');
+          panel.style.removeProperty('--spot-y');
+
+          if (panel.classList.contains('hero-visual')) {
+            panel.style.setProperty('--tilt-x', '0deg');
+            panel.style.setProperty('--tilt-y', '0deg');
+          }
+        });
+      });
+    }
+
     setActiveLink();
+    updateScrollEffects();
     runtime.addEventListener('scroll', setActiveLink, { passive: true });
+    runtime.addEventListener('scroll', updateScrollEffects, { passive: true });
   </script>
 </body>
 </html>
