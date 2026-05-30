@@ -17,7 +17,7 @@
       --panel-strong: oklch(0.94 0.02 82 / 0.96);
       --text: oklch(0.23 0.02 60);
       --text-inverse: oklch(0.99 0.01 85);
-      --muted: oklch(0.46 0.018 62);
+      --muted: oklch(0.38 0.018 62);
       --line: oklch(0.86 0.02 80);
       --line-strong: oklch(0.85 0.018 80 / 0.95);
       --line-soft: oklch(0.86 0.016 84);
@@ -33,6 +33,8 @@
       --accent-deep: oklch(0.48 0.15 28);
       --accent-alt: oklch(0.42 0.11 215);
       --accent-alt-soft: oklch(0.8 0.04 220 / 0.25);
+      --focus-ring: oklch(0.62 0.16 245);
+      --focus-shadow: 0 0 0 4px oklch(0.85 0.05 245 / 0.45);
       --success: oklch(0.62 0.13 150);
       --success-text: oklch(0.39 0.09 150);
       --shadow: 0 24px 80px oklch(0.32 0.04 45 / 0.14);
@@ -97,6 +99,31 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+      box-shadow: var(--focus-shadow);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -3.5rem;
+      z-index: 30;
+      padding: 0.85rem 1.1rem;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      background: var(--text);
+      color: var(--text-inverse);
+      font-weight: 700;
+      transition: top var(--transition);
+    }
+
+    .skip-link:focus-visible {
+      top: 0;
     }
 
     img {
@@ -240,11 +267,17 @@
     }
 
     .hero-copy:hover::before,
+    .hero-copy:focus-within::before,
     .hero-panel:hover::before,
+    .hero-panel:focus-within::before,
     .surface:hover::before,
+    .surface:focus-within::before,
     .timeline-item:hover::before,
+    .timeline-item:focus-within::before,
     .project:hover::before,
-    .cta-panel:hover::before {
+    .project:focus-within::before,
+    .cta-panel:hover::before,
+    .cta-panel:focus-within::before {
       opacity: 1;
     }
 
@@ -301,10 +334,12 @@
     }
 
     .hero-badge-strip {
+      list-style: none;
       display: flex;
       flex-wrap: wrap;
       gap: 0.65rem;
       margin-top: 1.3rem;
+      padding: 0;
     }
 
     .hero-badge-strip span {
@@ -461,7 +496,8 @@
     .project-meta,
     .stack li,
     .tags li,
-    .footer-note {
+    .footer-note,
+    .hero-panel p {
       color: var(--muted);
     }
 
@@ -761,6 +797,41 @@
       font-size: 0.92rem;
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (prefers-contrast: more) {
+      :root {
+        --panel: oklch(1 0 0 / 0.98);
+        --panel-strong: oklch(0.97 0.012 82 / 0.99);
+        --line-strong: oklch(0.74 0.018 80 / 1);
+        --line-soft: oklch(0.78 0.016 84 / 1);
+      }
+
+      body::before,
+      body::after,
+      .hero-copy::before,
+      .hero-panel::before,
+      .surface::before,
+      .timeline-item::before,
+      .project::before,
+      .cta-panel::before,
+      .button::before,
+      .button-secondary::before,
+      .hero-orbit {
+        display: none;
+      }
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -843,7 +914,19 @@
       }
 
       .nav {
-        display: none;
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+      }
+
+      .nav a {
+        flex: 0 0 auto;
+      }
+
+      .hero-orbit {
+        width: 12rem;
+        right: -3rem;
       }
 
       main {
@@ -872,13 +955,27 @@
         opacity: 1;
         transform: none;
       }
+
+      body::after,
+      .hero-copy::before,
+      .hero-panel::before,
+      .surface::before,
+      .timeline-item::before,
+      .project::before,
+      .cta-panel::before,
+      .button::before,
+      .button-secondary::before,
+      .hero-orbit {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="topbar" aria-label="Primary">
     <div class="topbar-inner">
-      <a class="brand" href="#top" aria-label="Go to top">
+      <a class="brand" href="#main-content" aria-label="Skip to page introduction">
         <span class="brand-mark">AM</span>
         <span>DevOps Engineer Resume</span>
       </a>
@@ -892,22 +989,22 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="main-content" tabindex="-1">
     <div class="shell">
-      <section class="hero">
+      <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy reveal">
           <div class="hero-orbit" aria-hidden="true"></div>
           <span class="eyebrow">Available for platform leadership</span>
-          <h1>Alex Mercer</h1>
+          <h1 id="hero-title">Alex Mercer</h1>
           <p>
             Senior DevOps engineer focused on resilient cloud platforms, delivery acceleration, and measurable reliability.
             I build Azure and Kubernetes foundations that reduce release friction, tame operational noise, and make engineering teams faster without trading away compliance.
           </p>
-          <div class="hero-badge-strip" aria-label="Core focus areas">
-            <span>Multi-region resilience</span>
-            <span>Platform guardrails</span>
-            <span>Release acceleration</span>
-          </div>
+          <ul class="hero-badge-strip" aria-label="Core focus areas">
+            <li><span>Multi-region resilience</span></li>
+            <li><span>Platform guardrails</span></li>
+            <li><span>Release acceleration</span></li>
+          </ul>
           <div class="hero-actions">
             <a class="button" href="mailto:alex.mercer.devops@example.com">alex.mercer.devops@example.com</a>
             <a class="button-secondary" href="#projects">See flagship projects</a>
@@ -939,19 +1036,19 @@
           <ul class="ops-list">
             <li>
               <span>Lead time for change</span>
-              <strong data-counter="68">0%</strong>
+              <strong data-counter="68" aria-label="68 percent faster lead time for change">0%</strong>
             </li>
             <li>
               <span>Infrastructure cost optimization</span>
-              <strong data-counter="31">0%</strong>
+              <strong data-counter="31" aria-label="31 percent infrastructure cost optimization">0%</strong>
             </li>
             <li>
               <span>Deployment frequency uplift</span>
-              <strong data-counter="4.6" data-suffix="x">0x</strong>
+              <strong data-counter="4.6" data-suffix="x" aria-label="4.6 times deployment frequency uplift">0x</strong>
             </li>
             <li>
               <span>Incident noise reduction</span>
-              <strong data-counter="57">0%</strong>
+              <strong data-counter="57" aria-label="57 percent incident noise reduction">0%</strong>
             </li>
           </ul>
           <p>
@@ -960,10 +1057,10 @@
         </aside>
       </section>
 
-      <section id="impact">
+      <section id="impact" aria-labelledby="impact-title">
         <div class="section-heading reveal">
           <div>
-            <h2>Infrastructure impact, stated in numbers</h2>
+            <h2 id="impact-title">Infrastructure impact, stated in numbers</h2>
           </div>
           <p>
             The strongest platform work is invisible to end users and obvious in engineering throughput, failure recovery, and cost control.
@@ -971,32 +1068,32 @@
         </div>
         <div class="metrics">
           <article class="surface reveal" data-reveal-delay="1">
-            <strong class="metric-value" data-counter="420">0</strong>
+            <strong class="metric-value" data-counter="420" aria-label="420 monthly production deployments">0</strong>
             <span class="metric-label">monthly production deployments</span>
             <p class="metric-detail">Scaled from 90 after introducing environment promotion rules and GitOps-based rollout controls.</p>
           </article>
           <article class="surface reveal" data-reveal-delay="2">
-            <strong class="metric-value" data-counter="14">0</strong>
+            <strong class="metric-value" data-counter="14" aria-label="14 minutes mean time to recovery">0</strong>
             <span class="metric-label">minutes mean time to recovery</span>
             <p class="metric-detail">Down from 61 minutes through runbook automation, service templates, and richer telemetry.</p>
           </article>
           <article class="surface reveal" data-reveal-delay="3">
-            <strong class="metric-value" data-counter="93">0</strong>
+            <strong class="metric-value" data-counter="93" aria-label="93 percent infrastructure as code coverage">0</strong>
             <span class="metric-label">percent IaC coverage</span>
             <p class="metric-detail">Brought drift-heavy cloud estate under Terraform modules and policy validation in CI.</p>
           </article>
           <article class="surface reveal" data-reveal-delay="1">
-            <strong class="metric-value" data-counter="7">0</strong>
+            <strong class="metric-value" data-counter="7" aria-label="7 regulated environments delivered">0</strong>
             <span class="metric-label">regulated environments delivered</span>
             <p class="metric-detail">Including PCI-aligned payment flows, audit-ready logging, and secret rotation baselines.</p>
           </article>
         </div>
       </section>
 
-      <section id="experience">
+      <section id="experience" aria-labelledby="experience-title">
         <div class="section-heading reveal">
           <div>
-            <h2>Experience built around reliability and speed</h2>
+            <h2 id="experience-title">Experience built around reliability and speed</h2>
           </div>
           <p>
             I operate best where product velocity, cloud governance, and runtime resilience need to improve together rather than in isolation.
@@ -1084,10 +1181,10 @@
         </div>
       </section>
 
-      <section id="projects">
+      <section id="projects" aria-labelledby="projects-title">
         <div class="section-heading reveal">
           <div>
-            <h2>Projects that demonstrate technical range</h2>
+            <h2 id="projects-title">Projects that demonstrate technical range</h2>
           </div>
           <p>
             Each project paired infrastructure depth with a concrete business outcome instead of stopping at tooling adoption.
@@ -1159,10 +1256,10 @@
         </div>
       </section>
 
-      <section id="skills">
+      <section id="skills" aria-labelledby="skills-title">
         <div class="section-heading reveal">
           <div>
-            <h2>Technical depth across the delivery stack</h2>
+            <h2 id="skills-title">Technical depth across the delivery stack</h2>
           </div>
           <p>
             Breadth matters, but the strongest signal is the ability to connect delivery workflows, runtime telemetry, and cloud controls into one operating model.
@@ -1184,10 +1281,10 @@
         </div>
       </section>
 
-      <section id="contact" class="reveal">
+      <section id="contact" class="reveal" aria-labelledby="contact-title">
         <div class="cta-panel">
           <div>
-            <h2>Need a DevOps engineer who can improve both delivery speed and platform discipline?</h2>
+            <h2 id="contact-title">Need a DevOps engineer who can improve both delivery speed and platform discipline?</h2>
             <p>
               I work best in teams scaling cloud platforms, standardizing engineering workflows, or rebuilding reliability foundations before growth exposes every weak seam.
             </p>
@@ -1215,6 +1312,7 @@
       const sections = document.querySelectorAll('main section[id]');
       const counters = document.querySelectorAll('[data-counter]');
       const spotlights = document.querySelectorAll('.hero-copy, .hero-panel, .surface, .timeline-item, .project, .cta-panel');
+      const allowAmbientMotion = !reducedMotion && globalThis.matchMedia('(pointer: fine)').matches;
 
       const syncSpotlight = (event, element) => {
         const rect = element.getBoundingClientRect();
@@ -1224,7 +1322,7 @@
         element.style.setProperty('--spotlight-y', y + '%');
       };
 
-      if (!reducedMotion) {
+      if (allowAmbientMotion) {
         document.addEventListener('pointermove', (event) => {
           const x = (event.clientX / globalThis.innerWidth - 0.5) * 36;
           const y = (event.clientY / globalThis.innerHeight - 0.5) * 36;
@@ -1325,7 +1423,14 @@
             }
 
             navLinks.forEach((link) => {
-              link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+              const isActive = link.getAttribute('href') === '#' + entry.target.id;
+              link.classList.toggle('active', isActive);
+
+              if (isActive) {
+                link.setAttribute('aria-current', 'true');
+              } else {
+                link.removeAttribute('aria-current');
+              }
             });
           });
         },
