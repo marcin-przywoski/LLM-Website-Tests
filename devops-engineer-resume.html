@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DevOps engineer resume webpage focused on cloud automation, reliability, platform engineering, and measurable delivery outcomes.">
+  <title>DevOps Engineer Resume | Alex Nowak</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: oklch(24% 0.032 218);
+      --muted: oklch(43% 0.035 221);
+      --soft: oklch(59% 0.032 224);
+      --paper: oklch(96.5% 0.013 91);
+      --paper-strong: oklch(99% 0.007 91);
+      --panel: oklch(92.5% 0.023 87);
+      --line: oklch(82% 0.031 83);
+      --signal: oklch(57% 0.154 158);
+      --signal-deep: oklch(38% 0.12 163);
+      --warning: oklch(70% 0.162 66);
+      --accent: oklch(54% 0.132 258);
+      --accent-soft: oklch(89% 0.052 252);
+      --danger: oklch(58% 0.17 31);
+      --topbar-border: oklch(80% 0.025 82 / 0.74);
+      --grid-line-strong: oklch(24% 0.03 218 / 0.055);
+      --grid-line-soft: oklch(24% 0.03 218 / 0.045);
+      --hover-border: oklch(24% 0.03 218 / 0.24);
+      --focus-ring: oklch(70% 0.162 66 / 0.72);
+      --terminal-bg: oklch(22% 0.034 218);
+      --terminal-fg: oklch(91% 0.03 149);
+      --terminal-dim: oklch(74% 0.035 218);
+      --tile-border: oklch(24% 0.032 218 / 0.14);
+      --chip-border: oklch(24% 0.032 218 / 0.15);
+      --section-line: oklch(24% 0.032 218 / 0.1);
+      --ghost-text: oklch(24% 0.032 218 / 0.08);
+      --contact-muted: oklch(89% 0.02 91);
+      --shadow: 0 24px 80px oklch(24% 0.04 220 / 0.14);
+      --radius: 8px;
+      --max: 1180px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --font-display: "Bahnschrift", "Aptos Display", "Segoe UI Variable Display", sans-serif;
+      --font-body: "Aptos", "Segoe UI Variable Text", "Trebuchet MS", sans-serif;
+      --font-code: "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 12% 8%, oklch(88% 0.08 157 / 0.65), transparent 31rem),
+        radial-gradient(circle at 88% 4%, oklch(88% 0.075 258 / 0.52), transparent 29rem),
+        linear-gradient(135deg, var(--paper-strong), var(--paper) 46%, oklch(91% 0.028 72));
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.58;
+      letter-spacing: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image:
+        linear-gradient(90deg, var(--grid-line-strong) 1px, transparent 1px),
+        linear-gradient(180deg, var(--grid-line-soft) 1px, transparent 1px);
+      background-size: 44px 44px;
+      -webkit-mask-image: linear-gradient(to bottom, black, transparent 82%);
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+      pointer-events: none;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 1rem;
+      top: 1rem;
+      z-index: 20;
+      transform: translateY(-180%);
+      background: var(--ink);
+      color: var(--paper-strong);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .progress {
+      position: fixed;
+      inset: 0 0 auto;
+      height: 4px;
+      z-index: 12;
+      background: linear-gradient(90deg, var(--signal), var(--accent), var(--warning));
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .shell {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      background: oklch(96% 0.012 91 / 0.82);
+      border-bottom: 1px solid var(--topbar-border);
+    }
+
+    .topbar .shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 68px;
+    }
+
+    .brand-mark {
+      display: inline-grid;
+      grid-template-columns: 42px 1fr;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand-mark svg {
+      width: 42px;
+      height: 42px;
+      border-radius: 7px;
+      box-shadow: 0 12px 28px oklch(42% 0.11 165 / 0.22);
+    }
+
+    .brand-mark strong,
+    h1,
+    h2,
+    h3,
+    .metric-value,
+    .role-title {
+      font-family: var(--font-display);
+      letter-spacing: 0;
+    }
+
+    .brand-mark strong {
+      display: block;
+      font-size: 0.98rem;
+      line-height: 1.05;
+    }
+
+    .brand-mark span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.15;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a,
+    .action,
+    .filter-button {
+      min-height: 40px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease), color 180ms var(--ease);
+    }
+
+    .nav a {
+      padding: 0.47rem 0.78rem;
+      font-size: 0.82rem;
+    }
+
+    .nav a[aria-current="true"],
+    .nav a:hover {
+      background: var(--ink);
+      color: var(--paper-strong);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(300px, 0.72fr);
+      gap: clamp(2rem, 5vw, 4.8rem);
+      align-items: center;
+      min-height: clamp(620px, 82vh, 820px);
+      padding: clamp(4rem, 7vw, 7rem) 0 clamp(3rem, 5vw, 5rem);
+    }
+
+    .hero-copy {
+      max-width: 780px;
+      animation: rise-in 820ms var(--ease) both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin: 0 0 1.2rem;
+      color: var(--signal-deep);
+      font-size: 0.83rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.65rem;
+      height: 0.65rem;
+      background: var(--signal);
+      border-radius: 2px;
+      box-shadow: 0 0 0 6px oklch(57% 0.154 158 / 0.13);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 12ch;
+      font-size: clamp(4.1rem, 11.5vw, 9.7rem);
+      line-height: 0.83;
+      font-weight: 900;
+    }
+
+    .hero-summary {
+      max-width: 67ch;
+      margin: clamp(1.2rem, 2.6vw, 2rem) 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.1vw, 1.34rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .action {
+      padding: 0.75rem 1rem;
+      background: var(--paper-strong);
+      box-shadow: 0 12px 30px oklch(24% 0.03 218 / 0.08);
+      font-size: 0.9rem;
+    }
+
+    .action.primary {
+      background: var(--ink);
+      color: var(--paper-strong);
+    }
+
+    .action:hover,
+    .filter-button:hover {
+      transform: translateY(-2px);
+      border-color: var(--hover-border);
+    }
+
+    .action:focus-visible,
+    .filter-button:focus-visible,
+    .nav a:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+
+    .command-panel {
+      position: relative;
+      min-height: 520px;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(155deg, oklch(98% 0.008 91 / 0.94), oklch(89% 0.035 152 / 0.8)),
+        var(--paper-strong);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: rise-in 900ms 120ms var(--ease) both;
+    }
+
+    .command-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0 24%, oklch(57% 0.154 158 / 0.18) 24% 25%, transparent 25% 52%, oklch(54% 0.132 258 / 0.13) 52% 53%, transparent 53%),
+        repeating-linear-gradient(0deg, transparent 0 28px, oklch(24% 0.032 218 / 0.055) 29px 30px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .panel-head,
+    .terminal,
+    .availability,
+    .stack-strip {
+      position: relative;
+      z-index: 1;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.35rem 0.2rem 1rem;
+      font-family: var(--font-code);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      background: var(--signal);
+      box-shadow: 0 0 0 0 oklch(57% 0.154 158 / 0.38);
+      animation: pulse 1800ms ease-out infinite;
+    }
+
+    .terminal {
+      display: grid;
+      gap: 0.55rem;
+      padding: 1.1rem;
+      border-radius: var(--radius);
+      background: var(--terminal-bg);
+      color: var(--terminal-fg);
+      font-family: var(--font-code);
+      font-size: 0.86rem;
+      box-shadow: inset 0 0 0 1px oklch(96% 0.01 91 / 0.08);
+    }
+
+    .terminal span {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .terminal .dim {
+      color: var(--terminal-dim);
+    }
+
+    .topology {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      margin: 1.3rem 0;
+      filter: drop-shadow(0 20px 24px oklch(24% 0.03 218 / 0.15));
+    }
+
+    .topology .line {
+      stroke-dasharray: 7 9;
+      animation: dash 18s linear infinite;
+    }
+
+    .availability {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .metric-tile {
+      min-height: 126px;
+      padding: 0.9rem;
+      border: 1px solid var(--tile-border);
+      border-radius: var(--radius);
+      background: oklch(98% 0.007 91 / 0.84);
+    }
+
+    .metric-value {
+      display: block;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .metric-label {
+      display: block;
+      margin-top: 0.45rem;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .stack-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 31px;
+      padding: 0.35rem 0.62rem;
+      border: 1px solid var(--chip-border);
+      border-radius: 999px;
+      background: oklch(99% 0.006 91 / 0.78);
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    main {
+      padding-bottom: 5rem;
+    }
+
+    section {
+      scroll-margin-top: 92px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 0.36fr 1fr;
+      gap: clamp(1.5rem, 4vw, 4rem);
+      padding: clamp(3.8rem, 7vw, 6rem) 0;
+      border-top: 1px solid var(--section-line);
+    }
+
+    .section-kicker {
+      margin: 0 0 0.7rem;
+      color: var(--signal-deep);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2.1rem, 5vw, 4.6rem);
+      line-height: 0.92;
+      font-weight: 900;
+      max-width: 9ch;
+    }
+
+    .section-note {
+      margin: 1.2rem 0 0;
+      max-width: 28ch;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .impact-board {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(124px, auto);
+      gap: 0.9rem;
+    }
+
+    .impact-card {
+      position: relative;
+      display: grid;
+      align-content: space-between;
+      min-height: 168px;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-strong);
+      overflow: hidden;
+    }
+
+    .impact-card:nth-child(1) {
+      grid-column: span 7;
+      background: oklch(90% 0.07 158);
+    }
+
+    .impact-card:nth-child(2) {
+      grid-column: span 5;
+      background: oklch(91% 0.06 252);
+    }
+
+    .impact-card:nth-child(3) {
+      grid-column: span 4;
+      background: oklch(93% 0.065 66);
+    }
+
+    .impact-card:nth-child(4) {
+      grid-column: span 4;
+    }
+
+    .impact-card:nth-child(5) {
+      grid-column: span 4;
+      background: oklch(90% 0.048 31);
+    }
+
+    .impact-card::after {
+      content: attr(data-signal);
+      position: absolute;
+      right: -0.3rem;
+      bottom: -1.8rem;
+      color: var(--ghost-text);
+      font-family: var(--font-code);
+      font-size: 7rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .impact-card strong {
+      position: relative;
+      z-index: 1;
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4.9rem);
+      line-height: 0.9;
+    }
+
+    .impact-card span {
+      position: relative;
+      z-index: 1;
+      display: block;
+      max-width: 36ch;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .role {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.22fr) 1fr;
+      gap: 1.2rem;
+      padding: 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: oklch(98.5% 0.006 91 / 0.78);
+      box-shadow: 0 18px 44px oklch(24% 0.03 218 / 0.07);
+    }
+
+    .role time {
+      color: var(--signal-deep);
+      font-family: var(--font-code);
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .role-title {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.7vw, 2.15rem);
+      line-height: 1.03;
+    }
+
+    .role-company {
+      margin: 0.25rem 0 0.7rem;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .role ul,
+    .project ul {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    .role li,
+    .project li {
+      margin: 0.35rem 0;
+      color: var(--muted);
+    }
+
+    .skill-matrix {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .skill-block {
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-strong);
+    }
+
+    .skill-block h3,
+    .project h3 {
+      margin: 0 0 0.7rem;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .depth {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .depth-row {
+      display: grid;
+      grid-template-columns: 9rem 1fr 3rem;
+      gap: 0.75rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .bar {
+      height: 0.65rem;
+      border-radius: 999px;
+      background: oklch(87% 0.024 84);
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--signal), var(--accent));
+      transition: width 1000ms var(--ease);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .filter-button {
+      padding: 0.55rem 0.82rem;
+      background: oklch(98% 0.007 91 / 0.88);
+      font-family: inherit;
+      font-size: 0.82rem;
+    }
+
+    .filter-button[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--paper-strong);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .project {
+      display: grid;
+      gap: 0.8rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: oklch(98.5% 0.006 91 / 0.86);
+      transition: opacity 200ms var(--ease), transform 200ms var(--ease);
+    }
+
+    .project[hidden] {
+      display: none;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .project p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .project strong {
+      color: var(--ink);
+    }
+
+    .certs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .cert {
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-strong);
+    }
+
+    .cert strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      line-height: 1.1;
+    }
+
+    .cert span {
+      display: block;
+      margin-top: 0.45rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: end;
+      padding: clamp(1.4rem, 4vw, 2.2rem);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: var(--paper-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel h2 {
+      max-width: 11ch;
+      color: var(--paper-strong);
+    }
+
+    .contact-panel p {
+      max-width: 58ch;
+      margin: 1rem 0 0;
+      color: var(--contact-muted);
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 0.6rem;
+      justify-items: end;
+    }
+
+    .contact-links a {
+      color: var(--paper-strong);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.25rem;
+      font-weight: 900;
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(26px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      70% {
+        box-shadow: 0 0 0 12px oklch(57% 0.154 158 / 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 oklch(57% 0.154 158 / 0);
+      }
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -240;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .topbar {
+        position: relative;
+      }
+
+      .topbar .shell,
+      .hero,
+      .section-grid,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar .shell {
+        align-items: flex-start;
+        padding: 0.9rem 0;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        min-height: 0;
+      }
+
+      .section-note,
+      h2 {
+        max-width: 100%;
+      }
+
+      .contact-links {
+        justify-items: start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(100% - 24px, var(--max));
+      }
+
+      h1 {
+        font-size: clamp(3.25rem, 18vw, 5.8rem);
+      }
+
+      .command-panel {
+        min-height: 0;
+      }
+
+      .availability,
+      .skill-matrix,
+      .project-grid,
+      .certs,
+      .role {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-board {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-card,
+      .impact-card:nth-child(n) {
+        grid-column: auto;
+      }
+
+      .depth-row {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+      }
+
+      .terminal {
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media print {
+      body {
+        background: var(--paper-strong);
+        color: var(--ink);
+      }
+
+      body::before,
+      .progress,
+      .topbar,
+      .hero-actions,
+      .filters {
+        display: none;
+      }
+
+      .shell {
+        width: 100%;
+      }
+
+      .hero,
+      .section-grid,
+      .contact-panel {
+        display: block;
+        min-height: 0;
+        padding: 1.2rem 0;
+      }
+
+      .command-panel,
+      .impact-card,
+      .role,
+      .skill-block,
+      .project,
+      .cert,
+      .contact-panel {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      a {
+        color: inherit;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to resume content</a>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="topbar" aria-label="Primary navigation">
+    <div class="shell">
+      <a class="brand-mark" href="#top" aria-label="Alex Nowak resume home">
+        <svg viewBox="0 0 80 80" role="img" aria-label="AN monogram with pipeline nodes">
+          <rect width="80" height="80" rx="14" fill="oklch(24% 0.032 218)"></rect>
+          <path d="M18 58V24h11l22 34H40l-4.2-7H28v7H18Zm10-15h3.5L28 37v6Zm35 15h-9V24h9v34Z" fill="oklch(91% 0.03 149)"></path>
+          <circle cx="18" cy="18" r="5" fill="oklch(57% 0.154 158)"></circle>
+          <circle cx="62" cy="18" r="5" fill="oklch(70% 0.162 66)"></circle>
+          <path d="M23 18h34" stroke="oklch(91% 0.03 149)" stroke-width="3" stroke-linecap="round"></path>
+        </svg>
+        <span><strong>Alex Nowak</strong><span>DevOps and Platform Engineer</span></span>
+      </a>
+      <nav class="nav" aria-label="Resume sections">
+        <a href="#impact">Impact</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="shell">
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Cloud reliability, automation, delivery systems</p>
+        <h1 id="hero-title">DevOps Engineer</h1>
+        <p class="hero-summary">I build cloud platforms that make delivery boring in the best possible way: observable, repeatable, cost-aware, and fast enough for product teams to ship without waiting on infrastructure.</p>
+        <div class="hero-actions" aria-label="Resume actions">
+          <a class="action primary" href="mailto:alex.nowak@example.com">Email Alex</a>
+          <a class="action" href="#projects">View Projects</a>
+          <button class="action" type="button" id="printResume">Print Resume</button>
+        </div>
+      </div>
+
+      <aside class="command-panel" aria-label="DevOps capability snapshot">
+        <div class="panel-head">
+          <span>platform.telemetry</span>
+          <span class="status-pill">available for senior IC roles</span>
+        </div>
+        <div class="terminal" aria-label="Profile summary in terminal style">
+          <span><span class="dim">$</span> whoami</span>
+          <span>senior-devops-engineer --cloud azure/aws --focus reliability</span>
+          <span><span class="dim">$</span> latest_outcome</span>
+          <span>reduced lead time 68%, raised deployment frequency 4.2x</span>
+        </div>
+        <svg class="topology" viewBox="0 0 560 250" role="img" aria-label="Infrastructure topology connecting CI, registry, clusters, observability, and users">
+          <defs>
+            <linearGradient id="nodeFill" x1="0" x2="1">
+              <stop stop-color="oklch(57% 0.154 158)"></stop>
+              <stop offset="1" stop-color="oklch(54% 0.132 258)"></stop>
+            </linearGradient>
+          </defs>
+          <path class="line" d="M74 62 C170 28 198 120 280 92 S410 28 486 74" fill="none" stroke="oklch(38% 0.12 163)" stroke-width="4" stroke-linecap="round"></path>
+          <path class="line" d="M74 178 C170 214 206 132 286 158 S410 218 486 174" fill="none" stroke="oklch(54% 0.132 258)" stroke-width="4" stroke-linecap="round"></path>
+          <g fill="oklch(98% 0.007 91)" stroke="oklch(24% 0.032 218)" stroke-width="4">
+            <rect x="28" y="34" width="92" height="58" rx="8"></rect>
+            <rect x="234" y="62" width="92" height="58" rx="8"></rect>
+            <rect x="440" y="46" width="92" height="58" rx="8"></rect>
+            <rect x="28" y="148" width="92" height="58" rx="8"></rect>
+            <rect x="234" y="132" width="92" height="58" rx="8"></rect>
+            <rect x="440" y="144" width="92" height="58" rx="8"></rect>
+          </g>
+          <g fill="url(#nodeFill)">
+            <circle cx="74" cy="63" r="9"></circle>
+            <circle cx="280" cy="91" r="9"></circle>
+            <circle cx="486" cy="75" r="9"></circle>
+            <circle cx="74" cy="177" r="9"></circle>
+            <circle cx="280" cy="161" r="9"></circle>
+            <circle cx="486" cy="173" r="9"></circle>
+          </g>
+          <g font-family="Cascadia Code, Consolas, monospace" font-size="18" font-weight="800" fill="oklch(24% 0.032 218)">
+            <text x="50" y="69">CI</text>
+            <text x="254" y="97">IaC</text>
+            <text x="461" y="81">K8s</text>
+            <text x="46" y="183">SLO</text>
+            <text x="255" y="167">SEC</text>
+            <text x="461" y="179">Fin</text>
+          </g>
+        </svg>
+        <div class="availability" aria-label="Selected performance metrics">
+          <div class="metric-tile">
+            <strong class="metric-value" data-count="99.96" data-suffix="%">0%</strong>
+            <span class="metric-label">production service availability</span>
+          </div>
+          <div class="metric-tile">
+            <strong class="metric-value" data-count="38" data-suffix="%">0%</strong>
+            <span class="metric-label">cloud spend reduction</span>
+          </div>
+        </div>
+        <div class="stack-strip" aria-label="Core technologies">
+          <span class="chip">Kubernetes</span>
+          <span class="chip">Terraform</span>
+          <span class="chip">GitHub Actions</span>
+          <span class="chip">Azure</span>
+          <span class="chip">AWS</span>
+          <span class="chip">Prometheus</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="impact" class="section-grid reveal" aria-labelledby="impact-title">
+      <div>
+        <p class="section-kicker">Measured outcomes</p>
+        <h2 id="impact-title">Impact in production</h2>
+        <p class="section-note">Numbers are strongest when they describe fewer incidents, faster feedback, and less manual toil.</p>
+      </div>
+      <div class="impact-board">
+        <article class="impact-card" data-signal="4.2x">
+          <strong data-count="4.2" data-suffix="x">0x</strong>
+          <span>increase in deployment frequency after standardizing reusable CI workflows and release gates.</span>
+        </article>
+        <article class="impact-card" data-signal="68%">
+          <strong data-count="68" data-suffix="%">0%</strong>
+          <span>lower lead time from commit to production through environment automation and parallelized validation.</span>
+        </article>
+        <article class="impact-card" data-signal="31m">
+          <strong data-count="31" data-suffix="m">0m</strong>
+          <span>mean time to restore for priority incidents, supported by SLO dashboards and runbook automation.</span>
+        </article>
+        <article class="impact-card" data-signal="420">
+          <strong data-count="420" data-suffix="+">0+</strong>
+          <span>services onboarded to shared logging, tracing, and metric conventions across product squads.</span>
+        </article>
+        <article class="impact-card" data-signal="0">
+          <strong data-count="0" data-suffix="">0</strong>
+          <span>critical secrets found in repositories after rolling out pre-commit scanning and vault-backed delivery.</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="section-grid reveal" aria-labelledby="experience-title">
+      <div>
+        <p class="section-kicker">Career path</p>
+        <h2 id="experience-title">Platform work with product pressure</h2>
+        <p class="section-note">Hands-on engineering across cloud infrastructure, CI/CD, observability, security, and incident response.</p>
+      </div>
+      <div class="timeline">
+        <article class="role">
+          <time datetime="2023">2023 to present</time>
+          <div>
+            <h3 class="role-title">Senior DevOps Engineer</h3>
+            <p class="role-company">Northstar Cloud Systems</p>
+            <ul>
+              <li>Designed a multi-account Azure and AWS landing zone with policy-as-code, private networking, workload identity, and reusable Terraform modules.</li>
+              <li>Moved 46 services from manual releases to progressive delivery with automated rollback, canary metrics, and signed container provenance.</li>
+              <li>Built cost visibility loops that cut idle compute, right-sized managed databases, and saved an estimated $1.4M annually.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="role">
+          <time datetime="2020">2020 to 2023</time>
+          <div>
+            <h3 class="role-title">Cloud Infrastructure Engineer</h3>
+            <p class="role-company">Brightline Commerce</p>
+            <ul>
+              <li>Operated Kubernetes clusters for peak retail events, serving 11M monthly sessions with zero checkout downtime during launch windows.</li>
+              <li>Replaced fragile shell deployments with GitHub Actions workflows, immutable images, test matrices, and environment protection rules.</li>
+              <li>Introduced SLOs for checkout, search, and payments, reducing alert noise by 57% while improving incident triage quality.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="role">
+          <time datetime="2018">2018 to 2020</time>
+          <div>
+            <h3 class="role-title">Systems Reliability Engineer</h3>
+            <p class="role-company">Vector Health Labs</p>
+            <ul>
+              <li>Automated Linux fleet provisioning, patch compliance, backup verification, and certificate rotation across regulated workloads.</li>
+              <li>Built a Prometheus, Grafana, and Alertmanager baseline that exposed capacity risk before quarterly audit cycles.</li>
+              <li>Partnered with security teams on least-privilege access, vulnerability remediation, and disaster recovery exercises.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section-grid reveal" aria-labelledby="skills-title">
+      <div>
+        <p class="section-kicker">Technical depth</p>
+        <h2 id="skills-title">Tools with operating judgment</h2>
+        <p class="section-note">The stack changes. The useful habit is choosing systems that teams can understand under stress.</p>
+      </div>
+      <div>
+        <div class="skill-matrix">
+          <article class="skill-block">
+            <h3>Cloud and infrastructure</h3>
+            <div class="skill-list">
+              <span class="chip">Azure</span>
+              <span class="chip">AWS</span>
+              <span class="chip">Terraform</span>
+              <span class="chip">Bicep</span>
+              <span class="chip">Pulumi</span>
+              <span class="chip">Linux</span>
+              <span class="chip">Networking</span>
+            </div>
+          </article>
+          <article class="skill-block">
+            <h3>Containers and orchestration</h3>
+            <div class="skill-list">
+              <span class="chip">Kubernetes</span>
+              <span class="chip">Helm</span>
+              <span class="chip">Docker</span>
+              <span class="chip">AKS</span>
+              <span class="chip">EKS</span>
+              <span class="chip">Argo CD</span>
+              <span class="chip">Flux</span>
+            </div>
+          </article>
+          <article class="skill-block">
+            <h3>Delivery and quality</h3>
+            <div class="skill-list">
+              <span class="chip">GitHub Actions</span>
+              <span class="chip">Azure DevOps</span>
+              <span class="chip">Jenkins</span>
+              <span class="chip">SonarQube</span>
+              <span class="chip">Trivy</span>
+              <span class="chip">OPA</span>
+            </div>
+          </article>
+          <article class="skill-block">
+            <h3>Observability and response</h3>
+            <div class="skill-list">
+              <span class="chip">Prometheus</span>
+              <span class="chip">Grafana</span>
+              <span class="chip">OpenTelemetry</span>
+              <span class="chip">Loki</span>
+              <span class="chip">Datadog</span>
+              <span class="chip">PagerDuty</span>
+            </div>
+          </article>
+        </div>
+        <div class="depth" aria-label="Capability depth chart">
+          <div class="depth-row"><span>Automation</span><div class="bar"><span data-width="96"></span></div><span>96%</span></div>
+          <div class="depth-row"><span>Reliability</span><div class="bar"><span data-width="93"></span></div><span>93%</span></div>
+          <div class="depth-row"><span>Security</span><div class="bar"><span data-width="88"></span></div><span>88%</span></div>
+          <div class="depth-row"><span>Cost</span><div class="bar"><span data-width="84"></span></div><span>84%</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section-grid reveal" aria-labelledby="projects-title">
+      <div>
+        <p class="section-kicker">Selected projects</p>
+        <h2 id="projects-title">Proof through shipped systems</h2>
+        <p class="section-note">Each project pairs technical design with a business outcome that survived production traffic.</p>
+      </div>
+      <div>
+        <div class="filters" aria-label="Filter projects">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-button" type="button" data-filter="platform" aria-pressed="false">Platform</button>
+          <button class="filter-button" type="button" data-filter="security" aria-pressed="false">Security</button>
+          <button class="filter-button" type="button" data-filter="observability" aria-pressed="false">Observability</button>
+        </div>
+        <div class="project-grid">
+          <article class="project" data-tags="platform observability">
+            <div class="project-meta">
+              <span class="chip">Kubernetes</span>
+              <span class="chip">Argo CD</span>
+              <span class="chip">OpenTelemetry</span>
+            </div>
+            <h3>Golden path delivery platform</h3>
+            <p>Created paved-road templates for services, pipelines, dashboards, and alerts. <strong>Result:</strong> onboarding time dropped from 9 days to 1.5 days.</p>
+            <ul>
+              <li>Self-service environments with policy checks before merge.</li>
+              <li>Reusable SLO templates for latency, errors, saturation, and availability.</li>
+            </ul>
+          </article>
+          <article class="project" data-tags="security platform">
+            <div class="project-meta">
+              <span class="chip">Terraform</span>
+              <span class="chip">Vault</span>
+              <span class="chip">OPA</span>
+            </div>
+            <h3>Secretless cloud deployment</h3>
+            <p>Replaced long-lived deployment credentials with workload identity, short-lived tokens, and automated policy tests. <strong>Result:</strong> 100% of production deploys moved off static secrets.</p>
+            <ul>
+              <li>Rotated legacy credentials without service interruption.</li>
+              <li>Added repository scanning, SBOM checks, and provenance attestations.</li>
+            </ul>
+          </article>
+          <article class="project" data-tags="observability">
+            <div class="project-meta">
+              <span class="chip">Prometheus</span>
+              <span class="chip">Grafana</span>
+              <span class="chip">PagerDuty</span>
+            </div>
+            <h3>Incident command cockpit</h3>
+            <p>Unified service health, deployment events, ownership, and runbooks into a single incident surface. <strong>Result:</strong> MTTR improved by 44% in two quarters.</p>
+            <ul>
+              <li>Alert routing based on service ownership and severity.</li>
+              <li>Post-incident review templates connected to action tracking.</li>
+            </ul>
+          </article>
+          <article class="project" data-tags="platform">
+            <div class="project-meta">
+              <span class="chip">FinOps</span>
+              <span class="chip">Azure</span>
+              <span class="chip">AWS</span>
+            </div>
+            <h3>Cloud cost control loop</h3>
+            <p>Built budgets, anomaly detection, tagging compliance, and engineering feedback reports. <strong>Result:</strong> monthly cloud waste fell by 38%.</p>
+            <ul>
+              <li>Chargeback reports for product, environment, and service owners.</li>
+              <li>Automated cleanup for stale preview environments and unattached disks.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="section-grid reveal" aria-labelledby="cert-title">
+      <div>
+        <p class="section-kicker">Credentials</p>
+        <h2 id="cert-title">Signals worth backing up</h2>
+        <p class="section-note">Certifications support the work, but the resume is anchored in outcomes and production systems.</p>
+      </div>
+      <div class="certs">
+        <article class="cert"><strong>CKA</strong><span>Certified Kubernetes Administrator</span></article>
+        <article class="cert"><strong>Azure Solutions Architect Expert</strong><span>Cloud architecture, governance, networking, and migration.</span></article>
+        <article class="cert"><strong>AWS DevOps Engineer Professional</strong><span>Automation, deployment, monitoring, and incident response.</span></article>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal" aria-labelledby="contact-title">
+      <div class="contact-panel">
+        <div>
+          <p class="section-kicker">Contact</p>
+          <h2 id="contact-title">Ready for resilient platforms</h2>
+          <p>Available for senior DevOps, platform engineering, and reliability roles where product teams need faster delivery without accepting fragile operations.</p>
+        </div>
+        <div class="contact-links" aria-label="Contact links">
+          <a href="mailto:alex.nowak@example.com">alex.nowak@example.com</a>
+          <a href="tel:+15550142024">+1 555 014 2024</a>
+          <a href="https://www.linkedin.com/" rel="noreferrer">LinkedIn</a>
+          <a href="https://github.com/" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <span>Single-file HTML resume with embedded CSS and JavaScript. Last updated May 2026.</span>
+  </footer>
+
+  <script>
+    (() => {
+      const prefersReducedMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const progress = document.querySelector(".progress");
+      const navLinks = [...document.querySelectorAll(".nav a")];
+      const sections = navLinks
+        .map((link) => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+
+      const formatNumber = (value) => Number.isInteger(value) ? String(value) : value.toFixed(2).replace(/0$/, "").replace(/\.0$/, "");
+
+      const animateCount = (element) => {
+        if (element.dataset.done === "true") return;
+        element.dataset.done = "true";
+        const target = Number(element.dataset.count || "0");
+        const suffix = element.dataset.suffix || "";
+        const duration = prefersReducedMotion ? 1 : 1100;
+        const start = performance.now();
+
+        const tick = (now) => {
+          const elapsed = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - elapsed, 4);
+          const current = target * eased;
+          element.textContent = `${formatNumber(current)}${suffix}`;
+          if (elapsed < 1) requestAnimationFrame(tick);
+          else element.textContent = `${formatNumber(target)}${suffix}`;
+        };
+
+        requestAnimationFrame(tick);
+      };
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          entry.target.querySelectorAll("[data-count]").forEach(animateCount);
+          entry.target.querySelectorAll(".bar span").forEach((bar) => {
+            bar.style.width = `${bar.dataset.width}%`;
+          });
+        });
+      }, { threshold: 0.18 });
+
+      document.querySelectorAll(".reveal, .command-panel").forEach((element) => revealObserver.observe(element));
+      document.querySelectorAll(".hero [data-count]").forEach(animateCount);
+
+      const updateProgress = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+        progress.style.transform = `scaleX(${Math.min(Math.max(ratio, 0), 1)})`;
+      };
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visible) return;
+        navLinks.forEach((link) => {
+          link.setAttribute("aria-current", String(link.getAttribute("href") === `#${visible.target.id}`));
+        });
+      }, { threshold: [0.25, 0.45, 0.65], rootMargin: "-20% 0px -45% 0px" });
+
+      sections.forEach((section) => sectionObserver.observe(section));
+      globalThis.addEventListener("scroll", updateProgress, { passive: true });
+      updateProgress();
+
+      document.querySelectorAll(".filter-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const filter = button.dataset.filter;
+          document.querySelectorAll(".filter-button").forEach((item) => {
+            item.setAttribute("aria-pressed", String(item === button));
+          });
+          document.querySelectorAll(".project").forEach((project) => {
+            const tags = project.dataset.tags || "";
+            project.hidden = filter !== "all" && !tags.includes(filter);
+          });
+        });
+      });
+
+      document.getElementById("printResume").addEventListener("click", () => globalThis.print());
+    })();
+  </script>
+</body>
+</html>
