@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adrian Vale | DevOps Engineer Resume</title>
+  <meta
+    name="description"
+    content="Single-file DevOps engineer resume showcasing platform reliability, cloud automation, delivery metrics, and selected infrastructure projects."
+  >
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: oklch(96% 0.014 85);
+      --bg-strong: oklch(92% 0.026 80);
+      --surface: oklch(98% 0.01 85 / 0.9);
+      --surface-strong: oklch(94% 0.022 75 / 0.95);
+      --ink: oklch(25% 0.03 250);
+      --muted: oklch(44% 0.022 245);
+      --line: oklch(80% 0.018 88);
+      --accent: oklch(58% 0.15 190);
+      --accent-soft: oklch(90% 0.06 190);
+      --signal: oklch(69% 0.16 55);
+      --signal-soft: oklch(92% 0.05 55);
+      --success: oklch(62% 0.14 150);
+      --shadow: 0 24px 60px oklch(38% 0.03 250 / 0.12);
+      --line-soft-rgb: rgba(197, 190, 177, 0.75);
+      --line-accent-rgb: rgba(112, 171, 177, 0.55);
+      --line-success-rgb: rgba(143, 183, 157, 0.65);
+      --surface-border-rgb: rgba(197, 190, 177, 0.7);
+      --skill-border-rgb: rgba(191, 183, 164, 0.55);
+      --signal-border-rgb: rgba(214, 184, 143, 0.5);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --content-width: min(1180px, calc(100vw - 2rem));
+      --body-font: "Aptos", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+      --display-font: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      --mono-font: "Cascadia Code", "Consolas", "Courier New", monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--body-font);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, oklch(97% 0.055 90), transparent 32%),
+        radial-gradient(circle at 82% 14%, oklch(94% 0.08 195 / 0.9), transparent 20%),
+        linear-gradient(180deg, oklch(97% 0.018 85), oklch(94% 0.02 82));
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(oklch(74% 0.01 250 / 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, oklch(74% 0.01 250 / 0.08) 1px, transparent 1px);
+      background-size: 48px 48px;
+      -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -3rem;
+      background: var(--ink);
+      color: var(--surface);
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      transition: top 180ms var(--ease);
+      z-index: 20;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    .shell {
+      width: var(--content-width);
+      margin: 0 auto;
+      padding: 1.1rem 0 4rem;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.9rem 1.1rem;
+      margin: 0 auto 1.4rem;
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      background: oklch(98% 0.012 85 / 0.84);
+      border: 1px solid var(--line-soft-rgb);
+      border-radius: 999px;
+      box-shadow: 0 16px 40px oklch(50% 0.02 250 / 0.1);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono-font);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background:
+        linear-gradient(140deg, oklch(90% 0.05 190), oklch(97% 0.015 85));
+      border: 1px solid var(--line-accent-rgb);
+    }
+
+    .brand-copy strong,
+    .eyebrow,
+    .section-heading h2,
+    .hero-title,
+    .timeline-item h3,
+    .project-card h3,
+    .metric strong,
+    .quote-card strong {
+      font-family: var(--display-font);
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .topnav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .topnav a {
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      transition: background-color 180ms var(--ease), color 180ms var(--ease), transform 180ms var(--ease);
+    }
+
+    .topnav a:hover,
+    .topnav a:focus-visible,
+    .topnav a.is-active {
+      color: var(--ink);
+      background: oklch(92% 0.03 190 / 0.9);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .top-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .status-pill,
+    .tag,
+    .button,
+    .stat-chip,
+    .skill-badge,
+    .project-meta span,
+    .contact-card a,
+    .legend span {
+      border-radius: 999px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.8rem;
+      background: var(--surface-strong);
+      border: 1px solid var(--line-success-rgb);
+      color: var(--ink);
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 0.24rem oklch(90% 0.045 150 / 0.75);
+    }
+
+    main {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    section {
+      position: relative;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--surface-border-rgb);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.9fr);
+      gap: 2rem;
+      padding: clamp(1.5rem, 2.6vw, 2.4rem);
+      background:
+        linear-gradient(135deg, oklch(97% 0.02 85 / 0.95), oklch(99% 0.005 85 / 0.9)),
+        var(--surface);
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 1.3rem;
+      align-content: start;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-lead {
+      margin: 0;
+      max-width: 61ch;
+      font-size: 1.04rem;
+      color: var(--muted);
+    }
+
+    .hero-tags,
+    .skill-cloud,
+    .project-meta,
+    .legend,
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .tag,
+    .skill-badge,
+    .project-meta span,
+    .contact-card a {
+      padding: 0.52rem 0.84rem;
+      background: oklch(94% 0.018 190 / 0.9);
+      border: 1px solid var(--line-accent-rgb);
+      color: var(--ink);
+      font-size: 0.92rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      min-height: 3rem;
+      padding: 0.8rem 1.15rem;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 180ms var(--ease), box-shadow 180ms var(--ease), background-color 180ms var(--ease), border-color 180ms var(--ease);
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .button-primary {
+      background: var(--ink);
+      color: #fcfbf7;
+      box-shadow: 0 18px 28px oklch(24% 0.03 250 / 0.18);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .highlight-card,
+    .quote-card,
+    .capability-card,
+    .timeline-item,
+    .project-card,
+    .contact-card,
+    .metric,
+    .stat-chip {
+      background: var(--surface);
+      border: 1px solid var(--surface-border-rgb);
+    }
+
+    .highlight-card {
+      padding: 1.1rem;
+      border-radius: var(--radius-lg);
+      display: grid;
+      gap: 0.95rem;
+      background:
+        linear-gradient(160deg, oklch(97% 0.016 85), oklch(94% 0.03 82)),
+        var(--surface);
+    }
+
+    .highlight-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .highlight-top strong {
+      font-size: 1rem;
+    }
+
+    .highlight-top span,
+    .timeline-meta,
+    .project-card p,
+    .capability-card p,
+    .contact-card p,
+    .section-heading p,
+    .metric small,
+    .quote-card p {
+      color: var(--muted);
+    }
+
+    .availability-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .stat-chip {
+      padding: 0.95rem;
+      border-radius: var(--radius-md);
+      background: oklch(98% 0.01 85 / 0.92);
+    }
+
+    .stat-chip strong {
+      display: block;
+      font-family: var(--display-font);
+      font-size: 1.3rem;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-chip span {
+      display: block;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .quote-card {
+      padding: 1.1rem 1.2rem;
+      border-radius: var(--radius-lg);
+      display: grid;
+      gap: 0.65rem;
+      background: oklch(97% 0.012 85 / 0.93);
+    }
+
+    .quote-card strong {
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--signal);
+    }
+
+    .metrics-band {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      background: oklch(80% 0.018 88 / 0.6);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .metric {
+      padding: 1.4rem 1.2rem;
+      min-height: 10rem;
+      display: grid;
+      align-content: start;
+      gap: 0.5rem;
+      background: oklch(98% 0.012 85 / 0.95);
+    }
+
+    .metric strong {
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -0.06em;
+      line-height: 0.9;
+    }
+
+    .metric small {
+      font-size: 0.88rem;
+      max-width: 18ch;
+    }
+
+    .section-shell {
+      padding: clamp(1.35rem, 2vw, 2rem);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 0.35rem;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      max-width: 58ch;
+    }
+
+    .legend {
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .legend span {
+      padding: 0.45rem 0.8rem;
+      font-size: 0.84rem;
+      background: var(--surface-strong);
+      border: 1px solid rgba(197, 190, 177, 0.65);
+    }
+
+    .capability-grid,
+    .projects-grid,
+    .contact-panels {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .capability-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .capability-card {
+      border-radius: var(--radius-lg);
+      padding: 1.2rem;
+      display: grid;
+      gap: 1rem;
+      background: oklch(98% 0.008 85 / 0.95);
+    }
+
+    .capability-card h3,
+    .contact-card h3 {
+      margin: 0;
+      font-size: 1.12rem;
+    }
+
+    .capability-card p,
+    .contact-card p,
+    .project-card p,
+    .timeline-item p {
+      margin: 0;
+    }
+
+    .skill-cloud {
+      align-items: flex-start;
+    }
+
+    .skill-badge {
+      background: oklch(95% 0.024 82 / 0.9);
+      border-color: var(--skill-border-rgb);
+      font-size: 0.88rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: 1.2rem;
+      padding: 1.25rem;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, oklch(98% 0.008 85 / 0.96), oklch(96% 0.018 82 / 0.94));
+    }
+
+    .timeline-meta {
+      display: grid;
+      gap: 0.35rem;
+      align-content: start;
+      font-size: 0.92rem;
+    }
+
+    .timeline-meta strong {
+      color: var(--signal);
+      font-family: var(--display-font);
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 0.25rem;
+      font-size: 1.38rem;
+      letter-spacing: -0.03em;
+    }
+
+    .timeline-item ul,
+    .project-card ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .project-card {
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      display: grid;
+      gap: 0.95rem;
+      background:
+        linear-gradient(165deg, oklch(98% 0.008 85 / 0.96), oklch(96% 0.022 190 / 0.17));
+    }
+
+    .project-kicker,
+    .contact-kicker {
+      margin: 0;
+      color: var(--accent);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+    }
+
+    .project-card h3 {
+      margin: 0;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .project-meta span {
+      font-size: 0.8rem;
+      background: oklch(96% 0.015 85 / 0.9);
+    }
+
+    .contact-panels {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .contact-card {
+      border-radius: var(--radius-lg);
+      padding: 1.3rem;
+      display: grid;
+      gap: 1rem;
+      background: oklch(98% 0.01 85 / 0.95);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .contact-card a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      font-weight: 700;
+      background: oklch(95% 0.03 190 / 0.86);
+    }
+
+    .contact-card a:hover,
+    .contact-card a:focus-visible {
+      background: oklch(90% 0.05 190);
+      outline: none;
+    }
+
+    .availability-note {
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-md);
+      background: oklch(95% 0.026 55 / 0.45);
+      border: 1px solid var(--signal-border-rgb);
+    }
+
+    .availability-note strong {
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .meter {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .meter-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.8rem;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .meter-bar {
+      position: relative;
+      height: 0.7rem;
+      overflow: hidden;
+      border-radius: 999px;
+      background: oklch(90% 0.014 85);
+    }
+
+    .meter-bar > span {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: var(--value, 50%);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--signal));
+      transform-origin: left center;
+      transform: scaleX(0.2);
+      opacity: 0.3;
+      transition: transform 900ms var(--ease), opacity 900ms var(--ease);
+    }
+
+    .meter-row.is-visible .meter-bar > span {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+    .footer {
+      padding: 1.4rem 0 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 1080px) {
+      .topbar,
+      .hero,
+      .contact-panels,
+      .capability-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        border-radius: 28px;
+      }
+
+      .section-heading,
+      .timeline-item,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-band {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .shell {
+        width: min(100vw - 1rem, 100%);
+      }
+
+      .topbar {
+        position: static;
+        padding: 1rem;
+      }
+
+      .topnav {
+        justify-content: flex-start;
+      }
+
+      .hero-title {
+        max-width: 100%;
+      }
+
+      .availability-grid,
+      .metrics-band,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        gap: 0.9rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal,
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      .meter-bar > span,
+      .meter-row.is-visible .meter-bar > span {
+        transform: none;
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="shell">
+    <header class="topbar" aria-label="Primary">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">AV</div>
+        <div class="brand-copy">
+          <strong>Adrian Vale</strong>
+          <span>DevOps Engineer, platform reliability and delivery systems</span>
+        </div>
+      </div>
+      <nav class="topnav" aria-label="Section navigation">
+        <a href="#impact">Impact</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="top-actions">
+        <div class="status-pill" aria-label="Current availability">Available for senior platform roles</div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero panel reveal" id="summary" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Resume / DevOps Engineering / Cloud Infrastructure</p>
+          <h1 class="hero-title" id="hero-title">Shipping stable platforms <span>at startup speed.</span></h1>
+          <p class="hero-lead">
+            DevOps engineer with 8+ years building cloud platforms, internal developer tooling, and delivery pipelines across AWS,
+            Kubernetes, and Terraform. I focus on release safety, observability, and cost control so product teams can move faster
+            without adding operational drag.
+          </p>
+          <div class="hero-tags" aria-label="Core specialties">
+            <span class="tag">AWS multi-account architecture</span>
+            <span class="tag">Kubernetes platform operations</span>
+            <span class="tag">Terraform and GitOps</span>
+            <span class="tag">SLO-driven reliability</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">Start a conversation</a>
+            <a class="button button-secondary" href="#projects">See platform projects</a>
+          </div>
+        </div>
+
+        <aside class="hero-side" aria-label="Quick profile highlights">
+          <div class="highlight-card">
+            <div class="highlight-top">
+              <strong>Operational snapshot</strong>
+              <span>Last 24 months</span>
+            </div>
+            <div class="availability-grid">
+              <div class="stat-chip">
+                <strong data-counter="99.97">0</strong>
+                <span>platform uptime across critical services</span>
+              </div>
+              <div class="stat-chip">
+                <strong data-counter="43">0</strong>
+                <span>minutes median recovery improvement</span>
+              </div>
+              <div class="stat-chip">
+                <strong data-counter="31">0</strong>
+                <span>cloud spend reduced through FinOps guardrails</span>
+              </div>
+              <div class="stat-chip">
+                <strong data-counter="210">0</strong>
+                <span>deployments per week enabled on flagship product</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="quote-card">
+            <strong>Operating principle</strong>
+            <p>
+              Build paved roads, not ticket queues. The strongest platform work removes recurring friction, exposes good defaults,
+              and gives engineers fast feedback before production does.
+            </p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel reveal" id="impact" aria-labelledby="impact-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <h2 id="impact-title">Measured impact</h2>
+              <p>Delivery, resilience, and cost signals pulled into one place for hiring managers who want evidence rather than adjectives.</p>
+            </div>
+            <div class="legend" aria-label="Impact categories">
+              <span>Reliability</span>
+              <span>Delivery</span>
+              <span>Cost</span>
+            </div>
+          </div>
+
+          <ul class="metrics-band" aria-label="Career metrics">
+            <li class="metric">
+              <small>Change failure rate</small>
+              <strong data-counter="8">0</strong>
+              <small>Lowered from 22% to 8% after introducing preview environments, rollout scoring, and SLO gates.</small>
+            </li>
+            <li class="metric">
+              <small>Lead time to production</small>
+              <strong data-counter="74">0</strong>
+              <small>Minutes from merge to live for the median service after pipeline rationalization and cache layering.</small>
+            </li>
+            <li class="metric">
+              <small>Incident detection window</small>
+              <strong data-counter="6">0</strong>
+              <small>Average minutes to actionable alert after moving from host metrics to service-level telemetry and synthetic checks.</small>
+            </li>
+            <li class="metric">
+              <small>Infrastructure reuse</small>
+              <strong data-counter="84">0</strong>
+              <small>Percent of new services bootstrapped from versioned platform modules and golden templates.</small>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel reveal" id="capabilities" aria-labelledby="capabilities-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <h2 id="capabilities-title">Capabilities</h2>
+              <p>The work sits at the intersection of infrastructure, developer experience, and operational discipline.</p>
+            </div>
+          </div>
+
+          <div class="capability-grid">
+            <article class="capability-card">
+              <h3>Platform engineering</h3>
+              <p>Own internal platforms that remove deployment friction, standardize service foundations, and make safe paths the default path.</p>
+              <div class="skill-cloud" aria-label="Platform engineering skills">
+                <span class="skill-badge">Kubernetes</span>
+                <span class="skill-badge">Helm</span>
+                <span class="skill-badge">Argo CD</span>
+                <span class="skill-badge">Backstage</span>
+                <span class="skill-badge">GitHub Actions</span>
+              </div>
+              <div class="meter" aria-label="Platform engineering strength indicators">
+                <div class="meter-row reveal">
+                  <span>Golden paths</span>
+                  <div class="meter-bar"><span data-value="92"></span></div>
+                  <span>92%</span>
+                </div>
+                <div class="meter-row reveal">
+                  <span>Self-service</span>
+                  <div class="meter-bar"><span data-value="88"></span></div>
+                  <span>88%</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="capability-card">
+              <h3>Cloud automation</h3>
+              <p>Design reproducible environments with strong security boundaries, policy checks, and drift resistance across multi-account estates.</p>
+              <div class="skill-cloud" aria-label="Cloud automation skills">
+                <span class="skill-badge">Terraform</span>
+                <span class="skill-badge">AWS Organizations</span>
+                <span class="skill-badge">IAM</span>
+                <span class="skill-badge">OPA</span>
+                <span class="skill-badge">Terragrunt</span>
+              </div>
+              <div class="meter" aria-label="Cloud automation strength indicators">
+                <div class="meter-row reveal">
+                  <span>Provisioning maturity</span>
+                  <div class="meter-bar"><span data-value="95"></span></div>
+                  <span>95%</span>
+                </div>
+                <div class="meter-row reveal">
+                  <span>Policy coverage</span>
+                  <div class="meter-bar"><span data-value="85"></span></div>
+                  <span>85%</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="capability-card">
+              <h3>Observability and resilience</h3>
+              <p>Turn telemetry into operating decisions, with practical SLOs, faster triage, and incident rituals that improve the system each time.</p>
+              <div class="skill-cloud" aria-label="Observability skills">
+                <span class="skill-badge">Prometheus</span>
+                <span class="skill-badge">Grafana</span>
+                <span class="skill-badge">OpenTelemetry</span>
+                <span class="skill-badge">Loki</span>
+                <span class="skill-badge">PagerDuty</span>
+              </div>
+              <div class="meter" aria-label="Reliability strength indicators">
+                <div class="meter-row reveal">
+                  <span>Alert quality</span>
+                  <div class="meter-bar"><span data-value="90"></span></div>
+                  <span>90%</span>
+                </div>
+                <div class="meter-row reveal">
+                  <span>Recovery readiness</span>
+                  <div class="meter-bar"><span data-value="87"></span></div>
+                  <span>87%</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel reveal" id="experience" aria-labelledby="experience-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <h2 id="experience-title">Experience</h2>
+              <p>Recent roles focused on scaling engineering systems, hardening release paths, and building platform capabilities that stick.</p>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-meta">
+                <strong>2023 to present</strong>
+                <span>Senior DevOps Engineer</span>
+                <span>Northstar Commerce</span>
+              </div>
+              <div>
+                <h3>Platform lead for multi-region retail infrastructure</h3>
+                <p>Directed the modernization of CI/CD and runtime operations for 70+ microservices serving seasonal traffic across Europe and North America.</p>
+                <ul>
+                  <li>Rebuilt deployment flow around progressive delivery, cutting change failure rate by 64% while increasing weekly deployment volume by 2.7x.</li>
+                  <li>Introduced cost anomaly detection and workload right-sizing reviews, reducing annualized AWS spend by $410K without service degradation.</li>
+                  <li>Rolled out OpenTelemetry instrumentation standards and SLO scorecards, shrinking mean time to detect from 19 minutes to 6.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-meta">
+                <strong>2020 to 2023</strong>
+                <span>DevOps Engineer</span>
+                <span>Signal Forge</span>
+              </div>
+              <div>
+                <h3>Scaled developer workflows for a fast-moving SaaS product</h3>
+                <p>Owned Kubernetes operations, GitHub Actions governance, and internal tooling for product teams pushing multiple times per day.</p>
+                <ul>
+                  <li>Created reusable Terraform modules and service templates that took service bootstrap time from two days to under 45 minutes.</li>
+                  <li>Built ephemeral preview environments for pull requests, improving review quality and reducing escaped configuration defects by 38%.</li>
+                  <li>Standardized incident postmortems and runbooks, increasing on-call confidence and cutting high-severity recovery time by 43 minutes.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-meta">
+                <strong>2018 to 2020</strong>
+                <span>Systems Engineer</span>
+                <span>Arcline Digital</span>
+              </div>
+              <div>
+                <h3>Bridged legacy operations and cloud-native delivery</h3>
+                <p>Helped a services business move from manually managed virtual machines to codified, monitored, and auditable cloud environments.</p>
+                <ul>
+                  <li>Migrated 40+ workloads to containerized AWS infrastructure with Terraform, load testing, and rollback playbooks.</li>
+                  <li>Introduced image scanning, least-privilege IAM patterns, and secrets rotation, raising audit readiness across delivery teams.</li>
+                  <li>Automated fleet patching and backup verification, eliminating repeated weekend maintenance work.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel reveal" id="projects" aria-labelledby="projects-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <h2 id="projects-title">Selected projects</h2>
+              <p>Three examples that show range: delivery architecture, reliability systems, and cost discipline.</p>
+            </div>
+          </div>
+
+          <div class="projects-grid">
+            <article class="project-card">
+              <p class="project-kicker">Internal platform</p>
+              <h3>Paved-road service bootstrap</h3>
+              <p>Built a self-service platform starter that bundled service templates, Terraform stacks, CI workflows, and observability defaults into one opinionated entry point.</p>
+              <div class="project-meta">
+                <span>Backstage</span>
+                <span>Terraform</span>
+                <span>GitHub Actions</span>
+              </div>
+              <ul>
+                <li>Raised baseline compliance coverage because teams stopped starting from scratch.</li>
+                <li>Reduced first-production deployment time for new services from 10 days to 2 days.</li>
+              </ul>
+            </article>
+
+            <article class="project-card">
+              <p class="project-kicker">Reliability engineering</p>
+              <h3>SLO command center</h3>
+              <p>Combined traces, logs, metrics, and synthetic probes into service scorecards that exposed burn rate, paging quality, and error budget posture for every critical product path.</p>
+              <div class="project-meta">
+                <span>Grafana</span>
+                <span>Prometheus</span>
+                <span>OpenTelemetry</span>
+              </div>
+              <ul>
+                <li>Helped engineering managers prioritize operational debt with clearer service health signals.</li>
+                <li>Cut noisy alerts by 41% while improving high-signal incident detection.</li>
+              </ul>
+            </article>
+
+            <article class="project-card">
+              <p class="project-kicker">FinOps</p>
+              <h3>Workload cost guardrails</h3>
+              <p>Implemented policy checks, usage reporting, and rightsizing feedback loops to keep cloud growth aligned with product growth.</p>
+              <div class="project-meta">
+                <span>AWS Cost Explorer</span>
+                <span>Lambda</span>
+                <span>Slack automation</span>
+              </div>
+              <ul>
+                <li>Prevented cost regressions during a year of double-digit traffic growth.</li>
+                <li>Gave engineering teams weekly unit-cost visibility tied to platform decisions.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel reveal" id="contact" aria-labelledby="contact-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <h2 id="contact-title">Contact and fit</h2>
+              <p>Best aligned with senior DevOps, platform engineering, and site reliability roles where delivery systems are treated as a product.</p>
+            </div>
+          </div>
+
+          <div class="contact-panels">
+            <article class="contact-card">
+              <p class="contact-kicker">Reach out</p>
+              <h3>Adrian Vale</h3>
+              <p>Based in Warsaw, open to hybrid or remote roles across Europe. Available for platform modernization, DevOps leadership tracks, and reliability engineering initiatives.</p>
+              <div class="contact-grid">
+                <a href="mailto:adrian.vale.dev@example.com">Email</a>
+                <a href="https://www.linkedin.com" target="_blank" rel="noreferrer noopener">LinkedIn</a>
+                <a href="https://github.com" target="_blank" rel="noreferrer noopener">GitHub</a>
+                <a href="#summary">Back to top</a>
+              </div>
+            </article>
+
+            <aside class="contact-card" aria-label="Role preference summary">
+              <p class="contact-kicker">Role preference</p>
+              <h3>Where I add the most value</h3>
+              <div class="availability-note">
+                <strong>Ideal scope</strong>
+                Platform teams with 30 to 250 engineers, cloud-native systems, and leadership that values measurable reduction in delivery friction.
+              </div>
+              <div class="availability-note">
+                <strong>What I bring quickly</strong>
+                Clear infrastructure standards, better deployment safety, stronger telemetry, and practical coaching for product teams using the platform.
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Single-file HTML resume with embedded CSS and JavaScript, crafted for fast review, strong readability, and technical credibility.
+    </footer>
+  </div>
+
+  <script>
+    const runtime = globalThis;
+    const revealItems = document.querySelectorAll('.reveal, .meter-row');
+    const counterItems = document.querySelectorAll('[data-counter]');
+    const navLinks = document.querySelectorAll('.topnav a');
+    const sections = Array.from(document.querySelectorAll('main section[id]'));
+    const prefersReducedMotion = runtime.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('.meter-bar > span[data-value]').forEach((bar) => {
+      bar.style.setProperty('--value', `${bar.dataset.value}%`);
+    });
+
+    const animateCounter = (element) => {
+      if (element.dataset.animated === 'true') {
+        return;
+      }
+
+      element.dataset.animated = 'true';
+      const targetValue = Number(element.dataset.counter);
+      const decimalPlaces = Number.isInteger(targetValue) ? 0 : String(targetValue).split('.')[1].length;
+
+      if (prefersReducedMotion) {
+        element.textContent = targetValue.toFixed(decimalPlaces);
+        return;
+      }
+
+      const duration = 1200;
+      const startTime = performance.now();
+
+      const tick = (currentTime) => {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        const value = targetValue * eased;
+        element.textContent = value.toFixed(decimalPlaces);
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        }
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add('is-visible');
+        entry.target.querySelectorAll('[data-counter]').forEach(animateCounter);
+        if (entry.target.matches('[data-counter]')) {
+          animateCounter(entry.target);
+        }
+        revealObserver.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    revealItems.forEach((item) => {
+      if (prefersReducedMotion) {
+        item.classList.add('is-visible');
+      } else {
+        revealObserver.observe(item);
+      }
+    });
+
+    counterItems.forEach((item) => {
+      if (prefersReducedMotion) {
+        animateCounter(item);
+      } else {
+        revealObserver.observe(item);
+      }
+    });
+
+    const setActiveLink = () => {
+      const scrollPosition = runtime.scrollY + 180;
+      let activeId = sections[0]?.id;
+
+      sections.forEach((section) => {
+        if (scrollPosition >= section.offsetTop) {
+          activeId = section.id;
+        }
+      });
+
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute('href') === `#${activeId}`;
+        link.classList.toggle('is-active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    setActiveLink();
+    runtime.addEventListener('scroll', setActiveLink, { passive: true });
+  </script>
+</body>
+</html>
