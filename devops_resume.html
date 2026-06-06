@@ -1,469 +1,569 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Chen | Senior DevOps Engineer</title>
-    <link rel="stylesheet" href="resume.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Chen | Senior DevOps Engineer</title>
+  <link rel="stylesheet" href="resume.css">
 </head>
+
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-dot"></div>
+  <!-- Skip Navigation for Screen Readers -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Background Effects -->
-    <div class="gradient-mesh"></div>
-    <canvas id="particles-canvas"></canvas>
-    <div class="grid-lines"></div>
+  <!-- Custom Cursor (hidden from screen readers) -->
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">AC</a>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+  <!-- Background Effects (decorative, hidden from screen readers) -->
+  <div class="gradient-mesh" aria-hidden="true"></div>
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <div class="grid-lines" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="#" class="logo" aria-label="Alex Chen - Home">AC</a>
+      <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false"
+        aria-controls="navLinks">
+        <span aria-hidden="true">☰</span>
+        <span class="sr-only">Menu</span>
+      </button>
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="#about" role="menuitem">About</a></li>
+        <li role="none"><a href="#skills" role="menuitem">Skills</a></li>
+        <li role="none"><a href="#experience" role="menuitem">Experience</a></li>
+        <li role="none"><a href="#projects" role="menuitem">Projects</a></li>
+        <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
 
     <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="hero-badge"><span class="status-dot"></span> Open to Opportunities</div>
-                    <h1>Alex <span class="highlight">Chen</span></h1>
-                    <p class="hero-title">Senior DevOps Engineer</p>
-                    <p class="hero-desc">Cloud-native infrastructure architect with 8+ years of experience designing, building, and optimizing scalable CI/CD pipelines and containerized environments.</p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">📧 Get in Touch</a>
-                        <a href="#projects" class="btn btn-secondary">🚀 View Projects</a>
-                    </div>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <div class="stat-number" data-target="8">0</div>
-                        <div class="stat-label">Years Experience</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-target="50">0</div>
-                        <div class="stat-label">Projects Delivered</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-target="99">0</div>
-                        <div class="stat-label">% Uptime SLA</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" data-target="40">0</div>
-                        <div class="stat-label">% Cost Reduction</div>
-                    </div>
-                </div>
+    <section class="hero" id="about" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="hero-badge" role="status" aria-label="Status: Open to Opportunities">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="badge-text">Open to Opportunities</span>
             </div>
+            <h1 id="hero-heading">Alex <span class="highlight">Chen</span></h1>
+            <p class="hero-title">Senior DevOps Engineer</p>
+            <p class="hero-desc">Cloud-native infrastructure architect with 8+ years of experience designing, building,
+              and optimizing scalable CI/CD pipelines and containerized environments.</p>
+            <div class="hero-buttons">
+              <a href="#contact" class="btn btn-primary" aria-label="Send email to get in touch">
+                <span aria-hidden="true">📧</span>
+                <span>Get in Touch</span>
+              </a>
+              <a href="#projects" class="btn btn-secondary" aria-label="View portfolio projects">
+                <span aria-hidden="true">🚀</span>
+                <span>View Projects</span>
+              </a>
+            </div>
+          </div>
+          <div class="hero-stats" role="region" aria-label="Key statistics">
+            <div class="stat-card" tabindex="0" aria-label="8 years of experience">
+              <div class="stat-number" data-target="8" data-suffix="">0</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card" tabindex="0" aria-label="50 projects delivered">
+              <div class="stat-number" data-target="50" data-suffix="+">0</div>
+              <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div class="stat-card" tabindex="0" aria-label="99 percent uptime SLA achieved">
+              <div class="stat-number" data-target="99" data-suffix="%">0</div>
+              <div class="stat-label">Uptime SLA</div>
+            </div>
+            <div class="stat-card" tabindex="0" aria-label="40 percent cost reduction achieved">
+              <div class="stat-number" data-target="40" data-suffix="%">0</div>
+              <div class="stat-label">Cost Reduction</div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Expertise</span>
-                <h2 class="section-title">Technical Skills</h2>
-                <p class="section-desc">Comprehensive toolkit spanning cloud platforms, automation, and modern deployment practices.</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-category reveal">
-                    <div class="skill-header">
-                        <div class="skill-icon">☁️</div>
-                        <h3 class="skill-title">Cloud Platforms</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="skill-tag">AWS</span><span class="skill-tag">Azure</span><span class="skill-tag">GCP</span>
-                        <span class="skill-tag">Kubernetes</span><span class="skill-tag">EKS</span><span class="skill-tag">AKS</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <div class="skill-header">
-                        <div class="skill-icon">🔧</div>
-                        <h3 class="skill-title">Infrastructure as Code</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="skill-tag">Terraform</span><span class="skill-tag">CloudFormation</span>
-                        <span class="skill-tag">Pulumi</span><span class="skill-tag">Ansible</span><span class="skill-tag">Helm</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <div class="skill-header">
-                        <div class="skill-icon">🚀</div>
-                        <h3 class="skill-title">CI/CD & Automation</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="skill-tag">GitHub Actions</span><span class="skill-tag">GitLab CI</span>
-                        <span class="skill-tag">Jenkins</span><span class="skill-tag">ArgoCD</span><span class="skill-tag">Flux</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <div class="skill-header">
-                        <div class="skill-icon">📊</div>
-                        <h3 class="skill-title">Observability</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="skill-tag">Prometheus</span><span class="skill-tag">Grafana</span>
-                        <span class="skill-tag">Datadog</span><span class="skill-tag">ELK Stack</span><span class="skill-tag">Jaeger</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <div class="skill-header">
-                        <div class="skill-icon">🐳</div>
-                        <h3 class="skill-title">Containers & Runtime</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="skill-tag">Docker</span><span class="skill-tag">containerd</span>
-                        <span class="skill-tag">Istio</span><span class="skill-tag">Envoy</span><span class="skill-tag">NGINX</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <div class="skill-header">
-                        <div class="skill-icon">💻</div>
-                        <h3 class="skill-title">Languages</h3>
-                    </div>
-                    <div class="skill-items">
-                        <span class="skill-tag">Python</span><span class="skill-tag">Go</span>
-                        <span class="skill-tag">Bash</span><span class="skill-tag">PowerShell</span><span class="skill-tag">HCL</span>
-                    </div>
-                </div>
-            </div>
+    <section id="skills" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag" aria-hidden="true">Expertise</span>
+          <h2 id="skills-heading" class="section-title">Technical Skills</h2>
+          <p class="section-desc">Comprehensive toolkit spanning cloud platforms, automation, and modern deployment
+            practices.</p>
         </div>
+        <div class="skills-grid" role="list">
+          <article class="skill-category reveal" role="listitem" tabindex="0" aria-labelledby="skill-cloud">
+            <div class="skill-header">
+              <div class="skill-icon" aria-hidden="true">☁️</div>
+              <h3 id="skill-cloud" class="skill-title">Cloud Platforms</h3>
+            </div>
+            <div class="skill-items" role="group" aria-label="Cloud platform technologies">
+              <span class="skill-tag" role="listitem">AWS</span><span class="skill-tag"
+                role="listitem">Azure</span><span class="skill-tag" role="listitem">GCP</span>
+              <span class="skill-tag" role="listitem">Kubernetes</span><span class="skill-tag"
+                role="listitem">EKS</span><span class="skill-tag" role="listitem">AKS</span>
+            </div>
+          </article>
+          <article class="skill-category reveal" role="listitem" tabindex="0" aria-labelledby="skill-iac">
+            <div class="skill-header">
+              <div class="skill-icon" aria-hidden="true">🔧</div>
+              <h3 id="skill-iac" class="skill-title">Infrastructure as Code</h3>
+            </div>
+            <div class="skill-items" role="group" aria-label="Infrastructure as code tools">
+              <span class="skill-tag" role="listitem">Terraform</span><span class="skill-tag"
+                role="listitem">CloudFormation</span>
+              <span class="skill-tag" role="listitem">Pulumi</span><span class="skill-tag"
+                role="listitem">Ansible</span><span class="skill-tag" role="listitem">Helm</span>
+            </div>
+          </article>
+          <article class="skill-category reveal" role="listitem" tabindex="0" aria-labelledby="skill-cicd">
+            <div class="skill-header">
+              <div class="skill-icon" aria-hidden="true">🚀</div>
+              <h3 id="skill-cicd" class="skill-title">CI/CD & Automation</h3>
+            </div>
+            <div class="skill-items" role="group" aria-label="CI/CD and automation tools">
+              <span class="skill-tag" role="listitem">GitHub Actions</span><span class="skill-tag"
+                role="listitem">GitLab CI</span>
+              <span class="skill-tag" role="listitem">Jenkins</span><span class="skill-tag"
+                role="listitem">ArgoCD</span><span class="skill-tag" role="listitem">Flux</span>
+            </div>
+          </article>
+          <article class="skill-category reveal" role="listitem" tabindex="0" aria-labelledby="skill-observability">
+            <div class="skill-header">
+              <div class="skill-icon" aria-hidden="true">📊</div>
+              <h3 id="skill-observability" class="skill-title">Observability</h3>
+            </div>
+            <div class="skill-items" role="group" aria-label="Observability and monitoring tools">
+              <span class="skill-tag" role="listitem">Prometheus</span><span class="skill-tag"
+                role="listitem">Grafana</span>
+              <span class="skill-tag" role="listitem">Datadog</span><span class="skill-tag" role="listitem">ELK
+                Stack</span><span class="skill-tag" role="listitem">Jaeger</span>
+            </div>
+          </article>
+          <article class="skill-category reveal" role="listitem" tabindex="0" aria-labelledby="skill-containers">
+            <div class="skill-header">
+              <div class="skill-icon" aria-hidden="true">🐳</div>
+              <h3 id="skill-containers" class="skill-title">Containers & Runtime</h3>
+            </div>
+            <div class="skill-items" role="group" aria-label="Container and runtime technologies">
+              <span class="skill-tag" role="listitem">Docker</span><span class="skill-tag"
+                role="listitem">containerd</span>
+              <span class="skill-tag" role="listitem">Istio</span><span class="skill-tag"
+                role="listitem">Envoy</span><span class="skill-tag" role="listitem">NGINX</span>
+            </div>
+          </article>
+          <article class="skill-category reveal" role="listitem" tabindex="0" aria-labelledby="skill-languages">
+            <div class="skill-header">
+              <div class="skill-icon" aria-hidden="true">💻</div>
+              <h3 id="skill-languages" class="skill-title">Languages</h3>
+            </div>
+            <div class="skill-items" role="group" aria-label="Programming and scripting languages">
+              <span class="skill-tag" role="listitem">Python</span><span class="skill-tag" role="listitem">Go</span>
+              <span class="skill-tag" role="listitem">Bash</span><span class="skill-tag"
+                role="listitem">PowerShell</span><span class="skill-tag" role="listitem">HCL</span>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Career</span>
-                <h2 class="section-title">Work Experience</h2>
-                <p class="section-desc">Progressive growth through enterprise-scale infrastructure challenges.</p>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <h3 class="timeline-role">Senior DevOps Engineer</h3>
-                                <p class="timeline-company">TechCorp Industries</p>
-                            </div>
-                            <span class="timeline-date">2021 - Present</span>
-                        </div>
-                        <p class="timeline-desc">Leading infrastructure modernization and platform engineering for a Fortune 500 technology company.</p>
-                        <ul class="timeline-achievements">
-                            <li>Architected multi-region Kubernetes platform serving 500+ microservices</li>
-                            <li>Reduced deployment time from 4 hours to 12 minutes via GitOps automation</li>
-                            <li>Implemented cost optimization strategies saving $2.4M annually</li>
-                            <li>Established SRE practices achieving 99.99% uptime SLA</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <h3 class="timeline-role">DevOps Engineer</h3>
-                                <p class="timeline-company">CloudScale Solutions</p>
-                            </div>
-                            <span class="timeline-date">2018 - 2021</span>
-                        </div>
-                        <p class="timeline-desc">Built cloud infrastructure for high-growth SaaS platform serving 10M+ users.</p>
-                        <ul class="timeline-achievements">
-                            <li>Migrated legacy infrastructure to AWS EKS with zero downtime</li>
-                            <li>Developed Terraform modules used across 50+ environments</li>
-                            <li>Created observability stack handling 10TB logs/day with 2s query latency</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div>
-                                <h3 class="timeline-role">Systems Administrator</h3>
-                                <p class="timeline-company">DataFirst Systems</p>
-                            </div>
-                            <span class="timeline-date">2016 - 2018</span>
-                        </div>
-                        <p class="timeline-desc">Managed on-premise and hybrid cloud infrastructure for enterprise data processing.</p>
-                        <ul class="timeline-achievements">
-                            <li>Automated server provisioning reducing deployment time by 80%</li>
-                            <li>Implemented Ansible for configuration management of 200+ servers</li>
-                            <li>Designed disaster recovery solution with 15-minute RTO</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <section id="experience" aria-labelledby="experience-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag" aria-hidden="true">Career</span>
+          <h2 id="experience-heading" class="section-title">Work Experience</h2>
+          <p class="section-desc">Progressive growth through enterprise-scale infrastructure challenges.</p>
         </div>
+        <div class="timeline" role="list" aria-label="Work experience timeline">
+          <article class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content" tabindex="0" aria-labelledby="job1-title" aria-describedby="job1-desc">
+              <div class="timeline-header">
+                <div>
+                  <h3 id="job1-title" class="timeline-role">Senior DevOps Engineer</h3>
+                  <p class="timeline-company">TechCorp Industries</p>
+                </div>
+                <time class="timeline-date" datetime="2021-01">2021 - Present</time>
+              </div>
+              <p id="job1-desc" class="timeline-desc">Leading infrastructure modernization and platform engineering for
+                a Fortune 500
+                technology company.</p>
+              <ul class="timeline-achievements" aria-label="Key achievements at TechCorp Industries">
+                <li>Architected multi-region Kubernetes platform serving 500+ microservices</li>
+                <li>Reduced deployment time from 4 hours to 12 minutes via GitOps automation</li>
+                <li>Implemented cost optimization strategies saving $2.4M annually</li>
+                <li>Established SRE practices achieving 99.99% uptime SLA</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content" tabindex="0" aria-labelledby="job2-title" aria-describedby="job2-desc">
+              <div class="timeline-header">
+                <div>
+                  <h3 id="job2-title" class="timeline-role">DevOps Engineer</h3>
+                  <p class="timeline-company">CloudScale Solutions</p>
+                </div>
+                <time class="timeline-date" datetime="2018-01">2018 - 2021</time>
+              </div>
+              <p id="job2-desc" class="timeline-desc">Built cloud infrastructure for high-growth SaaS platform serving
+                10M+ users.</p>
+              <ul class="timeline-achievements" aria-label="Key achievements at CloudScale Solutions">
+                <li>Migrated legacy infrastructure to AWS EKS with zero downtime</li>
+                <li>Developed Terraform modules used across 50+ environments</li>
+                <li>Created observability stack handling 10TB logs/day with 2s query latency</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content" tabindex="0" aria-labelledby="job3-title" aria-describedby="job3-desc">
+              <div class="timeline-header">
+                <div>
+                  <h3 id="job3-title" class="timeline-role">Systems Administrator</h3>
+                  <p class="timeline-company">DataFirst Systems</p>
+                </div>
+                <time class="timeline-date" datetime="2016-01">2016 - 2018</time>
+              </div>
+              <p id="job3-desc" class="timeline-desc">Managed on-premise and hybrid cloud infrastructure for enterprise
+                data
+                processing.</p>
+              <ul class="timeline-achievements" aria-label="Key achievements at DataFirst Systems">
+                <li>Automated server provisioning reducing deployment time by 80%</li>
+                <li>Implemented Ansible for configuration management of 200+ servers</li>
+                <li>Designed disaster recovery solution with 15-minute RTO</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Portfolio</span>
-                <h2 class="section-title">Key Projects</h2>
-                <p class="section-desc">Selected infrastructure and automation projects demonstrating technical depth.</p>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card reveal">
-                    <div class="project-header">
-                        <div class="project-icon">🚀</div>
-                        <h3 class="project-title">GitOps Platform</h3>
-                        <div class="project-tech">
-                            <span class="tech-tag">ArgoCD</span><span class="tech-tag">Kubernetes</span><span class="tech-tag">Terraform</span>
-                        </div>
-                    </div>
-                    <p class="project-desc">End-to-end GitOps deployment platform enabling teams to deploy via git push with automated promotions across environments.</p>
-                    <div class="project-metrics">
-                        <div class="metric"><div class="metric-value">12min</div><div class="metric-label">Deploy Time</div></div>
-                        <div class="metric"><div class="metric-value">200+</div><div class="metric-label">Services</div></div>
-                        <div class="metric"><div class="metric-value">99.9%</div><div class="metric-label">Success</div></div>
-                    </div>
-                </div>
-                <div class="project-card reveal">
-                    <div class="project-header">
-                        <div class="project-icon">📊</div>
-                        <h3 class="project-title">Observability Stack</h3>
-                        <div class="project-tech">
-                            <span class="tech-tag">Prometheus</span><span class="tech-tag">Grafana</span><span class="tech-tag">Thanos</span>
-                        </div>
-                    </div>
-                    <p class="project-desc">Multi-cluster observability platform with centralized metrics, logging, and distributed tracing for 10K+ pods.</p>
-                    <div class="project-metrics">
-                        <div class="metric"><div class="metric-value">10TB</div><div class="metric-label">Daily Logs</div></div>
-                        <div class="metric"><div class="metric-value">2s</div><div class="metric-label">Query Latency</div></div>
-                        <div class="metric"><div class="metric-value">5min</div><div class="metric-label">MTTR</div></div>
-                    </div>
-                </div>
-                <div class="project-card reveal">
-                    <div class="project-header">
-                        <div class="project-icon">🔒</div>
-                        <h3 class="project-title">Security Automation</h3>
-                        <div class="project-tech">
-                            <span class="tech-tag">OPA</span><span class="tech-tag">Falco</span><span class="tech-tag">Trivy</span>
-                        </div>
-                    </div>
-                    <p class="project-desc">Policy-as-code security framework with admission controllers, runtime threat detection, and automated vulnerability scanning.</p>
-                    <div class="project-metrics">
-                        <div class="metric"><div class="metric-value">75%</div><div class="metric-label">Vuln Reduction</div></div>
-                        <div class="metric"><div class="metric-value">0</div><div class="metric-label">Breaches</div></div>
-                        <div class="metric"><div class="metric-value">100%</div><div class="metric-label">Compliance</div></div>
-                    </div>
-                </div>
-            </div>
+    <section id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag" aria-hidden="true">Portfolio</span>
+          <h2 id="projects-heading" class="section-title">Key Projects</h2>
+          <p class="section-desc">Selected infrastructure and automation projects demonstrating technical depth.</p>
         </div>
+        <div class="projects-grid" role="list" aria-label="Featured projects">
+          <div class="project-card reveal">
+            <div class="project-header">
+              <div class="project-icon">🚀</div>
+              <h3 class="project-title">GitOps Platform</h3>
+              <div class="project-tech">
+                <span class="tech-tag">ArgoCD</span><span class="tech-tag">Kubernetes</span><span
+                  class="tech-tag">Terraform</span>
+              </div>
+            </div>
+            <p class="project-desc">End-to-end GitOps deployment platform enabling teams to deploy via git push with
+              automated promotions across environments.</p>
+            <div class="project-metrics">
+              <div class="metric">
+                <div class="metric-value">12min</div>
+                <div class="metric-label">Deploy Time</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">200+</div>
+                <div class="metric-label">Services</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">99.9%</div>
+                <div class="metric-label">Success</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-card reveal">
+            <div class="project-header">
+              <div class="project-icon">📊</div>
+              <h3 class="project-title">Observability Stack</h3>
+              <div class="project-tech">
+                <span class="tech-tag">Prometheus</span><span class="tech-tag">Grafana</span><span
+                  class="tech-tag">Thanos</span>
+              </div>
+            </div>
+            <p class="project-desc">Multi-cluster observability platform with centralized metrics, logging, and
+              distributed tracing for 10K+ pods.</p>
+            <div class="project-metrics">
+              <div class="metric">
+                <div class="metric-value">10TB</div>
+                <div class="metric-label">Daily Logs</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">2s</div>
+                <div class="metric-label">Query Latency</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">5min</div>
+                <div class="metric-label">MTTR</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-card reveal">
+            <div class="project-header">
+              <div class="project-icon">🔒</div>
+              <h3 class="project-title">Security Automation</h3>
+              <div class="project-tech">
+                <span class="tech-tag">OPA</span><span class="tech-tag">Falco</span><span class="tech-tag">Trivy</span>
+              </div>
+            </div>
+            <p class="project-desc">Policy-as-code security framework with admission controllers, runtime threat
+              detection, and automated vulnerability scanning.</p>
+            <div class="project-metrics">
+              <div class="metric">
+                <div class="metric-value">75%</div>
+                <div class="metric-label">Vuln Reduction</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">0</div>
+                <div class="metric-label">Breaches</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">100%</div>
+                <div class="metric-label">Compliance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Certifications Section -->
-    <section id="certs">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Certifications</span>
-                <h2 class="section-title">Credentials</h2>
-                <p class="section-desc">Industry-recognized certifications validating cloud and DevOps expertise.</p>
-            </div>
-            <div class="certs-grid">
-                <div class="cert-card reveal">
-                    <div class="cert-icon">🏆</div>
-                    <div class="cert-info"><h4>AWS Solutions Architect</h4><p>Professional • 2023</p></div>
-                </div>
-                <div class="cert-card reveal">
-                    <div class="cert-icon">🏆</div>
-                    <div class="cert-info"><h4>Certified Kubernetes Admin</h4><p>CKA • 2022</p></div>
-                </div>
-                <div class="cert-card reveal">
-                    <div class="cert-icon">🏆</div>
-                    <div class="cert-info"><h4>HashiCorp Terraform</h4><p>Associate • 2021</p></div>
-                </div>
-                <div class="cert-card reveal">
-                    <div class="cert-icon">🏆</div>
-                    <div class="cert-info"><h4>Azure DevOps Engineer</h4><p>Expert • 2020</p></div>
-                </div>
-            </div>
+    <section id="certs" aria-labelledby="certs-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag" aria-hidden="true">Certifications</span>
+          <h2 id="certs-heading" class="section-title">Credentials</h2>
+          <p class="section-desc">Industry-recognized certifications validating cloud and DevOps expertise.</p>
         </div>
+        <div class="certs-grid" role="list" aria-label="Professional certifications">
+          <article class="cert-card reveal" role="listitem" tabindex="0"
+            aria-label="AWS Solutions Architect Professional, obtained 2023">
+            <div class="cert-icon" aria-hidden="true">🏆</div>
+            <div class="cert-info">
+              <h4>AWS Solutions Architect</h4>
+              <p>Professional • <time datetime="2023">2023</time></p>
+            </div>
+          </article>
+          <article class="cert-card reveal" role="listitem" tabindex="0"
+            aria-label="Certified Kubernetes Administrator, obtained 2022">
+            <div class="cert-icon" aria-hidden="true">🏆</div>
+            <div class="cert-info">
+              <h4>Certified Kubernetes Admin</h4>
+              <p>CKA • <time datetime="2022">2022</time></p>
+            </div>
+          </article>
+          <article class="cert-card reveal" role="listitem" tabindex="0"
+            aria-label="HashiCorp Terraform Associate, obtained 2021">
+            <div class="cert-icon" aria-hidden="true">🏆</div>
+            <div class="cert-info">
+              <h4>HashiCorp Terraform</h4>
+              <p>Associate • <time datetime="2021">2021</time></p>
+            </div>
+          </article>
+          <article class="cert-card reveal" role="listitem" tabindex="0"
+            aria-label="Azure DevOps Engineer Expert, obtained 2020">
+            <div class="cert-icon" aria-hidden="true">🏆</div>
+            <div class="cert-info">
+              <h4>Azure DevOps Engineer</h4>
+              <p>Expert • <time datetime="2020">2020</time></p>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Contact</span>
-                <h2 class="section-title">Get in Touch</h2>
-                <p class="section-desc">Open to new opportunities and interesting infrastructure challenges.</p>
-            </div>
-            <div class="contact-grid">
-                <a href="mailto:alex.chen@email.com" class="contact-card reveal">
-                    <div class="contact-icon">📧</div>
-                    <div class="contact-label">Email</div>
-                    <div class="contact-value">alex.chen@email.com</div>
-                </a>
-                <a href="https://linkedin.com" target="_blank" class="contact-card reveal">
-                    <div class="contact-icon">💼</div>
-                    <div class="contact-label">LinkedIn</div>
-                    <div class="contact-value">linkedin.com/in/alexchen</div>
-                </a>
-                <a href="https://github.com" target="_blank" class="contact-card reveal">
-                    <div class="contact-icon">🐙</div>
-                    <div class="contact-label">GitHub</div>
-                    <div class="contact-value">github.com/alexchen</div>
-                </a>
-                <a href="#" class="contact-card reveal">
-                    <div class="contact-icon">📍</div>
-                    <div class="contact-label">Location</div>
-                    <div class="contact-value">San Francisco, CA</div>
-                </a>
-            </div>
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag" aria-hidden="true">Contact</span>
+          <h2 id="contact-heading" class="section-title">Get in Touch</h2>
+          <p class="section-desc">Open to new opportunities and interesting infrastructure challenges.</p>
         </div>
+        <nav class="contact-grid" aria-label="Contact information">
+          <a href="mailto:alex.chen@email.com" class="contact-card reveal"
+            aria-label="Send email to alex.chen@email.com">
+            <div class="contact-icon" aria-hidden="true">📧</div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">alex.chen@email.com</div>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-card reveal"
+            aria-label="Visit LinkedIn profile (opens in new tab)">
+            <div class="contact-icon" aria-hidden="true">💼</div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">linkedin.com/in/alexchen</div>
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-card reveal"
+            aria-label="Visit GitHub profile (opens in new tab)">
+            <div class="contact-icon" aria-hidden="true">🐙</div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">github.com/alexchen</div>
+          </a>
+          <div class="contact-card reveal" aria-label="Location: San Francisco, California">
+            <div class="contact-icon" aria-hidden="true">📍</div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">San Francisco, CA</div>
+          </div>
+        </nav>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Alex Chen. Built with epic visual effects.</p>
-        </div>
-    </footer>
+  </main>
 
-    <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorDot = document.querySelector('.cursor-dot');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 10 + 'px';
-            cursor.style.top = e.clientY - 10 + 'px';
-            cursorDot.style.left = e.clientX - 2 + 'px';
-            cursorDot.style.top = e.clientY - 2 + 'px';
-        });
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="container">
+      <p>&copy; 2026 Alex Chen. Built with accessibility in mind.</p>
+    </div>
+  </footer>
 
-        document.querySelectorAll('a, button, .skill-tag, .project-card, .stat-card').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
+  <script>
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    const cursorDot = document.querySelector('.cursor-dot');
 
-        // Mobile Menu
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX - 10 + 'px';
+      cursor.style.top = e.clientY - 10 + 'px';
+      cursorDot.style.left = e.clientX - 2 + 'px';
+      cursorDot.style.top = e.clientY - 2 + 'px';
+    });
+
+    document.querySelectorAll('a, button, .skill-tag, .project-card, .stat-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // Mobile Menu with accessibility
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+
+      navLinks.classList.toggle('active');
+      menuBtn.setAttribute('aria-expanded', !isExpanded);
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('active');
+        document.querySelector('.mobile-menu-btn').setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Particle System
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const particleCount = 50;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = Math.random() > 0.5 ? '#6366f1' : '#06b6d4';
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(99, 102, 241, ${0.1 - distance / 1000})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
         }
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-            });
-        });
+      }
+      requestAnimationFrame(animateParticles);
+    }
 
-        // Particle System
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    initParticles();
+    animateParticles();
 
-        const particles = [];
-        const particleCount = 50;
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                this.color = Math.random() > 0.5 ? '#6366f1' : '#06b6d4';
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+    // Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
+      });
+    }, { threshold: 0.1 });
+    revealElements.forEach(el => revealObserver.observe(el));
 
-        function initParticles() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+    // Animated Counters
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+          entry.target.classList.add('counted');
+          const target = parseInt(entry.target.dataset.target);
+          let current = 0;
+          const increment = target / 50;
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              entry.target.textContent = target;
+              clearInterval(timer);
+            } else {
+              entry.target.textContent = Math.floor(current);
             }
+          }, 30);
         }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.1 - distance / 1000})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animateParticles);
-        }
-
-        initParticles();
-        animateParticles();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // Animated Counters
-        const statObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                    entry.target.classList.add('counted');
-                    const target = parseInt(entry.target.dataset.target);
-                    let current = 0;
-                    const increment = target / 50;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            entry.target.textContent = target;
-                            clearInterval(timer);
-                        } else {
-                            entry.target.textContent = Math.floor(current);
-                        }
-                    }, 30);
-                }
-            });
-        }, { threshold: 0.5 });
-        document.querySelectorAll('.stat-number').forEach(el => statObserver.observe(el));
-    </script>
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-number').forEach(el => statObserver.observe(el));
+  </script>
 </body>
+
 </html>
