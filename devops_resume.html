@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevOps Engineer – Resume</title>
+  <!-- Google Font import – optional external request, remove if offline only -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Layout helpers */
+    .container {
+      width: 90%;
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 4rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .hero__name {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      font-weight: 700;
+    }
+
+    .hero__title {
+      font-size: 1.25rem;
+      color: var(--text-light);
+    }
+
+    .hero__links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 500;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-light);
+    }
+
+    /* About */
+    .about__text {
+      max-width: 60ch;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    /* Skills */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+    }
+
+    .skill__header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .progress {
+      position: relative;
+      background: var(--border);
+      height: 8px;
+      border-radius: 4px;
+    }
+
+    .progress__bar {
+      height: 100%;
+      width: 0;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+      transition: width 1s ease-out;
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .stat {
+      flex: 1 1 160px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat__number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat__label {
+      color: var(--text-light);
+      margin-top: 0.25rem;
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .project__name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .project__desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    /* Experience Timeline */
+    .timeline {
+      position: relative;
+      margin: 2rem 0;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 2px;
+      top: 0;
+      height: 100%;
+      background: var(--border);
+      transform: translateX(-50%);
+    }
+
+    .entry {
+      position: relative;
+      width: 50%;
+      padding: 1.25rem 2rem;
+    }
+
+    .entry.left {
+      left: 0;
+      text-align: right;
+    }
+
+    .entry.right {
+      left: 50%;
+      text-align: left;
+    }
+
+    .entry::before {
+      content: "";
+      position: absolute;
+      top: 1.25rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 2px solid var(--card-bg);
+      z-index: 1;
+    }
+
+    .entry.left::before {
+      right: -6px;
+    }
+
+    .entry.right::before {
+      left: -6px;
+    }
+
+    .entry__title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .entry__company {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    .entry__desc {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+
+    @media (max-width: 700px) {
+      .timeline::before {
+        left: 8px;
+      }
+      .entry {
+        width: 100%;
+        padding-left: 2.5rem;
+        text-align: left !important;
+      }
+      .entry.left,
+      .entry.right {
+        left: 0;
+      }
+      .entry.left::before,
+      .entry.right::before {
+        left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero container">
+    <h1 class="hero__name">Alex Johnson</h1>
+    <p class="hero__title">Senior DevOps Engineer</p>
+    <div class="hero__links">
+      <a class="btn" href="mailto:alex.johnson@example.com">Contact Me</a>
+      <a class="btn" href="https://github.com/alexdev" target="_blank">GitHub</a>
+      <a class="btn" href="https://linkedin.com/in/alexdev" target="_blank">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="container">
+    <h2>About Me</h2>
+    <p class="about__text">
+      Results-driven DevOps engineer with 7+ years delivering scalable CI/CD pipelines, cloud-native
+      infrastructure and automation for high-traffic SaaS platforms. Passionate about reliability,
+      observability and developer experience.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section class="container">
+    <h2>Core Skills</h2>
+    <div class="skills" id="skills">
+      <!-- Skill template sample -->
+      <div class="skill">
+        <div class="skill__header"><span>CI/CD (Pipelines)</span><span>95%</span></div>
+        <div class="progress"><div class="progress__bar" data-width="95"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill__header"><span>Kubernetes &amp; Docker</span><span>90%</span></div>
+        <div class="progress"><div class="progress__bar" data-width="90"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill__header"><span>AWS Cloud</span><span>85%</span></div>
+        <div class="progress"><div class="progress__bar" data-width="85"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill__header"><span>Infrastructure as Code (Terraform)</span><span>80%</span></div>
+        <div class="progress"><div class="progress__bar" data-width="80"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill__header"><span>Monitoring &amp; Logging</span><span>90%</span></div>
+        <div class="progress"><div class="progress__bar" data-width="90"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill__header"><span>Python &amp; Bash Scripting</span><span>85%</span></div>
+        <div class="progress"><div class="progress__bar" data-width="85"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="container">
+    <h2>Statistics</h2>
+    <div class="stats" id="stats">
+      <div class="stat"><div class="stat__number" data-count="12">0</div><div class="stat__label">Deployed Microservices</div></div>
+      <div class="stat"><div class="stat__number" data-count="99.99">0</div><div class="stat__label">% Uptime Achieved</div></div>
+      <div class="stat"><div class="stat__number" data-count="30">0</div><div class="stat__label">Automated Pipelines</div></div>
+      <div class="stat"><div class="stat__number" data-count="50">0</div><div class="stat__label">Engineers Enabled</div></div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="container">
+    <h2>Key Projects &amp; Achievements</h2>
+    <div class="projects">
+      <div class="project">
+        <span class="project__name">Cloud-Native Migration</span>
+        <p class="project__desc">Led re-architecture of monolithic platform to Kubernetes on AWS EKS, reducing deployment time by 70% and cutting infra costs 25% using spot fleets.</p>
+      </div>
+      <div class="project">
+        <span class="project__name">Self-Service CI/CD Platform</span>
+        <p class="project__desc">Built a GitHub Actions-driven pipeline generator empowering 40+ developers to deploy independently with policy guardrails and automated rollback.</p>
+      </div>
+      <div class="project">
+        <span class="project__name">Observability Stack</span>
+        <p class="project__desc">Implemented Prometheus, Grafana and Loki with SLO dashboards; MTTR improved from 45 min to 10 min through actionable alerts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Timeline -->
+  <section class="container">
+    <h2>Professional Experience</h2>
+    <div class="timeline">
+      <div class="entry left">
+        <span class="entry__title">Senior DevOps Engineer</span> – <span class="entry__company">TechCorp Inc.</span>
+        <div class="entry__desc">2022 – Present – Driving cloud cost optimizations and platform reliability for 120M monthly users.</div>
+      </div>
+      <div class="entry right">
+        <span class="entry__title">DevOps Engineer</span> – <span class="entry__company">InnovateX</span>
+        <div class="entry__desc">2019 – 2022 – Implemented IaC and zero-downtime deployments across multi-cloud estate.</div>
+      </div>
+      <div class="entry left">
+        <span class="entry__title">Build &amp; Release Engineer</span> – <span class="entry__company">SoftSystems</span>
+        <div class="entry__desc">2016 – 2019 – Automated build pipelines and orchestrated Dockerized staging environments.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <section class="container" style="text-align:center; border:none; padding:2rem 0 4rem;">
+    <p>© 2026 Alex Johnson. All rights reserved.</p>
+  </section>
+
+  <script>
+    // Animate progress bars once in view
+    const progressBars = document.querySelectorAll('.progress__bar');
+    const statsNumbers = document.querySelectorAll('.stat__number');
+
+    const animateSkills = () => {
+      progressBars.forEach(bar => {
+        const target = bar.getAttribute('data-width');
+        bar.style.width = target + '%';
+      });
+    };
+
+    const animateStats = () => {
+      statsNumbers.forEach(num => {
+        const end = parseFloat(num.getAttribute('data-count'));
+        const duration = 1500;
+        let start = 0;
+        const step = (timestamp, startTime) => {
+          if (!startTime) startTime = timestamp;
+          const progress = timestamp - startTime;
+          const percent = Math.min(progress / duration, 1);
+          num.textContent = (end * percent).toFixed(end % 1 === 0 ? 0 : 2);
+          if (progress < duration) requestAnimationFrame(ts => step(ts, startTime));
+        };
+        requestAnimationFrame(step);
+      });
+    };
+
+    // Intersection Observers
+    const createObserver = (elements, callback) => {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            callback();
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      elements.forEach(el => observer.observe(el));
+    };
+
+    // Observe triggers
+    createObserver(progressBars, animateSkills);
+    createObserver(statsNumbers, animateStats);
+  </script>
+</body>
+</html>
