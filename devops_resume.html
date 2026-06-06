@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Rivera • Senior DevOps Engineer</title>
+  <style>
+    :root {
+      --bg-primary: #0a0b0f;
+      --bg-secondary: #121318;
+      --bg-tertiary: #1a1c23;
+      --bg-card: #16181f;
+      --border-color: #252833;
+      --text-primary: #f0f1f4;
+      --text-secondary: #a1a5b5;
+      --text-muted: #6b7085;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --gradient-start: #3b82f6;
+      --gradient-end: #8b5cf6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 11, 15, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.04em;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 560px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
+    }
+
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--accent);
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* Experience Section */
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 12px;
+      bottom: 12px;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -29px;
+      top: 8px;
+      width: 24px;
+      height: 24px;
+      background: var(--bg-primary);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .timeline-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.2s ease;
+    }
+
+    .timeline-content:hover {
+      border-color: var(--accent);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .timeline-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .timeline-company {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .timeline-date {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .timeline-description {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 6px 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-secondary);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-category {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .skill-category-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skill-category-title::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--gradient-end));
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-item {
+      font-size: 0.8125rem;
+      padding: 8px 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .skill-item:hover {
+      border-color: var(--accent);
+      background: var(--bg-tertiary);
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .project-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--gradient-end));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .project-metrics {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .project-metric {
+      text-align: left;
+    }
+
+    .project-metric-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .project-metric-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .project-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .project-tech span {
+      font-size: 0.6875rem;
+      padding: 4px 10px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+
+    /* Achievements Section */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .achievement-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.2s ease;
+    }
+
+    .achievement-card:hover {
+      border-color: var(--success);
+    }
+
+    .achievement-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(34, 197, 94, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .achievement-content h4 {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .achievement-content p {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    /* Education & Certifications */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .edu-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .edu-org {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .edu-details {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 0.875rem;
+    }
+
+    .cert-item::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* Contact Footer */
+    .contact {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .contact h3 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .contact p {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      background: var(--bg-tertiary);
+    }
+
+    /* Progress bars for skills */
+    .skill-bar {
+      margin-top: 12px;
+    }
+
+    .skill-bar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8125rem;
+      margin-bottom: 6px;
+    }
+
+    .skill-bar-track {
+      height: 6px;
+      background: var(--bg-secondary);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--gradient-end));
+      border-radius: 3px;
+      transition: width 1s ease;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .scroll-indicator .arrow {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .timeline {
+        padding-left: 28px;
+      }
+      
+      .timeline-dot {
+        left: -21px;
+      }
+      
+      .timeline::before {
+        left: 7px;
+      }
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="nav-brand">Alex Rivera</div>
+      <ul class="nav-links">
+        <li><a href="#stats">Metrics</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span>Open to opportunities • Remote / Hybrid</span>
+        </div>
+        <h1>Senior DevOps Engineer<br>building <span>reliable infrastructure</span> at scale.</h1>
+        <p class="hero-subtitle">10+ years architecting cloud-native platforms, automating operations, and leading reliability initiatives for high-growth technology companies.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Get in touch</a>
+          <a href="#experience" class="btn btn-secondary">View experience</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="arrow"></div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="stats" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" data-target="99.95">0</div>
+          <div class="stat-label">Average Uptime</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" data-target="42">0</div>
+          <div class="stat-label">Production Deployments / Month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" data-target="78">0</div>
+          <div class="stat-label">Infrastructure Cost Reduction %</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" data-target="150">0</div>
+          <div class="stat-label">Engineers Onboarded</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Professional Journey</div>
+        <h2 class="section-title">Experience</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">Staff DevOps Engineer</div>
+                <div class="timeline-company">Vercel</div>
+              </div>
+              <div class="timeline-date">2022 — Present</div>
+            </div>
+            <p class="timeline-description">Lead platform reliability and infrastructure automation for a global edge platform serving millions of developers. Architected multi-region Kubernetes control planes and reduced deployment latency by 67%.</p>
+            <div class="timeline-tags">
+              <span class="tag">Kubernetes</span>
+              <span class="tag">Go</span>
+              <span class="tag">Terraform</span>
+              <span class="tag">ArgoCD</span>
+              <span class="tag">Prometheus</span>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">Senior DevOps Engineer</div>
+                <div class="timeline-company">Stripe</div>
+              </div>
+              <div class="timeline-date">2020 — 2022</div>
+            </div>
+            <p class="timeline-description">Owned CI/CD platform serving 400+ engineers. Built self-service infrastructure provisioning that reduced ticket volume by 82%. Led migration of payment processing workloads to AWS from on-prem.</p>
+            <div class="timeline-tags">
+              <span class="tag">AWS</span>
+              <span class="tag">Packer</span>
+              <span class="tag">Jenkins</span>
+              <span class="tag">Vault</span>
+              <span class="tag">Python</span>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">DevOps Engineer</div>
+                <div class="timeline-company">Datadog</div>
+              </div>
+              <div class="timeline-date">2018 — 2020</div>
+            </div>
+            <p class="timeline-description">Scaled monitoring infrastructure to ingest 3.2M metrics/sec. Implemented chaos engineering practices that prevented 4 major incidents. Automated 90% of on-call response playbooks.</p>
+            <div class="timeline-tags">
+              <span class="tag">GCP</span>
+              <span class="tag">Kafka</span>
+              <span class="tag">Ansible</span>
+              <span class="tag">ELK</span>
+              <span class="tag">Shell</span>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">Site Reliability Engineer</div>
+                <div class="timeline-company">Twilio</div>
+              </div>
+              <div class="timeline-date">2016 — 2018</div>
+            </div>
+            <p class="timeline-description">Maintained 99.99% availability for SMS/voice infrastructure. Developed capacity planning models that saved $2.1M annually. Mentored 3 junior SREs through onboarding.</p>
+            <div class="timeline-tags">
+              <span class="tag">Docker</span>
+              <span class="tag">Nginx</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">PagerDuty</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Technical Expertise</div>
+        <h2 class="section-title">Skills & Proficiency</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <div class="skill-category-title">Cloud Platforms</div>
+          <div class="skill-list">
+            <span class="skill-item">AWS (Professional)</span>
+            <span class="skill-item">GCP</span>
+            <span class="skill-item">Azure</span>
+            <span class="skill-item">DigitalOcean</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-header"><span>AWS</span><span>95%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 95%"></div></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">Container & Orchestration</div>
+          <div class="skill-list">
+            <span class="skill-item">Kubernetes</span>
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">Helm</span>
+            <span class="skill-item">Containerd</span>
+            <span class="skill-item">Nomad</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-header"><span>Kubernetes</span><span>92%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 92%"></div></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">Infrastructure as Code</div>
+          <div class="skill-list">
+            <span class="skill-item">Terraform</span>
+            <span class="skill-item">Pulumi</span>
+            <span class="skill-item">Ansible</span>
+            <span class="skill-item">CloudFormation</span>
+            <span class="skill-item">Crossplane</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-header"><span>Terraform</span><span>90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%"></div></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">CI/CD & Automation</div>
+          <div class="skill-list">
+            <span class="skill-item">GitHub Actions</span>
+            <span class="skill-item">ArgoCD</span>
+            <span class="skill-item">Jenkins</span>
+            <span class="skill-item">GitLab CI</span>
+            <span class="skill-item">Spinnaker</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-header"><span>GitHub Actions</span><span>88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%"></div></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">Observability</div>
+          <div class="skill-list">
+            <span class="skill-item">Prometheus</span>
+            <span class="skill-item">Grafana</span>
+            <span class="skill-item">Datadog</span>
+            <span class="skill-item">ELK Stack</span>
+            <span class="skill-item">OpenTelemetry</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-header"><span>Prometheus</span><span>94%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 94%"></div></div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">Languages & Scripting</div>
+          <div class="skill-list">
+            <span class="skill-item">Python</span>
+            <span class="skill-item">Go</span>
+            <span class="skill-item">Bash</span>
+            <span class="skill-item">TypeScript</span>
+            <span class="skill-item">HCL</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-header"><span>Python</span><span>85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 85%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Selected Work</div>
+        <h2 class="section-title">Key Projects & Initiatives</h2>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">🌐</div>
+          </div>
+          <div class="project-metrics">
+            <div class="project-metric">
+              <div class="project-metric-value">99.99%</div>
+              <div class="project-metric-label">Uptime</div>
+            </div>
+            <div class="project-metric">
+              <div class="project-metric-value">42ms</div>
+              <div class="project-metric-label">P99 Latency</div>
+            </div>
+          </div>
+          <div class="project-title">Global Edge Control Plane</div>
+          <p class="project-description">Designed and deployed a multi-region Kubernetes control plane powering Vercel's edge network. Implemented automatic failover and traffic steering across 18 regions.</p>
+          <div class="project-tech">
+            <span>Kubernetes</span><span>Go</span><span>etcd</span><span>Envoy</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">⚡</div>
+          </div>
+          <div class="project-metrics">
+            <div class="project-metric">
+              <div class="project-metric-value">82%</div>
+              <div class="project-metric-label">Fewer Tickets</div>
+            </div>
+            <div class="project-metric">
+              <div class="project-metric-value">4min</div>
+              <div class="project-metric-label">Avg Provision</div>
+            </div>
+          </div>
+          <div class="project-title">Self-Service Infrastructure Platform</div>
+          <p class="project-description">Built an internal developer platform allowing teams to provision production-ready environments via GitOps. Eliminated manual approvals and reduced time-to-prod from days to minutes.</p>
+          <div class="project-tech">
+            <span>Terraform</span><span>ArgoCD</span><span>Backstage</span><span>AWS</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">🔥</div>
+          </div>
+          <div class="project-metrics">
+            <div class="project-metric">
+              <div class="project-metric-value">3.2M</div>
+              <div class="project-metric-label">Metrics/sec</div>
+            </div>
+            <div class="project-metric">
+              <div class="project-metric-value">47%</div>
+              <div class="project-metric-label">Cost Savings</div>
+            </div>
+          </div>
+          <div class="project-title">Observability at Scale</div>
+          <p class="project-description">Architected Datadog's high-throughput metrics pipeline handling billions of data points daily. Implemented intelligent sampling and compression reducing storage costs significantly.</p>
+          <div class="project-tech">
+            <span>Kafka</span><span>ClickHouse</span><span>Prometheus</span><span>Go</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section id="achievements" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Recognition</div>
+        <h2 class="section-title">Achievements & Impact</h2>
+      </div>
+      <div class="achievements-grid">
+        <div class="achievement-card">
+          <div class="achievement-icon">🏆</div>
+          <div class="achievement-content">
+            <h4>CNCF Speaker</h4>
+            <p>Keynote on GitOps at KubeCon 2024; 3,200+ attendees</p>
+          </div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-icon">📝</div>
+          <div class="achievement-content">
+            <h4>Published Author</h4>
+            <p>Co-authored "Production Kubernetes" (O'Reilly, 2023)</p>
+          </div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-icon">💰</div>
+          <div class="achievement-content">
+            <h4>Cost Optimization Award</h4>
+            <p>$4.8M annual savings through infrastructure right-sizing</p>
+          </div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-icon">🚨</div>
+          <div class="achievement-content">
+            <h4>Incident Prevention</h4>
+            <p>Zero Sev-1 incidents in 18 months at Vercel</p>
+          </div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-icon">👥</div>
+          <div class="achievement-content">
+            <h4>Community Leadership</h4>
+            <p>Founded SF DevOps Meetup; 2,800+ members</p>
+          </div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-icon">🎓</div>
+          <div class="achievement-content">
+            <h4>Mentorship Impact</h4>
+            <p>Trained 12 engineers now in senior engineering roles</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education & Certifications -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Credentials</div>
+        <h2 class="section-title">Education & Certifications</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-title">B.S. Computer Science</div>
+          <div class="edu-org">Stanford University</div>
+          <div class="edu-details">Graduated 2015 • Dean's List • Systems & Networking focus</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-title">Professional Certifications</div>
+          <div class="cert-list" style="margin-top: 16px;">
+            <div class="cert-item">AWS Solutions Architect Professional</div>
+            <div class="cert-item">Certified Kubernetes Administrator (CKA)</div>
+            <div class="cert-item">Google Cloud Professional DevOps Engineer</div>
+            <div class="cert-item">HashiCorp Certified: Terraform Associate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h3>Let's build something reliable together.</h3>
+      <p>Currently exploring senior infrastructure and platform engineering opportunities.</p>
+      <div class="contact-links">
+        <a href="mailto:alex.rivera@email.com" class="contact-link">✉ alex.rivera@email.com</a>
+        <a href="https://github.com/arivera-dev" target="_blank" class="contact-link">⚡ github.com/arivera-dev</a>
+        <a href="https://linkedin.com/in/alexrivera" target="_blank" class="contact-link">🔗 linkedin.com/in/alexrivera</a>
+        <a href="#" class="contact-link" onclick="downloadResume(event)">📄 Download PDF</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Animated counter for stats
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-value');
+      
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target'));
+        const isDecimal = counter.getAttribute('data-target').includes('.');
+        const duration = 1500;
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          
+          // Easing function
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = target * eased;
+          
+          if (isDecimal) {
+            counter.textContent = current.toFixed(2);
+          } else {
+            counter.textContent = Math.floor(current);
+          }
+          
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            if (isDecimal) {
+              counter.textContent = target.toFixed(2);
+            } else {
+              counter.textContent = target;
+            }
+          }
+        }
+        
+        requestAnimationFrame(update);
+      });
+    }
+
+    // Intersection observer for fade-in animations
+    function initFadeIn() {
+      const elements = document.querySelectorAll('.timeline-item, .skill-category, .project-card, .achievement-card, .edu-card, .stat-card');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('fade-in', 'visible');
+            }, index * 50);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      
+      elements.forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+      });
+    }
+
+    // Animate skill bars when in view
+    function initSkillBars() {
+      const skillBars = document.querySelectorAll('.skill-bar-fill');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const bar = entry.target;
+            const width = bar.style.width;
+            bar.style.width = '0';
+            setTimeout(() => {
+              bar.style.width = width;
+            }, 100);
+            observer.unobserve(bar);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      skillBars.forEach(bar => observer.observe(bar));
+    }
+
+    // Smooth scroll for navigation links
+    function initSmoothScroll() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            const navHeight = 72;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+
+    // Active nav link highlighting
+    function initNavHighlight() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a');
+      
+      window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (window.pageYOffset >= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navLinks.forEach(link => {
+          link.style.color = '';
+          if (link.getAttribute('href') === `#${current}`) {
+            link.style.color = 'var(--text-primary)';
+          }
+        });
+      });
+    }
+
+    // Download resume simulation
+    function downloadResume(e) {
+      e.preventDefault();
+      const btns = document.querySelectorAll('.contact-link');
+      const originalTexts = [];
+      
+      btns.forEach((btn, i) => {
+        originalTexts[i] = btn.innerHTML;
+      });
+      
+      const downloadBtn = Array.from(btns).find(b => b.innerHTML.includes('Download'));
+      if (downloadBtn) {
+        downloadBtn.innerHTML = '⏳ Generating...';
+        
+        setTimeout(() => {
+          downloadBtn.innerHTML = '✅ Downloaded!';
+          setTimeout(() => {
+            downloadBtn.innerHTML = originalTexts[btns.indexOf(downloadBtn)] || '📄 Download PDF';
+          }, 2000);
+        }, 1200);
+      }
+    }
+
+    // Keyboard navigation support
+    function initKeyboardNav() {
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+          e.preventDefault();
+          const firstLink = document.querySelector('.nav-links a');
+          if (firstLink) firstLink.focus();
+        }
+      });
+    }
+
+    // Initialize all interactions
+    function init() {
+      // Trigger stat counter after a brief delay
+      setTimeout(animateCounters, 400);
+      
+      initFadeIn();
+      initSkillBars();
+      initSmoothScroll();
+      initNavHighlight();
+      initKeyboardNav();
+      
+      // Add subtle parallax to hero gradient
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        window.addEventListener('scroll', () => {
+          const scrolled = window.pageYOffset;
+          if (scrolled < window.innerHeight) {
+            hero.style.transform = `translateY(${scrolled * 0.1}px)`;
+          }
+        }, { passive: true });
+      }
+      
+      // Mark body as ready
+      document.body.style.opacity = '1';
+    }
+
+    // Boot
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>
