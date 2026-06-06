@@ -287,6 +287,8 @@
     .timeline {
       position: relative;
       padding-left: 40px;
+      list-style: none;
+      margin: 0;
     }
 
     .timeline::before {
@@ -297,6 +299,16 @@
       bottom: 12px;
       width: 2px;
       background: var(--border-color);
+    }
+
+    /* Ensure li inside timeline behave like the previous divs for layout */
+    .timeline>li {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .timeline>li:last-child {
+      margin-bottom: 0;
     }
 
     .timeline-item {
@@ -1374,47 +1386,113 @@
     .contact-link:hover::before {
       transform: scaleX(1);
     }
+
+    /* ============================================
+       ACCESSIBILITY ENHANCEMENTS (WCAG 2.2 AA+)
+       ============================================ */
+
+    /* Skip link: standard pattern - offscreen until focused */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      z-index: 10001;
+      padding: 12px 20px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+      outline: 3px solid #fff;
+      outline-offset: 2px;
+    }
+
+    /* Strong, visible focus indicators for all interactive elements */
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* Make sure buttons and links inside cards don't get double outlines */
+    .stat-card:focus-visible,
+    .achievement-card:focus-visible,
+    .project-card:focus-visible {
+      outline-offset: 6px;
+    }
+
+    /* Visually hidden but available to screen readers */
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* Ensure interactive cards that receive focus show clear state */
+    .stat-card[tabindex="0"]:focus-visible,
+    .achievement-card[tabindex="0"]:focus-visible {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    }
   </style>
 </head>
 
 <body>
-  <!-- Scroll Progress Bar -->
-  <div class="scroll-progress" id="scroll-progress"></div>
+  <!-- Skip link for keyboard users (WCAG 2.2) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="container">
-      <div class="nav-brand">Alex Rivera</div>
-      <ul class="nav-links">
-        <li><a href="#stats">Metrics</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-      </ul>
-    </div>
-  </nav>
+  <!-- Scroll Progress Bar (informative + decorative) -->
+  <div class="scroll-progress" id="scroll-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+    aria-valuenow="0" aria-label="Page scroll progress"></div>
+
+  <!-- Primary site header + navigation landmark -->
+  <header>
+    <nav aria-label="Primary">
+      <div class="container">
+        <div class="nav-brand" aria-label="Alex Rivera — Senior DevOps Engineer">Alex Rivera</div>
+        <ul class="nav-links">
+          <li><a href="#stats">Metrics</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
   <!-- Hero with Epic Visual Layers -->
-  <section class="hero">
-    <!-- Animated Grid Background -->
-    <div class="grid-bg"></div>
-    <!-- Floating Gradient Orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <!-- Particle Canvas -->
-    <canvas id="particles"></canvas>
+  <section class="hero" aria-label="Introduction">
+    <!-- Animated Grid Background (purely decorative) -->
+    <div class="grid-bg" aria-hidden="true"></div>
+    <!-- Floating Gradient Orbs (purely decorative) -->
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+    <!-- Particle Canvas (purely decorative) -->
+    <canvas id="particles" aria-hidden="true"></canvas>
 
     <div class="container">
       <div class="hero-content hero-inner">
-        <div class="hero-badge">
-          <span class="dot"></span>
+        <div class="hero-badge" aria-hidden="true">
+          <span class="dot" aria-hidden="true"></span>
           <span>Open to opportunities • Remote / Hybrid</span>
         </div>
         <h1 data-text="Senior DevOps Engineer building reliable infrastructure at scale.">Senior DevOps
           Engineer<br>building <span data-text="reliable infrastructure">reliable infrastructure</span> at scale.<span
-            class="type-cursor"></span></h1>
+            class="type-cursor" aria-hidden="true"></span></h1>
         <p class="hero-subtitle">10+ years architecting cloud-native platforms, automating operations, and leading
           reliability initiatives for high-growth technology companies.</p>
         <div class="hero-actions">
@@ -1423,415 +1501,436 @@
         </div>
       </div>
     </div>
-    <div class="scroll-indicator">
+    <div class="scroll-indicator" aria-hidden="true">
       <span>Scroll to explore</span>
       <div class="arrow"></div>
     </div>
   </section>
 
-  <!-- Global Mouse Glow -->
-  <div class="mouse-glow" id="mouse-glow"></div>
+  <!-- Global Mouse Glow (decorative only) -->
+  <div class="mouse-glow" id="mouse-glow" aria-hidden="true"></div>
 
-  <!-- Statistics -->
-  <section class="stats" id="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-value" data-target="99.95">0</div>
-          <div class="stat-label">Average Uptime</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" data-target="42">0</div>
-          <div class="stat-label">Production Deployments / Month</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" data-target="78">0</div>
-          <div class="stat-label">Infrastructure Cost Reduction %</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" data-target="150">0</div>
-          <div class="stat-label">Engineers Onboarded</div>
+  <!-- Main content landmark -->
+  <main id="main">
+
+    <!-- Statistics -->
+    <section class="stats" id="stats" aria-labelledby="stats-heading" role="region">
+      <div class="container">
+        <h2 id="stats-heading" class="visually-hidden">Key Performance Metrics</h2>
+        <div class="stats-grid">
+          <div class="stat-card" tabindex="0" role="button"
+            aria-label="Average Uptime: 99.95 percent. Click or press Enter to replay animation.">
+            <div class="stat-value" data-target="99.95">0</div>
+            <div class="stat-label">Average Uptime</div>
+          </div>
+          <div class="stat-card" tabindex="0" role="button"
+            aria-label="Production Deployments per Month: 42. Click or press Enter to replay animation.">
+            <div class="stat-value" data-target="42">0</div>
+            <div class="stat-label">Production Deployments / Month</div>
+          </div>
+          <div class="stat-card" tabindex="0" role="button"
+            aria-label="Infrastructure Cost Reduction: 78 percent. Click or press Enter to replay animation.">
+            <div class="stat-value" data-target="78">0</div>
+            <div class="stat-label">Infrastructure Cost Reduction %</div>
+          </div>
+          <div class="stat-card" tabindex="0" role="button"
+            aria-label="Engineers Onboarded: 150. Click or press Enter to replay animation.">
+            <div class="stat-value" data-target="150">0</div>
+            <div class="stat-label">Engineers Onboarded</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Experience -->
-  <section id="experience">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Professional Journey</div>
-        <h2 class="section-title">Experience</h2>
-      </div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-title">Staff DevOps Engineer</div>
-                <div class="timeline-company">Vercel</div>
+    <!-- Experience -->
+    <section id="experience" aria-labelledby="experience-heading" role="region">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Professional Journey</div>
+          <h2 id="experience-heading" class="section-title">Experience</h2>
+        </div>
+        <ol class="timeline" aria-label="Professional experience in reverse chronological order">
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-title">Staff DevOps Engineer</div>
+                  <div class="timeline-company">Vercel</div>
+                </div>
+                <div class="timeline-date">2022 — Present</div>
               </div>
-              <div class="timeline-date">2022 — Present</div>
+              <p class="timeline-description">Lead platform reliability and infrastructure automation for a global edge
+                platform serving millions of developers. Architected multi-region Kubernetes control planes and reduced
+                deployment latency by 67%.</p>
+              <div class="timeline-tags" aria-label="Technologies and tools used">
+                <span class="tag">Kubernetes</span>
+                <span class="tag">Go</span>
+                <span class="tag">Terraform</span>
+                <span class="tag">ArgoCD</span>
+                <span class="tag">Prometheus</span>
+              </div>
             </div>
-            <p class="timeline-description">Lead platform reliability and infrastructure automation for a global edge
-              platform serving millions of developers. Architected multi-region Kubernetes control planes and reduced
-              deployment latency by 67%.</p>
-            <div class="timeline-tags">
-              <span class="tag">Kubernetes</span>
-              <span class="tag">Go</span>
-              <span class="tag">Terraform</span>
-              <span class="tag">ArgoCD</span>
-              <span class="tag">Prometheus</span>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-title">Senior DevOps Engineer</div>
+                  <div class="timeline-company">Stripe</div>
+                </div>
+                <div class="timeline-date">2020 — 2022</div>
+              </div>
+              <p class="timeline-description">Owned CI/CD platform serving 400+ engineers. Built self-service
+                infrastructure provisioning that reduced ticket volume by 82%. Led migration of payment processing
+                workloads to AWS from on-prem.</p>
+              <div class="timeline-tags" aria-label="Technologies and tools used">
+                <span class="tag">AWS</span>
+                <span class="tag">Packer</span>
+                <span class="tag">Jenkins</span>
+                <span class="tag">Vault</span>
+                <span class="tag">Python</span>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-title">DevOps Engineer</div>
+                  <div class="timeline-company">Datadog</div>
+                </div>
+                <div class="timeline-date">2018 — 2020</div>
+              </div>
+              <p class="timeline-description">Scaled monitoring infrastructure to ingest 3.2M metrics/sec. Implemented
+                chaos engineering practices that prevented 4 major incidents. Automated 90% of on-call response
+                playbooks.
+              </p>
+              <div class="timeline-tags" aria-label="Technologies and tools used">
+                <span class="tag">GCP</span>
+                <span class="tag">Kafka</span>
+                <span class="tag">Ansible</span>
+                <span class="tag">ELK</span>
+                <span class="tag">Shell</span>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <div class="timeline-title">Site Reliability Engineer</div>
+                  <div class="timeline-company">Twilio</div>
+                </div>
+                <div class="timeline-date">2016 — 2018</div>
+              </div>
+              <p class="timeline-description">Maintained 99.99% availability for SMS/voice infrastructure. Developed
+                capacity planning models that saved $2.1M annually. Mentored 3 junior SREs through onboarding.</p>
+              <div class="timeline-tags" aria-label="Technologies and tools used">
+                <span class="tag">Docker</span>
+                <span class="tag">Nginx</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">PagerDuty</span>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" style="background: var(--bg-secondary);" aria-labelledby="skills-heading" role="region">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Technical Expertise</div>
+          <h2 id="skills-heading" class="section-title">Skills & Proficiency</h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <div class="skill-category-title">Cloud Platforms</div>
+            <div class="skill-list">
+              <span class="skill-item">AWS (Professional)</span>
+              <span class="skill-item">GCP</span>
+              <span class="skill-item">Azure</span>
+              <span class="skill-item">DigitalOcean</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-header"><span>AWS</span><span>95%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" style="width: 95%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-title">Container & Orchestration</div>
+            <div class="skill-list">
+              <span class="skill-item">Kubernetes</span>
+              <span class="skill-item">Docker</span>
+              <span class="skill-item">Helm</span>
+              <span class="skill-item">Containerd</span>
+              <span class="skill-item">Nomad</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-header"><span>Kubernetes</span><span>92%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" style="width: 92%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-title">Infrastructure as Code</div>
+            <div class="skill-list">
+              <span class="skill-item">Terraform</span>
+              <span class="skill-item">Pulumi</span>
+              <span class="skill-item">Ansible</span>
+              <span class="skill-item">CloudFormation</span>
+              <span class="skill-item">Crossplane</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-header"><span>Terraform</span><span>90%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" style="width: 90%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-title">CI/CD & Automation</div>
+            <div class="skill-list">
+              <span class="skill-item">GitHub Actions</span>
+              <span class="skill-item">ArgoCD</span>
+              <span class="skill-item">Jenkins</span>
+              <span class="skill-item">GitLab CI</span>
+              <span class="skill-item">Spinnaker</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-header"><span>GitHub Actions</span><span>88%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" style="width: 88%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-title">Observability</div>
+            <div class="skill-list">
+              <span class="skill-item">Prometheus</span>
+              <span class="skill-item">Grafana</span>
+              <span class="skill-item">Datadog</span>
+              <span class="skill-item">ELK Stack</span>
+              <span class="skill-item">OpenTelemetry</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-header"><span>Prometheus</span><span>94%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" style="width: 94%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-title">Languages & Scripting</div>
+            <div class="skill-list">
+              <span class="skill-item">Python</span>
+              <span class="skill-item">Go</span>
+              <span class="skill-item">Bash</span>
+              <span class="skill-item">TypeScript</span>
+              <span class="skill-item">HCL</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-header"><span>Python</span><span>85%</span></div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" style="width: 85%"></div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-title">Senior DevOps Engineer</div>
-                <div class="timeline-company">Stripe</div>
-              </div>
-              <div class="timeline-date">2020 — 2022</div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" aria-labelledby="projects-heading" role="region">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Selected Work</div>
+          <h2 id="projects-heading" class="section-title">Key Projects & Initiatives</h2>
+        </div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-icon" aria-hidden="true">🌐</div>
             </div>
-            <p class="timeline-description">Owned CI/CD platform serving 400+ engineers. Built self-service
-              infrastructure provisioning that reduced ticket volume by 82%. Led migration of payment processing
-              workloads to AWS from on-prem.</p>
-            <div class="timeline-tags">
-              <span class="tag">AWS</span>
-              <span class="tag">Packer</span>
-              <span class="tag">Jenkins</span>
-              <span class="tag">Vault</span>
-              <span class="tag">Python</span>
+            <div class="project-metrics">
+              <div class="project-metric">
+                <div class="project-metric-value">99.99%</div>
+                <div class="project-metric-label">Uptime</div>
+              </div>
+              <div class="project-metric">
+                <div class="project-metric-value">42ms</div>
+                <div class="project-metric-label">P99 Latency</div>
+              </div>
+            </div>
+            <div class="project-title">Global Edge Control Plane</div>
+            <p class="project-description">Designed and deployed a multi-region Kubernetes control plane powering
+              Vercel's
+              edge network. Implemented automatic failover and traffic steering across 18 regions.</p>
+            <div class="project-tech">
+              <span>Kubernetes</span><span>Go</span><span>etcd</span><span>Envoy</span>
             </div>
           </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-title">DevOps Engineer</div>
-                <div class="timeline-company">Datadog</div>
-              </div>
-              <div class="timeline-date">2018 — 2020</div>
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-icon" aria-hidden="true">⚡</div>
             </div>
-            <p class="timeline-description">Scaled monitoring infrastructure to ingest 3.2M metrics/sec. Implemented
-              chaos engineering practices that prevented 4 major incidents. Automated 90% of on-call response playbooks.
+            <div class="project-metrics">
+              <div class="project-metric">
+                <div class="project-metric-value">82%</div>
+                <div class="project-metric-label">Fewer Tickets</div>
+              </div>
+              <div class="project-metric">
+                <div class="project-metric-value">4min</div>
+                <div class="project-metric-label">Avg Provision</div>
+              </div>
+            </div>
+            <div class="project-title">Self-Service Infrastructure Platform</div>
+            <p class="project-description">Built an internal developer platform allowing teams to provision
+              production-ready environments via GitOps. Eliminated manual approvals and reduced time-to-prod from days
+              to
+              minutes.</p>
+            <div class="project-tech">
+              <span>Terraform</span><span>ArgoCD</span><span>Backstage</span><span>AWS</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-icon" aria-hidden="true">🔥</div>
+            </div>
+            <div class="project-metrics">
+              <div class="project-metric">
+                <div class="project-metric-value">3.2M</div>
+                <div class="project-metric-label">Metrics/sec</div>
+              </div>
+              <div class="project-metric">
+                <div class="project-metric-value">47%</div>
+                <div class="project-metric-label">Cost Savings</div>
+              </div>
+            </div>
+            <div class="project-title">Observability at Scale</div>
+            <p class="project-description">Architected Datadog's high-throughput metrics pipeline handling billions of
+              data points daily. Implemented intelligent sampling and compression reducing storage costs significantly.
             </p>
-            <div class="timeline-tags">
-              <span class="tag">GCP</span>
-              <span class="tag">Kafka</span>
-              <span class="tag">Ansible</span>
-              <span class="tag">ELK</span>
-              <span class="tag">Shell</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-title">Site Reliability Engineer</div>
-                <div class="timeline-company">Twilio</div>
-              </div>
-              <div class="timeline-date">2016 — 2018</div>
-            </div>
-            <p class="timeline-description">Maintained 99.99% availability for SMS/voice infrastructure. Developed
-              capacity planning models that saved $2.1M annually. Mentored 3 junior SREs through onboarding.</p>
-            <div class="timeline-tags">
-              <span class="tag">Docker</span>
-              <span class="tag">Nginx</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">PagerDuty</span>
+            <div class="project-tech">
+              <span>Kafka</span><span>ClickHouse</span><span>Prometheus</span><span>Go</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Skills -->
-  <section id="skills" style="background: var(--bg-secondary);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Technical Expertise</div>
-        <h2 class="section-title">Skills & Proficiency</h2>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <div class="skill-category-title">Cloud Platforms</div>
-          <div class="skill-list">
-            <span class="skill-item">AWS (Professional)</span>
-            <span class="skill-item">GCP</span>
-            <span class="skill-item">Azure</span>
-            <span class="skill-item">DigitalOcean</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header"><span>AWS</span><span>95%</span></div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 95%"></div>
+    <!-- Achievements -->
+    <section id="achievements" style="background: var(--bg-secondary);" aria-labelledby="achievements-heading"
+      role="region">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Recognition</div>
+          <h2 id="achievements-heading" class="section-title">Achievements & Impact</h2>
+        </div>
+        <div class="achievements-grid">
+          <div class="achievement-card" tabindex="0" role="button"
+            aria-label="CNCF Speaker: Keynote on GitOps at KubeCon 2024 with 3,200+ attendees">
+            <div class="achievement-icon" aria-hidden="true">🏆</div>
+            <div class="achievement-content">
+              <h4>CNCF Speaker</h4>
+              <p>Keynote on GitOps at KubeCon 2024; 3,200+ attendees</p>
             </div>
           </div>
-        </div>
-        <div class="skill-category">
-          <div class="skill-category-title">Container & Orchestration</div>
-          <div class="skill-list">
-            <span class="skill-item">Kubernetes</span>
-            <span class="skill-item">Docker</span>
-            <span class="skill-item">Helm</span>
-            <span class="skill-item">Containerd</span>
-            <span class="skill-item">Nomad</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header"><span>Kubernetes</span><span>92%</span></div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 92%"></div>
+          <div class="achievement-card" tabindex="0" role="button"
+            aria-label="Published Author: Co-authored Production Kubernetes by O'Reilly in 2023">
+            <div class="achievement-icon" aria-hidden="true">📝</div>
+            <div class="achievement-content">
+              <h4>Published Author</h4>
+              <p>Co-authored "Production Kubernetes" (O'Reilly, 2023)</p>
             </div>
           </div>
-        </div>
-        <div class="skill-category">
-          <div class="skill-category-title">Infrastructure as Code</div>
-          <div class="skill-list">
-            <span class="skill-item">Terraform</span>
-            <span class="skill-item">Pulumi</span>
-            <span class="skill-item">Ansible</span>
-            <span class="skill-item">CloudFormation</span>
-            <span class="skill-item">Crossplane</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header"><span>Terraform</span><span>90%</span></div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 90%"></div>
+          <div class="achievement-card" tabindex="0" role="button"
+            aria-label="Cost Optimization Award: $4.8M annual savings through infrastructure right-sizing">
+            <div class="achievement-icon" aria-hidden="true">💰</div>
+            <div class="achievement-content">
+              <h4>Cost Optimization Award</h4>
+              <p>$4.8M annual savings through infrastructure right-sizing</p>
             </div>
           </div>
-        </div>
-        <div class="skill-category">
-          <div class="skill-category-title">CI/CD & Automation</div>
-          <div class="skill-list">
-            <span class="skill-item">GitHub Actions</span>
-            <span class="skill-item">ArgoCD</span>
-            <span class="skill-item">Jenkins</span>
-            <span class="skill-item">GitLab CI</span>
-            <span class="skill-item">Spinnaker</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header"><span>GitHub Actions</span><span>88%</span></div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 88%"></div>
+          <div class="achievement-card" tabindex="0" role="button"
+            aria-label="Incident Prevention: Zero Sev-1 incidents in 18 months at Vercel">
+            <div class="achievement-icon" aria-hidden="true">🚨</div>
+            <div class="achievement-content">
+              <h4>Incident Prevention</h4>
+              <p>Zero Sev-1 incidents in 18 months at Vercel</p>
             </div>
           </div>
-        </div>
-        <div class="skill-category">
-          <div class="skill-category-title">Observability</div>
-          <div class="skill-list">
-            <span class="skill-item">Prometheus</span>
-            <span class="skill-item">Grafana</span>
-            <span class="skill-item">Datadog</span>
-            <span class="skill-item">ELK Stack</span>
-            <span class="skill-item">OpenTelemetry</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header"><span>Prometheus</span><span>94%</span></div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 94%"></div>
+          <div class="achievement-card" tabindex="0" role="button"
+            aria-label="Community Leadership: Founded SF DevOps Meetup with 2,800+ members">
+            <div class="achievement-icon" aria-hidden="true">👥</div>
+            <div class="achievement-content">
+              <h4>Community Leadership</h4>
+              <p>Founded SF DevOps Meetup; 2,800+ members</p>
             </div>
           </div>
-        </div>
-        <div class="skill-category">
-          <div class="skill-category-title">Languages & Scripting</div>
-          <div class="skill-list">
-            <span class="skill-item">Python</span>
-            <span class="skill-item">Go</span>
-            <span class="skill-item">Bash</span>
-            <span class="skill-item">TypeScript</span>
-            <span class="skill-item">HCL</span>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar-header"><span>Python</span><span>85%</span></div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 85%"></div>
+          <div class="achievement-card" tabindex="0" role="button"
+            aria-label="Mentorship Impact: Trained 12 engineers now in senior engineering roles">
+            <div class="achievement-icon" aria-hidden="true">🎓</div>
+            <div class="achievement-content">
+              <h4>Mentorship Impact</h4>
+              <p>Trained 12 engineers now in senior engineering roles</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Projects -->
-  <section id="projects">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Selected Work</div>
-        <h2 class="section-title">Key Projects & Initiatives</h2>
-      </div>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">🌐</div>
-          </div>
-          <div class="project-metrics">
-            <div class="project-metric">
-              <div class="project-metric-value">99.99%</div>
-              <div class="project-metric-label">Uptime</div>
-            </div>
-            <div class="project-metric">
-              <div class="project-metric-value">42ms</div>
-              <div class="project-metric-label">P99 Latency</div>
-            </div>
-          </div>
-          <div class="project-title">Global Edge Control Plane</div>
-          <p class="project-description">Designed and deployed a multi-region Kubernetes control plane powering Vercel's
-            edge network. Implemented automatic failover and traffic steering across 18 regions.</p>
-          <div class="project-tech">
-            <span>Kubernetes</span><span>Go</span><span>etcd</span><span>Envoy</span>
-          </div>
+    <!-- Education & Certifications -->
+    <section aria-labelledby="education-heading" role="region">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Credentials</div>
+          <h2 id="education-heading" class="section-title">Education & Certifications</h2>
         </div>
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">⚡</div>
+        <div class="edu-grid">
+          <div class="edu-card">
+            <div class="edu-title">B.S. Computer Science</div>
+            <div class="edu-org">Stanford University</div>
+            <div class="edu-details">Graduated 2015 • Dean's List • Systems & Networking focus</div>
           </div>
-          <div class="project-metrics">
-            <div class="project-metric">
-              <div class="project-metric-value">82%</div>
-              <div class="project-metric-label">Fewer Tickets</div>
+          <div class="edu-card">
+            <div class="edu-title">Professional Certifications</div>
+            <div class="cert-list" style="margin-top: 16px;">
+              <div class="cert-item">AWS Solutions Architect Professional</div>
+              <div class="cert-item">Certified Kubernetes Administrator (CKA)</div>
+              <div class="cert-item">Google Cloud Professional DevOps Engineer</div>
+              <div class="cert-item">HashiCorp Certified: Terraform Associate</div>
             </div>
-            <div class="project-metric">
-              <div class="project-metric-value">4min</div>
-              <div class="project-metric-label">Avg Provision</div>
-            </div>
-          </div>
-          <div class="project-title">Self-Service Infrastructure Platform</div>
-          <p class="project-description">Built an internal developer platform allowing teams to provision
-            production-ready environments via GitOps. Eliminated manual approvals and reduced time-to-prod from days to
-            minutes.</p>
-          <div class="project-tech">
-            <span>Terraform</span><span>ArgoCD</span><span>Backstage</span><span>AWS</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">🔥</div>
-          </div>
-          <div class="project-metrics">
-            <div class="project-metric">
-              <div class="project-metric-value">3.2M</div>
-              <div class="project-metric-label">Metrics/sec</div>
-            </div>
-            <div class="project-metric">
-              <div class="project-metric-value">47%</div>
-              <div class="project-metric-label">Cost Savings</div>
-            </div>
-          </div>
-          <div class="project-title">Observability at Scale</div>
-          <p class="project-description">Architected Datadog's high-throughput metrics pipeline handling billions of
-            data points daily. Implemented intelligent sampling and compression reducing storage costs significantly.
-          </p>
-          <div class="project-tech">
-            <span>Kafka</span><span>ClickHouse</span><span>Prometheus</span><span>Go</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Achievements -->
-  <section id="achievements" style="background: var(--bg-secondary);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Recognition</div>
-        <h2 class="section-title">Achievements & Impact</h2>
-      </div>
-      <div class="achievements-grid">
-        <div class="achievement-card">
-          <div class="achievement-icon">🏆</div>
-          <div class="achievement-content">
-            <h4>CNCF Speaker</h4>
-            <p>Keynote on GitOps at KubeCon 2024; 3,200+ attendees</p>
-          </div>
-        </div>
-        <div class="achievement-card">
-          <div class="achievement-icon">📝</div>
-          <div class="achievement-content">
-            <h4>Published Author</h4>
-            <p>Co-authored "Production Kubernetes" (O'Reilly, 2023)</p>
-          </div>
-        </div>
-        <div class="achievement-card">
-          <div class="achievement-icon">💰</div>
-          <div class="achievement-content">
-            <h4>Cost Optimization Award</h4>
-            <p>$4.8M annual savings through infrastructure right-sizing</p>
-          </div>
-        </div>
-        <div class="achievement-card">
-          <div class="achievement-icon">🚨</div>
-          <div class="achievement-content">
-            <h4>Incident Prevention</h4>
-            <p>Zero Sev-1 incidents in 18 months at Vercel</p>
-          </div>
-        </div>
-        <div class="achievement-card">
-          <div class="achievement-icon">👥</div>
-          <div class="achievement-content">
-            <h4>Community Leadership</h4>
-            <p>Founded SF DevOps Meetup; 2,800+ members</p>
-          </div>
-        </div>
-        <div class="achievement-card">
-          <div class="achievement-icon">🎓</div>
-          <div class="achievement-content">
-            <h4>Mentorship Impact</h4>
-            <p>Trained 12 engineers now in senior engineering roles</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- Education & Certifications -->
-  <section>
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Credentials</div>
-        <h2 class="section-title">Education & Certifications</h2>
-      </div>
-      <div class="edu-grid">
-        <div class="edu-card">
-          <div class="edu-title">B.S. Computer Science</div>
-          <div class="edu-org">Stanford University</div>
-          <div class="edu-details">Graduated 2015 • Dean's List • Systems & Networking focus</div>
-        </div>
-        <div class="edu-card">
-          <div class="edu-title">Professional Certifications</div>
-          <div class="cert-list" style="margin-top: 16px;">
-            <div class="cert-item">AWS Solutions Architect Professional</div>
-            <div class="cert-item">Certified Kubernetes Administrator (CKA)</div>
-            <div class="cert-item">Google Cloud Professional DevOps Engineer</div>
-            <div class="cert-item">HashiCorp Certified: Terraform Associate</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="contact" id="contact">
+  <!-- Contact / Footer -->
+  <footer class="contact" id="contact" aria-label="Contact and resume download">
     <div class="container">
       <h3>Let's build something reliable together.</h3>
       <p>Currently exploring senior infrastructure and platform engineering opportunities.</p>
       <div class="contact-links">
         <a href="mailto:alex.rivera@email.com" class="contact-link">✉ alex.rivera@email.com</a>
-        <a href="https://github.com/arivera-dev" target="_blank" class="contact-link">⚡ github.com/arivera-dev</a>
-        <a href="https://linkedin.com/in/alexrivera" target="_blank" class="contact-link">🔗
+        <a href="https://github.com/arivera-dev" target="_blank" rel="noopener noreferrer" class="contact-link">⚡
+          github.com/arivera-dev</a>
+        <a href="https://linkedin.com/in/alexrivera" target="_blank" rel="noopener noreferrer" class="contact-link">🔗
           linkedin.com/in/alexrivera</a>
         <a href="#" class="contact-link" onclick="downloadResume(event)">📄 Download PDF</a>
       </div>
     </div>
-  </section>
+  </footer>
 
   <script>
     // ============================================
@@ -1846,7 +1945,7 @@
     let mouseX = 0, mouseY = 0;
     let targetMouseX = 0, targetMouseY = 0;
 
-    // Scroll Progress Bar
+    // Scroll Progress Bar (with ARIA live value)
     function initScrollProgress() {
       scrollProgressEl = document.getElementById('scroll-progress');
       if (!scrollProgressEl) return;
@@ -1855,7 +1954,9 @@
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-        scrollProgressEl.style.width = progress + '%';
+        const rounded = Math.round(progress);
+        scrollProgressEl.style.width = rounded + '%';
+        scrollProgressEl.setAttribute('aria-valuenow', rounded);
       }
 
       window.addEventListener('scroll', updateProgress, { passive: true });
@@ -2161,7 +2262,7 @@
     function initAchievementBursts() {
       const cards = document.querySelectorAll('.achievement-card');
       cards.forEach(card => {
-        card.addEventListener('click', (e) => {
+        const trigger = () => {
           const rect = card.getBoundingClientRect();
           const x = rect.left + rect.width / 2;
           const y = rect.top + rect.height / 2;
@@ -2174,18 +2275,28 @@
             card.style.transition = 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)';
             card.style.boxShadow = '';
           }, 220);
+        };
+
+        card.addEventListener('click', trigger);
+
+        // Keyboard activation for role=button achievement cards
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault(); // prevent page scroll on Space
+            trigger();
+          }
         });
       });
     }
 
-    // Enhanced Stat Cards (pulse + bump number)
+    // Enhanced Stat Cards (pulse + bump number) + full keyboard support
     function initStatCardEffects() {
       const cards = document.querySelectorAll('.stat-card');
       cards.forEach(card => {
         const valueEl = card.querySelector('.stat-value');
         if (!valueEl) return;
 
-        card.addEventListener('click', () => {
+        const trigger = () => {
           // Scale pulse
           valueEl.style.transition = 'transform 0.1s ease';
           valueEl.style.transform = 'scale(1.35)';
@@ -2209,6 +2320,16 @@
             else valueEl.textContent = isDecimal ? target.toFixed(2) : target;
           }
           requestAnimationFrame(bump);
+        };
+
+        card.addEventListener('click', trigger);
+
+        // Keyboard activation for role=button cards
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault(); // prevent page scroll on Space
+            trigger();
+          }
         });
       });
     }
