@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Rivera • Senior DevOps Engineer</title>
+  <meta name="description"
+    content="Senior DevOps Engineer resume for Alex Rivera — 10+ years building reliable cloud-native platforms, Kubernetes, IaC, CI/CD, and observability at scale.">
+  <meta name="color-scheme" content="dark">
+  <title>Alex Rivera — Senior DevOps Engineer | Resume</title>
   <style>
     :root {
       --bg-primary: #0a0b0f;
@@ -140,8 +144,15 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
     }
 
     .hero h1 {
@@ -703,15 +714,15 @@
       .nav-links {
         display: none;
       }
-      
+
       .timeline {
         padding-left: 28px;
       }
-      
+
       .timeline-dot {
         left: -21px;
       }
-      
+
       .timeline::before {
         left: 7px;
       }
@@ -736,9 +747,640 @@
         transition: none !important;
       }
     }
+
+    /* ============================================
+       EPIC VISUAL EFFECTS & ANIMATIONS
+       ============================================ */
+
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--gradient-end));
+      z-index: 10000;
+      transition: width 0.05s linear;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    /* Animated Grid Background */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 60px 60px;
+      }
+    }
+
+    /* Floating Gradient Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-1 {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+      top: -10%;
+      right: -5%;
+      animation: floatOrb1 25s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.35) 0%, transparent 70%);
+      bottom: 10%;
+      left: -8%;
+      animation: floatOrb2 30s ease-in-out infinite;
+    }
+
+    .orb-3 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
+      top: 40%;
+      left: 30%;
+      animation: floatOrb3 22s ease-in-out infinite;
+    }
+
+    @keyframes floatOrb1 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(40px, -60px) scale(1.1);
+      }
+
+      66% {
+        transform: translate(-30px, 50px) scale(0.95);
+      }
+    }
+
+    @keyframes floatOrb2 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(70px, 40px) scale(1.15);
+      }
+    }
+
+    @keyframes floatOrb3 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      40% {
+        transform: translate(-50px, -40px) scale(1.08);
+      }
+
+      80% {
+        transform: translate(30px, 60px) scale(0.92);
+      }
+    }
+
+    /* Particle Canvas */
+    #particles {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    /* Epic Hero Enhancements */
+    .hero {
+      position: relative;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Glitch / Scan Effect on Hero Title */
+    .hero h1 {
+      position: relative;
+    }
+
+    .hero h1::before,
+    .hero h1::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    .hero h1::before {
+      left: 2px;
+      text-shadow: -1px 0 var(--accent);
+      animation: glitch-1 2.5s infinite linear alternate-reverse;
+    }
+
+    .hero h1::after {
+      left: -2px;
+      text-shadow: 1px 0 var(--gradient-end);
+      animation: glitch-2 3s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-1 {
+      0% {
+        clip: rect(42px, 9999px, 44px, 0);
+      }
+
+      5% {
+        clip: rect(12px, 9999px, 89px, 0);
+      }
+
+      10% {
+        clip: rect(78px, 9999px, 12px, 0);
+      }
+
+      15% {
+        clip: rect(3px, 9999px, 67px, 0);
+      }
+
+      100% {
+        clip: rect(0, 9999px, 0, 0);
+      }
+    }
+
+    @keyframes glitch-2 {
+      0% {
+        clip: rect(65px, 9999px, 119px, 0);
+      }
+
+      7% {
+        clip: rect(31px, 9999px, 8px, 0);
+      }
+
+      12% {
+        clip: rect(91px, 9999px, 52px, 0);
+      }
+
+      18% {
+        clip: rect(14px, 9999px, 77px, 0);
+      }
+
+      100% {
+        clip: rect(0, 9999px, 0, 0);
+      }
+    }
+
+    .hero h1 span {
+      position: relative;
+      display: inline-block;
+      animation: gradientFlow 4s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientFlow {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 200% 50%;
+      }
+    }
+
+    /* Typewriter Cursor */
+    .type-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      animation: cursorBlink 0.7s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes cursorBlink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Holographic / Shimmer Borders */
+    .stat-card,
+    .timeline-content,
+    .skill-category,
+    .project-card,
+    .achievement-card,
+    .edu-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before,
+    .timeline-content::before,
+    .skill-category::before,
+    .project-card::before,
+    .achievement-card::before,
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          transparent);
+      transition: left 0.6s;
+    }
+
+    .stat-card:hover::before,
+    .timeline-content:hover::before,
+    .skill-category:hover::before,
+    .project-card:hover::before,
+    .achievement-card:hover::before,
+    .edu-card:hover::before {
+      left: 250%;
+    }
+
+    /* Enhanced Stat Cards - Epic */
+    .stat-card {
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+        border-color 0.3s ease,
+        box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--accent);
+      box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+    }
+
+    .stat-card .stat-value {
+      transition: transform 0.2s ease;
+    }
+
+    .stat-card:hover .stat-value {
+      transform: scale(1.08);
+    }
+
+    /* Epic Timeline */
+    .timeline::before {
+      background: linear-gradient(to bottom,
+          var(--border-color),
+          var(--accent),
+          var(--gradient-end),
+          var(--border-color));
+      background-size: 100% 300%;
+      animation: timelineFlow 6s linear infinite;
+    }
+
+    @keyframes timelineFlow {
+      0% {
+        background-position: 0 0%;
+      }
+
+      100% {
+        background-position: 0 300%;
+      }
+    }
+
+    .timeline-dot {
+      transition: all 0.3s ease;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    }
+
+    .timeline-dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.2),
+        0 0 20px var(--accent);
+      animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes ping {
+
+      75%,
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    .timeline-item {
+      opacity: 0.4;
+      transform: translateX(-20px);
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-content {
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .timeline-content:hover {
+      transform: translateX(8px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Glowing Tags */
+    .tag {
+      position: relative;
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+
+    .tag:hover {
+      color: var(--text-primary);
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .tag::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 30%;
+      height: 200%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent);
+      transition: left 0.5s;
+    }
+
+    .tag:hover::after {
+      left: 200%;
+    }
+
+    /* Skill Bars - Epic Flow */
+    .skill-bar-track {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      position: relative;
+      background: linear-gradient(90deg,
+          var(--accent),
+          var(--gradient-end),
+          var(--accent));
+      background-size: 200% 100%;
+      animation: flowGradient 2.5s linear infinite;
+    }
+
+    @keyframes flowGradient {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    .skill-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent);
+      animation: shineSweep 2s linear infinite;
+    }
+
+    @keyframes shineSweep {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(400%);
+      }
+    }
+
+    /* Project Cards - 3D + Holo */
+    .project-card {
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+        border-color 0.3s ease,
+        box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(59, 130, 246, 0.15) inset;
+    }
+
+    .project-icon {
+      position: relative;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+        box-shadow 0.3s ease;
+    }
+
+    .project-card:hover .project-icon {
+      transform: rotate(8deg) scale(1.1);
+      box-shadow: 0 10px 30px -5px rgba(59, 130, 246, 0.5);
+    }
+
+    .project-metric-value {
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover .project-metric-value {
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Achievement Cards - Epic Glow */
+    .achievement-card {
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: var(--success);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(34, 197, 94, 0.15);
+    }
+
+    .achievement-icon {
+      transition: all 0.4s ease;
+    }
+
+    .achievement-card:hover .achievement-icon {
+      background: rgba(34, 197, 94, 0.2);
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    /* Confetti burst container */
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Enhanced Buttons */
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 50%;
+      height: 200%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 255, 255, 0.35),
+          transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-primary:hover::after {
+      left: 250%;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    /* Mouse Glow Effect */
+    .mouse-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: screen;
+      transition: opacity 0.2s ease;
+      opacity: 0;
+    }
+
+    /* Section entrance dramatic */
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stats {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Skill item hover glow */
+    .skill-item {
+      transition: all 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .skill-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* Contact links epic */
+    .contact-link {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--gradient-end));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .contact-link:hover::before {
+      transform: scaleX(1);
+    }
   </style>
 </head>
+
 <body>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
   <!-- Navigation -->
   <nav>
     <div class="container">
@@ -753,16 +1395,28 @@
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- Hero with Epic Visual Layers -->
   <section class="hero">
+    <!-- Animated Grid Background -->
+    <div class="grid-bg"></div>
+    <!-- Floating Gradient Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <!-- Particle Canvas -->
+    <canvas id="particles"></canvas>
+
     <div class="container">
-      <div class="hero-content">
+      <div class="hero-content hero-inner">
         <div class="hero-badge">
           <span class="dot"></span>
           <span>Open to opportunities • Remote / Hybrid</span>
         </div>
-        <h1>Senior DevOps Engineer<br>building <span>reliable infrastructure</span> at scale.</h1>
-        <p class="hero-subtitle">10+ years architecting cloud-native platforms, automating operations, and leading reliability initiatives for high-growth technology companies.</p>
+        <h1 data-text="Senior DevOps Engineer building reliable infrastructure at scale.">Senior DevOps
+          Engineer<br>building <span data-text="reliable infrastructure">reliable infrastructure</span> at scale.<span
+            class="type-cursor"></span></h1>
+        <p class="hero-subtitle">10+ years architecting cloud-native platforms, automating operations, and leading
+          reliability initiatives for high-growth technology companies.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">Get in touch</a>
           <a href="#experience" class="btn btn-secondary">View experience</a>
@@ -774,6 +1428,9 @@
       <div class="arrow"></div>
     </div>
   </section>
+
+  <!-- Global Mouse Glow -->
+  <div class="mouse-glow" id="mouse-glow"></div>
 
   <!-- Statistics -->
   <section class="stats" id="stats">
@@ -817,7 +1474,9 @@
               </div>
               <div class="timeline-date">2022 — Present</div>
             </div>
-            <p class="timeline-description">Lead platform reliability and infrastructure automation for a global edge platform serving millions of developers. Architected multi-region Kubernetes control planes and reduced deployment latency by 67%.</p>
+            <p class="timeline-description">Lead platform reliability and infrastructure automation for a global edge
+              platform serving millions of developers. Architected multi-region Kubernetes control planes and reduced
+              deployment latency by 67%.</p>
             <div class="timeline-tags">
               <span class="tag">Kubernetes</span>
               <span class="tag">Go</span>
@@ -837,7 +1496,9 @@
               </div>
               <div class="timeline-date">2020 — 2022</div>
             </div>
-            <p class="timeline-description">Owned CI/CD platform serving 400+ engineers. Built self-service infrastructure provisioning that reduced ticket volume by 82%. Led migration of payment processing workloads to AWS from on-prem.</p>
+            <p class="timeline-description">Owned CI/CD platform serving 400+ engineers. Built self-service
+              infrastructure provisioning that reduced ticket volume by 82%. Led migration of payment processing
+              workloads to AWS from on-prem.</p>
             <div class="timeline-tags">
               <span class="tag">AWS</span>
               <span class="tag">Packer</span>
@@ -857,7 +1518,9 @@
               </div>
               <div class="timeline-date">2018 — 2020</div>
             </div>
-            <p class="timeline-description">Scaled monitoring infrastructure to ingest 3.2M metrics/sec. Implemented chaos engineering practices that prevented 4 major incidents. Automated 90% of on-call response playbooks.</p>
+            <p class="timeline-description">Scaled monitoring infrastructure to ingest 3.2M metrics/sec. Implemented
+              chaos engineering practices that prevented 4 major incidents. Automated 90% of on-call response playbooks.
+            </p>
             <div class="timeline-tags">
               <span class="tag">GCP</span>
               <span class="tag">Kafka</span>
@@ -877,7 +1540,8 @@
               </div>
               <div class="timeline-date">2016 — 2018</div>
             </div>
-            <p class="timeline-description">Maintained 99.99% availability for SMS/voice infrastructure. Developed capacity planning models that saved $2.1M annually. Mentored 3 junior SREs through onboarding.</p>
+            <p class="timeline-description">Maintained 99.99% availability for SMS/voice infrastructure. Developed
+              capacity planning models that saved $2.1M annually. Mentored 3 junior SREs through onboarding.</p>
             <div class="timeline-tags">
               <span class="tag">Docker</span>
               <span class="tag">Nginx</span>
@@ -908,7 +1572,9 @@
           </div>
           <div class="skill-bar">
             <div class="skill-bar-header"><span>AWS</span><span>95%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 95%"></div></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width: 95%"></div>
+            </div>
           </div>
         </div>
         <div class="skill-category">
@@ -922,7 +1588,9 @@
           </div>
           <div class="skill-bar">
             <div class="skill-bar-header"><span>Kubernetes</span><span>92%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 92%"></div></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width: 92%"></div>
+            </div>
           </div>
         </div>
         <div class="skill-category">
@@ -936,7 +1604,9 @@
           </div>
           <div class="skill-bar">
             <div class="skill-bar-header"><span>Terraform</span><span>90%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%"></div></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width: 90%"></div>
+            </div>
           </div>
         </div>
         <div class="skill-category">
@@ -950,7 +1620,9 @@
           </div>
           <div class="skill-bar">
             <div class="skill-bar-header"><span>GitHub Actions</span><span>88%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%"></div></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width: 88%"></div>
+            </div>
           </div>
         </div>
         <div class="skill-category">
@@ -964,7 +1636,9 @@
           </div>
           <div class="skill-bar">
             <div class="skill-bar-header"><span>Prometheus</span><span>94%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 94%"></div></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width: 94%"></div>
+            </div>
           </div>
         </div>
         <div class="skill-category">
@@ -978,7 +1652,9 @@
           </div>
           <div class="skill-bar">
             <div class="skill-bar-header"><span>Python</span><span>85%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 85%"></div></div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="width: 85%"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1008,7 +1684,8 @@
             </div>
           </div>
           <div class="project-title">Global Edge Control Plane</div>
-          <p class="project-description">Designed and deployed a multi-region Kubernetes control plane powering Vercel's edge network. Implemented automatic failover and traffic steering across 18 regions.</p>
+          <p class="project-description">Designed and deployed a multi-region Kubernetes control plane powering Vercel's
+            edge network. Implemented automatic failover and traffic steering across 18 regions.</p>
           <div class="project-tech">
             <span>Kubernetes</span><span>Go</span><span>etcd</span><span>Envoy</span>
           </div>
@@ -1028,7 +1705,9 @@
             </div>
           </div>
           <div class="project-title">Self-Service Infrastructure Platform</div>
-          <p class="project-description">Built an internal developer platform allowing teams to provision production-ready environments via GitOps. Eliminated manual approvals and reduced time-to-prod from days to minutes.</p>
+          <p class="project-description">Built an internal developer platform allowing teams to provision
+            production-ready environments via GitOps. Eliminated manual approvals and reduced time-to-prod from days to
+            minutes.</p>
           <div class="project-tech">
             <span>Terraform</span><span>ArgoCD</span><span>Backstage</span><span>AWS</span>
           </div>
@@ -1048,7 +1727,9 @@
             </div>
           </div>
           <div class="project-title">Observability at Scale</div>
-          <p class="project-description">Architected Datadog's high-throughput metrics pipeline handling billions of data points daily. Implemented intelligent sampling and compression reducing storage costs significantly.</p>
+          <p class="project-description">Architected Datadog's high-throughput metrics pipeline handling billions of
+            data points daily. Implemented intelligent sampling and compression reducing storage costs significantly.
+          </p>
           <div class="project-tech">
             <span>Kafka</span><span>ClickHouse</span><span>Prometheus</span><span>Go</span>
           </div>
@@ -1145,77 +1826,473 @@
       <div class="contact-links">
         <a href="mailto:alex.rivera@email.com" class="contact-link">✉ alex.rivera@email.com</a>
         <a href="https://github.com/arivera-dev" target="_blank" class="contact-link">⚡ github.com/arivera-dev</a>
-        <a href="https://linkedin.com/in/alexrivera" target="_blank" class="contact-link">🔗 linkedin.com/in/alexrivera</a>
+        <a href="https://linkedin.com/in/alexrivera" target="_blank" class="contact-link">🔗
+          linkedin.com/in/alexrivera</a>
         <a href="#" class="contact-link" onclick="downloadResume(event)">📄 Download PDF</a>
       </div>
     </div>
   </section>
 
   <script>
-    // Animated counter for stats
+    // ============================================
+    // EPIC VISUAL EFFECTS - JAVASCRIPT LAYER
+    // ============================================
+
+    let scrollProgressEl = null;
+    let mouseGlowEl = null;
+    let particleCanvas = null;
+    let particleCtx = null;
+    let particles = [];
+    let mouseX = 0, mouseY = 0;
+    let targetMouseX = 0, targetMouseY = 0;
+
+    // Scroll Progress Bar
+    function initScrollProgress() {
+      scrollProgressEl = document.getElementById('scroll-progress');
+      if (!scrollProgressEl) return;
+
+      function updateProgress() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        scrollProgressEl.style.width = progress + '%';
+      }
+
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+    }
+
+    // Particle System (canvas)
+    function initParticles() {
+      particleCanvas = document.getElementById('particles');
+      if (!particleCanvas) return;
+
+      particleCtx = particleCanvas.getContext('2d', { alpha: true });
+
+      function resizeCanvas() {
+        const hero = document.querySelector('.hero');
+        if (!hero) return;
+        particleCanvas.width = hero.offsetWidth;
+        particleCanvas.height = hero.offsetHeight;
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      // Create particles
+      particles = [];
+      const count = Math.min(90, Math.floor((particleCanvas.width * particleCanvas.height) / 9000));
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * particleCanvas.width,
+          y: Math.random() * particleCanvas.height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          size: Math.random() * 1.8 + 0.6,
+          alpha: Math.random() * 0.5 + 0.3
+        });
+      }
+
+      function draw() {
+        if (!particleCtx || !particleCanvas) return;
+        particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+
+        // Update + draw
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Gentle bounds bounce
+          if (p.x < 0 || p.x > particleCanvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > particleCanvas.height) p.vy *= -1;
+
+          // Mouse repulsion
+          const dx = p.x - mouseX;
+          const dy = p.y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          if (dist < 140) {
+            const force = (140 - dist) / 140;
+            p.vx += (dx / dist) * force * 0.12;
+            p.vy += (dy / dist) * force * 0.12;
+          }
+
+          // Damp velocity
+          p.vx *= 0.985;
+          p.vy *= 0.985;
+
+          // Draw
+          particleCtx.beginPath();
+          particleCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          particleCtx.fillStyle = `rgba(59,130,246,${p.alpha})`;
+          particleCtx.fill();
+        }
+
+        // Connect nearby particles
+        particleCtx.strokeStyle = 'rgba(59,130,246,0.15)';
+        particleCtx.lineWidth = 0.8;
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const a = particles[i];
+            const b = particles[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 110) {
+              particleCtx.globalAlpha = (1 - d / 110) * 0.6;
+              particleCtx.beginPath();
+              particleCtx.moveTo(a.x, a.y);
+              particleCtx.lineTo(b.x, b.y);
+              particleCtx.stroke();
+            }
+          }
+        }
+        particleCtx.globalAlpha = 1;
+
+        requestAnimationFrame(draw);
+      }
+
+      // Track mouse inside hero for repulsion
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        hero.addEventListener('mousemove', (e) => {
+          const rect = hero.getBoundingClientRect();
+          mouseX = e.clientX - rect.left;
+          mouseY = e.clientY - rect.top;
+        });
+        hero.addEventListener('mouseleave', () => {
+          mouseX = -9999;
+          mouseY = -9999;
+        });
+      }
+
+      draw();
+    }
+
+    // Mouse Glow Follow
+    function initMouseGlow() {
+      mouseGlowEl = document.getElementById('mouse-glow');
+      if (!mouseGlowEl) return;
+
+      let visible = false;
+
+      document.addEventListener('mousemove', (e) => {
+        targetMouseX = e.clientX;
+        targetMouseY = e.clientY;
+
+        if (!visible) {
+          visible = true;
+          mouseGlowEl.style.opacity = '1';
+        }
+
+        // Smooth follow
+        const lerp = (a, b, t) => a + (b - a) * t;
+        const currentX = parseFloat(mouseGlowEl.style.left) || targetMouseX;
+        const currentY = parseFloat(mouseGlowEl.style.top) || targetMouseY;
+
+        const x = lerp(currentX, targetMouseX, 0.12);
+        const y = lerp(currentY, targetMouseY, 0.12);
+
+        mouseGlowEl.style.left = x + 'px';
+        mouseGlowEl.style.top = y + 'px';
+        mouseGlowEl.style.transform = 'translate(-50%, -50%)';
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', () => {
+        if (mouseGlowEl) mouseGlowEl.style.opacity = '0';
+        visible = false;
+      });
+    }
+
+    // Timeline active dots + progressive reveal
+    function initEpicTimeline() {
+      const items = document.querySelectorAll('.timeline-item');
+      const dots = document.querySelectorAll('.timeline-dot');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+
+            // Activate dot
+            const dot = entry.target.querySelector('.timeline-dot');
+            if (dot) {
+              dot.classList.add('active');
+              setTimeout(() => dot.classList.remove('active'), 1800);
+            }
+          }
+        });
+      }, { threshold: 0.35, rootMargin: '-80px 0px -60px 0px' });
+
+      items.forEach(item => observer.observe(item));
+    }
+
+    // Dramatic section entrance
+    function initSectionReveals() {
+      const sections = document.querySelectorAll('section');
+      sections.forEach((section, idx) => {
+        if (section.classList.contains('stats') || section.classList.contains('hero')) {
+          section.classList.add('visible');
+          return;
+        }
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.classList.add('visible');
+              }, idx * 40);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -80px 0px' });
+        obs.observe(section);
+      });
+    }
+
+    // 3D Tilt on Project Cards
+    function initCardTilt() {
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        let raf = null;
+
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) - 0.5;
+          const y = ((e.clientY - rect.top) / rect.height) - 0.5;
+
+          const rotX = (-y * 12).toFixed(1);
+          const rotY = (x * 14).toFixed(1);
+
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+          });
+        });
+
+        card.addEventListener('mouseleave', () => {
+          if (raf) cancelAnimationFrame(raf);
+          card.style.transition = 'transform 0.45s cubic-bezier(0.23,1,0.32,1)';
+          card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)';
+          setTimeout(() => {
+            card.style.transition = 'transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease, box-shadow 0.4s ease';
+          }, 450);
+        });
+
+        card.addEventListener('mouseenter', () => {
+          card.style.transition = 'transform 0.12s ease-out';
+        });
+      });
+    }
+
+    // Confetti burst on achievement cards
+    function createConfettiBurst(x, y, count = 42) {
+      const colors = ['#22c55e', '#3b82f6', '#8b5cf6'];
+      const container = document.createElement('div');
+      container.className = 'confetti';
+      container.style.left = '0';
+      container.style.top = '0';
+      container.style.width = '100%';
+      container.style.height = '100%';
+      document.body.appendChild(container);
+
+      const c = document.createElement('canvas');
+      c.width = window.innerWidth;
+      c.height = window.innerHeight;
+      c.style.position = 'fixed';
+      c.style.left = '0';
+      c.style.top = '0';
+      c.style.pointerEvents = 'none';
+      c.style.zIndex = '9999';
+      container.appendChild(c);
+
+      const ctx = c.getContext('2d');
+      const pieces = [];
+
+      for (let i = 0; i < count; i++) {
+        pieces.push({
+          x: x + (Math.random() - 0.5) * 60,
+          y: y + (Math.random() - 0.5) * 40,
+          vx: (Math.random() - 0.5) * 7.5,
+          vy: Math.random() * -7 - 3,
+          size: Math.random() * 6 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rot: Math.random() * Math.PI * 2,
+          vr: (Math.random() - 0.5) * 0.4,
+          life: 60 + Math.random() * 30
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        let alive = false;
+
+        for (let i = 0; i < pieces.length; i++) {
+          const p = pieces[i];
+          if (p.life <= 0) continue;
+          alive = true;
+
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.18;
+          p.vx *= 0.99;
+          p.rot += p.vr;
+          p.life--;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(p.life / 70, 0);
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
+        }
+
+        if (alive) {
+          requestAnimationFrame(draw);
+        } else {
+          container.remove();
+        }
+      }
+
+      draw();
+      setTimeout(() => container.remove(), 2400);
+    }
+
+    function initAchievementBursts() {
+      const cards = document.querySelectorAll('.achievement-card');
+      cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = rect.left + rect.width / 2;
+          const y = rect.top + rect.height / 2;
+          createConfettiBurst(x, y, 48);
+
+          // Quick visual flash
+          card.style.transition = 'none';
+          card.style.boxShadow = '0 0 0 1px rgba(34,197,94,0.6), 0 30px 70px -15px rgba(0,0,0,0.5)';
+          setTimeout(() => {
+            card.style.transition = 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)';
+            card.style.boxShadow = '';
+          }, 220);
+        });
+      });
+    }
+
+    // Enhanced Stat Cards (pulse + bump number)
+    function initStatCardEffects() {
+      const cards = document.querySelectorAll('.stat-card');
+      cards.forEach(card => {
+        const valueEl = card.querySelector('.stat-value');
+        if (!valueEl) return;
+
+        card.addEventListener('click', () => {
+          // Scale pulse
+          valueEl.style.transition = 'transform 0.1s ease';
+          valueEl.style.transform = 'scale(1.35)';
+          setTimeout(() => {
+            valueEl.style.transition = 'transform 0.35s cubic-bezier(0.23,1,0.32,1)';
+            valueEl.style.transform = 'scale(1)';
+          }, 120);
+
+          // Re-animate the number once
+          const target = parseFloat(valueEl.getAttribute('data-target'));
+          const isDecimal = valueEl.getAttribute('data-target').includes('.');
+          const start = performance.now();
+          const dur = 650;
+
+          function bump(now) {
+            const t = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            const cur = target * eased;
+            valueEl.textContent = isDecimal ? cur.toFixed(2) : Math.floor(cur);
+            if (t < 1) requestAnimationFrame(bump);
+            else valueEl.textContent = isDecimal ? target.toFixed(2) : target;
+          }
+          requestAnimationFrame(bump);
+        });
+      });
+    }
+
+    // Enhanced skill bar hover (boost glow)
+    function initSkillBarExtras() {
+      const fills = document.querySelectorAll('.skill-bar-fill');
+      fills.forEach(fill => {
+        const track = fill.parentElement;
+        if (!track) return;
+
+        track.addEventListener('mouseenter', () => {
+          fill.style.boxShadow = '0 0 12px rgba(59,130,246,0.6)';
+        });
+        track.addEventListener('mouseleave', () => {
+          fill.style.boxShadow = '';
+        });
+      });
+    }
+
+    // Keyboard easter egg: press "e" for particle explosion in hero
+    function initKeyboardEasterEgg() {
+      let lastPress = 0;
+      document.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === 'e') {
+          const now = Date.now();
+          if (now - lastPress < 180) return;
+          lastPress = now;
+
+          const hero = document.querySelector('.hero');
+          if (!hero || !particleCanvas) return;
+
+          const rect = hero.getBoundingClientRect();
+          const cx = rect.width / 2;
+          const cy = rect.height * 0.4;
+
+          // Inject extra particles
+          for (let i = 0; i < 26; i++) {
+            particles.push({
+              x: cx + (Math.random() - 0.5) * 140,
+              y: cy + (Math.random() - 0.5) * 120,
+              vx: (Math.random() - 0.5) * 5,
+              vy: (Math.random() - 0.5) * 5,
+              size: Math.random() * 2.2 + 1,
+              alpha: 0.9
+            });
+          }
+        }
+      });
+    }
+
+    // Existing base functions kept but enhanced
     function animateCounters() {
       const counters = document.querySelectorAll('.stat-value');
-      
       counters.forEach(counter => {
         const target = parseFloat(counter.getAttribute('data-target'));
         const isDecimal = counter.getAttribute('data-target').includes('.');
-        const duration = 1500;
+        const duration = 1650;
         const startTime = performance.now();
-        
+
         function update(currentTime) {
           const elapsed = currentTime - startTime;
           const progress = Math.min(elapsed / duration, 1);
-          
-          // Easing function
-          const eased = 1 - Math.pow(1 - progress, 3);
+          const eased = 1 - Math.pow(1 - progress, 3.2);
           const current = target * eased;
-          
+
           if (isDecimal) {
             counter.textContent = current.toFixed(2);
           } else {
             counter.textContent = Math.floor(current);
           }
-          
+
           if (progress < 1) {
             requestAnimationFrame(update);
           } else {
-            if (isDecimal) {
-              counter.textContent = target.toFixed(2);
-            } else {
-              counter.textContent = target;
-            }
+            counter.textContent = isDecimal ? target.toFixed(2) : target;
           }
         }
-        
         requestAnimationFrame(update);
       });
     }
 
-    // Intersection observer for fade-in animations
-    function initFadeIn() {
-      const elements = document.querySelectorAll('.timeline-item, .skill-category, .project-card, .achievement-card, .edu-card, .stat-card');
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('fade-in', 'visible');
-            }, index * 50);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-      
-      elements.forEach(el => {
-        el.classList.add('fade-in');
-        observer.observe(el);
-      });
-    }
-
-    // Animate skill bars when in view
     function initSkillBars() {
       const skillBars = document.querySelectorAll('.skill-bar-fill');
-      
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1224,85 +2301,50 @@
             bar.style.width = '0';
             setTimeout(() => {
               bar.style.width = width;
-            }, 100);
+            }, 80);
             observer.unobserve(bar);
           }
         });
-      }, { threshold: 0.5 });
-      
+      }, { threshold: 0.45 });
       skillBars.forEach(bar => observer.observe(bar));
     }
 
-    // Smooth scroll for navigation links
     function initSmoothScroll() {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
           const targetId = this.getAttribute('href');
           if (targetId === '#') return;
-          
           const target = document.querySelector(targetId);
           if (target) {
             e.preventDefault();
             const navHeight = 72;
             const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-            
-            window.scrollTo({
-              top: targetPosition,
-              behavior: 'smooth'
-            });
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
           }
         });
       });
     }
 
-    // Active nav link highlighting
     function initNavHighlight() {
       const sections = document.querySelectorAll('section[id]');
       const navLinks = document.querySelectorAll('.nav-links a');
-      
+
       window.addEventListener('scroll', () => {
         let current = '';
-        
         sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          if (window.pageYOffset >= sectionTop - 100) {
+          if (window.pageYOffset >= section.offsetTop - 110) {
             current = section.getAttribute('id');
           }
         });
-        
         navLinks.forEach(link => {
           link.style.color = '';
           if (link.getAttribute('href') === `#${current}`) {
             link.style.color = 'var(--text-primary)';
           }
         });
-      });
+      }, { passive: true });
     }
 
-    // Download resume simulation
-    function downloadResume(e) {
-      e.preventDefault();
-      const btns = document.querySelectorAll('.contact-link');
-      const originalTexts = [];
-      
-      btns.forEach((btn, i) => {
-        originalTexts[i] = btn.innerHTML;
-      });
-      
-      const downloadBtn = Array.from(btns).find(b => b.innerHTML.includes('Download'));
-      if (downloadBtn) {
-        downloadBtn.innerHTML = '⏳ Generating...';
-        
-        setTimeout(() => {
-          downloadBtn.innerHTML = '✅ Downloaded!';
-          setTimeout(() => {
-            downloadBtn.innerHTML = originalTexts[btns.indexOf(downloadBtn)] || '📄 Download PDF';
-          }, 2000);
-        }, 1200);
-      }
-    }
-
-    // Keyboard navigation support
     function initKeyboardNav() {
       document.addEventListener('keydown', (e) => {
         if (e.key === '/' && document.activeElement.tagName === 'BODY') {
@@ -1313,33 +2355,68 @@
       });
     }
 
-    // Initialize all interactions
+    function downloadResume(e) {
+      e.preventDefault();
+      const btns = document.querySelectorAll('.contact-link');
+      const originalTexts = [];
+      btns.forEach((btn, i) => { originalTexts[i] = btn.innerHTML; });
+
+      const downloadBtn = Array.from(btns).find(b => b.innerHTML.includes('Download'));
+      if (downloadBtn) {
+        downloadBtn.innerHTML = '⏳ Generating...';
+        setTimeout(() => {
+          downloadBtn.innerHTML = '✅ Downloaded!';
+          setTimeout(() => {
+            downloadBtn.innerHTML = originalTexts[btns.indexOf(downloadBtn)] || '📄 Download PDF';
+          }, 1900);
+        }, 1100);
+      }
+    }
+
+    // Master init
     function init() {
-      // Trigger stat counter after a brief delay
-      setTimeout(animateCounters, 400);
-      
-      initFadeIn();
+      // Core epic systems
+      initScrollProgress();
+      initParticles();
+      initMouseGlow();
+      initEpicTimeline();
+      initSectionReveals();
+      initCardTilt();
+      initAchievementBursts();
+      initStatCardEffects();
+      initSkillBarExtras();
+      initKeyboardEasterEgg();
+
+      // Base interactions
+      setTimeout(animateCounters, 380);
       initSkillBars();
       initSmoothScroll();
       initNavHighlight();
       initKeyboardNav();
-      
-      // Add subtle parallax to hero gradient
+
+      // Hero parallax (stronger)
       const hero = document.querySelector('.hero');
       if (hero) {
+        let ticking = false;
         window.addEventListener('scroll', () => {
-          const scrolled = window.pageYOffset;
-          if (scrolled < window.innerHeight) {
-            hero.style.transform = `translateY(${scrolled * 0.1}px)`;
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              const scrolled = window.pageYOffset;
+              if (scrolled < window.innerHeight * 1.1) {
+                hero.style.transform = `translateY(${scrolled * 0.085}px)`;
+              }
+              ticking = false;
+            });
+            ticking = true;
           }
         }, { passive: true });
       }
-      
-      // Mark body as ready
+
+      // Boot complete visual cue
+      document.body.style.transition = 'opacity 0.2s ease';
       document.body.style.opacity = '1';
     }
 
-    // Boot
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);
     } else {
@@ -1347,4 +2424,5 @@
     }
   </script>
 </body>
+
 </html>
