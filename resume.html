@@ -50,11 +50,32 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+
+    .glass-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(99, 102, 241, 0.08), transparent 80%);
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-panel:hover::after {
+      opacity: 1;
     }
 
     .light .glass-panel {
       background: rgba(255, 255, 255, 0.7);
       border: 1px solid rgba(15, 23, 42, 0.05);
+    }
+
+    .light .glass-panel::after {
+      background: radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(99, 102, 241, 0.05), transparent 80%);
     }
 
     .glow-cyan {
@@ -67,6 +88,134 @@
 
     .glow-indigo {
       box-shadow: 0 0 20px -5px rgba(99, 102, 241, 0.3);
+    }
+
+    .border-glow {
+      position: relative;
+    }
+
+    .border-glow::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 1.5px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, #06b6d4, #6366f1, #10b981, #06b6d4);
+      background-size: 300% 300%;
+      animation: border-glow-move 8s ease infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .border-glow:hover::before {
+      opacity: 1;
+    }
+
+    @keyframes border-glow-move {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .crt-screen {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .crt-screen::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+      z-index: 2;
+      background-size: 100% 3px;
+      pointer-events: none;
+    }
+
+    .crt-screen::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, transparent 55%, rgba(0, 0, 0, 0.5) 100%);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    @keyframes crt-flicker {
+      0% {
+        opacity: 0.985;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.99;
+      }
+    }
+
+    .crt-flicker {
+      animation: crt-flicker 0.15s infinite;
+    }
+
+    .boot-loader {
+      position: fixed;
+      inset: 0;
+      background: #020617;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      color: #06b6d4;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+    }
+
+    .boot-loader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .glitch-text {
+      position: relative;
+      animation: glitch 1.5s infinite;
+    }
+
+    @keyframes glitch {
+      0% {
+        text-shadow: 1.5px 0 0 #ff00c1, -1.5px 0 0 #00fff0;
+      }
+
+      100% {
+        text-shadow: 0 0 0 #ff00c1, 0 0 0 #00fff0;
+      }
+    }
+
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
 
     ::-webkit-scrollbar {
@@ -110,6 +259,10 @@
         box-shadow: none !important;
       }
 
+      .glass-panel::after {
+        display: none !important;
+      }
+
       .text-slate-400,
       .text-slate-500 {
         color: #475569 !important;
@@ -129,6 +282,31 @@
 
 <body
   class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-300 relative grid-bg overflow-x-hidden">
+
+  <div id="bootScreen" class="boot-loader no-print crt-screen crt-flicker">
+    <div class="max-w-xl w-full px-6 flex flex-col space-y-4">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="terminal" class="w-6 h-6 text-cyan-400 animate-pulse"></i>
+        <span class="font-bold tracking-wider uppercase text-cyan-400 glitch-text">INFRA-BOOT V2.6</span>
+      </div>
+      <div
+        class="bg-slate-900 border border-slate-800 p-4 rounded-lg h-60 font-mono text-[10px] sm:text-xs text-slate-400 overflow-y-auto space-y-1.5 scrollbar-none"
+        id="bootLogs"></div>
+      <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800 relative">
+        <div class="bg-gradient-to-r from-cyan-400 via-indigo-500 to-emerald-400 h-full w-0 transition-all duration-300"
+          id="bootProgress"></div>
+      </div>
+      <div class="flex items-center justify-between text-[11px] font-mono text-slate-500">
+        <span id="bootPercent">Loading infra core: 0%</span>
+        <button onclick="skipBoot()"
+          class="px-2.5 py-1 rounded border border-slate-800 bg-slate-900/60 hover:bg-slate-800 hover:text-cyan-400 hover:border-cyan-500/30 transition-colors">SKIP
+          DIAGNOSTICS</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="networkCanvas"
+    class="no-print absolute inset-0 pointer-events-none z-0 opacity-30 dark:opacity-15"></canvas>
 
   <div class="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-500 z-50"></div>
 
@@ -168,7 +346,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
       <div class="lg:col-span-4 space-y-6 print-full">
-        <div class="glass-panel rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden glow-indigo">
+        <div class="glass-panel rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden glow-indigo border-glow">
           <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-bl-full pointer-events-none"></div>
 
           <div class="relative inline-block mb-4">
@@ -224,7 +402,8 @@
           </div>
         </div>
 
-        <div class="bg-slate-950 rounded-2xl p-6 no-print overflow-hidden relative border border-slate-900 glow-cyan">
+        <div
+          class="bg-slate-950 rounded-2xl p-6 no-print overflow-hidden relative border border-slate-900 glow-cyan border-glow crt-screen crt-flicker">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center space-x-2">
               <div class="flex space-x-1.5">
@@ -335,7 +514,7 @@
       <div class="lg:col-span-8 space-y-6 print-full">
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-emerald">
+          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-emerald border-glow">
             <div class="absolute -right-2 -bottom-2 opacity-5">
               <i data-lucide="shield-check" class="w-24 h-24 text-emerald-500"></i>
             </div>
@@ -352,7 +531,7 @@
             <p class="text-[10px] text-emerald-400 font-mono mt-1">Target uptime maintained</p>
           </div>
 
-          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-cyan">
+          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-cyan border-glow">
             <div class="absolute -right-2 -bottom-2 opacity-5">
               <i data-lucide="rocket" class="w-24 h-24 text-cyan-500"></i>
             </div>
@@ -367,7 +546,7 @@
             <p class="text-[10px] text-cyan-400 font-mono mt-1">Successful deploys daily</p>
           </div>
 
-          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-indigo">
+          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-indigo border-glow">
             <div class="absolute -right-2 -bottom-2 opacity-5">
               <i data-lucide="trending-down" class="w-24 h-24 text-indigo-500"></i>
             </div>
@@ -382,7 +561,7 @@
             <p class="text-[10px] text-indigo-400 font-mono mt-1">Average annual cost cut</p>
           </div>
 
-          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-cyan">
+          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-cyan border-glow">
             <div class="absolute -right-2 -bottom-2 opacity-5">
               <i data-lucide="zap" class="w-24 h-24 text-cyan-500"></i>
             </div>
@@ -771,6 +950,9 @@
       initTheme();
       initStats();
       initTerminal();
+      initBootLoader();
+      initNetworkCanvas();
+      initGlassPanelInteraction();
     });
 
     function initTheme() {
@@ -974,6 +1156,159 @@
 
       out.innerHTML += promptLine + responseLine;
       out.scrollTop = out.scrollHeight;
+    }
+
+    function initBootLoader() {
+      const bootScreen = document.getElementById("bootScreen");
+      const logsContainer = document.getElementById("bootLogs");
+      const progressBar = document.getElementById("bootProgress");
+      const percentText = document.getElementById("bootPercent");
+      if (!logsContainer || !progressBar || !percentText) return;
+
+      const logLines = [
+        "[ 0.012390 ] Booting DevOps-Resume diagnostic kernel (v2.6.0-generic)...",
+        "[ 0.150102 ] Checking environmental CPU parameters... OK (16 Core Engine Connected)",
+        "[ 0.312940 ] Mount block storage pool clusters (AWS EBS, EFS)... OK (Mounting Succeeded)",
+        "[ 0.490211 ] Establish secure VPC networks: US-West (Active), US-East (Standby)... OK",
+        "[ 0.612049 ] Verifying cryptographic signatures (Cosign/Vault)... VERIFIED [SHA256:d8ae31...]",
+        "[ 0.792841 ] Orchestrating Kubernetes namespaces: microservices, telemetry, database... OK",
+        "[ 0.950182 ] Spawning pod deployment nodes: API [5/5], Web [3/3], Auth [2/2]... RUNNING",
+        "[ 1.112093 ] Checking cloud costs cluster limit optimizer... Saved 42% Cloud Spend [PASS]",
+        "[ 1.289110 ] Checking GitOps synchronization (ArgoCD target branch)... SYNCHRONIZED [PASS]",
+        "[ 1.450239 ] Running system integrations end-to-end health check... [100% OPERATIONAL]",
+        "[ 1.580192 ] Mounting Alex Chen CV profile blocks...",
+        "[ 1.700000 ] Diagnostics completed. Initializing main dashboard graphical shell..."
+      ];
+
+      let lineIdx = 0;
+      let progress = 0;
+
+      function printNextLog() {
+        if (lineIdx < logLines.length) {
+          const div = document.createElement("div");
+          div.className = "flex items-start";
+
+          if (logLines[lineIdx].includes("OK") || logLines[lineIdx].includes("OPERATIONAL") || logLines[lineIdx].includes("SYNCHRONIZED") || logLines[lineIdx].includes("PASS")) {
+            div.innerHTML = `<span class="text-emerald-400 mr-1.5">✔</span> <span>${logLines[lineIdx]}</span>`;
+          } else {
+            div.innerHTML = `<span class="text-cyan-400 mr-1.5">❯</span> <span>${logLines[lineIdx]}</span>`;
+          }
+
+          logsContainer.appendChild(div);
+          logsContainer.scrollTop = logsContainer.scrollHeight;
+
+          lineIdx++;
+
+          progress = Math.floor((lineIdx / logLines.length) * 100);
+          progressBar.style.width = `${progress}%`;
+          percentText.innerText = `Loading infra core: ${progress}%`;
+
+          setTimeout(printNextLog, 100 + Math.random() * 80);
+        } else {
+          setTimeout(() => {
+            skipBoot();
+          }, 400);
+        }
+      }
+
+      setTimeout(printNextLog, 150);
+    }
+
+    function skipBoot() {
+      const bootScreen = document.getElementById("bootScreen");
+      if (bootScreen) {
+        bootScreen.classList.add("fade-out");
+        setTimeout(() => {
+          bootScreen.remove();
+        }, 800);
+      }
+    }
+
+    function initNetworkCanvas() {
+      const canvas = document.getElementById("networkCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      const particles = [];
+      const particleCount = 45;
+      const connectionDist = 120;
+
+      window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.4;
+          this.vy = (Math.random() - 0.5) * 0.4;
+          this.size = Math.random() * 2 + 1;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = document.documentElement.classList.contains('dark') ? "rgba(6, 182, 212, 0.4)" : "rgba(6, 182, 212, 0.2)";
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+
+        ctx.beginPath();
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < connectionDist) {
+              const alpha = (1 - dist / connectionDist) * 0.15;
+              ctx.strokeStyle = document.documentElement.classList.contains('dark')
+                ? `rgba(99, 102, 241, ${alpha})`
+                : `rgba(99, 102, 241, ${alpha * 0.5})`;
+              ctx.lineWidth = 0.8;
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+            }
+          }
+        }
+        ctx.stroke();
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    function initGlassPanelInteraction() {
+      document.querySelectorAll('.glass-panel').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
     }
   </script>
 </body>
