@@ -5,6 +5,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f8fb" media="(prefers-color-scheme: light)">
   <title>DevOps Engineer — Resume</title>
   <meta name="description"
     content="DevOps Engineer resume highlighting cloud, CI/CD, IaC, reliability, and automation with achievements and project portfolio." />
@@ -112,6 +114,45 @@
 
     a:hover {
       text-decoration: underline;
+    }
+
+    /* Screen-reader only utility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 1px, 1px);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Global focus styles */
+    :focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: fixed;
+      left: 12px;
+      top: -50px;
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      z-index: 60;
+      transition: top .2s ease;
+    }
+
+    .skip-link:focus {
+      top: 12px;
     }
 
     .shell {
@@ -564,6 +605,7 @@
 </head>
 
 <body>
+  <a href="#main" class="skip-link">Skip to main content</a>
   <canvas id="bgFX" aria-hidden="true"></canvas>
   <div id="progress" aria-hidden="true"></div>
   <div class="shell">
@@ -584,243 +626,250 @@
           </span>
         </div>
         <div class="nav-actions">
-          <button class="btn" id="themeToggle" aria-label="Toggle color theme">Toggle Theme</button>
+          <button class="btn" type="button" id="themeToggle" aria-label="Toggle color theme">Toggle Theme</button>
           <a class="btn primary" download href="#" id="downloadBtn" aria-label="Download resume as PDF">Download PDF</a>
         </div>
       </nav>
     </header>
 
-    <div class="hero">
-      <div class="card identity" role="banner">
-        <div class="row" style="align-items:center; gap:16px;">
-          <img
-            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96'><rect rx='16' width='96' height='96' fill='%237c9cff'/><text x='50%' y='56%' font-family='sans-serif' font-size='42' text-anchor='middle' fill='white'>DO</text></svg>"
-            alt="Avatar" width="72" height="72"
-            style="border-radius:16px; border:1px solid var(--border); box-shadow: var(--shadow);" />
-          <div class="grow">
-            <div class="title">Alex Morgan</div>
-            <div class="subtitle">DevOps Engineer specializing in cloud-native platforms, scalable CI/CD, and SRE
-              practices.</div>
+    <main id="main" tabindex="-1">
+      <div class="hero">
+        <div class="card identity" role="region" aria-labelledby="identity-h">
+          <div class="row" style="align-items:center; gap:16px;">
+            <img
+              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96'><rect rx='16' width='96' height='96' fill='%237c9cff'/><text x='50%' y='56%' font-family='sans-serif' font-size='42' text-anchor='middle' fill='white'>DO</text></svg>"
+              alt="Avatar" width="72" height="72"
+              style="border-radius:16px; border:1px solid var(--border); box-shadow: var(--shadow);" />
+            <div class="grow">
+              <h1 class="title" id="identity-h">Alex Morgan</h1>
+              <div class="subtitle">DevOps Engineer specializing in cloud-native platforms, scalable CI/CD, and SRE
+                practices.</div>
+            </div>
+            <div class="row right">
+              <a class="btn" href="#contact" aria-label="Go to contact section">Contact</a>
+            </div>
+          </div>
+          <div class="tags" aria-label="Key capabilities">
+            <span class="pill">Kubernetes</span>
+            <span class="pill">AWS • GCP • Azure</span>
+            <span class="pill">Terraform • Pulumi</span>
+            <span class="pill">GitHub Actions • ArgoCD</span>
+            <span class="pill">Observability • SLOs</span>
+            <span class="pill">Python • Go • Bash</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="quick-stats" aria-label="Highlights">
+            <div class="stat">
+              <h3 aria-describedby="s1"><span class="counter" data-target="99">0</span>.95%</h3>
+              <p id="s1">Pipeline success rate (12m)</p>
+            </div>
+            <div class="stat">
+              <h3 aria-describedby="s2"><span class="counter" data-target="47">0</span>%</h3>
+              <p id="s2">MTTR reduction YoY</p>
+            </div>
+            <div class="stat">
+              <h3 aria-describedby="s3"><span class="counter" data-target="1200">0</span>+</h3>
+              <p id="s3">Deploys automated per month</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" style="align-items:start;">
+        <section class="card section-card" aria-labelledby="skills-h">
+          <div class="row" style="justify-content:space-between; align-items:center;">
+            <h2 id="skills-h">Core Skills</h2>
+            <div class="row">
+              <label for="skillFilter" class="sr-only">Filter skills by category</label>
+              <select class="btn" id="skillFilter">
+                <option value="all">All</option>
+                <option value="cloud">Cloud</option>
+                <option value="iac">IaC</option>
+                <option value="ci">CI/CD</option>
+                <option value="sre">SRE</option>
+                <option value="code">Coding</option>
+              </select>
+            </div>
+          </div>
+          <div class="skills" id="skills">
+            <div class="skill" data-cat="cloud">
+              <div class="skill-top"><strong>AWS</strong><span class="muted">Advanced</span></div>
+              <div class="bar" aria-hidden="true"><span style="--w:92%"></span></div>
+            </div>
+            <div class="skill" data-cat="cloud">
+              <div class="skill-top"><strong>Kubernetes</strong><span class="muted">Advanced</span></div>
+              <div class="bar"><span style="--w:90%"></span></div>
+            </div>
+            <div class="skill" data-cat="iac">
+              <div class="skill-top"><strong>Terraform</strong><span class="muted">Advanced</span></div>
+              <div class="bar"><span style="--w:88%"></span></div>
+            </div>
+            <div class="skill" data-cat="ci">
+              <div class="skill-top"><strong>GitHub Actions</strong><span class="muted">Advanced</span></div>
+              <div class="bar"><span style="--w:86%"></span></div>
+            </div>
+            <div class="skill" data-cat="sre">
+              <div class="skill-top"><strong>Observability (Prom/Graf/OTel)</strong><span class="muted">Advanced</span>
+              </div>
+              <div class="bar"><span style="--w:84%"></span></div>
+            </div>
+            <div class="skill" data-cat="code">
+              <div class="skill-top"><strong>Python</strong><span class="muted">Advanced</span></div>
+              <div class="bar"><span style="--w:82%"></span></div>
+            </div>
+            <div class="skill" data-cat="ci">
+              <div class="skill-top"><strong>ArgoCD</strong><span class="muted">Intermediate</span></div>
+              <div class="bar"><span style="--w:78%"></span></div>
+            </div>
+            <div class="skill" data-cat="iac">
+              <div class="skill-top"><strong>Pulumi</strong><span class="muted">Intermediate</span></div>
+              <div class="bar"><span style="--w:72%"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section-card" aria-labelledby="ach-h">
+          <h2 id="ach-h">Impact & Achievements</h2>
+          <ul>
+            <li>Cut cloud spend by 28% via rightsizing, Graviton adoption, and autoscaling policies.</li>
+            <li>Designed GitOps platform enabling >1,200 safe monthly deploys with policy-as-code.</li>
+            <li>Defined SLOs and error budgets that reduced incidents by 41% and MTTR by 47%.</li>
+            <li>Migrated monolith to Kubernetes microservices; blue/green and canary releases.</li>
+          </ul>
+          <div class="row" style="margin-top:6px; gap:8px;">
+            <span class="pill">FinTech</span>
+            <span class="pill">E‑commerce</span>
+            <span class="pill">SaaS</span>
+          </div>
+        </section>
+
+        <section class="card section-card" aria-labelledby="exp-h">
+          <h2 id="exp-h">Experience</h2>
+          <div class="timeline">
+            <div class="event">
+              <h3>Senior DevOps Engineer • Acme Payments <small>(2022—Present)</small></h3>
+              <ul>
+                <li>Built multi-tenant EKS platform with cross-account networking and IRSA.</li>
+                <li>Implemented progressive delivery (Argo Rollouts) with SLO-based guardrails.</li>
+                <li>Codified infra with Terraform; 200+ reusable modules and golden paths.</li>
+              </ul>
+            </div>
+            <div class="event">
+              <h3>DevOps Engineer • Shopster <small>(2020—2022)</small></h3>
+              <ul>
+                <li>Re-architected CI pipelines (GH Actions) cutting build time from 24m to 9m.</li>
+                <li>Unified observability with Prometheus, Loki, Tempo; SLOs and alerting.</li>
+                <li>Introduced policy-as-code (OPA/Conftest) and pre-commit security gates.</li>
+              </ul>
+            </div>
+            <div class="event">
+              <h3>Platform Engineer • CloudNine <small>(2017—2020)</small></h3>
+              <ul>
+                <li>Managed hybrid cloud (AWS/Azure) and on-prem via Kubernetes federation.</li>
+                <li>Automated DR with RPO/RTO objectives; quarterly game days.</li>
+                <li>Created Python tooling for release orchestration and cost reporting.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section-card" aria-labelledby="proj-h">
+          <div class="row" style="justify-content:space-between; align-items:center;">
+            <h2 id="proj-h">Selected Projects</h2>
+            <div class="row">
+              <button class="btn" type="button" id="shuffleProjects" aria-label="Shuffle project order">Shuffle</button>
+            </div>
+          </div>
+          <div class="projects" id="projects" role="list" aria-label="Project list">
+            <article class="project" role="listitem" data-stars="612">
+              <div class="row" style="justify-content:space-between; align-items:center;">
+                <h3 style="margin:0; font-size:15px;"><strong>k8s-cost-optimizer</strong></h3>
+                <span class="meta"><span class="pill">Terraform</span><span class="pill">AWS</span></span>
+              </div>
+              <p class="muted">Terraform modules and controller for rightsizing Kubernetes nodes & workloads using cost
+                and utilization metrics.</p>
+              <div class="row" style="justify-content:space-between; align-items:center;">
+                <span class="muted">★ <span class="stars">612</span></span>
+                <a href="#" class="btn" aria-label="View repository k8s-cost-optimizer" target="_blank"
+                  rel="noopener noreferrer">View</a>
+              </div>
+            </article>
+            <article class="project" role="listitem" data-stars="389">
+              <div class="row" style="justify-content:space-between; align-items:center;">
+                <h3 style="margin:0; font-size:15px;"><strong>gitops-guardian</strong></h3>
+                <span class="meta"><span class="pill">ArgoCD</span><span class="pill">OPA</span></span>
+              </div>
+              <p class="muted">Policy-as-code checks for GitOps pipelines: image provenance, RBAC, network, and secret
+                scanning.</p>
+              <div class="row" style="justify-content:space-between; align-items:center;">
+                <span class="muted">★ <span class="stars">389</span></span>
+                <a href="#" class="btn" aria-label="View repository gitops-guardian" target="_blank"
+                  rel="noopener noreferrer">View</a>
+              </div>
+            </article>
+            <article class="project" role="listitem" data-stars="241">
+              <div class="row" style="justify-content:space-between; align-items:center;">
+                <h3 style="margin:0; font-size:15px;"><strong>reliability-dashboard</strong></h3>
+                <span class="meta"><span class="pill">Grafana</span><span class="pill">OpenTelemetry</span></span>
+              </div>
+              <p class="muted">SLO dashboards and golden signals with error budgets, burn rate alerts, and Release QA
+                widgets.</p>
+              <div class="row" style="justify-content:space-between; align-items:center;">
+                <span class="muted">★ <span class="stars">241</span></span>
+                <a href="#" class="btn" aria-label="View repository reliability-dashboard" target="_blank"
+                  rel="noopener noreferrer">View</a>
+              </div>
+            </article>
+            <article class="project" role="listitem" data-stars="198">
+              <div class="row" style="justify-content:space-between; align-items:center;">
+                <h3 style="margin:0; font-size:15px;"><strong>pipeline-accelerator</strong></h3>
+                <span class="meta"><span class="pill">GitHub Actions</span><span class="pill">Caching</span></span>
+              </div>
+              <p class="muted">Reusable workflows, build matrix optimization, and artifact acceleration for multi-repo
+                monorepos.</p>
+              <div class="row" style="justify-content:space-between; align-items:center;">
+                <span class="muted">★ <span class="stars">198</span></span>
+                <a href="#" class="btn" aria-label="View repository pipeline-accelerator" target="_blank"
+                  rel="noopener noreferrer">View</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="card section-card" aria-labelledby="cert-h">
+          <h2 id="cert-h">Certifications</h2>
+          <div class="row">
+            <span class="pill">CKA</span>
+            <span class="pill">AWS Solutions Architect – Associate</span>
+            <span class="pill">HashiCorp Terraform Associate</span>
+          </div>
+        </section>
+
+        <section class="card section-card" aria-labelledby="edu-h">
+          <h2 id="edu-h">Education</h2>
+          <p>B.Sc. in Computer Science, Tech University</p>
+        </section>
+      </div>
+
+      <footer id="contact">
+        <div class="card contact">
+          <div>
+            <h2 style="margin:0 0 6px 0;">Contact</h2>
+            <div class="muted">Based in Berlin • Remote/Hybrid • Willing to relocate</div>
           </div>
           <div class="row right">
-            <a class="btn" href="#contact" aria-label="Skip to contact">Contact</a>
+            <a class="btn" href="mailto:alex.morgan.devops@example.com" aria-label="Email Alex Morgan">Email</a>
+            <button class="btn" type="button" id="copyEmail" aria-label="Copy email to clipboard">Copy</button>
+            <a class="btn primary" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
+              aria-label="Open LinkedIn profile">LinkedIn</a>
           </div>
         </div>
-        <div class="tags" aria-label="Key capabilities">
-          <span class="pill">Kubernetes</span>
-          <span class="pill">AWS • GCP • Azure</span>
-          <span class="pill">Terraform • Pulumi</span>
-          <span class="pill">GitHub Actions • ArgoCD</span>
-          <span class="pill">Observability • SLOs</span>
-          <span class="pill">Python • Go • Bash</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="quick-stats" aria-label="Highlights">
-          <div class="stat" aria-live="polite">
-            <h3><span class="counter" data-target="99">0</span>.95%</h3>
-            <p>Pipeline success rate (12m)</p>
-          </div>
-          <div class="stat" aria-live="polite">
-            <h3><span class="counter" data-target="47">0</span>%</h3>
-            <p>MTTR reduction YoY</p>
-          </div>
-          <div class="stat" aria-live="polite">
-            <h3><span class="counter" data-target="1200">0</span>+</h3>
-            <p>Deploys automated per month</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid" style="align-items:start;">
-      <section class="card section-card" aria-labelledby="skills-h">
-        <div class="row" style="justify-content:space-between; align-items:center;">
-          <h2 id="skills-h">Core Skills</h2>
-          <div class="row">
-            <select class="btn" id="skillFilter" aria-label="Filter skills by category">
-              <option value="all">All</option>
-              <option value="cloud">Cloud</option>
-              <option value="iac">IaC</option>
-              <option value="ci">CI/CD</option>
-              <option value="sre">SRE</option>
-              <option value="code">Coding</option>
-            </select>
-          </div>
-        </div>
-        <div class="skills" id="skills">
-          <div class="skill" data-cat="cloud">
-            <div class="skill-top"><strong>AWS</strong><span class="muted">Advanced</span></div>
-            <div class="bar" aria-hidden="true"><span style="--w:92%"></span></div>
-          </div>
-          <div class="skill" data-cat="cloud">
-            <div class="skill-top"><strong>Kubernetes</strong><span class="muted">Advanced</span></div>
-            <div class="bar"><span style="--w:90%"></span></div>
-          </div>
-          <div class="skill" data-cat="iac">
-            <div class="skill-top"><strong>Terraform</strong><span class="muted">Advanced</span></div>
-            <div class="bar"><span style="--w:88%"></span></div>
-          </div>
-          <div class="skill" data-cat="ci">
-            <div class="skill-top"><strong>GitHub Actions</strong><span class="muted">Advanced</span></div>
-            <div class="bar"><span style="--w:86%"></span></div>
-          </div>
-          <div class="skill" data-cat="sre">
-            <div class="skill-top"><strong>Observability (Prom/Graf/OTel)</strong><span class="muted">Advanced</span>
-            </div>
-            <div class="bar"><span style="--w:84%"></span></div>
-          </div>
-          <div class="skill" data-cat="code">
-            <div class="skill-top"><strong>Python</strong><span class="muted">Advanced</span></div>
-            <div class="bar"><span style="--w:82%"></span></div>
-          </div>
-          <div class="skill" data-cat="ci">
-            <div class="skill-top"><strong>ArgoCD</strong><span class="muted">Intermediate</span></div>
-            <div class="bar"><span style="--w:78%"></span></div>
-          </div>
-          <div class="skill" data-cat="iac">
-            <div class="skill-top"><strong>Pulumi</strong><span class="muted">Intermediate</span></div>
-            <div class="bar"><span style="--w:72%"></span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card section-card" aria-labelledby="ach-h">
-        <h2 id="ach-h">Impact & Achievements</h2>
-        <ul>
-          <li>Cut cloud spend by 28% via rightsizing, Graviton adoption, and autoscaling policies.</li>
-          <li>Designed GitOps platform enabling >1,200 safe monthly deploys with policy-as-code.</li>
-          <li>Defined SLOs and error budgets that reduced incidents by 41% and MTTR by 47%.</li>
-          <li>Migrated monolith to Kubernetes microservices; blue/green and canary releases.</li>
-        </ul>
-        <div class="row" style="margin-top:6px; gap:8px;">
-          <span class="pill">FinTech</span>
-          <span class="pill">E‑commerce</span>
-          <span class="pill">SaaS</span>
-        </div>
-      </section>
-
-      <section class="card section-card" aria-labelledby="exp-h">
-        <h2 id="exp-h">Experience</h2>
-        <div class="timeline">
-          <div class="event">
-            <h3>Senior DevOps Engineer • Acme Payments <small>(2022—Present)</small></h3>
-            <ul>
-              <li>Built multi-tenant EKS platform with cross-account networking and IRSA.</li>
-              <li>Implemented progressive delivery (Argo Rollouts) with SLO-based guardrails.</li>
-              <li>Codified infra with Terraform; 200+ reusable modules and golden paths.</li>
-            </ul>
-          </div>
-          <div class="event">
-            <h3>DevOps Engineer • Shopster <small>(2020—2022)</small></h3>
-            <ul>
-              <li>Re-architected CI pipelines (GH Actions) cutting build time from 24m to 9m.</li>
-              <li>Unified observability with Prometheus, Loki, Tempo; SLOs and alerting.</li>
-              <li>Introduced policy-as-code (OPA/Conftest) and pre-commit security gates.</li>
-            </ul>
-          </div>
-          <div class="event">
-            <h3>Platform Engineer • CloudNine <small>(2017—2020)</small></h3>
-            <ul>
-              <li>Managed hybrid cloud (AWS/Azure) and on-prem via Kubernetes federation.</li>
-              <li>Automated DR with RPO/RTO objectives; quarterly game days.</li>
-              <li>Created Python tooling for release orchestration and cost reporting.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="card section-card" aria-labelledby="proj-h">
-        <div class="row" style="justify-content:space-between; align-items:center;">
-          <h2 id="proj-h">Selected Projects</h2>
-          <div class="row">
-            <button class="btn" id="shuffleProjects" aria-label="Shuffle project order">Shuffle</button>
-          </div>
-        </div>
-        <div class="projects" id="projects">
-          <article class="project" data-stars="612">
-            <div class="row" style="justify-content:space-between; align-items:center;">
-              <strong>k8s-cost-optimizer</strong>
-              <span class="meta"><span class="pill">Terraform</span><span class="pill">AWS</span></span>
-            </div>
-            <p class="muted">Terraform modules and controller for rightsizing Kubernetes nodes & workloads using cost
-              and utilization metrics.</p>
-            <div class="row" style="justify-content:space-between; align-items:center;">
-              <span class="muted">★ <span class="stars">612</span></span>
-              <a href="#" class="btn" aria-label="View repository">View</a>
-            </div>
-          </article>
-          <article class="project" data-stars="389">
-            <div class="row" style="justify-content:space-between; align-items:center;">
-              <strong>gitops-guardian</strong>
-              <span class="meta"><span class="pill">ArgoCD</span><span class="pill">OPA</span></span>
-            </div>
-            <p class="muted">Policy-as-code checks for GitOps pipelines: image provenance, RBAC, network, and secret
-              scanning.</p>
-            <div class="row" style="justify-content:space-between; align-items:center;">
-              <span class="muted">★ <span class="stars">389</span></span>
-              <a href="#" class="btn" aria-label="View repository">View</a>
-            </div>
-          </article>
-          <article class="project" data-stars="241">
-            <div class="row" style="justify-content:space-between; align-items:center;">
-              <strong>reliability-dashboard</strong>
-              <span class="meta"><span class="pill">Grafana</span><span class="pill">OpenTelemetry</span></span>
-            </div>
-            <p class="muted">SLO dashboards and golden signals with error budgets, burn rate alerts, and Release QA
-              widgets.</p>
-            <div class="row" style="justify-content:space-between; align-items:center;">
-              <span class="muted">★ <span class="stars">241</span></span>
-              <a href="#" class="btn" aria-label="View repository">View</a>
-            </div>
-          </article>
-          <article class="project" data-stars="198">
-            <div class="row" style="justify-content:space-between; align-items:center;">
-              <strong>pipeline-accelerator</strong>
-              <span class="meta"><span class="pill">GitHub Actions</span><span class="pill">Caching</span></span>
-            </div>
-            <p class="muted">Reusable workflows, build matrix optimization, and artifact acceleration for multi-repo
-              monorepos.</p>
-            <div class="row" style="justify-content:space-between; align-items:center;">
-              <span class="muted">★ <span class="stars">198</span></span>
-              <a href="#" class="btn" aria-label="View repository">View</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="card section-card" aria-labelledby="cert-h">
-        <h2 id="cert-h">Certifications</h2>
-        <div class="row">
-          <span class="pill">CKA</span>
-          <span class="pill">AWS Solutions Architect – Associate</span>
-          <span class="pill">HashiCorp Terraform Associate</span>
-        </div>
-      </section>
-
-      <section class="card section-card" aria-labelledby="edu-h">
-        <h2 id="edu-h">Education</h2>
-        <p>B.Sc. in Computer Science, Tech University</p>
-      </section>
-    </div>
-
-    <footer id="contact">
-      <div class="card contact">
-        <div>
-          <h2 style="margin:0 0 6px 0;">Contact</h2>
-          <div class="muted">Based in Berlin • Remote/Hybrid • Willing to relocate</div>
-        </div>
-        <div class="row right">
-          <a class="btn" href="mailto:alex.morgan.devops@example.com" aria-label="Email">Email</a>
-          <button class="btn" id="copyEmail" aria-label="Copy email to clipboard">Copy</button>
-          <a class="btn primary" href="https://www.linkedin.com/" target="_blank" rel="noreferrer"
-            aria-label="LinkedIn">LinkedIn</a>
-        </div>
-      </div>
-      <div class="muted" style="text-align:center; font-size:12px;">© 2026 Alex Morgan. Built with accessibility and
-        performance in mind.</div>
-    </footer>
+        <div class="muted" style="text-align:center; font-size:12px;">© 2026 Alex Morgan. Built with accessibility and
+          performance in mind.</div>
+      </footer>
+    </main>
   </div>
 
   <script>
@@ -963,10 +1012,12 @@
     })();
 
     (function () {
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const canvas = document.getElementById('bgFX');
+      if (reduce) { canvas.style.display = 'none'; return; }
       const ctx = canvas.getContext('2d');
       let w, h, dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const resize = () => { w = canvas.clientWidth; h = canvas.clientHeight; canvas.width = w * dpr; canvas.height = h * dpr; ctx.scale(dpr, dpr); };
+      const resize = () => { w = canvas.clientWidth; h = canvas.clientHeight; canvas.width = w * dpr; canvas.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
       resize();
       window.addEventListener('resize', resize);
       const count = 60;
