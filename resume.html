@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Chen | Senior DevOps & Infrastructure Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'terminal-blink': 'blink 1s step-end infinite',
+          },
+          keyframes: {
+            blink: {
+              'from, to': { borderColor: 'transparent' },
+              '50%': { borderColor: 'currentColor' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .grid-bg {
+      background-image: radial-gradient(rgba(14, 165, 233, 0.15) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .light .grid-bg {
+      background-image: radial-gradient(rgba(14, 165, 233, 0.08) 1px, transparent 1px);
+    }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .light .glass-panel {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(15, 23, 42, 0.05);
+    }
+
+    .glow-cyan {
+      box-shadow: 0 0 20px -5px rgba(6, 182, 212, 0.3);
+    }
+
+    .glow-emerald {
+      box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.3);
+    }
+
+    .glow-indigo {
+      box-shadow: 0 0 20px -5px rgba(99, 102, 241, 0.3);
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.3);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.5);
+    }
+
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .print-full {
+        width: 100% !important;
+        max-width: 100% !important;
+        grid-column: span 12 / span 12 !important;
+      }
+
+      .glass-panel {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: none !important;
+      }
+
+      .text-slate-400,
+      .text-slate-500 {
+        color: #475569 !important;
+      }
+
+      .grid {
+        display: block !important;
+      }
+
+      .grid>* {
+        margin-bottom: 1.5rem !important;
+        page-break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+
+<body
+  class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-300 relative grid-bg overflow-x-hidden">
+
+  <div class="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-500 z-50"></div>
+
+  <div
+    class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(99,102,241,0.1),transparent_50%)] pointer-events-none">
+  </div>
+  <div class="absolute top-1/3 left-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+  <header class="no-print border-b border-slate-900/60 dark:border-slate-800/40 glass-panel sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+        </div>
+        <span class="font-mono text-xs text-slate-500 dark:text-slate-400 tracking-wider">SYSTEM STATUS: <span
+            class="text-emerald-500 dark:text-emerald-400 font-bold">ALL SYSTEMS OPERATIONAL</span></span>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <button id="themeToggle"
+          class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors"
+          aria-label="Toggle theme">
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+          <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-slate-600 hover:text-slate-900"></i>
+        </button>
+        <button onclick="window.print()"
+          class="flex items-center space-x-2 px-3.5 py-1.5 rounded-lg bg-indigo-600/10 text-indigo-400 hover:bg-indigo-600/20 hover:text-indigo-300 border border-indigo-500/20 dark:border-indigo-400/10 transition-all font-medium text-sm">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>PDF Resume</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <div class="lg:col-span-4 space-y-6 print-full">
+        <div class="glass-panel rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden glow-indigo">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-bl-full pointer-events-none"></div>
+
+          <div class="relative inline-block mb-4">
+            <div
+              class="w-28 h-28 mx-auto rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 p-1 shadow-xl">
+              <div
+                class="w-full h-full bg-slate-50 dark:bg-slate-950 rounded-[14px] flex items-center justify-center overflow-hidden">
+                <span
+                  class="font-mono text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">&lt;AC/&gt;</span>
+              </div>
+            </div>
+            <div
+              class="absolute -bottom-1.5 -right-1.5 bg-emerald-500 text-white dark:text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider shadow-md border-2 border-slate-50 dark:border-slate-950">
+              Active
+            </div>
+          </div>
+
+          <h1 class="text-2xl font-extrabold tracking-tight dark:text-white text-slate-900">Alex Chen</h1>
+          <p class="text-sm font-mono text-cyan-600 dark:text-cyan-400 font-semibold mt-1.5">Senior DevOps &
+            Infrastructure Lead</p>
+          <p class="text-xs text-slate-600 dark:text-slate-400 mt-3 font-normal leading-relaxed">
+            Architecting ultra-scalable Kubernetes clusters, automating high-performance GitOps pipelines, and
+            optimizing multi-cloud budgets with laser focus on 99.999% reliability.
+          </p>
+
+          <div class="mt-6 pt-6 border-t border-slate-900/60 dark:border-slate-800/40 text-left space-y-3.5">
+            <a href="mailto:alex.chen@infra.io"
+              class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors group">
+              <i data-lucide="mail"
+                class="w-4.5 h-4.5 text-slate-400 dark:text-slate-500 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors"></i>
+              <span class="font-mono truncate">alex.chen@infra.io</span>
+            </a>
+            <div class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400">
+              <i data-lucide="phone" class="w-4.5 h-4.5 text-slate-400 dark:text-slate-500"></i>
+              <span class="font-mono">+1 (555) 382-9012</span>
+            </div>
+            <div class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400">
+              <i data-lucide="map-pin" class="w-4.5 h-4.5 text-slate-400 dark:text-slate-500"></i>
+              <span>San Francisco, CA (Hybrid / Remote)</span>
+            </div>
+            <a href="https://github.com" target="_blank"
+              class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group">
+              <i data-lucide="github"
+                class="w-4.5 h-4.5 text-slate-400 dark:text-slate-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"></i>
+              <span class="font-mono">github.com/alexchen-ops</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank"
+              class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group">
+              <i data-lucide="linkedin"
+                class="w-4.5 h-4.5 text-slate-400 dark:text-slate-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"></i>
+              <span class="font-mono">linkedin.com/in/alexchen-devops</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 rounded-2xl p-6 no-print overflow-hidden relative border border-slate-900 glow-cyan">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-2">
+              <div class="flex space-x-1.5">
+                <span class="w-3 h-3 rounded-full bg-red-500/70 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-yellow-500/70 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-green-500/70 inline-block"></span>
+              </div>
+              <span class="font-mono text-xs text-slate-400 font-bold pl-2">infra-shell v1.4.2</span>
+            </div>
+            <div class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
+          </div>
+
+          <div class="font-mono text-xs text-cyan-400 space-y-3 h-64 overflow-y-auto pr-1" id="terminalOutput">
+            <div><span class="text-indigo-400">guest@infra-cv:~$</span> systemctl status candidate</div>
+            <div class="text-slate-400">● alexchen.service - Senior DevOps Engineer Resume
+              Core<br>&nbsp;&nbsp;&nbsp;Loaded: active (running) since Jun 2019<br>&nbsp;&nbsp;&nbsp;Status: "Ready to
+              scale infrastructure and optimize pipelines."</div>
+            <div><span class="text-indigo-400">guest@infra-cv:~$</span> type 'help' for custom commands</div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-900/60 dark:border-slate-800/40 flex items-center space-x-2">
+            <span class="font-mono text-xs text-indigo-400 font-bold shrink-0">guest@infra-cv:~$</span>
+            <input type="text" id="terminalInput"
+              class="bg-transparent text-xs text-cyan-400 font-mono outline-none border-none p-0 m-0 w-full focus:ring-0 focus:outline-none"
+              placeholder="help" autocomplete="off" autofocus>
+          </div>
+
+          <div class="mt-3 flex flex-wrap gap-1.5 pt-1.5 text-[10px]">
+            <span class="font-mono text-slate-500 text-[9px] mr-1 flex items-center">Quick commands:</span>
+            <button onclick="runTerminalCmd('about')"
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors">about</button>
+            <button onclick="runTerminalCmd('skills')"
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors">skills</button>
+            <button onclick="runTerminalCmd('projects')"
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors">projects</button>
+            <button onclick="runTerminalCmd('contact')"
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors">contact</button>
+            <button onclick="runTerminalCmd('sudo reboot')"
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-red-500/30 text-slate-400 hover:text-red-400 transition-colors">reboot</button>
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-6 space-y-4">
+          <h2 class="text-md font-bold tracking-tight text-slate-800 dark:text-slate-100 flex items-center space-x-2">
+            <i data-lucide="award" class="w-5 h-5 text-indigo-400"></i>
+            <span>Certifications</span>
+          </h2>
+          <div class="space-y-3">
+            <div
+              class="p-3 rounded-xl bg-slate-100/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/50 flex items-start space-x-3">
+              <div class="p-1.5 rounded-lg bg-orange-500/10 text-orange-400 border border-orange-500/20 mt-0.5">
+                <i data-lucide="cloud" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold text-slate-800 dark:text-slate-200">AWS Certified Solutions Architect</h3>
+                <p class="text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-0.5">Professional • ID:
+                  AWS-SAP-7412</p>
+              </div>
+            </div>
+
+            <div
+              class="p-3 rounded-xl bg-slate-100/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/50 flex items-start space-x-3">
+              <div class="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mt-0.5">
+                <i data-lucide="container" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold text-slate-800 dark:text-slate-200">Certified Kubernetes Administrator</h3>
+                <p class="text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-0.5">Linux Foundation • ID:
+                  CKA-89021</p>
+              </div>
+            </div>
+
+            <div
+              class="p-3 rounded-xl bg-slate-100/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/50 flex items-start space-x-3">
+              <div class="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mt-0.5">
+                <i data-lucide="cpu" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold text-slate-800 dark:text-slate-200">HashiCorp Certified: Terraform
+                  Associate</h3>
+                <p class="text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-0.5">HashiCorp • ID: HC-TFA-5501
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-6">
+          <h2
+            class="text-md font-bold tracking-tight text-slate-800 dark:text-slate-100 flex items-center space-x-2 mb-3">
+            <i data-lucide="graduation-cap" class="w-5 h-5 text-cyan-400"></i>
+            <span>Education</span>
+          </h2>
+          <div class="relative pl-4 border-l-2 border-slate-200 dark:border-slate-800 space-y-4">
+            <div>
+              <div class="absolute w-3 h-3 rounded-full bg-cyan-500 -left-[7px] top-1"></div>
+              <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200">B.S. in Computer Science</h3>
+              <p class="text-xs text-cyan-600 dark:text-cyan-400 font-mono mt-0.5">University of California, Berkeley
+              </p>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Focus on Distributed Systems & Networking.
+                Graduated 2019.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="lg:col-span-8 space-y-6 print-full">
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-emerald">
+            <div class="absolute -right-2 -bottom-2 opacity-5">
+              <i data-lucide="shield-check" class="w-24 h-24 text-emerald-500"></i>
+            </div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Service SLA</span>
+              <span class="flex h-2 w-2 relative">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+            </div>
+            <div class="text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 font-mono"
+              id="stat-uptime" data-val="99.999">0.000</div>
+            <p class="text-[10px] text-emerald-400 font-mono mt-1">Target uptime maintained</p>
+          </div>
+
+          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-cyan">
+            <div class="absolute -right-2 -bottom-2 opacity-5">
+              <i data-lucide="rocket" class="w-24 h-24 text-cyan-500"></i>
+            </div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Deployments</span>
+              <span class="p-1 rounded bg-cyan-500/10 text-cyan-400">
+                <i data-lucide="infinity" class="w-3.5 h-3.5"></i>
+              </span>
+            </div>
+            <div class="text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 font-mono"
+              id="stat-deploys" data-val="15">0</div>
+            <p class="text-[10px] text-cyan-400 font-mono mt-1">Successful deploys daily</p>
+          </div>
+
+          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-indigo">
+            <div class="absolute -right-2 -bottom-2 opacity-5">
+              <i data-lucide="trending-down" class="w-24 h-24 text-indigo-500"></i>
+            </div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Cloud Saving</span>
+              <span class="p-1 rounded bg-indigo-500/10 text-indigo-400">
+                <i data-lucide="dollar-sign" class="w-3.5 h-3.5"></i>
+              </span>
+            </div>
+            <div class="text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 font-mono"
+              id="stat-savings" data-val="42">0%</div>
+            <p class="text-[10px] text-indigo-400 font-mono mt-1">Average annual cost cut</p>
+          </div>
+
+          <div class="glass-panel rounded-2xl p-5 relative overflow-hidden glow-cyan">
+            <div class="absolute -right-2 -bottom-2 opacity-5">
+              <i data-lucide="zap" class="w-24 h-24 text-cyan-500"></i>
+            </div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Lead Time</span>
+              <span class="p-1 rounded bg-cyan-500/10 text-cyan-400">
+                <i data-lucide="timer" class="w-3.5 h-3.5"></i>
+              </span>
+            </div>
+            <div class="text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 font-mono"
+              id="stat-leadtime" data-val="6">0m</div>
+            <p class="text-[10px] text-cyan-400 font-mono mt-1">Pipeline execution time</p>
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <h2
+              class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 flex items-center space-x-2.5">
+              <i data-lucide="cpu" class="w-5 h-5 text-cyan-500 dark:text-cyan-400"></i>
+              <span>Professional Experience</span>
+            </h2>
+            <div
+              class="no-print flex items-center space-x-2 bg-slate-100 dark:bg-slate-900/20 p-1 rounded-lg border border-slate-200 dark:border-slate-800/40">
+              <span class="text-xs font-mono text-slate-500 px-2 font-bold uppercase tracking-wider">Pipeline
+                Flow:</span>
+              <button onclick="togglePipelineVisual()" id="pipelineToggleBtn"
+                class="px-2.5 py-1 text-xs font-mono bg-cyan-600/20 text-cyan-400 hover:bg-cyan-600/30 rounded border border-cyan-500/30 transition-colors">Observed</button>
+            </div>
+          </div>
+
+          <div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-3 sm:ml-4 space-y-10"
+            id="experienceTimeline">
+
+            <div class="relative pl-7 sm:pl-9 group">
+              <div
+                class="absolute -left-[13px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-slate-950 border-2 border-emerald-500 glow-emerald transition-transform group-hover:scale-110 duration-300">
+                <i data-lucide="play" class="w-3 h-3 text-emerald-500 fill-emerald-500/20"></i>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                <div>
+                  <h3
+                    class="text-lg font-bold text-slate-800 dark:text-slate-200 dark:group-hover:text-cyan-400 group-hover:text-cyan-600 transition-colors">
+                    Lead DevOps &
+                    Infrastructure Architect</h3>
+                  <p class="text-sm font-mono text-cyan-600 dark:text-cyan-400 font-semibold">CloudScale Solutions</p>
+                </div>
+                <div class="sm:text-right">
+                  <span
+                    class="inline-flex px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono border border-emerald-500/20 dark:border-emerald-500/20">Jan
+                    2024 - Present</span>
+                </div>
+              </div>
+              <div class="mt-4 text-sm text-slate-600 dark:text-slate-400 space-y-2.5 leading-relaxed">
+                <p>Leading cloud orchestration architecture and modern GitOps delivery paradigms supporting
+                  high-concurrency B2B enterprise microservices.</p>
+                <ul class="list-none space-y-2.5">
+                  <li class="flex items-start">
+                    <span
+                      class="inline-block mt-1 text-cyan-600 dark:text-cyan-400 mr-2 shrink-0 font-mono text-xs">✔</span>
+                    <span>Designed and provisioned multi-region AWS EKS clusters utilizing HashiCorp Terraform modules,
+                      scaling dynamically to handle 4.5M+ requests daily with <strong
+                        class="text-slate-800 dark:text-slate-200">99.999%
+                        system SLA</strong>.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span
+                      class="inline-block mt-1 text-cyan-600 dark:text-cyan-400 mr-2 shrink-0 font-mono text-xs">✔</span>
+                    <span>Implemented continuous integration and continuous deployment via ArgoCD, reducing application
+                      deploy times <strong class="text-slate-800 dark:text-slate-200">from 25 minutes down to 6
+                        minutes</strong>.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span
+                      class="inline-block mt-1 text-cyan-600 dark:text-cyan-400 mr-2 shrink-0 font-mono text-xs">✔</span>
+                    <span>Introduced spot instance orchestrators and AWS Savings Plans models, shaving over <strong
+                        class="text-slate-800 dark:text-slate-200">42% ($240k/yr) from corporate cloud bills</strong>
+                      with zero impact on
+                      workload capacity.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="relative pl-7 sm:pl-9 group">
+              <div
+                class="absolute -left-[13px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-slate-950 border-2 border-indigo-500 glow-indigo transition-transform group-hover:scale-110 duration-300">
+                <i data-lucide="git-branch" class="w-3 h-3 text-indigo-500"></i>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                <div>
+                  <h3
+                    class="text-lg font-bold text-slate-800 dark:text-slate-200 dark:group-hover:text-cyan-400 group-hover:text-cyan-600 transition-colors">
+                    Senior
+                    Systems & CI/CD Specialist</h3>
+                  <p class="text-sm font-mono text-cyan-600 dark:text-cyan-400 font-semibold">DataFlow Technologies</p>
+                </div>
+                <div class="sm:text-right">
+                  <span
+                    class="inline-flex px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 text-xs font-mono border border-slate-200 dark:border-slate-800/40">May
+                    2021 - Dec 2023</span>
+                </div>
+              </div>
+              <div class="mt-4 text-sm text-slate-600 dark:text-slate-400 space-y-2.5 leading-relaxed">
+                <p>Architected automated delivery lifecycles, configuration configurations, and telemetry architectures
+                  across high-throughput streaming systems.</p>
+                <ul class="list-none space-y-2.5">
+                  <li class="flex items-start">
+                    <span
+                      class="inline-block mt-1 text-indigo-500 dark:text-indigo-400 mr-2 shrink-0 font-mono text-xs">✔</span>
+                    <span>Designed automated blue-green delivery topologies for microservice clusters, eliminating
+                      release window downtime and reducing deployment rollbacks by <strong
+                        class="text-slate-800 dark:text-slate-200">85%</strong>.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span
+                      class="inline-block mt-1 text-indigo-500 dark:text-indigo-400 mr-2 shrink-0 font-mono text-xs">✔</span>
+                    <span>Created Prometheus and Grafana alerts, identifying potential memory leaks and query
+                      performance degradations <strong class="text-slate-800 dark:text-slate-200">94% before
+                        client-facing anomalies
+                        occurred</strong>.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span
+                      class="inline-block mt-1 text-indigo-500 dark:text-indigo-400 mr-2 shrink-0 font-mono text-xs">✔</span>
+                    <span>Standardized configuration templates via Ansible and Consul, automating bare-metal
+                      provisioning and VM fleet patching for 150+ Linux environments.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="relative pl-7 sm:pl-9 group">
+              <div
+                class="absolute -left-[13px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-slate-950 border-2 border-cyan-500 glow-cyan transition-transform group-hover:scale-110 duration-300">
+                <i data-lucide="git-commit" class="w-3 h-3 text-cyan-400"></i>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                <div>
+                  <h3
+                    class="text-lg font-bold text-slate-800 dark:text-slate-200 dark:group-hover:text-cyan-400 group-hover:text-cyan-600 transition-colors">
+                    Cloud &
+                    Systems Engineer</h3>
+                  <p class="text-sm font-mono text-cyan-600 dark:text-cyan-400 font-semibold">SaaSify Global</p>
+                </div>
+                <div class="sm:text-right">
+                  <span
+                    class="inline-flex px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 text-xs font-mono border border-slate-200 dark:border-slate-800/40">Jun
+                    2019 - Apr 2021</span>
+                </div>
+              </div>
+              <div class="mt-4 text-sm text-slate-600 dark:text-slate-400 space-y-2.5 leading-relaxed">
+                <p>Collaborated closely with software engineering divisions to transition legacy application assets into
+                  modern containerized ecosystems.</p>
+                <ul class="list-none space-y-2.5">
+                  <li class="flex items-start">
+                    <span
+                      class="inline-block mt-1 text-cyan-600 dark:text-cyan-400 mr-2 shrink-0 font-mono text-xs">✔</span>
+                    <span>Containerized 45+ legacy Python and Node.js monolithic workloads, utilizing Docker multi-stage
+                      builds to optimize image layers <strong class="text-slate-800 dark:text-slate-200">by up to
+                        60%</strong>.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span
+                      class="inline-block mt-1 text-cyan-600 dark:text-cyan-400 mr-2 shrink-0 font-mono text-xs">✔</span>
+                    <span>Configured Jenkins pipeline libraries containing scanning checkpoints (SonarQube, OWASP
+                      Dependency-Check) for proactive security analysis on pull requests.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <h2
+              class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 flex items-center space-x-2.5">
+              <i data-lucide="layers" class="w-5 h-5 text-indigo-400"></i>
+              <span>Tech Stack & Skill Matrix</span>
+            </h2>
+            <div
+              class="no-print flex flex-wrap gap-1 bg-slate-100 dark:bg-slate-900/20 p-1 rounded-lg border border-slate-200 dark:border-slate-800/40">
+              <button onclick="filterSkills('all')"
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded bg-indigo-600 text-white transition-all">ALL</button>
+              <button onclick="filterSkills('cloud')"
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all">CLOUD/IAC</button>
+              <button onclick="filterSkills('containers')"
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all">K8S</button>
+              <button onclick="filterSkills('cicd')"
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all">CI/CD</button>
+              <button onclick="filterSkills('telemetry')"
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all">OBSERVABILITY</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="skillsContainer">
+
+            <div
+              class="p-4 rounded-xl bg-slate-100/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/50 skill-card"
+              data-category="cloud">
+              <div class="flex items-center justify-between mb-2">
+                <span
+                  class="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">Cloud
+                  & IaC</span>
+                <span
+                  class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 dark:border-cyan-500/15 font-mono">Expert</span>
+              </div>
+              <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">Terraform, AWS, GCP, Ansible</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mb-3">Multi-cloud orchestration and fully automated,
+                repeatable immutable
+                infrastructure patterns.</p>
+              <div class="w-full bg-slate-200 dark:bg-slate-950 h-1 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full rounded-full" style="width: 95%"></div>
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-slate-100/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/50 skill-card"
+              data-category="containers">
+              <div class="flex items-center justify-between mb-2">
+                <span
+                  class="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">Kubernetes
+                  Ecosystem</span>
+                <span
+                  class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 dark:border-cyan-500/15 font-mono">Expert</span>
+              </div>
+              <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">K8s, Docker, Helm, ArgoCD, Linkerd
+              </h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mb-3">High-scale microservices scheduling, service
+                mesh implementation,
+                and declarative GitOps pipelines.</p>
+              <div class="w-full bg-slate-200 dark:bg-slate-950 h-1 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-cyan-400 to-indigo-500 h-full rounded-full" style="width: 92%"></div>
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-slate-100/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/50 skill-card"
+              data-category="cicd">
+              <div class="flex items-center justify-between mb-2">
+                <span
+                  class="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">CI/CD
+                  Pipelines</span>
+                <span
+                  class="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 dark:border-indigo-400/15 font-mono">Advanced</span>
+              </div>
+              <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">GitHub Actions, GitLab CI, Jenkins
+              </h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mb-3">Fast parallel pipelines, automated artifact
+                isolation, compliance
+                audits, and security scanners.</p>
+              <div class="w-full bg-slate-200 dark:bg-slate-950 h-1 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-indigo-400 to-purple-500 h-full rounded-full" style="width: 89%">
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-slate-100/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/50 skill-card"
+              data-category="telemetry">
+              <div class="flex items-center justify-between mb-2">
+                <span
+                  class="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">Observability
+                  &
+                  Telemetry</span>
+                <span
+                  class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 dark:border-emerald-500/15 font-mono">Advanced</span>
+              </div>
+              <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">Grafana, Prometheus, ELK Stack,
+                Jaeger</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mb-3">Comprehensive system visibility, log
+                aggregation, request tracing,
+                and AI-driven alerting metrics.</p>
+              <div class="w-full bg-slate-200 dark:bg-slate-950 h-1 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-emerald-400 to-teal-500 h-full rounded-full" style="width: 88%"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-6 sm:p-8">
+          <h2
+            class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 flex items-center space-x-2.5 mb-6">
+            <i data-lucide="network" class="w-5 h-5 text-indigo-400"></i>
+            <span>Featured Architectures & Blueprints</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div
+              class="rounded-xl border border-slate-200 dark:border-slate-800/50 bg-slate-100/50 dark:bg-slate-900/10 overflow-hidden flex flex-col justify-between">
+              <div class="p-5">
+                <div class="flex items-center justify-between mb-3">
+                  <span
+                    class="px-2 py-0.5 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-[10px] font-mono border border-cyan-500/20 dark:border-cyan-500/15 rounded font-bold">AWS
+                    MULTI-REGION K8S</span>
+                  <span class="font-mono text-[11px] text-slate-500">GitOps & Terraform</span>
+                </div>
+                <h3 class="text-md font-bold text-slate-800 dark:text-slate-200 mb-2">High-Availability Active-Active
+                  Cluster Topology</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Provisioned across two AWS geographic regions with global Route53 latency routing, EKS node scaling
+                  arrays, and real-time state sync through decentralized database structures.
+                </p>
+
+                <div class="mt-4 p-3 bg-slate-900 rounded-lg border border-slate-800">
+                  <div class="font-mono text-[10px] text-slate-500 space-y-1">
+                    <div>[Client] ──► Route53 (Latency Policy)</div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├──► [US-West EKS] ──► ArgoCD</div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──► [US-East EKS] ──► ArgoCD</div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="px-5 py-3.5 bg-slate-100 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800/40 flex items-center justify-between">
+                <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400">Target SLA: 99.999%</span>
+                <span
+                  class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold flex items-center cursor-pointer hover:text-indigo-500 dark:hover:text-indigo-300 no-print"
+                  onclick="runTerminalCmd('projects')">
+                  More Info <i data-lucide="chevron-right" class="w-4 h-4 ml-0.5"></i>
+                </span>
+              </div>
+            </div>
+
+            <div
+              class="rounded-xl border border-slate-200 dark:border-slate-800/50 bg-slate-100/50 dark:bg-slate-900/10 overflow-hidden flex flex-col justify-between">
+              <div class="p-5">
+                <div class="flex items-center justify-between mb-3">
+                  <span
+                    class="px-2 py-0.5 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[10px] font-mono border border-indigo-500/20 dark:border-indigo-400/15 rounded font-bold">ZERO-TRUST
+                    PIPELINE</span>
+                  <span class="font-mono text-[11px] text-slate-500">Security / DevSecOps</span>
+                </div>
+                <h3 class="text-md font-bold text-slate-800 dark:text-slate-200 mb-2">Automated Compliance &
+                  Cryptographic Signing</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Secured microservice pipelines using Cosign container image signatures, GitHub Actions runner
+                  isolation, Vault identity integrations, and automated daily compliance scanning grids.
+                </p>
+
+                <div class="mt-4 p-3 bg-slate-900 rounded-lg border border-slate-800">
+                  <div class="font-mono text-[10px] text-slate-500 space-y-1">
+                    <div>[Code Commit] ──► Trufflehog Secret Scan</div>
+                    <div>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──►
+                      Build ──► Trivy (CVE)</div>
+                    <div>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──►
+                      Sign (Cosign)</div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="px-5 py-3.5 bg-slate-100 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800/40 flex items-center justify-between">
+                <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400">Target Security: PCI-DSS</span>
+                <span
+                  class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold flex items-center cursor-pointer hover:text-indigo-500 dark:hover:text-indigo-300 no-print"
+                  onclick="runTerminalCmd('projects')">
+                  More Info <i data-lucide="chevron-right" class="w-4 h-4 ml-0.5"></i>
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer
+    class="mt-16 py-8 border-t border-slate-200 dark:border-slate-800/40 bg-slate-100 dark:bg-slate-950 no-print text-center">
+    <div class="max-w-7xl mx-auto px-4 text-xs font-mono text-slate-500 dark:text-slate-400 space-y-2">
+      <p>Built with TailwindCSS, Lucide Icons & pure Javascript.</p>
+      <p>&copy; 2026 Alex Chen. Operating within safe parameters.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      initTheme();
+      initStats();
+      initTerminal();
+    });
+
+    function initTheme() {
+      const toggle = document.getElementById("themeToggle");
+
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        if (savedTheme === 'light') {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        } else {
+          document.documentElement.classList.remove('light');
+          document.documentElement.classList.add('dark');
+        }
+      }
+
+      toggle.addEventListener("click", () => {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+          localStorage.setItem("theme", "light");
+        } else {
+          document.documentElement.classList.remove('light');
+          document.documentElement.classList.add('dark');
+          localStorage.setItem("theme", "dark");
+        }
+      });
+    }
+
+    function initStats() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            const targetVal = parseFloat(target.getAttribute("data-val"));
+            animateValue(target, 0, targetVal, 1500);
+            observer.unobserve(target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      const stats = ["stat-uptime", "stat-deploys", "stat-savings", "stat-leadtime"];
+      stats.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }
+
+    function animateValue(obj, start, end, duration) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+        let current;
+        if (obj.id === "stat-uptime") {
+          current = (progress * (end - start) + start).toFixed(3);
+          obj.innerHTML = current + "%";
+        } else if (obj.id === "stat-deploys") {
+          current = Math.floor(progress * (end - start) + start);
+          obj.innerHTML = current + "+";
+        } else if (obj.id === "stat-savings") {
+          current = Math.floor(progress * (end - start) + start);
+          obj.innerHTML = current + "%";
+        } else {
+          current = Math.floor(progress * (end - start) + start);
+          obj.innerHTML = "<" + current + "m";
+        }
+
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    function filterSkills(cat) {
+      const cards = document.querySelectorAll(".skill-card");
+      const buttons = document.querySelectorAll(".skill-tab-btn");
+
+      buttons.forEach(btn => {
+        if (btn.getAttribute("onclick").includes(cat)) {
+          btn.classList.add("bg-indigo-600", "text-white");
+          btn.classList.remove("text-slate-400", "hover:text-slate-200");
+        } else {
+          btn.classList.remove("bg-indigo-600", "text-white");
+          btn.classList.add("text-slate-400", "hover:text-slate-200");
+        }
+      });
+
+      cards.forEach(card => {
+        if (cat === "all" || card.getAttribute("data-category") === cat) {
+          card.style.display = "block";
+          setTimeout(() => { card.style.opacity = "1"; }, 10);
+        } else {
+          card.style.opacity = "0";
+          setTimeout(() => { card.style.display = "none"; }, 150);
+        }
+      });
+    }
+
+    function togglePipelineVisual() {
+      const timeline = document.getElementById("experienceTimeline");
+      const btn = document.getElementById("pipelineToggleBtn");
+
+      if (timeline.classList.contains("border-l-2")) {
+        timeline.classList.remove("border-l-2");
+        timeline.classList.add("border-l-0");
+        btn.innerHTML = "Isolated";
+        btn.classList.remove("text-cyan-400", "bg-cyan-600/20", "border-cyan-500/30");
+        btn.classList.add("text-indigo-400", "bg-indigo-600/20", "border-indigo-500/30");
+      } else {
+        timeline.classList.add("border-l-2");
+        timeline.classList.remove("border-l-0");
+        btn.innerHTML = "Observed";
+        btn.classList.remove("text-indigo-400", "bg-indigo-600/20", "border-indigo-500/30");
+        btn.classList.add("text-cyan-400", "bg-cyan-600/20", "border-cyan-500/30");
+      }
+    }
+
+    function initTerminal() {
+      const input = document.getElementById("terminalInput");
+      if (!input) return;
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const cmd = input.value.trim().toLowerCase();
+          input.value = "";
+          handleTerminalCommand(cmd);
+        }
+      });
+    }
+
+    function runTerminalCmd(cmd) {
+      handleTerminalCommand(cmd);
+    }
+
+    function handleTerminalCommand(cmd) {
+      const out = document.getElementById("terminalOutput");
+      if (!out) return;
+
+      let response = "";
+
+      if (cmd === "help") {
+        response = `Available commands:<br>
+          &nbsp;&nbsp;<span class="text-cyan-400">about</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Short biological background summary<br>
+          &nbsp;&nbsp;<span class="text-cyan-400">skills</span>&nbsp;&nbsp;&nbsp;&nbsp;- High level lists of technical proficiencies<br>
+          &nbsp;&nbsp;<span class="text-cyan-400">projects</span>&nbsp;&nbsp;- Top technical projects and scale metrics<br>
+          &nbsp;&nbsp;<span class="text-cyan-400">contact</span>&nbsp;&nbsp;&nbsp;- Quick reach coordinates and email link<br>
+          &nbsp;&nbsp;<span class="text-cyan-400">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Reset the system console output<br>
+          &nbsp;&nbsp;<span class="text-cyan-400">reboot</span>&nbsp;&nbsp;&nbsp;&nbsp;- Perform complete virtual service cycle`;
+      } else if (cmd === "about") {
+        response = `BIO METRICS:<br>
+          &nbsp;&nbsp;Name: Alex Chen<br>
+          &nbsp;&nbsp;Role: Senior Lead DevOps Engineer<br>
+          &nbsp;&nbsp;Mission: Scaling mission-critical workloads, orchestrating<br>
+          &nbsp;&nbsp;GitOps architectures, reducing multi-million dollar cloud<br>
+          &nbsp;&nbsp;spending using strategic capacity plans.`;
+      } else if (cmd === "skills") {
+        response = `TECHNICAL CAPABILITIES MATRIX:<br>
+          &nbsp;&nbsp;• Clouds: AWS (Professional), GCP (Associate)<br>
+          &nbsp;&nbsp;• Containers: Kubernetes, Docker, Helm, Istio, ArgoCD<br>
+          &nbsp;&nbsp;• Tooling: Terraform, Ansible, Chef, Packer<br>
+          &nbsp;&nbsp;• CI/CD: GitHub Actions, GitLab CI, Jenkins, Tekton<br>
+          &nbsp;&nbsp;• Telemetry: Prometheus, Grafana, OpenTelemetry, Jaeger<br>
+          &nbsp;&nbsp;• Languages: Python, Go, Bash, Rust`;
+      } else if (cmd === "projects") {
+        response = `PRODUCTION WORKLOAD BLUEPRINTS:<br>
+          &nbsp;&nbsp;1. Multi-Region AWS EKS active-active high scale cluster.<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SLA: 99.999% | Code: Terraform + GitOps (ArgoCD)<br>
+          &nbsp;&nbsp;2. Zero-Trust DevSecOps software delivery security framework.<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Security compliance standard: PCI-DSS | Tools: Cosign + Vault`;
+      } else if (cmd === "contact") {
+        response = `COORDINATE CHANNELS:<br>
+          &nbsp;&nbsp;• Email: alex.chen@infra.io<br>
+          &nbsp;&nbsp;• Tel: +1 (555) 382-9012<br>
+          &nbsp;&nbsp;• Loc: San Francisco, CA<br>
+          &nbsp;&nbsp;• GitHub: alexchen-ops`;
+      } else if (cmd === "clear") {
+        out.innerHTML = "";
+        return;
+      } else if (cmd === "reboot" || cmd === "sudo reboot") {
+        out.innerHTML = `<span class="text-red-500 font-bold">[ALERT]</span> Initiating system reset protocol...<br>
+          <span class="text-yellow-500">[WARN]</span> Terminating existing developer connections...<br>
+          Unmounting modules... OK<br>
+          Restarting container engine... OK<br>
+          Reloading CV assets... SUCCESS.<br>
+          <span class="text-emerald-400">[INFO]</span> Service returned to stable ONLINE state.`;
+        setTimeout(() => {
+          location.reload();
+        }, 1200);
+        return;
+      } else if (cmd === "") {
+        response = "";
+      } else {
+        response = `<span class="text-red-500">shell: command not found: ${cmd}</span>. Type <span class="text-white">'help'</span> for reference.`;
+      }
+
+      const promptLine = `<div><span class="text-indigo-400">guest@infra-cv:~$</span> ${cmd}</div>`;
+      const responseLine = response ? `<div>${response}</div>` : "";
+
+      out.innerHTML += promptLine + responseLine;
+      out.scrollTop = out.scrollHeight;
+    }
+  </script>
+</body>
+
+</html>
