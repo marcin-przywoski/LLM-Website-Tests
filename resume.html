@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -37,40 +40,160 @@
         }
     </script>
     <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(14, 165, 233, 0.2);
+            border-radius: 5px;
+            border: 3px solid transparent;
+            background-clip: content-box;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(14, 165, 233, 0.5);
+        }
+
         body {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
+
+        /* Epic Background */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from {
+                transform: translate(-10%, -10%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(10%, 10%) rotate(360deg);
+            }
+        }
+
         .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
+
         .dark .glass {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
+
         .gradient-text {
-            background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+            background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #7c3aed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-shift 5s ease infinite;
         }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         .skill-tag {
-            transition: all 0.2s ease;
-        }
-        .skill-tag:hover {
-            transform: translateY(-2px);
-        }
-        .stat-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        .skill-tag:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 20px -10px rgba(14, 165, 233, 0.5);
+        }
+
+        .stat-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
         .stat-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -20px rgba(14, 165, 233, 0.3);
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(226, 232, 240, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .dark .progress-bar {
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0ea5e9, #2563eb);
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.1, 0.5, 0.5, 1);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
+
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
-    
+
+    <!-- Epic Background Elements -->
+    <div class="bg-mesh">
+        <div class="blob bg-primary-400/20 top-0 -left-20"></div>
+        <div class="blob bg-purple-400/20 bottom-0 -right-20" style="animation-delay: -5s;"></div>
+        <div class="blob bg-blue-400/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            style="animation-delay: -10s;"></div>
+    </div>
+
     <!-- Theme Toggle -->
     <div class="fixed top-6 right-6 z-50">
         <button id="theme-toggle" class="p-3 rounded-full glass shadow-lg hover:shadow-xl transition-all duration-300">
@@ -80,7 +203,7 @@
 
     <div class="max-w-5xl mx-auto px-4 py-12 lg:py-20">
         <!-- Header Section -->
-        <header class="mb-16 animate-fade-in">
+        <header class="mb-16 reveal">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
                 <div>
                     <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-2">
@@ -90,7 +213,8 @@
                         Senior DevOps & Cloud Architect
                     </p>
                     <div class="flex flex-wrap gap-4 text-sm font-medium">
-                        <a href="mailto:alex.rivera@example.com" class="flex items-center gap-2 hover:text-primary-500 transition-colors">
+                        <a href="mailto:alex.rivera@example.com"
+                            class="flex items-center gap-2 hover:text-primary-500 transition-colors">
                             <i class="fas fa-envelope text-primary-500"></i> alex.rivera@example.com
                         </a>
                         <a href="#" class="flex items-center gap-2 hover:text-primary-500 transition-colors">
@@ -105,8 +229,11 @@
                     </div>
                 </div>
                 <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-primary-400 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                    <div class="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden glass border-2 border-white/20">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-primary-400 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
+                    </div>
+                    <div
+                        class="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden glass border-2 border-white/20 group-hover:border-primary-500/50 transition-colors duration-500">
                         <!-- Placeholder for Profile Image -->
                         <div class="w-full h-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
                             <i class="fas fa-user-gear text-4xl text-slate-400"></i>
@@ -117,23 +244,31 @@
         </header>
 
         <!-- Stats Section -->
-        <section class="mb-20">
+        <section class="mb-20 reveal">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="stat-card p-6 rounded-3xl glass text-center">
-                    <div class="text-3xl font-bold gradient-text mb-1">99.99%</div>
-                    <div class="text-xs uppercase tracking-wider font-semibold text-slate-500">Uptime Managed</div>
+                <div class="stat-card p-6 rounded-3xl glass text-center group">
+                    <div class="text-3xl font-bold gradient-text mb-1 counter" data-target="99.99">0</div>
+                    <div
+                        class="text-xs uppercase tracking-wider font-semibold text-slate-500 group-hover:text-primary-500 transition-colors">
+                        Uptime Managed</div>
                 </div>
-                <div class="stat-card p-6 rounded-3xl glass text-center">
-                    <div class="text-3xl font-bold gradient-text mb-1">85%</div>
-                    <div class="text-xs uppercase tracking-wider font-semibold text-slate-500">CI/CD Speedup</div>
+                <div class="stat-card p-6 rounded-3xl glass text-center group">
+                    <div class="text-3xl font-bold gradient-text mb-1 counter" data-target="85">0</div>
+                    <div
+                        class="text-xs uppercase tracking-wider font-semibold text-slate-500 group-hover:text-primary-500 transition-colors">
+                        CI/CD Speedup %</div>
                 </div>
-                <div class="stat-card p-6 rounded-3xl glass text-center">
-                    <div class="text-3xl font-bold gradient-text mb-1">10k+</div>
-                    <div class="text-xs uppercase tracking-wider font-semibold text-slate-500">Pods Orchestrated</div>
+                <div class="stat-card p-6 rounded-3xl glass text-center group">
+                    <div class="text-3xl font-bold gradient-text mb-1 counter" data-target="10000">0</div>
+                    <div
+                        class="text-xs uppercase tracking-wider font-semibold text-slate-500 group-hover:text-primary-500 transition-colors">
+                        Pods Orchestrated</div>
                 </div>
-                <div class="stat-card p-6 rounded-3xl glass text-center">
-                    <div class="text-3xl font-bold gradient-text mb-1">$2M+</div>
-                    <div class="text-xs uppercase tracking-wider font-semibold text-slate-500">Cloud Savings</div>
+                <div class="stat-card p-6 rounded-3xl glass text-center group">
+                    <div class="text-3xl font-bold gradient-text mb-1 counter" data-target="2000000">0</div>
+                    <div
+                        class="text-xs uppercase tracking-wider font-semibold text-slate-500 group-hover:text-primary-500 transition-colors">
+                        Cloud Savings $</div>
                 </div>
             </div>
         </section>
@@ -142,58 +277,71 @@
             <!-- Left Column -->
             <div class="lg:col-span-1 space-y-12">
                 <!-- Summary -->
-                <section>
+                <section class="reveal">
                     <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">01</span>
+                        <span
+                            class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">01</span>
                         Profile
                     </h2>
                     <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                        Strategic DevOps leader with 8+ years of experience in automating complex cloud infrastructures. Expert in Kubernetes orchestration, CI/CD pipeline optimization, and implementing "Infrastructure as Code" at scale. Passionate about SRE principles and developer experience.
+                        Strategic DevOps leader with 8+ years of experience in automating complex cloud infrastructures.
+                        Expert in Kubernetes orchestration, CI/CD pipeline optimization, and implementing
+                        "Infrastructure as Code" at scale. Passionate about SRE principles and developer experience.
                     </p>
                 </section>
 
                 <!-- Technical Stack -->
-                <section>
+                <section class="reveal">
                     <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">02</span>
-                        Tech Stack
+                        <span
+                            class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">02</span>
+                        Expertise
                     </h2>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-3">Cloud & Core</h3>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">AWS</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">GCP</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Kubernetes</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Docker</span>
+                    <div class="space-y-8">
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm font-bold">
+                                <span>Infrastructure as Code</span>
+                                <span class="text-primary-500">95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="95%"></div>
                             </div>
                         </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-3">Infrastructure</h3>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Terraform</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Pulumi</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Ansible</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Helm</span>
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm font-bold">
+                                <span>Kubernetes & Orchestration</span>
+                                <span class="text-primary-500">92%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="92%"></div>
                             </div>
                         </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-3">Monitoring & DX</h3>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Prometheus</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Grafana</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Datadog</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Go</span>
-                                <span class="skill-tag px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-medium">Python</span>
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm font-bold">
+                                <span>CI/CD & Automation</span>
+                                <span class="text-primary-500">98%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="98%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm font-bold">
+                                <span>Cloud Architecture (AWS/GCP)</span>
+                                <span class="text-primary-500">89%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="89%"></div>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <!-- Certifications -->
-                <section>
+                <section class="reveal">
                     <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">03</span>
+                        <span
+                            class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">03</span>
                         Certs
                     </h2>
                     <ul class="space-y-4">
@@ -225,52 +373,67 @@
             <!-- Right Column -->
             <div class="lg:col-span-2 space-y-12">
                 <!-- Experience -->
-                <section>
+                <section class="reveal">
                     <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">04</span>
+                        <span
+                            class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">04</span>
                         Experience
                     </h2>
                     <div class="space-y-12">
                         <!-- Role 1 -->
-                        <div class="relative pl-8 border-l-2 border-slate-200 dark:border-slate-800">
-                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary-500 border-4 border-white dark:border-slate-950"></div>
+                        <div class="relative pl-8 border-l-2 border-slate-200 dark:border-slate-800 group/role">
+                            <div
+                                class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary-500 border-4 border-white dark:border-slate-950 group-hover/role:scale-150 transition-transform">
+                            </div>
                             <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
                                 <h3 class="text-xl font-bold">Lead DevOps Engineer</h3>
-                                <span class="px-3 py-1 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs font-bold uppercase tracking-wider">2021 — Present</span>
+                                <span
+                                    class="px-3 py-1 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs font-bold uppercase tracking-wider">2021
+                                    — Present</span>
                             </div>
-                            <p class="text-lg font-medium text-slate-700 dark:text-slate-300 mb-4">CloudScale Systems</p>
+                            <p class="text-lg font-medium text-slate-700 dark:text-slate-300 mb-4">CloudScale Systems
+                            </p>
                             <ul class="space-y-3 text-slate-600 dark:text-slate-400">
                                 <li class="flex items-start gap-2">
                                     <span class="text-primary-500 mt-1.5">●</span>
-                                    <span>Spearheaded migration of 200+ microservices from legacy VMs to EKS, achieving a <strong>40% reduction</strong> in compute costs.</span>
+                                    <span>Spearheaded migration of 200+ microservices from legacy VMs to EKS, achieving
+                                        a <strong>40% reduction</strong> in compute costs.</span>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <span class="text-primary-500 mt-1.5">●</span>
-                                    <span>Implemented GitOps with ArgoCD, reducing deployment lead time from 2 hours to <strong>15 minutes</strong>.</span>
+                                    <span>Implemented GitOps with ArgoCD, reducing deployment lead time from 2 hours to
+                                        <strong>15 minutes</strong>.</span>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <span class="text-primary-500 mt-1.5">●</span>
-                                    <span>Engineered self-service infrastructure portal using Backstage, saving the platform team <strong>20+ hours/week</strong> in manual provisioning.</span>
+                                    <span>Engineered self-service infrastructure portal using Backstage, saving the
+                                        platform team <strong>20+ hours/week</strong> in manual provisioning.</span>
                                 </li>
                             </ul>
                         </div>
 
                         <!-- Role 2 -->
-                        <div class="relative pl-8 border-l-2 border-slate-200 dark:border-slate-800">
-                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-white dark:border-slate-950"></div>
+                        <div class="relative pl-8 border-l-2 border-slate-200 dark:border-slate-800 group/role">
+                            <div
+                                class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-white dark:border-slate-950 group-hover/role:bg-primary-500 group-hover/role:scale-150 transition-all">
+                            </div>
                             <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
                                 <h3 class="text-xl font-bold">Site Reliability Engineer</h3>
-                                <span class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">2018 — 2021</span>
+                                <span
+                                    class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">2018
+                                    — 2021</span>
                             </div>
                             <p class="text-lg font-medium text-slate-700 dark:text-slate-300 mb-4">DataNexus Corp</p>
                             <ul class="space-y-3 text-slate-600 dark:text-slate-400">
                                 <li class="flex items-start gap-2">
                                     <span class="text-primary-500 mt-1.5">●</span>
-                                    <span>Automated multi-region disaster recovery using Terraform and AWS Route53, hitting <strong>RTO < 30 mins</strong>.</span>
+                                    <span>Automated multi-region disaster recovery using Terraform and AWS Route53,
+                                        hitting <strong>RTO < 30 mins</strong>.</span>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <span class="text-primary-500 mt-1.5">●</span>
-                                    <span>Built an internal SLI/SLO dashboarding tool that improved incident response time by <strong>35%</strong>.</span>
+                                    <span>Built an internal SLI/SLO dashboarding tool that improved incident response
+                                        time by <strong>35%</strong>.</span>
                                 </li>
                             </ul>
                         </div>
@@ -278,33 +441,44 @@
                 </section>
 
                 <!-- Projects -->
-                <section>
+                <section class="reveal">
                     <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">05</span>
+                        <span
+                            class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500 text-sm">05</span>
                         Key Projects
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="group p-6 rounded-3xl glass hover:border-primary-500/50 transition-all duration-300">
-                            <div class="w-12 h-12 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 mb-4 group-hover:scale-110 transition-transform">
+                        <div
+                            class="group p-6 rounded-3xl glass hover:border-primary-500/50 transition-all duration-300">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 mb-4 group-hover:scale-110 transition-transform">
                                 <i class="fas fa-network-wired"></i>
                             </div>
                             <h3 class="font-bold text-lg mb-2">Zero-Trust Network Mesh</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Deployed Istio service mesh across hybrid-cloud clusters to enforce mTLS and fine-grained access control.</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Deployed Istio service mesh
+                                across hybrid-cloud clusters to enforce mTLS and fine-grained access control.</p>
                             <div class="flex gap-2">
-                                <span class="text-[10px] font-bold uppercase tracking-tighter bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">Istio</span>
-                                <span class="text-[10px] font-bold uppercase tracking-tighter bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">Vault</span>
+                                <span
+                                    class="text-[10px] font-bold uppercase tracking-tighter bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">Istio</span>
+                                <span
+                                    class="text-[10px] font-bold uppercase tracking-tighter bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">Vault</span>
                             </div>
                         </div>
 
-                        <div class="group p-6 rounded-3xl glass hover:border-primary-500/50 transition-all duration-300">
-                            <div class="w-12 h-12 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 mb-4 group-hover:scale-110 transition-transform">
+                        <div
+                            class="group p-6 rounded-3xl glass hover:border-primary-500/50 transition-all duration-300">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 mb-4 group-hover:scale-110 transition-transform">
                                 <i class="fas fa-bolt"></i>
                             </div>
                             <h3 class="font-bold text-lg mb-2">FinOps Automation</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Custom Python bot that auto-tags resources and kills orphaned instances, saving <strong>$15k/month</strong>.</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Custom Python bot that auto-tags
+                                resources and kills orphaned instances, saving <strong>$15k/month</strong>.</p>
                             <div class="flex gap-2">
-                                <span class="text-[10px] font-bold uppercase tracking-tighter bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">Python</span>
-                                <span class="text-[10px] font-bold uppercase tracking-tighter bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">Boto3</span>
+                                <span
+                                    class="text-[10px] font-bold uppercase tracking-tighter bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">Python</span>
+                                <span
+                                    class="text-[10px] font-bold uppercase tracking-tighter bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">Boto3</span>
                             </div>
                         </div>
                     </div>
@@ -313,9 +487,10 @@
         </div>
 
         <!-- Footer -->
-        <footer class="mt-24 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
+        <footer class="mt-24 pt-8 border-t border-slate-200 dark:border-slate-800 text-center reveal">
             <p class="text-slate-500 text-sm font-medium">Built with precision & high-availability by Alex Rivera.</p>
-            <div class="mt-4 flex justify-center gap-6 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+            <div
+                class="mt-4 flex justify-center gap-6 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
                 <i class="fab fa-aws text-2xl"></i>
                 <i class="fab fa-docker text-2xl"></i>
                 <i class="fab fa-linux text-2xl"></i>
@@ -328,7 +503,7 @@
         // Theme Toggle Logic
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
-        
+
         function toggleTheme() {
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
@@ -341,7 +516,6 @@
             }
         }
 
-        // Initialize theme based on preference or system
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             themeIcon.classList.replace('fa-moon', 'fa-sun');
@@ -352,51 +526,57 @@
 
         themeToggleBtn.addEventListener('click', toggleTheme);
 
-        // Simple Fade-in Animation on Scroll
+        // Advanced Reveal & Counter Logic
         const observerOptions = {
-            threshold: 0.1
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const counterAnimation = (el) => {
+            const target = parseFloat(el.getAttribute('data-target'));
+            const duration = 2000;
+            const start = 0;
+            let current = start;
+            const increment = target / (duration / 16);
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    clearInterval(timer);
+                    el.innerText = target.toLocaleString() + (target < 100 ? (target % 1 === 0 ? '' : '%') : (target === 85 ? '%' : (target === 99.99 ? '%' : '+')));
+                    if (el.getAttribute('data-target') == "2000000") el.innerText = '$2M+';
+                    if (el.getAttribute('data-target') == "10000") el.innerText = '10k+';
+                } else {
+                    el.innerText = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in-up');
-                    observer.unobserve(entry.target);
+                    entry.target.classList.add('active');
+
+                    // Trigger counters
+                    entry.target.querySelectorAll('.counter').forEach(counterAnimation);
+
+                    // Trigger progress bars
+                    entry.target.querySelectorAll('.progress-fill').forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        // Define the animation keyframes in a style tag
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            .animate-fade-in-up {
-                animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            }
-            .animate-fade-in {
-                animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            }
-            section, .stat-card {
-                opacity: 0;
-            }
-            header {
-                opacity: 1 !important;
-            }
-        `;
-        document.head.appendChild(style);
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        document.querySelectorAll('section, .stat-card').forEach(el => {
-            observer.observe(el);
-        });
+        // Initial header animation
+        setTimeout(() => {
+            document.querySelector('header').classList.add('active');
+        }, 100);
     </script>
 </body>
+
 </html>
