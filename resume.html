@@ -283,7 +283,12 @@
 <body
   class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-300 relative grid-bg overflow-x-hidden">
 
-  <div id="bootScreen" class="boot-loader no-print crt-screen crt-flicker">
+  <a href="#mainContent"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-indigo-600 text-white px-4 py-2 rounded-lg z-[10000] font-medium font-mono text-xs focus:ring-2 focus:ring-cyan-500 focus:outline-none no-print">Skip
+    to Content</a>
+
+  <div id="bootScreen" class="boot-loader no-print crt-screen crt-flicker" role="dialog" aria-modal="true"
+    aria-label="System Diagnostics Boot Screen">
     <div class="max-w-xl w-full px-6 flex flex-col space-y-4">
       <div class="flex items-center space-x-2">
         <i data-lucide="terminal" class="w-6 h-6 text-cyan-400 animate-pulse"></i>
@@ -291,7 +296,7 @@
       </div>
       <div
         class="bg-slate-900 border border-slate-800 p-4 rounded-lg h-60 font-mono text-[10px] sm:text-xs text-slate-400 overflow-y-auto space-y-1.5 scrollbar-none"
-        id="bootLogs"></div>
+        id="bootLogs" role="log" aria-live="polite"></div>
       <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800 relative">
         <div class="bg-gradient-to-r from-cyan-400 via-indigo-500 to-emerald-400 h-full w-0 transition-all duration-300"
           id="bootProgress"></div>
@@ -299,7 +304,7 @@
       <div class="flex items-center justify-between text-[11px] font-mono text-slate-500">
         <span id="bootPercent">Loading infra core: 0%</span>
         <button onclick="skipBoot()"
-          class="px-2.5 py-1 rounded border border-slate-800 bg-slate-900/60 hover:bg-slate-800 hover:text-cyan-400 hover:border-cyan-500/30 transition-colors">SKIP
+          class="px-2.5 py-1 rounded border border-slate-800 bg-slate-900/60 hover:bg-slate-800 hover:text-cyan-400 hover:border-cyan-500/30 transition-colors focus:ring-2 focus:ring-cyan-500 focus:outline-none">SKIP
           DIAGNOSTICS</button>
       </div>
     </div>
@@ -328,13 +333,13 @@
 
       <div class="flex items-center space-x-4">
         <button id="themeToggle"
-          class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors"
+          class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 focus:outline-none focus:ring-offset-2 dark:focus:ring-offset-slate-950 focus:ring-offset-slate-50"
           aria-label="Toggle theme">
           <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
           <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-slate-600 hover:text-slate-900"></i>
         </button>
         <button onclick="window.print()"
-          class="flex items-center space-x-2 px-3.5 py-1.5 rounded-lg bg-indigo-600/10 text-indigo-400 hover:bg-indigo-600/20 hover:text-indigo-300 border border-indigo-500/20 dark:border-indigo-400/10 transition-all font-medium text-sm">
+          class="flex items-center space-x-2 px-3.5 py-1.5 rounded-lg bg-indigo-600/10 text-indigo-400 hover:bg-indigo-600/20 hover:text-indigo-300 border border-indigo-500/20 dark:border-indigo-400/10 transition-all font-medium text-sm focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none focus:ring-offset-2 dark:focus:ring-offset-slate-950 focus:ring-offset-slate-50">
           <i data-lucide="download" class="w-4 h-4"></i>
           <span>PDF Resume</span>
         </button>
@@ -342,7 +347,8 @@
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10">
+  <main id="mainContent" tabindex="-1"
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10 focus:outline-none">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
       <div class="lg:col-span-4 space-y-6 print-full">
@@ -374,7 +380,7 @@
 
           <div class="mt-6 pt-6 border-t border-slate-900/60 dark:border-slate-800/40 text-left space-y-3.5">
             <a href="mailto:alex.chen@infra.io"
-              class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors group">
+              class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors group rounded-md focus:ring-2 focus:ring-cyan-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-900">
               <i data-lucide="mail"
                 class="w-4.5 h-4.5 text-slate-400 dark:text-slate-500 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors"></i>
               <span class="font-mono truncate">alex.chen@infra.io</span>
@@ -388,13 +394,13 @@
               <span>San Francisco, CA (Hybrid / Remote)</span>
             </div>
             <a href="https://github.com" target="_blank"
-              class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group">
+              class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-900">
               <i data-lucide="github"
                 class="w-4.5 h-4.5 text-slate-400 dark:text-slate-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"></i>
               <span class="font-mono">github.com/alexchen-ops</span>
             </a>
             <a href="https://linkedin.com" target="_blank"
-              class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group">
+              class="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-900">
               <i data-lucide="linkedin"
                 class="w-4.5 h-4.5 text-slate-400 dark:text-slate-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"></i>
               <span class="font-mono">linkedin.com/in/alexchen-devops</span>
@@ -416,7 +422,8 @@
             <div class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
           </div>
 
-          <div class="font-mono text-xs text-cyan-400 space-y-3 h-64 overflow-y-auto pr-1" id="terminalOutput">
+          <div class="font-mono text-xs text-cyan-400 space-y-3 h-64 overflow-y-auto pr-1" id="terminalOutput"
+            role="log" aria-live="polite" aria-label="Terminal output log">
             <div><span class="text-indigo-400">guest@infra-cv:~$</span> systemctl status candidate</div>
             <div class="text-slate-400">● alexchen.service - Senior DevOps Engineer Resume
               Core<br>&nbsp;&nbsp;&nbsp;Loaded: active (running) since Jun 2019<br>&nbsp;&nbsp;&nbsp;Status: "Ready to
@@ -428,21 +435,26 @@
             <span class="font-mono text-xs text-indigo-400 font-bold shrink-0">guest@infra-cv:~$</span>
             <input type="text" id="terminalInput"
               class="bg-transparent text-xs text-cyan-400 font-mono outline-none border-none p-0 m-0 w-full focus:ring-0 focus:outline-none"
-              placeholder="help" autocomplete="off" autofocus>
+              placeholder="help" autocomplete="off" aria-label="Terminal command input">
           </div>
 
           <div class="mt-3 flex flex-wrap gap-1.5 pt-1.5 text-[10px]">
             <span class="font-mono text-slate-500 text-[9px] mr-1 flex items-center">Quick commands:</span>
             <button onclick="runTerminalCmd('about')"
-              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors">about</button>
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors focus:ring-2 focus:ring-cyan-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-900"
+              aria-label="Terminal command: about">about</button>
             <button onclick="runTerminalCmd('skills')"
-              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors">skills</button>
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors focus:ring-2 focus:ring-cyan-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-900"
+              aria-label="Terminal command: skills">skills</button>
             <button onclick="runTerminalCmd('projects')"
-              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors">projects</button>
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors focus:ring-2 focus:ring-cyan-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-900"
+              aria-label="Terminal command: projects">projects</button>
             <button onclick="runTerminalCmd('contact')"
-              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors">contact</button>
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900 hover:bg-slate-800 border border-slate-800/80 hover:border-cyan-500/30 text-slate-400 hover:text-cyan-400 transition-colors focus:ring-2 focus:ring-cyan-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-900"
+              aria-label="Terminal command: contact">contact</button>
             <button onclick="runTerminalCmd('sudo reboot')"
-              class="font-mono px-1.5 py-0.5 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 hover:border-red-500/30 text-slate-400 hover:text-red-400 transition-colors">reboot</button>
+              class="font-mono px-1.5 py-0.5 rounded bg-slate-900 hover:bg-slate-800 border border-slate-800/80 hover:border-red-500/30 text-slate-400 hover:text-red-400 transition-colors focus:ring-2 focus:ring-red-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-900"
+              aria-label="Terminal command: reboot">reboot</button>
           </div>
         </div>
 
@@ -527,7 +539,8 @@
               </span>
             </div>
             <div class="text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 font-mono"
-              id="stat-uptime" data-val="99.999">0.000</div>
+              id="stat-uptime" data-val="99.999" aria-label="System availability rating: 99.999 percent SLA maintained">
+              0.000</div>
             <p class="text-[10px] text-emerald-400 font-mono mt-1">Target uptime maintained</p>
           </div>
 
@@ -542,7 +555,8 @@
               </span>
             </div>
             <div class="text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 font-mono"
-              id="stat-deploys" data-val="15">0</div>
+              id="stat-deploys" data-val="15"
+              aria-label="System deployment frequency: 15 plus successful deploys daily">0</div>
             <p class="text-[10px] text-cyan-400 font-mono mt-1">Successful deploys daily</p>
           </div>
 
@@ -557,7 +571,8 @@
               </span>
             </div>
             <div class="text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 font-mono"
-              id="stat-savings" data-val="42">0%</div>
+              id="stat-savings" data-val="42"
+              aria-label="Cloud infrastructure expense reduction: 42 percent annual savings cut">0%</div>
             <p class="text-[10px] text-indigo-400 font-mono mt-1">Average annual cost cut</p>
           </div>
 
@@ -572,7 +587,8 @@
               </span>
             </div>
             <div class="text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 font-mono"
-              id="stat-leadtime" data-val="6">0m</div>
+              id="stat-leadtime" data-val="6"
+              aria-label="Software release delivery speed: under 6 minutes pipeline execution time">0m</div>
             <p class="text-[10px] text-cyan-400 font-mono mt-1">Pipeline execution time</p>
           </div>
         </div>
@@ -589,7 +605,8 @@
               <span class="text-xs font-mono text-slate-500 px-2 font-bold uppercase tracking-wider">Pipeline
                 Flow:</span>
               <button onclick="togglePipelineVisual()" id="pipelineToggleBtn"
-                class="px-2.5 py-1 text-xs font-mono bg-cyan-600/20 text-cyan-400 hover:bg-cyan-600/30 rounded border border-cyan-500/30 transition-colors">Observed</button>
+                class="px-2.5 py-1 text-xs font-mono bg-cyan-600/20 text-cyan-400 hover:bg-cyan-600/30 rounded border border-cyan-500/30 transition-all focus:ring-2 focus:ring-cyan-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-50 dark:focus:ring-offset-slate-950"
+                aria-label="Toggle pipeline visual connection styling: currently Observed mode">Observed</button>
             </div>
           </div>
 
@@ -745,21 +762,28 @@
               <span>Tech Stack & Skill Matrix</span>
             </h2>
             <div
-              class="no-print flex flex-wrap gap-1 bg-slate-100 dark:bg-slate-900/20 p-1 rounded-lg border border-slate-200 dark:border-slate-800/40">
+              class="no-print flex flex-wrap gap-1 bg-slate-100 dark:bg-slate-900/20 p-1 rounded-lg border border-slate-200 dark:border-slate-800/40"
+              role="tablist" aria-label="Skill matrix categories">
               <button onclick="filterSkills('all')"
-                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded bg-indigo-600 text-white transition-all">ALL</button>
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded bg-indigo-600 text-white transition-all focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-100 dark:focus:ring-offset-slate-900"
+                role="tab" aria-selected="true" aria-controls="skillsContainer">ALL</button>
               <button onclick="filterSkills('cloud')"
-                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all">CLOUD/IAC</button>
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-100 dark:focus:ring-offset-slate-900"
+                role="tab" aria-selected="false" aria-controls="skillsContainer">CLOUD/IAC</button>
               <button onclick="filterSkills('containers')"
-                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all">K8S</button>
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-100 dark:focus:ring-offset-slate-900"
+                role="tab" aria-selected="false" aria-controls="skillsContainer">K8S</button>
               <button onclick="filterSkills('cicd')"
-                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all">CI/CD</button>
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-100 dark:focus:ring-offset-slate-900"
+                role="tab" aria-selected="false" aria-controls="skillsContainer">CI/CD</button>
               <button onclick="filterSkills('telemetry')"
-                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all">OBSERVABILITY</button>
+                class="skill-tab-btn px-2.5 py-1 text-xs font-mono rounded text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1 focus:ring-offset-slate-100 dark:focus:ring-offset-slate-900"
+                role="tab" aria-selected="false" aria-controls="skillsContainer">OBSERVABILITY</button>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="skillsContainer">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="skillsContainer" role="tabpanel"
+            aria-label="Skills Matrix">
 
             <div
               class="p-4 rounded-xl bg-slate-100/50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/50 skill-card"
@@ -881,11 +905,12 @@
               <div
                 class="px-5 py-3.5 bg-slate-100 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800/40 flex items-center justify-between">
                 <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400">Target SLA: 99.999%</span>
-                <span
-                  class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold flex items-center cursor-pointer hover:text-indigo-500 dark:hover:text-indigo-300 no-print"
-                  onclick="runTerminalCmd('projects')">
+                <button
+                  class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold flex items-center hover:text-indigo-500 dark:hover:text-indigo-300 no-print focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1 dark:focus:ring-offset-slate-900 rounded-md p-0.5"
+                  onclick="runTerminalCmd('projects')"
+                  aria-label="More details on EKS Active-Active Project in terminal">
                   More Info <i data-lucide="chevron-right" class="w-4 h-4 ml-0.5"></i>
-                </span>
+                </button>
               </div>
             </div>
 
@@ -920,11 +945,12 @@
               <div
                 class="px-5 py-3.5 bg-slate-100 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800/40 flex items-center justify-between">
                 <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400">Target Security: PCI-DSS</span>
-                <span
-                  class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold flex items-center cursor-pointer hover:text-indigo-500 dark:hover:text-indigo-300 no-print"
-                  onclick="runTerminalCmd('projects')">
+                <button
+                  class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold flex items-center hover:text-indigo-500 dark:hover:text-indigo-300 no-print focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1 dark:focus:ring-offset-slate-900 rounded-md p-0.5"
+                  onclick="runTerminalCmd('projects')"
+                  aria-label="More details on Zero-Trust DevSecOps Project in terminal">
                   More Info <i data-lucide="chevron-right" class="w-4 h-4 ml-0.5"></i>
-                </span>
+                </button>
               </div>
             </div>
 
@@ -1037,9 +1063,11 @@
         if (btn.getAttribute("onclick").includes(cat)) {
           btn.classList.add("bg-indigo-600", "text-white");
           btn.classList.remove("text-slate-400", "hover:text-slate-200");
+          btn.setAttribute("aria-selected", "true");
         } else {
           btn.classList.remove("bg-indigo-600", "text-white");
           btn.classList.add("text-slate-400", "hover:text-slate-200");
+          btn.setAttribute("aria-selected", "false");
         }
       });
 
@@ -1064,12 +1092,14 @@
         btn.innerHTML = "Isolated";
         btn.classList.remove("text-cyan-400", "bg-cyan-600/20", "border-cyan-500/30");
         btn.classList.add("text-indigo-400", "bg-indigo-600/20", "border-indigo-500/30");
+        btn.setAttribute("aria-label", "Toggle pipeline visual connection styling: currently Isolated mode");
       } else {
         timeline.classList.add("border-l-2");
         timeline.classList.remove("border-l-0");
         btn.innerHTML = "Observed";
         btn.classList.remove("text-indigo-400", "bg-indigo-600/20", "border-indigo-500/30");
         btn.classList.add("text-cyan-400", "bg-cyan-600/20", "border-cyan-500/30");
+        btn.setAttribute("aria-label", "Toggle pipeline visual connection styling: currently Observed mode");
       }
     }
 
