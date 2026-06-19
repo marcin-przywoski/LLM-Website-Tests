@@ -15,8 +15,9 @@
       --surface-2: oklch(92.5% 0.018 82);
       --ink: oklch(24% 0.045 252);
       --muted: oklch(48% 0.04 252);
-      --soft: oklch(65% 0.035 252);
+      --soft: oklch(42% 0.035 252);
       --line: oklch(84% 0.022 77);
+      --focus: oklch(46% 0.16 185);
       --accent: oklch(55% 0.13 34);
       --accent-2: oklch(53% 0.12 185);
       --accent-3: oklch(59% 0.11 276);
@@ -41,8 +42,9 @@
       --surface-2: oklch(27% 0.032 252);
       --ink: oklch(92% 0.014 78);
       --muted: oklch(73% 0.025 78);
-      --soft: oklch(61% 0.03 78);
+      --soft: oklch(76% 0.026 78);
       --line: oklch(36% 0.035 252);
+      --focus: oklch(80% 0.14 184);
       --accent: oklch(67% 0.14 38);
       --accent-2: oklch(68% 0.12 184);
       --accent-3: oklch(72% 0.12 276);
@@ -115,6 +117,28 @@
 
     button {
       cursor: pointer;
+    }
+
+    :where(a, button, [tabindex]:not([tabindex="-1"])):focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    main:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 8px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .skip-link {
@@ -203,6 +227,7 @@
 
     .nav-links a,
     .theme-toggle,
+    .motion-toggle,
     .print-button {
       border: 0;
       border-radius: 999px;
@@ -214,14 +239,20 @@
 
     .nav-links a:hover,
     .theme-toggle:hover,
+    .motion-toggle:hover,
     .print-button:hover,
     .nav-links a:focus-visible,
     .theme-toggle:focus-visible,
-    .print-button:focus-visible {
+    .motion-toggle:focus-visible,
+    .print-button:focus-visible,
+    .nav-links a[aria-current="location"] {
       color: var(--ink);
       background: color-mix(in oklch, var(--accent-2) 12%, transparent);
-      outline: none;
       transform: translateY(-1px);
+    }
+
+    .nav-links a[aria-current="location"] {
+      box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--focus) 70%, transparent);
     }
 
     .top-actions {
@@ -349,7 +380,6 @@
 
     .button:hover,
     .button:focus-visible {
-      outline: none;
       transform: translateY(-2px);
       box-shadow: 0 18px 36px var(--shadow-soft);
     }
@@ -637,7 +667,6 @@
     .filter-button:focus-visible,
     .project-filter:focus-visible {
       color: var(--ink);
-      outline: none;
       transform: translateY(-1px);
     }
 
@@ -1562,10 +1591,42 @@
       transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift));
     }
 
+    .nav-links a:focus-visible,
+    .theme-toggle:focus-visible,
+    .motion-toggle:focus-visible,
+    .print-button:focus-visible,
+    .button:focus-visible,
+    .filter-button:focus-visible,
+    .project-filter:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 4px;
+    }
+
     @media (hover: none) {
       .cursor-halo {
         display: none;
       }
+    }
+
+    html[data-motion="reduced"] {
+      scroll-behavior: auto;
+    }
+
+    html[data-motion="reduced"] *,
+    html[data-motion="reduced"] *::before,
+    html[data-motion="reduced"] *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    html[data-motion="reduced"] .ambient,
+    html[data-motion="reduced"] .cursor-halo,
+    html[data-motion="reduced"] .hero-orbit,
+    html[data-motion="reduced"] .signal-ribbon,
+    html[data-motion="reduced"] .deployment-stream,
+    html[data-motion="reduced"] .scroll-meter {
+      display: none !important;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1574,8 +1635,40 @@
       .cursor-halo,
       .hero-orbit,
       .signal-ribbon,
-      .deployment-stream {
+      .deployment-stream,
+      .scroll-meter {
         display: none !important;
+      }
+    }
+
+    @media (forced-colors: active) {
+
+      .ambient,
+      .cursor-halo,
+      .hero-orbit,
+      .signal-ribbon,
+      .deployment-stream,
+      .scroll-meter {
+        display: none !important;
+      }
+
+      .button,
+      .tag,
+      .skill-pill,
+      .filter-button,
+      .project-filter,
+      .hero-copy,
+      .ops-panel,
+      .proof-item,
+      .timeline-card,
+      .project-card,
+      .callout,
+      .contact-card {
+        border: 1px solid CanvasText;
+      }
+
+      :where(a, button, [tabindex]:not([tabindex="-1"])):focus-visible {
+        outline: 3px solid Highlight;
       }
     }
 
@@ -1817,8 +1910,21 @@
         border-radius: 28px;
       }
 
+      .topbar {
+        flex-wrap: wrap;
+      }
+
       .nav-links {
-        display: none;
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 0.1rem 0 0.35rem;
+        scrollbar-width: thin;
+      }
+
+      .nav-links a {
+        min-width: max-content;
       }
 
       .hero,
@@ -1991,12 +2097,13 @@
         <a href="#contact">Contact</a>
       </nav>
       <div class="top-actions">
-        <button class="theme-toggle" type="button" aria-pressed="false">Theme</button>
-        <button class="print-button" type="button">Print</button>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch color theme">Theme</button>
+        <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Reduce animations">Motion</button>
+        <button class="print-button" type="button" aria-label="Print or save resume as PDF">Print</button>
       </div>
     </header>
 
-    <main id="main">
+    <main id="main" tabindex="-1">
       <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-copy reveal">
           <div class="hero-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -2013,7 +2120,8 @@
             response, and security automation.</p>
           <div class="hero-cta" aria-label="Resume actions">
             <a class="button primary" href="mailto:jordan.vale@example.com">Book an interview</a>
-            <button class="button secondary" type="button" data-copy="jordan.vale@example.com">Copy email</button>
+            <button class="button secondary" type="button" data-copy="jordan.vale@example.com"
+              aria-label="Copy email address jordan.vale@example.com">Copy email</button>
           </div>
           <ul class="availability" aria-label="Candidate highlights">
             <li>Remote or hybrid</li>
@@ -2080,23 +2188,27 @@
         </div>
         <div class="proof-strip" aria-label="Achievement statistics">
           <article class="proof-item">
-            <strong><span data-count="99.99" data-decimals="2">0</span>%</strong>
+            <strong aria-hidden="true"><span data-count="99.99" data-decimals="2">0</span>%</strong>
+            <span class="sr-only">99.99 percent</span>
             <span>payment API availability</span>
             <p>Protected critical workloads through progressive delivery, error budgets, and multi-zone recovery drills.
             </p>
           </article>
           <article class="proof-item">
-            <strong><span data-count="42">0</span>%</strong>
+            <strong aria-hidden="true"><span data-count="42">0</span>%</strong>
+            <span class="sr-only">42 percent</span>
             <span>MTTR reduction</span>
             <p>Rebuilt alert routing, runbooks, ownership maps, and post-incident review habits across six teams.</p>
           </article>
           <article class="proof-item">
-            <strong><span data-count="180">0</span>+</strong>
+            <strong aria-hidden="true"><span data-count="180">0</span>+</strong>
+            <span class="sr-only">More than 180</span>
             <span>Terraform modules shipped</span>
             <p>Standardized account vending, networking, secrets, Kubernetes add-ons, and golden service templates.</p>
           </article>
           <article class="proof-item">
-            <strong><span data-count="28">0</span>m</strong>
+            <strong aria-hidden="true"><span data-count="28">0</span>m</strong>
+            <span class="sr-only">28 minutes</span>
             <span>pipeline time saved monthly</span>
             <p>Removed redundant builds, added remote caching, parallelized test suites, and automated rollback gates.
             </p>
@@ -2113,18 +2225,25 @@
           <p>Filter the stack by operating mode. The emphasis is production ownership, not keyword collection.</p>
         </div>
         <div class="stack-board">
-          <div class="filter-rail" role="group" aria-label="Filter technical skills">
-            <button class="filter-button" type="button" data-skill-filter="all" aria-pressed="true">All systems</button>
-            <button class="filter-button" type="button" data-skill-filter="platform" aria-pressed="false">Platform
+          <p id="skill-filter-status" class="sr-only" role="status">Showing all technical skills.</p>
+          <div class="filter-rail" role="group" aria-label="Filter technical skills"
+            aria-describedby="skill-filter-status">
+            <button class="filter-button" type="button" aria-controls="skill-list" data-skill-filter="all"
+              aria-pressed="true">All systems</button>
+            <button class="filter-button" type="button" aria-controls="skill-list" data-skill-filter="platform"
+              aria-pressed="false">Platform
               runtime</button>
-            <button class="filter-button" type="button" data-skill-filter="iac" aria-pressed="false">Infrastructure as
+            <button class="filter-button" type="button" aria-controls="skill-list" data-skill-filter="iac"
+              aria-pressed="false">Infrastructure as
               code</button>
-            <button class="filter-button" type="button" data-skill-filter="delivery" aria-pressed="false">Delivery
+            <button class="filter-button" type="button" aria-controls="skill-list" data-skill-filter="delivery"
+              aria-pressed="false">Delivery
               flow</button>
-            <button class="filter-button" type="button" data-skill-filter="security" aria-pressed="false">Security and
+            <button class="filter-button" type="button" aria-controls="skill-list" data-skill-filter="security"
+              aria-pressed="false">Security and
               observability</button>
           </div>
-          <div class="skill-cloud" aria-live="polite">
+          <div class="skill-cloud" id="skill-list" aria-live="polite">
             <span class="skill-pill" data-skill-group="platform">Kubernetes</span>
             <span class="skill-pill" data-skill-group="platform">EKS</span>
             <span class="skill-pill" data-skill-group="platform">AKS</span>
@@ -2240,17 +2359,20 @@
           <p>Each project combined technical build work with adoption, documentation, and measurable operating outcomes.
           </p>
         </div>
-        <div class="project-toolbar" role="group" aria-label="Filter projects">
-          <button class="project-filter" type="button" data-project-filter="all" aria-pressed="true">All</button>
-          <button class="project-filter" type="button" data-project-filter="reliability"
+        <p id="project-filter-status" class="sr-only" role="status">Showing all selected projects.</p>
+        <div class="project-toolbar" role="group" aria-label="Filter projects" aria-describedby="project-filter-status">
+          <button class="project-filter" type="button" aria-controls="project-list" data-project-filter="all"
+            aria-pressed="true">All</button>
+          <button class="project-filter" type="button" aria-controls="project-list" data-project-filter="reliability"
             aria-pressed="false">Reliability</button>
-          <button class="project-filter" type="button" data-project-filter="automation"
+          <button class="project-filter" type="button" aria-controls="project-list" data-project-filter="automation"
             aria-pressed="false">Automation</button>
-          <button class="project-filter" type="button" data-project-filter="security"
+          <button class="project-filter" type="button" aria-controls="project-list" data-project-filter="security"
             aria-pressed="false">Security</button>
-          <button class="project-filter" type="button" data-project-filter="cost" aria-pressed="false">Cost</button>
+          <button class="project-filter" type="button" aria-controls="project-list" data-project-filter="cost"
+            aria-pressed="false">Cost</button>
         </div>
-        <div class="project-grid">
+        <div class="project-grid" id="project-list">
           <article class="project-card" data-project-tags="reliability automation" data-code="SLO">
             <h3>SLO command center</h3>
             <p>Built a shared reliability workspace for golden signals, error budgets, deployment correlation, and
@@ -2352,8 +2474,10 @@
           </div>
           <div class="contact-actions">
             <a class="button primary" href="mailto:jordan.vale@example.com">jordan.vale@example.com</a>
-            <a class="button secondary" href="https://www.linkedin.com/in/jordan-vale">LinkedIn profile</a>
-            <a class="button secondary" href="https://github.com/jordanvale">GitHub portfolio</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/jordan-vale"
+              aria-label="Jordan Vale LinkedIn profile">LinkedIn profile</a>
+            <a class="button secondary" href="https://github.com/jordanvale"
+              aria-label="Jordan Vale GitHub portfolio">GitHub portfolio</a>
           </div>
         </div>
       </section>
@@ -2369,27 +2493,46 @@
   <script>
     const root = document.documentElement;
     const themeButton = document.querySelector('.theme-toggle');
+    const motionButton = document.querySelector('.motion-toggle');
     const printButton = document.querySelector('.print-button');
     const scrollMeter = document.querySelector('.scroll-meter');
     const toast = document.querySelector('.toast');
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const motionPreferenceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const savedMotion = localStorage.getItem('resume-motion');
+    let prefersReducedMotion = motionPreferenceQuery.matches || savedMotion === 'reduced';
     const canUsePointerEffects = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const tiltTargets = document.querySelectorAll('.hero-copy, .ops-panel, .proof-item, .timeline-card, .project-card, .callout, .contact-card');
     const nodes = document.querySelectorAll('.node');
     const deploymentStream = document.querySelector('.deployment-stream');
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+    const sectionTargets = navLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const skillFilterStatus = document.querySelector('#skill-filter-status');
+    const projectFilterStatus = document.querySelector('#project-filter-status');
 
     const savedTheme = localStorage.getItem('resume-theme');
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const initialTheme = savedTheme || systemTheme;
-    root.dataset.theme = initialTheme;
-    themeButton.setAttribute('aria-pressed', String(initialTheme === 'dark'));
+    setTheme(initialTheme, false);
+    setMotionPreference(prefersReducedMotion, false);
 
     themeButton.addEventListener('click', () => {
       const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-      root.dataset.theme = nextTheme;
-      localStorage.setItem('resume-theme', nextTheme);
-      themeButton.setAttribute('aria-pressed', String(nextTheme === 'dark'));
+      setTheme(nextTheme, true);
       showToast(`${nextTheme === 'dark' ? 'Dark' : 'Light'} theme enabled`);
+    });
+
+    motionButton.addEventListener('click', () => {
+      if (motionPreferenceQuery.matches) {
+        setMotionPreference(true, false);
+        showToast('Animations are reduced by your system setting');
+        return;
+      }
+      setMotionPreference(root.dataset.motion !== 'reduced', true);
+    });
+
+    motionPreferenceQuery.addEventListener('change', (event) => {
+      const savedPreference = localStorage.getItem('resume-motion');
+      setMotionPreference(event.matches || savedPreference === 'reduced', false);
     });
 
     printButton.addEventListener('click', () => window.print());
@@ -2418,6 +2561,8 @@
         skillPills.forEach((pill) => {
           pill.classList.toggle('is-muted', filter !== 'all' && pill.dataset.skillGroup !== filter);
         });
+        const label = button.textContent.trim().toLowerCase();
+        skillFilterStatus.textContent = filter === 'all' ? 'Showing all technical skills.' : `Showing ${label} skills with other skills visually muted.`;
       });
     });
 
@@ -2428,10 +2573,16 @@
       button.addEventListener('click', () => {
         const filter = button.dataset.projectFilter;
         projectButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        let visibleProjects = 0;
         projectCards.forEach((card) => {
           const tags = card.dataset.projectTags.split(' ');
-          card.classList.toggle('is-hidden', filter !== 'all' && !tags.includes(filter));
+          const isHidden = filter !== 'all' && !tags.includes(filter);
+          card.classList.toggle('is-hidden', isHidden);
+          card.toggleAttribute('hidden', isHidden);
+          if (!isHidden) visibleProjects += 1;
         });
+        const label = button.textContent.trim().toLowerCase();
+        projectFilterStatus.textContent = filter === 'all' ? 'Showing all selected projects.' : `Showing ${visibleProjects} ${label} projects.`;
       });
     });
 
@@ -2455,7 +2606,7 @@
     if (!prefersReducedMotion) {
       let pointerTicking = false;
       window.addEventListener('pointermove', (event) => {
-        if (pointerTicking) return;
+        if (prefersReducedMotion || pointerTicking) return;
         pointerTicking = true;
         requestAnimationFrame(() => {
           root.style.setProperty('--pointer-x', `${event.clientX}px`);
@@ -2469,6 +2620,7 @@
       tiltTargets.forEach((target) => {
         target.classList.add('tilt-card');
         target.addEventListener('pointermove', (event) => {
+          if (prefersReducedMotion) return;
           const rect = target.getBoundingClientRect();
           const x = ((event.clientX - rect.left) / rect.width) - 0.5;
           const y = ((event.clientY - rect.top) / rect.height) - 0.5;
@@ -2488,6 +2640,7 @@
 
     if (!prefersReducedMotion && nodes.length) {
       window.setInterval(() => {
+        if (prefersReducedMotion) return;
         nodes.forEach((node, index) => {
           node.classList.toggle('is-active', (Date.now() / 700 + index) % 5 < 1);
         });
@@ -2505,6 +2658,7 @@
       ];
       let streamIndex = 0;
       window.setInterval(() => {
+        if (prefersReducedMotion) return;
         const firstLine = deploymentStream.querySelector('span');
         if (!firstLine) return;
         firstLine.textContent = streamEvents[streamIndex % streamEvents.length];
@@ -2533,9 +2687,52 @@
       scrollMeter.style.transform = `scaleX(${progress})`;
     };
 
+    if (sectionTargets.length) {
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((link) => {
+            link.toggleAttribute('aria-current', link.getAttribute('href') === `#${entry.target.id}`);
+            if (link.getAttribute('href') === `#${entry.target.id}`) {
+              link.setAttribute('aria-current', 'location');
+            }
+          });
+        });
+      }, { rootMargin: '-42% 0px -48% 0px', threshold: 0.01 });
+
+      sectionTargets.forEach((section) => navObserver.observe(section));
+    }
+
     window.addEventListener('scroll', updateScrollMeter, { passive: true });
     window.addEventListener('resize', updateScrollMeter);
     updateScrollMeter();
+
+    function setTheme(theme, shouldPersist) {
+      root.dataset.theme = theme;
+      themeButton.textContent = theme === 'dark' ? 'Dark' : 'Light';
+      themeButton.setAttribute('aria-pressed', String(theme === 'dark'));
+      themeButton.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+      if (shouldPersist) localStorage.setItem('resume-theme', theme);
+    }
+
+    function setMotionPreference(shouldReduce, shouldPersist) {
+      const effectiveReduction = shouldReduce || motionPreferenceQuery.matches;
+      prefersReducedMotion = effectiveReduction;
+      root.dataset.motion = effectiveReduction ? 'reduced' : 'full';
+      motionButton.textContent = effectiveReduction ? 'Motion off' : 'Motion on';
+      motionButton.setAttribute('aria-pressed', String(effectiveReduction));
+      motionButton.setAttribute('aria-label', motionPreferenceQuery.matches ? 'Animations are reduced by your system setting' : effectiveReduction ? 'Enable animations' : 'Reduce animations');
+      motionButton.setAttribute('aria-disabled', String(motionPreferenceQuery.matches));
+      if (effectiveReduction) {
+        tiltTargets.forEach((target) => {
+          target.style.setProperty('--rx', '0deg');
+          target.style.setProperty('--ry', '0deg');
+          target.style.setProperty('--card-x', '50%');
+          target.style.setProperty('--card-y', '40%');
+        });
+      }
+      if (shouldPersist) localStorage.setItem('resume-motion', shouldReduce ? 'reduced' : 'full');
+    }
 
     let toastTimer;
     function showToast(message) {
