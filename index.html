@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A stylish single-file DevOps engineer resume with technical achievements, metrics, projects, and interactive UX patterns.">
+  <meta name="description"
+    content="A stylish single-file DevOps engineer resume with technical achievements, metrics, projects, and interactive UX patterns.">
   <title>DevOps Engineer Resume | Jordan Vale</title>
   <style>
     :root {
@@ -64,7 +66,9 @@
         scroll-behavior: auto;
       }
 
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
@@ -758,8 +762,8 @@
       color: var(--muted);
     }
 
-    .timeline-card li + li,
-    .project-card li + li {
+    .timeline-card li+li,
+    .project-card li+li {
       margin-top: 0.45rem;
     }
 
@@ -995,6 +999,760 @@
       transform: translateY(0);
     }
 
+    html {
+      --pointer-x: 50vw;
+      --pointer-y: 24vh;
+    }
+
+    body {
+      isolation: isolate;
+      background:
+        radial-gradient(circle at var(--pointer-x) var(--pointer-y), color-mix(in oklch, var(--accent-2) 24%, transparent), transparent 18rem),
+        radial-gradient(circle at 8% 8%, oklch(79% 0.13 185 / 0.24), transparent 31rem),
+        radial-gradient(circle at 88% 4%, oklch(72% 0.15 38 / 0.23), transparent 28rem),
+        radial-gradient(circle at 62% 72%, oklch(69% 0.12 276 / 0.16), transparent 30rem),
+        linear-gradient(135deg, var(--bg), var(--surface-2));
+    }
+
+    body::before {
+      z-index: 0;
+      animation: gridPan 24s linear infinite;
+    }
+
+    .ambient,
+    .cursor-halo {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient {
+      inset: -12vh -10vw;
+      overflow: hidden;
+      filter: saturate(1.25);
+    }
+
+    .ambient span {
+      position: absolute;
+      width: clamp(16rem, 28vw, 34rem);
+      aspect-ratio: 1;
+      border-radius: 999px;
+      background: radial-gradient(circle, color-mix(in oklch, var(--accent-2) 46%, transparent), transparent 66%);
+      opacity: 0.32;
+      filter: blur(6px);
+      transform: translate3d(0, 0, 0);
+      animation: auroraFloat 18s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+    }
+
+    .ambient span:nth-child(1) {
+      left: -4%;
+      top: 8%;
+      animation-duration: 20s;
+    }
+
+    .ambient span:nth-child(2) {
+      right: 2%;
+      top: -6%;
+      background: radial-gradient(circle, color-mix(in oklch, var(--accent) 44%, transparent), transparent 68%);
+      animation-duration: 24s;
+      animation-delay: -6s;
+    }
+
+    .ambient span:nth-child(3) {
+      left: 35%;
+      top: 24%;
+      width: clamp(13rem, 20vw, 25rem);
+      background: radial-gradient(circle, color-mix(in oklch, var(--accent-3) 42%, transparent), transparent 68%);
+      animation-duration: 17s;
+      animation-delay: -9s;
+    }
+
+    .ambient span:nth-child(4) {
+      right: 18%;
+      bottom: 4%;
+      width: clamp(14rem, 22vw, 28rem);
+      animation-duration: 26s;
+      animation-delay: -12s;
+    }
+
+    .ambient span:nth-child(5) {
+      left: 8%;
+      bottom: 14%;
+      width: clamp(11rem, 18vw, 22rem);
+      background: radial-gradient(circle, color-mix(in oklch, var(--good) 36%, transparent), transparent 68%);
+      animation-duration: 21s;
+      animation-delay: -4s;
+    }
+
+    .ambient span:nth-child(6) {
+      right: 42%;
+      top: 58%;
+      width: clamp(9rem, 16vw, 18rem);
+      background: radial-gradient(circle, color-mix(in oklch, var(--warn) 32%, transparent), transparent 70%);
+      animation-duration: 19s;
+      animation-delay: -7s;
+    }
+
+    .ambient span:nth-child(7) {
+      right: -5%;
+      bottom: 28%;
+      width: clamp(12rem, 19vw, 24rem);
+      background: radial-gradient(circle, color-mix(in oklch, var(--danger) 28%, transparent), transparent 70%);
+      animation-duration: 23s;
+      animation-delay: -11s;
+    }
+
+    .ambient span:nth-child(8) {
+      left: 45%;
+      bottom: -10%;
+      width: clamp(18rem, 30vw, 36rem);
+      background: radial-gradient(circle, color-mix(in oklch, var(--accent-3) 25%, transparent), transparent 72%);
+      animation-duration: 29s;
+      animation-delay: -14s;
+    }
+
+    .cursor-halo {
+      left: var(--pointer-x);
+      top: var(--pointer-y);
+      width: 420px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in oklch, var(--accent-2) 24%, transparent), transparent 67%);
+      mix-blend-mode: multiply;
+      opacity: 0.44;
+      transform: translate(-50%, -50%);
+      transition: opacity 180ms ease-out;
+    }
+
+    [data-theme="dark"] .cursor-halo {
+      mix-blend-mode: screen;
+      opacity: 0.32;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      animation: topbarDrop 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .brand-mark span:first-child {
+      animation: badgeSpin 10s linear infinite;
+    }
+
+    .hero-copy {
+      isolation: isolate;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at var(--card-x, 55%) var(--card-y, 30%), color-mix(in oklch, var(--accent-2) 18%, transparent), transparent 34%),
+        conic-gradient(from 180deg at 64% 38%, transparent, color-mix(in oklch, var(--accent) 16%, transparent), transparent 42%);
+      opacity: 0.86;
+      pointer-events: none;
+    }
+
+    .hero-copy> :not(.hero-orbit) {
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      text-shadow: 0 1px 0 color-mix(in oklch, var(--surface) 85%, transparent), 0 22px 44px color-mix(in oklch, var(--accent-3) 18%, transparent);
+      animation: titleSurge 7s ease-in-out infinite alternate;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      right: clamp(1rem, 8vw, 4rem);
+      bottom: clamp(1rem, 4vw, 2rem);
+      z-index: 1;
+      width: clamp(118px, 15vw, 184px);
+      aspect-ratio: 1;
+      border: 1px solid color-mix(in oklch, var(--accent-2) 42%, transparent);
+      border-radius: 50%;
+      opacity: 0.75;
+      animation: ringSpin 18s linear infinite;
+    }
+
+    .hero-orbit::before,
+    .hero-orbit::after {
+      content: "";
+      position: absolute;
+      border: 1px solid color-mix(in oklch, var(--accent) 32%, transparent);
+      border-radius: inherit;
+    }
+
+    .hero-orbit::before {
+      inset: 18%;
+      animation: ringSpin 11s linear infinite reverse;
+    }
+
+    .hero-orbit::after {
+      inset: 35%;
+      background: radial-gradient(circle, color-mix(in oklch, var(--accent-2) 28%, transparent), transparent 68%);
+    }
+
+    .hero-orbit span {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 28px color-mix(in oklch, var(--accent-2) 72%, transparent);
+    }
+
+    .hero-orbit span:nth-child(1) {
+      left: 50%;
+      top: -5px;
+    }
+
+    .hero-orbit span:nth-child(2) {
+      right: 8%;
+      bottom: 13%;
+      background: var(--accent);
+      box-shadow: 0 0 28px color-mix(in oklch, var(--accent) 72%, transparent);
+    }
+
+    .hero-orbit span:nth-child(3) {
+      left: 7%;
+      bottom: 20%;
+      background: var(--accent-3);
+      box-shadow: 0 0 28px color-mix(in oklch, var(--accent-3) 72%, transparent);
+    }
+
+    .signal-ribbon {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0.28rem;
+      width: min(310px, 62vw);
+      margin: -0.25rem 0 1.25rem;
+    }
+
+    .signal-ribbon span {
+      height: 22px;
+      border-radius: 999px;
+      background: color-mix(in oklch, var(--accent-2) 34%, var(--surface));
+      transform-origin: center bottom;
+      animation: signalPulse 1.7s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+      animation-delay: calc(var(--b) * 72ms);
+    }
+
+    .signal-ribbon span:nth-child(3n) {
+      background: color-mix(in oklch, var(--accent) 34%, var(--surface));
+    }
+
+    .signal-ribbon span:nth-child(4n) {
+      background: color-mix(in oklch, var(--accent-3) 32%, var(--surface));
+    }
+
+    .ops-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        linear-gradient(120deg, transparent 0 34%, oklch(92% 0.014 78 / 0.10) 45%, transparent 56%),
+        repeating-linear-gradient(to bottom, transparent 0 9px, oklch(92% 0.014 78 / 0.045) 10px);
+      transform: translateX(-70%);
+      animation: panelScan 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      pointer-events: none;
+    }
+
+    .node {
+      position: relative;
+      box-shadow: inset 0 0 0 1px oklch(92% 0.014 78 / 0.04);
+    }
+
+    .node.is-active {
+      border-color: oklch(86% 0.14 185 / 0.88);
+      background: oklch(86% 0.14 185 / 0.25);
+      box-shadow: 0 0 30px oklch(80% 0.14 185 / 0.35), inset 0 0 0 1px oklch(92% 0.014 78 / 0.18);
+    }
+
+    .deployment-stream {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 0.38rem;
+      margin: -0.35rem 0 1.1rem;
+      padding: 0.84rem;
+      border: 1px solid oklch(92% 0.014 78 / 0.14);
+      border-radius: 18px;
+      background: linear-gradient(135deg, oklch(92% 0.014 78 / 0.09), oklch(92% 0.014 78 / 0.04));
+      overflow: hidden;
+      font-family: var(--mono);
+    }
+
+    .deployment-stream::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(to bottom, transparent 0 7px, oklch(92% 0.014 78 / 0.05) 8px);
+      animation: scanLines 4s linear infinite;
+      pointer-events: none;
+    }
+
+    .deployment-stream span {
+      position: relative;
+      z-index: 1;
+      color: oklch(89% 0.08 184);
+      font-size: 0.75rem;
+      transform: translateY(0);
+      animation: terminalRise 2.9s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+      animation-delay: calc(var(--l) * 150ms);
+    }
+
+    .deployment-stream span::before {
+      content: "$ ";
+      color: oklch(84% 0.12 150);
+    }
+
+    .bar span {
+      box-shadow: 0 0 18px color-mix(in oklch, var(--good) 36%, transparent);
+    }
+
+    .proof-strip,
+    .stack-board,
+    .timeline-card,
+    .project-card,
+    .callout,
+    .contact-card {
+      isolation: isolate;
+    }
+
+    .proof-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proof-item::before {
+      content: "";
+      position: absolute;
+      left: -40%;
+      right: -40%;
+      bottom: 0;
+      height: 58px;
+      background: repeating-linear-gradient(115deg, transparent 0 18px, color-mix(in oklch, var(--accent-2) 22%, transparent) 19px 21px);
+      opacity: 0.5;
+      transform: translateX(-18%);
+      animation: waveSlide 8s linear infinite;
+      pointer-events: none;
+    }
+
+    .proof-item::after {
+      content: "";
+      position: absolute;
+      right: 16%;
+      top: 18%;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 24px color-mix(in oklch, var(--accent) 64%, transparent);
+      animation: sparkRoute 4.8s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate;
+    }
+
+    .proof-item>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stack-board {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stack-board::before {
+      content: "";
+      position: absolute;
+      inset: auto -12% -44% 32%;
+      height: 300px;
+      border-radius: 50%;
+      background: conic-gradient(from 90deg, color-mix(in oklch, var(--accent-2) 20%, transparent), transparent, color-mix(in oklch, var(--accent) 20%, transparent), transparent);
+      filter: blur(10px);
+      opacity: 0.74;
+      animation: ringSpin 20s linear infinite;
+      pointer-events: none;
+    }
+
+    .filter-rail,
+    .skill-cloud {
+      position: relative;
+      z-index: 1;
+    }
+
+    .skill-cloud::before {
+      content: "";
+      position: absolute;
+      inset: 8% 6%;
+      border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in oklch, var(--accent-3) 13%, transparent), transparent 68%);
+      animation: breathe 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .skill-pill {
+      position: relative;
+      z-index: 1;
+      animation: pillFloat 3.6s ease-in-out infinite alternate;
+      animation-delay: calc(var(--pill-index, 0) * 90ms);
+    }
+
+    .skill-pill:hover {
+      transform: translateY(-4px) scale(1.04);
+      background: color-mix(in oklch, var(--surface) 70%, var(--accent-2) 12%);
+    }
+
+    .skill-pill.is-muted {
+      animation: none;
+      transform: scale(0.96);
+    }
+
+    .timeline-dot::after {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: inherit;
+      border: 1px solid color-mix(in oklch, var(--accent) 28%, transparent);
+      animation: dotPing 2.4s ease-out infinite;
+    }
+
+    .timeline-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(110deg, transparent 0 30%, color-mix(in oklch, var(--accent-2) 14%, transparent), transparent 62%);
+      opacity: 0;
+      transform: translateX(-70%);
+      transition: opacity 220ms ease-out, transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    .timeline-card:hover::before {
+      opacity: 1;
+      transform: translateX(48%);
+    }
+
+    .timeline-card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: 0;
+      background: radial-gradient(circle at var(--card-x, 50%) var(--card-y, 40%), color-mix(in oklch, var(--accent-2) 24%, transparent), transparent 34%);
+      opacity: 0;
+      transition: opacity 220ms ease-out;
+      pointer-events: none;
+    }
+
+    .project-card:hover::before,
+    .project-card:focus-within::before {
+      opacity: 1;
+    }
+
+    .project-card::after {
+      z-index: 0;
+    }
+
+    .project-card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .callout {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .callout::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -92px;
+      bottom: -92px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, color-mix(in oklch, var(--accent-2) 34%, transparent), transparent, color-mix(in oklch, var(--accent) 30%, transparent));
+      animation: ringSpin 14s linear infinite;
+      opacity: 0.72;
+    }
+
+    .callout>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(circle at var(--card-x, 82%) var(--card-y, 30%), color-mix(in oklch, var(--accent) 18%, transparent), transparent 34%);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .contact-card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .button {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .button::before {
+      content: "";
+      position: absolute;
+      inset: -45% -25%;
+      background: linear-gradient(110deg, transparent 34%, color-mix(in oklch, var(--surface) 28%, transparent), transparent 66%);
+      opacity: 0.58;
+      transform: translateX(-80%) rotate(10deg);
+      transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    .button:hover::before,
+    .button:focus-visible::before {
+      transform: translateX(80%) rotate(10deg);
+    }
+
+    .tilt-card {
+      --rx: 0deg;
+      --ry: 0deg;
+      --lift: 0px;
+      transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift));
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .tilt-card:hover {
+      --lift: -5px;
+    }
+
+    .reveal.tilt-card:not(.is-visible) {
+      transform: translateY(24px);
+    }
+
+    .reveal.is-visible.tilt-card {
+      transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift));
+    }
+
+    @media (hover: none) {
+      .cursor-halo {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .ambient,
+      .cursor-halo,
+      .hero-orbit,
+      .signal-ribbon,
+      .deployment-stream {
+        display: none !important;
+      }
+    }
+
+    @media print {
+
+      .ambient,
+      .cursor-halo,
+      .hero-orbit,
+      .signal-ribbon,
+      .deployment-stream {
+        display: none !important;
+      }
+    }
+
+    @keyframes auroraFloat {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.92);
+      }
+
+      50% {
+        transform: translate3d(6vw, -4vh, 0) scale(1.05);
+      }
+
+      100% {
+        transform: translate3d(-4vw, 5vh, 0) scale(1.14);
+      }
+    }
+
+    @keyframes gridPan {
+      from {
+        background-position: 0 0, 0 0;
+      }
+
+      to {
+        background-position: 72px 72px, 72px 72px;
+      }
+    }
+
+    @keyframes topbarDrop {
+      from {
+        opacity: 0;
+        transform: translateY(-16px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes badgeSpin {
+
+      0%,
+      88% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes titleSurge {
+      from {
+        text-shadow: 0 1px 0 color-mix(in oklch, var(--surface) 85%, transparent), 0 18px 36px color-mix(in oklch, var(--accent-3) 12%, transparent);
+      }
+
+      to {
+        text-shadow: 0 1px 0 color-mix(in oklch, var(--surface) 85%, transparent), 0 28px 60px color-mix(in oklch, var(--accent-2) 24%, transparent);
+      }
+    }
+
+    @keyframes ringSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes signalPulse {
+      0% {
+        transform: scaleY(0.28);
+        opacity: 0.58;
+      }
+
+      100% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes panelScan {
+
+      0%,
+      18% {
+        transform: translateX(-78%);
+        opacity: 0;
+      }
+
+      35%,
+      65% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(74%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes scanLines {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 0 40px;
+      }
+    }
+
+    @keyframes terminalRise {
+      from {
+        transform: translateY(2px);
+        opacity: 0.68;
+      }
+
+      to {
+        transform: translateY(-2px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes waveSlide {
+      from {
+        transform: translateX(-18%);
+      }
+
+      to {
+        transform: translateX(18%);
+      }
+    }
+
+    @keyframes sparkRoute {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.8);
+      }
+
+      45% {
+        transform: translate3d(-52px, 34px, 0) scale(1.25);
+      }
+
+      100% {
+        transform: translate3d(16px, 74px, 0) scale(0.92);
+      }
+    }
+
+    @keyframes pillFloat {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-5px);
+      }
+    }
+
+    @keyframes dotPing {
+      from {
+        transform: scale(0.7);
+        opacity: 0.72;
+      }
+
+      to {
+        transform: scale(1.45);
+        opacity: 0;
+      }
+    }
+
     footer {
       display: flex;
       align-items: center;
@@ -1006,27 +1764,51 @@
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--good) 35%, transparent); }
-      100% { box-shadow: 0 0 0 12px color-mix(in oklch, var(--good) 0%, transparent); }
+      0% {
+        box-shadow: 0 0 0 0 color-mix(in oklch, var(--good) 35%, transparent);
+      }
+
+      100% {
+        box-shadow: 0 0 0 12px color-mix(in oklch, var(--good) 0%, transparent);
+      }
     }
 
     @keyframes drift {
-      from { transform: translate3d(0, 0, 0) rotate(0deg); }
-      to { transform: translate3d(-24px, 18px, 0) rotate(18deg); }
+      from {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+      }
+
+      to {
+        transform: translate3d(-24px, 18px, 0) rotate(18deg);
+      }
     }
 
     @keyframes breathe {
-      from { transform: scale(0.9) translateY(0); opacity: 0.78; }
-      to { transform: scale(1.08) translateY(-16px); opacity: 1; }
+      from {
+        transform: scale(0.9) translateY(0);
+        opacity: 0.78;
+      }
+
+      to {
+        transform: scale(1.08) translateY(-16px);
+        opacity: 1;
+      }
     }
 
     @keyframes nodeUp {
-      to { transform: scale(1); }
+      to {
+        transform: scale(1);
+      }
     }
 
     @keyframes fillBar {
-      from { transform: scaleX(0); }
-      to { transform: scaleX(1); }
+      from {
+        transform: scaleX(0);
+      }
+
+      to {
+        transform: scaleX(1);
+      }
     }
 
     @media (max-width: 960px) {
@@ -1180,9 +1962,21 @@
     }
   </style>
 </head>
+
 <body>
   <a class="skip-link" href="#main">Skip to resume content</a>
   <div class="scroll-meter" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="cursor-halo" aria-hidden="true"></div>
   <div class="page-shell">
     <header class="topbar" aria-label="Primary navigation">
       <a class="brand-mark" href="#top" aria-label="Jordan Vale resume home">
@@ -1205,9 +1999,18 @@
     <main id="main">
       <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-copy reveal">
-          <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Senior DevOps Engineer, platform reliability specialist</p>
+          <div class="hero-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Senior DevOps Engineer, platform reliability
+            specialist</p>
           <h1 id="hero-title">Jordan Vale</h1>
-          <p class="role-line">I build resilient cloud platforms for product teams that need <strong>speed, traceability, and calm operations</strong>. Kubernetes, Terraform, GitOps, CI/CD, observability, incident response, and security automation.</p>
+          <div class="signal-ribbon" aria-hidden="true"><span style="--b:1"></span><span style="--b:2"></span><span
+              style="--b:3"></span><span style="--b:4"></span><span style="--b:5"></span><span
+              style="--b:6"></span><span style="--b:7"></span><span style="--b:8"></span><span
+              style="--b:9"></span><span style="--b:10"></span><span style="--b:11"></span><span style="--b:12"></span>
+          </div>
+          <p class="role-line">I build resilient cloud platforms for product teams that need <strong>speed,
+              traceability, and calm operations</strong>. Kubernetes, Terraform, GitOps, CI/CD, observability, incident
+            response, and security automation.</p>
           <div class="hero-cta" aria-label="Resume actions">
             <a class="button primary" href="mailto:jordan.vale@example.com">Book an interview</a>
             <button class="button secondary" type="button" data-copy="jordan.vale@example.com">Copy email</button>
@@ -1240,10 +2043,23 @@
             <span class="node" style="--i:12"></span>
           </div>
           <div class="service-list" aria-label="Service health indicators">
-            <div class="service-row"><span>deploy</span><div class="bar"><span style="--w:92%"></span></div><strong>92%</strong></div>
-            <div class="service-row"><span>slo</span><div class="bar"><span style="--w:99%"></span></div><strong>99%</strong></div>
-            <div class="service-row"><span>cost</span><div class="bar"><span style="--w:74%"></span></div><strong>74%</strong></div>
-            <div class="service-row"><span>risk</span><div class="bar"><span style="--w:88%"></span></div><strong>88%</strong></div>
+            <div class="service-row"><span>deploy</span>
+              <div class="bar"><span style="--w:92%"></span></div><strong>92%</strong>
+            </div>
+            <div class="service-row"><span>slo</span>
+              <div class="bar"><span style="--w:99%"></span></div><strong>99%</strong>
+            </div>
+            <div class="service-row"><span>cost</span>
+              <div class="bar"><span style="--w:74%"></span></div><strong>74%</strong>
+            </div>
+            <div class="service-row"><span>risk</span>
+              <div class="bar"><span style="--w:88%"></span></div><strong>88%</strong>
+            </div>
+          </div>
+          <div class="deployment-stream" aria-hidden="true">
+            <span style="--l:1">terraform plan: 0 drift detected</span>
+            <span style="--l:2">canary gate: p95 latency stable</span>
+            <span style="--l:3">policy check: privileged pods blocked</span>
           </div>
           <div class="panel-foot" aria-label="Snapshot metrics">
             <div><strong>12</strong><span>production clusters owned</span></div>
@@ -1259,13 +2075,15 @@
             <span class="kicker">Measured impact</span>
             <h2 id="impact-title">Reliability work with numbers attached.</h2>
           </div>
-          <p>Every program tied deployment speed, incident load, cost, or audit confidence to a measurable business result.</p>
+          <p>Every program tied deployment speed, incident load, cost, or audit confidence to a measurable business
+            result.</p>
         </div>
         <div class="proof-strip" aria-label="Achievement statistics">
           <article class="proof-item">
             <strong><span data-count="99.99" data-decimals="2">0</span>%</strong>
             <span>payment API availability</span>
-            <p>Protected critical workloads through progressive delivery, error budgets, and multi-zone recovery drills.</p>
+            <p>Protected critical workloads through progressive delivery, error budgets, and multi-zone recovery drills.
+            </p>
           </article>
           <article class="proof-item">
             <strong><span data-count="42">0</span>%</strong>
@@ -1280,7 +2098,8 @@
           <article class="proof-item">
             <strong><span data-count="28">0</span>m</strong>
             <span>pipeline time saved monthly</span>
-            <p>Removed redundant builds, added remote caching, parallelized test suites, and automated rollback gates.</p>
+            <p>Removed redundant builds, added remote caching, parallelized test suites, and automated rollback gates.
+            </p>
           </article>
         </div>
       </section>
@@ -1296,10 +2115,14 @@
         <div class="stack-board">
           <div class="filter-rail" role="group" aria-label="Filter technical skills">
             <button class="filter-button" type="button" data-skill-filter="all" aria-pressed="true">All systems</button>
-            <button class="filter-button" type="button" data-skill-filter="platform" aria-pressed="false">Platform runtime</button>
-            <button class="filter-button" type="button" data-skill-filter="iac" aria-pressed="false">Infrastructure as code</button>
-            <button class="filter-button" type="button" data-skill-filter="delivery" aria-pressed="false">Delivery flow</button>
-            <button class="filter-button" type="button" data-skill-filter="security" aria-pressed="false">Security and observability</button>
+            <button class="filter-button" type="button" data-skill-filter="platform" aria-pressed="false">Platform
+              runtime</button>
+            <button class="filter-button" type="button" data-skill-filter="iac" aria-pressed="false">Infrastructure as
+              code</button>
+            <button class="filter-button" type="button" data-skill-filter="delivery" aria-pressed="false">Delivery
+              flow</button>
+            <button class="filter-button" type="button" data-skill-filter="security" aria-pressed="false">Security and
+              observability</button>
           </div>
           <div class="skill-cloud" aria-live="polite">
             <span class="skill-pill" data-skill-group="platform">Kubernetes</span>
@@ -1338,7 +2161,8 @@
             <span class="kicker">Experience</span>
             <h2 id="experience-title">Roles that turned infrastructure into leverage.</h2>
           </div>
-          <p>Focused on reliable abstractions, paved roads, and operating models that reduce cognitive load for product engineering.</p>
+          <p>Focused on reliable abstractions, paved roads, and operating models that reduce cognitive load for product
+            engineering.</p>
         </div>
         <div class="timeline">
           <article class="timeline-item">
@@ -1348,13 +2172,17 @@
                 <h3>Senior DevOps Engineer, NimbusGrid Systems</h3>
                 <p class="timeline-meta">2021 to present · Cloud platform, Kubernetes, regulated SaaS</p>
                 <ul>
-                  <li>Owned multi-account AWS platform with Terraform, centralized policy checks, service catalog templates, and GitOps promotion flow.</li>
-                  <li>Designed incident command playbooks that cut paging noise by 36% and reduced unresolved severity-two follow-ups by 58%.</li>
-                  <li>Introduced progressive delivery for 70+ services with canary analysis, automated rollback, and service-level objective dashboards.</li>
+                  <li>Owned multi-account AWS platform with Terraform, centralized policy checks, service catalog
+                    templates, and GitOps promotion flow.</li>
+                  <li>Designed incident command playbooks that cut paging noise by 36% and reduced unresolved
+                    severity-two follow-ups by 58%.</li>
+                  <li>Introduced progressive delivery for 70+ services with canary analysis, automated rollback, and
+                    service-level objective dashboards.</li>
                 </ul>
               </div>
               <div class="timeline-tags" aria-label="Role tools">
-                <span class="tag">AWS</span><span class="tag">EKS</span><span class="tag">Terraform</span><span class="tag">Argo CD</span><span class="tag">Prometheus</span><span class="tag">Vault</span>
+                <span class="tag">AWS</span><span class="tag">EKS</span><span class="tag">Terraform</span><span
+                  class="tag">Argo CD</span><span class="tag">Prometheus</span><span class="tag">Vault</span>
               </div>
             </div>
           </article>
@@ -1365,13 +2193,17 @@
                 <h3>Platform Engineer, AtlasPay</h3>
                 <p class="timeline-meta">2018 to 2021 · Payments, compliance, high-throughput APIs</p>
                 <ul>
-                  <li>Built reusable CI templates and deployment guardrails that moved release cadence from weekly windows to daily self-service releases.</li>
-                  <li>Led SOC 2 evidence automation for infrastructure changes, access reviews, vulnerability scans, and production deployment records.</li>
-                  <li>Migrated legacy workloads to containerized services with blue-green deployment and zero planned customer downtime.</li>
+                  <li>Built reusable CI templates and deployment guardrails that moved release cadence from weekly
+                    windows to daily self-service releases.</li>
+                  <li>Led SOC 2 evidence automation for infrastructure changes, access reviews, vulnerability scans, and
+                    production deployment records.</li>
+                  <li>Migrated legacy workloads to containerized services with blue-green deployment and zero planned
+                    customer downtime.</li>
                 </ul>
               </div>
               <div class="timeline-tags" aria-label="Role tools">
-                <span class="tag">GitLab CI</span><span class="tag">Docker</span><span class="tag">KMS</span><span class="tag">Datadog</span><span class="tag">Ansible</span><span class="tag">PostgreSQL</span>
+                <span class="tag">GitLab CI</span><span class="tag">Docker</span><span class="tag">KMS</span><span
+                  class="tag">Datadog</span><span class="tag">Ansible</span><span class="tag">PostgreSQL</span>
               </div>
             </div>
           </article>
@@ -1382,13 +2214,17 @@
                 <h3>Cloud Automation Engineer, ByteFoundry</h3>
                 <p class="timeline-meta">2016 to 2018 · Managed cloud, automation, internal developer tools</p>
                 <ul>
-                  <li>Automated environment provisioning, hardened Linux images, backup verification, and configuration drift detection.</li>
-                  <li>Wrote operational tooling that converted repetitive support tasks into audited self-service workflows.</li>
-                  <li>Partnered with application teams to define readiness checks, deployment checklists, and escalation paths.</li>
+                  <li>Automated environment provisioning, hardened Linux images, backup verification, and configuration
+                    drift detection.</li>
+                  <li>Wrote operational tooling that converted repetitive support tasks into audited self-service
+                    workflows.</li>
+                  <li>Partnered with application teams to define readiness checks, deployment checklists, and escalation
+                    paths.</li>
                 </ul>
               </div>
               <div class="timeline-tags" aria-label="Role tools">
-                <span class="tag">Python</span><span class="tag">Packer</span><span class="tag">Linux</span><span class="tag">Jenkins</span><span class="tag">Bash</span><span class="tag">Nagios</span>
+                <span class="tag">Python</span><span class="tag">Packer</span><span class="tag">Linux</span><span
+                  class="tag">Jenkins</span><span class="tag">Bash</span><span class="tag">Nagios</span>
               </div>
             </div>
           </article>
@@ -1401,55 +2237,67 @@
             <span class="kicker">Selected projects</span>
             <h2 id="projects-title">Visible wins beyond the job title.</h2>
           </div>
-          <p>Each project combined technical build work with adoption, documentation, and measurable operating outcomes.</p>
+          <p>Each project combined technical build work with adoption, documentation, and measurable operating outcomes.
+          </p>
         </div>
         <div class="project-toolbar" role="group" aria-label="Filter projects">
           <button class="project-filter" type="button" data-project-filter="all" aria-pressed="true">All</button>
-          <button class="project-filter" type="button" data-project-filter="reliability" aria-pressed="false">Reliability</button>
-          <button class="project-filter" type="button" data-project-filter="automation" aria-pressed="false">Automation</button>
-          <button class="project-filter" type="button" data-project-filter="security" aria-pressed="false">Security</button>
+          <button class="project-filter" type="button" data-project-filter="reliability"
+            aria-pressed="false">Reliability</button>
+          <button class="project-filter" type="button" data-project-filter="automation"
+            aria-pressed="false">Automation</button>
+          <button class="project-filter" type="button" data-project-filter="security"
+            aria-pressed="false">Security</button>
           <button class="project-filter" type="button" data-project-filter="cost" aria-pressed="false">Cost</button>
         </div>
         <div class="project-grid">
           <article class="project-card" data-project-tags="reliability automation" data-code="SLO">
             <h3>SLO command center</h3>
-            <p>Built a shared reliability workspace for golden signals, error budgets, deployment correlation, and on-call readiness.</p>
+            <p>Built a shared reliability workspace for golden signals, error budgets, deployment correlation, and
+              on-call readiness.</p>
             <ul>
               <li>Reduced noisy alerts from 1,140 to 410 per month.</li>
               <li>Raised ownership coverage for tier-one services to 100%.</li>
               <li>Created review ritual that tied product priorities to error budgets.</li>
             </ul>
-            <div class="project-foot"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">OpenTelemetry</span></div>
+            <div class="project-foot"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span
+                class="tag">OpenTelemetry</span></div>
           </article>
           <article class="project-card" data-project-tags="automation security" data-code="GIT">
             <h3>GitOps compliance runway</h3>
-            <p>Replaced manual cluster changes with signed pull requests, admission policy, drift alerts, and automated evidence capture.</p>
+            <p>Replaced manual cluster changes with signed pull requests, admission policy, drift alerts, and automated
+              evidence capture.</p>
             <ul>
               <li>Moved 94% of cluster mutations to reviewed Git workflows.</li>
               <li>Cut audit evidence prep from three weeks to two days.</li>
               <li>Blocked privileged workload patterns before deployment.</li>
             </ul>
-            <div class="project-foot"><span class="tag">Argo CD</span><span class="tag">OPA</span><span class="tag">Vault</span></div>
+            <div class="project-foot"><span class="tag">Argo CD</span><span class="tag">OPA</span><span
+                class="tag">Vault</span></div>
           </article>
           <article class="project-card" data-project-tags="cost automation" data-code="FIN">
             <h3>Cloud cost telemetry</h3>
-            <p>Created team-level cloud spend telemetry with actionable rightsizing, idle resource cleanup, and forecast alerts.</p>
+            <p>Created team-level cloud spend telemetry with actionable rightsizing, idle resource cleanup, and forecast
+              alerts.</p>
             <ul>
               <li>Saved $1.2M annualized without reducing platform capacity.</li>
               <li>Gave every squad cost ownership in weekly engineering review.</li>
               <li>Automated cleanup for preview environments and orphaned volumes.</li>
             </ul>
-            <div class="project-foot"><span class="tag">AWS CUR</span><span class="tag">Lambda</span><span class="tag">Terraform</span></div>
+            <div class="project-foot"><span class="tag">AWS CUR</span><span class="tag">Lambda</span><span
+                class="tag">Terraform</span></div>
           </article>
           <article class="project-card" data-project-tags="security reliability" data-code="SEC">
             <h3>Container supply-chain shield</h3>
-            <p>Implemented image provenance, vulnerability gates, runtime threat detection, and exception workflows that developers could actually use.</p>
+            <p>Implemented image provenance, vulnerability gates, runtime threat detection, and exception workflows that
+              developers could actually use.</p>
             <ul>
               <li>Reached 97% signed image coverage across production services.</li>
               <li>Cut critical vulnerability exposure window from 19 days to 4 days.</li>
               <li>Integrated security findings directly into delivery pipelines.</li>
             </ul>
-            <div class="project-foot"><span class="tag">Trivy</span><span class="tag">Cosign</span><span class="tag">Falco</span></div>
+            <div class="project-foot"><span class="tag">Trivy</span><span class="tag">Cosign</span><span
+                class="tag">Falco</span></div>
           </article>
         </div>
       </section>
@@ -1460,12 +2308,14 @@
             <span class="kicker">Credentials</span>
             <h2 id="credentials-title">Certified where it supports execution.</h2>
           </div>
-          <p>Certifications are paired with repeatable delivery systems, not treated as substitutes for production judgement.</p>
+          <p>Certifications are paired with repeatable delivery systems, not treated as substitutes for production
+            judgement.</p>
         </div>
         <div class="cert-layout">
           <aside class="callout">
             <strong>Operator mindset.</strong>
-            <p>Own the lifecycle: design the platform, document the path, measure behavior, rehearse failure, improve the loop.</p>
+            <p>Own the lifecycle: design the platform, document the path, measure behavior, rehearse failure, improve
+              the loop.</p>
           </aside>
           <div class="cert-list" aria-label="Certifications and education">
             <article class="cert-item">
@@ -1497,7 +2347,8 @@
           <div>
             <span class="kicker">Contact</span>
             <h2 id="contact-title">Need a platform engineer who reduces chaos?</h2>
-            <p>Send a note with the platform, team size, and reliability challenge. I will respond with the first questions I would ask in a technical discovery call.</p>
+            <p>Send a note with the platform, team size, and reliability challenge. I will respond with the first
+              questions I would ask in a technical discovery call.</p>
           </div>
           <div class="contact-actions">
             <a class="button primary" href="mailto:jordan.vale@example.com">jordan.vale@example.com</a>
@@ -1522,6 +2373,10 @@
     const scrollMeter = document.querySelector('.scroll-meter');
     const toast = document.querySelector('.toast');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canUsePointerEffects = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const tiltTargets = document.querySelectorAll('.hero-copy, .ops-panel, .proof-item, .timeline-card, .project-card, .callout, .contact-card');
+    const nodes = document.querySelectorAll('.node');
+    const deploymentStream = document.querySelector('.deployment-stream');
 
     const savedTheme = localStorage.getItem('resume-theme');
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -1553,6 +2408,8 @@
 
     const skillButtons = document.querySelectorAll('[data-skill-filter]');
     const skillPills = document.querySelectorAll('[data-skill-group]');
+
+    skillPills.forEach((pill, index) => pill.style.setProperty('--pill-index', index));
 
     skillButtons.forEach((button) => {
       button.addEventListener('click', () => {
@@ -1595,6 +2452,67 @@
       requestAnimationFrame(tick);
     };
 
+    if (!prefersReducedMotion) {
+      let pointerTicking = false;
+      window.addEventListener('pointermove', (event) => {
+        if (pointerTicking) return;
+        pointerTicking = true;
+        requestAnimationFrame(() => {
+          root.style.setProperty('--pointer-x', `${event.clientX}px`);
+          root.style.setProperty('--pointer-y', `${event.clientY}px`);
+          pointerTicking = false;
+        });
+      }, { passive: true });
+    }
+
+    if (!prefersReducedMotion && canUsePointerEffects) {
+      tiltTargets.forEach((target) => {
+        target.classList.add('tilt-card');
+        target.addEventListener('pointermove', (event) => {
+          const rect = target.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) - 0.5;
+          const y = ((event.clientY - rect.top) / rect.height) - 0.5;
+          target.style.setProperty('--ry', `${x * 7}deg`);
+          target.style.setProperty('--rx', `${y * -7}deg`);
+          target.style.setProperty('--card-x', `${(x + 0.5) * 100}%`);
+          target.style.setProperty('--card-y', `${(y + 0.5) * 100}%`);
+        });
+        target.addEventListener('pointerleave', () => {
+          target.style.setProperty('--rx', '0deg');
+          target.style.setProperty('--ry', '0deg');
+          target.style.setProperty('--card-x', '50%');
+          target.style.setProperty('--card-y', '40%');
+        });
+      });
+    }
+
+    if (!prefersReducedMotion && nodes.length) {
+      window.setInterval(() => {
+        nodes.forEach((node, index) => {
+          node.classList.toggle('is-active', (Date.now() / 700 + index) % 5 < 1);
+        });
+      }, 900);
+    }
+
+    if (!prefersReducedMotion && deploymentStream) {
+      const streamEvents = [
+        'terraform apply: service mesh policy synced',
+        'canary gate: error budget remains healthy',
+        'vault rotation: database lease renewed',
+        'argocd sync: production wave completed',
+        'trivy scan: critical vulnerabilities blocked',
+        'otel trace: checkout latency recovered'
+      ];
+      let streamIndex = 0;
+      window.setInterval(() => {
+        const firstLine = deploymentStream.querySelector('span');
+        if (!firstLine) return;
+        firstLine.textContent = streamEvents[streamIndex % streamEvents.length];
+        deploymentStream.append(firstLine);
+        streamIndex += 1;
+      }, 2200);
+    }
+
     const revealItems = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries, entryObserver) => {
       entries.forEach((entry) => {
@@ -1628,4 +2546,5 @@
     }
   </script>
 </body>
+
 </html>
