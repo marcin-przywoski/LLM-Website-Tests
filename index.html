@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A stylish single-file DevOps engineer resume with technical achievements, metrics, projects, and interactive UX patterns.">
+  <title>DevOps Engineer Resume | Jordan Vale</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: oklch(96.5% 0.012 77);
+      --surface: oklch(99% 0.009 77);
+      --surface-2: oklch(92.5% 0.018 82);
+      --ink: oklch(24% 0.045 252);
+      --muted: oklch(48% 0.04 252);
+      --soft: oklch(65% 0.035 252);
+      --line: oklch(84% 0.022 77);
+      --accent: oklch(55% 0.13 34);
+      --accent-2: oklch(53% 0.12 185);
+      --accent-3: oklch(59% 0.11 276);
+      --good: oklch(54% 0.12 150);
+      --warn: oklch(66% 0.13 82);
+      --danger: oklch(56% 0.15 24);
+      --shadow: oklch(29% 0.04 252 / 0.14);
+      --shadow-soft: oklch(29% 0.04 252 / 0.08);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+      --max: 1180px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: oklch(18% 0.025 252);
+      --surface: oklch(22% 0.028 252);
+      --surface-2: oklch(27% 0.032 252);
+      --ink: oklch(92% 0.014 78);
+      --muted: oklch(73% 0.025 78);
+      --soft: oklch(61% 0.03 78);
+      --line: oklch(36% 0.035 252);
+      --accent: oklch(67% 0.14 38);
+      --accent-2: oklch(68% 0.12 184);
+      --accent-3: oklch(72% 0.12 276);
+      --good: oklch(71% 0.13 151);
+      --warn: oklch(76% 0.13 82);
+      --danger: oklch(70% 0.15 24);
+      --shadow: oklch(8% 0.03 252 / 0.36);
+      --shadow-soft: oklch(8% 0.03 252 / 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 8%, oklch(79% 0.13 185 / 0.22), transparent 31rem),
+        radial-gradient(circle at 88% 4%, oklch(72% 0.15 38 / 0.21), transparent 28rem),
+        linear-gradient(135deg, var(--bg), var(--surface-2));
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.45;
+      background-image:
+        linear-gradient(to right, color-mix(in oklch, var(--line) 72%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in oklch, var(--line) 72%, transparent) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+      z-index: -2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 100;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      color: var(--surface);
+      background: var(--ink);
+      transform: translateY(-130%);
+      transition: transform 220ms ease-out;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .scroll-meter {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 90;
+      height: 4px;
+      width: 100%;
+      transform-origin: left center;
+      transform: scaleX(0);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+    }
+
+    .page-shell {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 26px;
+      padding: 0.7rem;
+      border: 1px solid color-mix(in oklch, var(--line) 86%, transparent);
+      border-radius: 999px;
+      background: color-mix(in oklch, var(--surface) 88%, transparent);
+      box-shadow: 0 18px 46px var(--shadow-soft);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      min-width: max-content;
+      padding: 0.35rem 0.85rem 0.35rem 0.45rem;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark span:first-child {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: var(--surface);
+      background: var(--ink);
+      box-shadow: inset 0 -10px 18px oklch(100% 0 0 / 0.12);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a,
+    .theme-toggle,
+    .print-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.68rem 0.9rem;
+      color: var(--muted);
+      background: transparent;
+      transition: color 180ms ease-out, background 180ms ease-out, transform 180ms ease-out;
+    }
+
+    .nav-links a:hover,
+    .theme-toggle:hover,
+    .print-button:hover,
+    .nav-links a:focus-visible,
+    .theme-toggle:focus-visible,
+    .print-button:focus-visible {
+      color: var(--ink);
+      background: color-mix(in oklch, var(--accent-2) 12%, transparent);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      min-width: max-content;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      gap: clamp(1.25rem, 4vw, 3.5rem);
+      align-items: stretch;
+      padding: clamp(1rem, 3vw, 2rem) 0 clamp(2rem, 4vw, 3.75rem);
+    }
+
+    .hero-copy {
+      position: relative;
+      padding: clamp(1.5rem, 5vw, 4.4rem) clamp(1.2rem, 5vw, 4.2rem);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, color-mix(in oklch, var(--surface) 95%, var(--accent) 5%), var(--surface)),
+        var(--surface);
+      box-shadow: 0 28px 80px var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -112px;
+      top: -120px;
+      border-radius: 42% 58% 57% 43%;
+      background: color-mix(in oklch, var(--accent) 23%, transparent);
+      filter: blur(2px);
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      width: fit-content;
+      margin: 0 0 1.4rem;
+      padding: 0.42rem 0.72rem;
+      border: 1px solid color-mix(in oklch, var(--accent-2) 45%, var(--line));
+      border-radius: 999px;
+      color: var(--muted);
+      background: color-mix(in oklch, var(--accent-2) 10%, transparent);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .pulse {
+      width: 0.58rem;
+      height: 0.58rem;
+      border-radius: 50%;
+      background: var(--good);
+      box-shadow: 0 0 0 8px color-mix(in oklch, var(--good) 20%, transparent);
+      animation: pulse 1.9s ease-out infinite;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 11ch;
+      margin-bottom: 1.1rem;
+      font-size: clamp(3.2rem, 8vw, 7.4rem);
+      line-height: 0.88;
+      letter-spacing: -0.075em;
+    }
+
+    .role-line {
+      max-width: 66ch;
+      margin-bottom: 1.6rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.1vw, 1.38rem);
+    }
+
+    .role-line strong {
+      color: var(--ink);
+    }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.58rem;
+      min-height: 46px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0.78rem 1.02rem;
+      font-weight: 800;
+      transition: transform 180ms ease-out, box-shadow 180ms ease-out, background 180ms ease-out, border-color 180ms ease-out;
+    }
+
+    .button.primary {
+      color: var(--surface);
+      background: var(--ink);
+      box-shadow: 0 16px 34px var(--shadow-soft);
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      border-color: var(--line);
+      background: color-mix(in oklch, var(--surface) 82%, transparent);
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      outline: none;
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px var(--shadow-soft);
+    }
+
+    .availability {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .availability li {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.48rem 0.65rem;
+      border-radius: 999px;
+      color: var(--muted);
+      background: color-mix(in oklch, var(--surface-2) 72%, transparent);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .ops-panel {
+      position: relative;
+      display: grid;
+      align-content: space-between;
+      min-height: 100%;
+      padding: clamp(1.05rem, 2.5vw, 1.6rem);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--ink);
+      color: var(--surface);
+      box-shadow: 0 28px 80px var(--shadow);
+      overflow: hidden;
+    }
+
+    .ops-panel::before {
+      content: "";
+      position: absolute;
+      inset: auto -18% -26% 20%;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, oklch(74% 0.14 185 / 0.38), transparent 70%);
+      animation: breathe 7s ease-in-out infinite alternate;
+    }
+
+    .panel-head,
+    .panel-foot,
+    .node-map,
+    .service-list {
+      position: relative;
+      z-index: 1;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .panel-title {
+      margin: 0;
+      color: color-mix(in oklch, var(--surface) 86%, transparent);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .panel-state {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.38rem 0.58rem;
+      border-radius: 999px;
+      color: oklch(90% 0.12 150);
+      background: oklch(90% 0.12 150 / 0.11);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .node-map {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.56rem;
+      margin-bottom: 2rem;
+    }
+
+    .node {
+      aspect-ratio: 1;
+      border: 1px solid oklch(92% 0.014 78 / 0.17);
+      border-radius: 14px;
+      background: oklch(92% 0.014 78 / 0.08);
+      transform: scale(0.92);
+      animation: nodeUp 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: calc(var(--i) * 70ms);
+    }
+
+    .node.hot {
+      border-color: oklch(77% 0.13 38 / 0.62);
+      background: oklch(77% 0.13 38 / 0.18);
+    }
+
+    .node.good {
+      border-color: oklch(80% 0.13 150 / 0.56);
+      background: oklch(80% 0.13 150 / 0.16);
+    }
+
+    .service-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 90px minmax(0, 1fr) auto;
+      gap: 0.8rem;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: oklch(92% 0.014 78 / 0.13);
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      width: var(--w);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent-2), var(--good));
+      transform-origin: left center;
+      animation: fillBar 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .panel-foot {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.7rem;
+    }
+
+    .panel-foot div {
+      padding: 0.9rem;
+      border: 1px solid oklch(92% 0.014 78 / 0.14);
+      border-radius: 18px;
+      background: oklch(92% 0.014 78 / 0.08);
+    }
+
+    .panel-foot strong {
+      display: block;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .panel-foot span {
+      color: oklch(92% 0.014 78 / 0.68);
+      font-size: 0.76rem;
+    }
+
+    .section {
+      margin: clamp(2.2rem, 5vw, 4.8rem) 0;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 0.75fr) minmax(260px, 0.45fr);
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: clamp(1.3rem, 3vw, 2rem);
+    }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 0.55rem;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(2rem, 4vw, 4.3rem);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .proof-strip {
+      display: grid;
+      grid-template-columns: 1.05fr 0.75fr 1fr 0.8fr;
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--line);
+      box-shadow: 0 22px 60px var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .proof-item {
+      min-height: 190px;
+      padding: clamp(1rem, 2.5vw, 1.5rem);
+      background: var(--surface);
+    }
+
+    .proof-item:nth-child(2) {
+      background: color-mix(in oklch, var(--accent-2) 9%, var(--surface));
+    }
+
+    .proof-item:nth-child(3) {
+      background: color-mix(in oklch, var(--accent) 9%, var(--surface));
+    }
+
+    .proof-item strong {
+      display: block;
+      margin-bottom: 0.55rem;
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 0.86;
+      letter-spacing: -0.08em;
+    }
+
+    .proof-item span {
+      display: block;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .proof-item p {
+      margin: 1rem 0 0;
+      color: var(--soft);
+      font-size: 0.94rem;
+    }
+
+    .stack-board {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 1rem;
+      padding: clamp(1rem, 2.5vw, 1.2rem);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: 0 22px 60px var(--shadow-soft);
+    }
+
+    .filter-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      padding: 0.5rem;
+      border-radius: var(--radius-lg);
+      background: color-mix(in oklch, var(--surface-2) 64%, transparent);
+    }
+
+    .filter-button,
+    .project-filter {
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0.78rem 0.9rem;
+      color: var(--muted);
+      background: transparent;
+      text-align: left;
+      font-weight: 800;
+      transition: background 180ms ease-out, color 180ms ease-out, border-color 180ms ease-out, transform 180ms ease-out;
+    }
+
+    .filter-button:hover,
+    .project-filter:hover,
+    .filter-button:focus-visible,
+    .project-filter:focus-visible {
+      color: var(--ink);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .filter-button[aria-pressed="true"],
+    .project-filter[aria-pressed="true"] {
+      color: var(--ink);
+      border-color: var(--line);
+      background: var(--surface);
+      box-shadow: 0 12px 24px var(--shadow-soft);
+    }
+
+    .skill-cloud {
+      display: flex;
+      align-content: flex-start;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      min-height: 280px;
+      padding: clamp(0.8rem, 2vw, 1.25rem);
+    }
+
+    .skill-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      height: fit-content;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.62rem 0.78rem;
+      background: color-mix(in oklch, var(--surface) 88%, transparent);
+      box-shadow: 0 10px 18px var(--shadow-soft);
+      font-weight: 800;
+      transition: opacity 180ms ease-out, transform 180ms ease-out, background 180ms ease-out;
+    }
+
+    .skill-pill::before {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: var(--accent-2);
+    }
+
+    .skill-pill[data-skill-group="iac"]::before {
+      background: var(--accent);
+    }
+
+    .skill-pill[data-skill-group="delivery"]::before {
+      background: var(--accent-3);
+    }
+
+    .skill-pill[data-skill-group="security"]::before {
+      background: var(--danger);
+    }
+
+    .skill-pill.is-muted {
+      opacity: 0.22;
+      transform: scale(0.96);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0.6rem;
+      bottom: 0.6rem;
+      left: 1.05rem;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 2.1rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .timeline-dot {
+      position: relative;
+      z-index: 1;
+      width: 2.1rem;
+      height: 2.1rem;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: inset 0 0 0 8px color-mix(in oklch, var(--accent) 13%, transparent);
+    }
+
+    .timeline-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 0.45fr);
+      gap: 1.2rem;
+      padding: clamp(1rem, 2.5vw, 1.45rem);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: 0 14px 38px var(--shadow-soft);
+    }
+
+    .timeline-card h3 {
+      margin-bottom: 0.35rem;
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      letter-spacing: -0.025em;
+    }
+
+    .timeline-meta {
+      margin-bottom: 0.9rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+    }
+
+    .timeline-card ul,
+    .project-card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+
+    .timeline-card li + li,
+    .project-card li + li {
+      margin-top: 0.45rem;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: start;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.42rem 0.55rem;
+      color: var(--muted);
+      background: color-mix(in oklch, var(--surface-2) 68%, transparent);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .project-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+    }
+
+    .project-card {
+      position: relative;
+      min-height: 290px;
+      padding: clamp(1.1rem, 2.7vw, 1.55rem);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: 0 18px 48px var(--shadow-soft);
+      overflow: hidden;
+      transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease-out, box-shadow 220ms ease-out;
+    }
+
+    .project-card:nth-child(2) {
+      margin-top: 2.4rem;
+      background: color-mix(in oklch, var(--accent-2) 8%, var(--surface));
+    }
+
+    .project-card:nth-child(3) {
+      background: color-mix(in oklch, var(--accent) 8%, var(--surface));
+    }
+
+    .project-card:nth-child(4) {
+      margin-top: -2.4rem;
+      background: color-mix(in oklch, var(--accent-3) 7%, var(--surface));
+    }
+
+    .project-card::after {
+      content: attr(data-code);
+      position: absolute;
+      right: 1rem;
+      bottom: 0.7rem;
+      color: color-mix(in oklch, var(--muted) 20%, transparent);
+      font-family: var(--mono);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 26px 70px var(--shadow);
+    }
+
+    .project-card.is-hidden {
+      display: none;
+    }
+
+    .project-card h3 {
+      margin-bottom: 0.55rem;
+      max-width: 17ch;
+      font-size: clamp(1.5rem, 3vw, 2.45rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .project-card p {
+      max-width: 60ch;
+      color: var(--muted);
+    }
+
+    .project-foot {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.48rem;
+      margin-top: 1rem;
+    }
+
+    .cert-layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .callout {
+      display: grid;
+      align-content: space-between;
+      min-height: 310px;
+      padding: clamp(1.2rem, 3vw, 1.8rem);
+      border-radius: var(--radius-xl);
+      color: var(--surface);
+      background: linear-gradient(135deg, var(--ink), color-mix(in oklch, var(--ink) 72%, var(--accent-3)));
+      box-shadow: 0 22px 60px var(--shadow);
+    }
+
+    .callout p {
+      max-width: 45ch;
+      color: color-mix(in oklch, var(--surface) 76%, transparent);
+    }
+
+    .callout strong {
+      display: block;
+      max-width: 11ch;
+      font-size: clamp(2rem, 4.2vw, 4.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+    }
+
+    .cert-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--line);
+      overflow: hidden;
+    }
+
+    .cert-item {
+      padding: clamp(1rem, 2.6vw, 1.35rem);
+      background: var(--surface);
+    }
+
+    .cert-item span {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cert-item strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cert-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      padding: clamp(1.25rem, 3.5vw, 2.2rem);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: 0 22px 60px var(--shadow-soft);
+    }
+
+    .contact-card h2 {
+      max-width: 12ch;
+      margin-bottom: 0.9rem;
+    }
+
+    .contact-card p {
+      max-width: 62ch;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .contact-actions {
+      display: grid;
+      gap: 0.65rem;
+      min-width: 230px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 100;
+      max-width: 320px;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--ink);
+      background: var(--surface);
+      box-shadow: 0 18px 48px var(--shadow);
+      opacity: 0;
+      transform: translateY(14px);
+      pointer-events: none;
+      transition: opacity 180ms ease-out, transform 180ms ease-out;
+    }
+
+    .toast.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2rem;
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--good) 35%, transparent); }
+      100% { box-shadow: 0 0 0 12px color-mix(in oklch, var(--good) 0%, transparent); }
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0) rotate(0deg); }
+      to { transform: translate3d(-24px, 18px, 0) rotate(18deg); }
+    }
+
+    @keyframes breathe {
+      from { transform: scale(0.9) translateY(0); opacity: 0.78; }
+      to { transform: scale(1.08) translateY(-16px); opacity: 1; }
+    }
+
+    @keyframes nodeUp {
+      to { transform: scale(1); }
+    }
+
+    @keyframes fillBar {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @media (max-width: 960px) {
+      .topbar {
+        align-items: flex-start;
+        border-radius: 28px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero,
+      .section-heading,
+      .stack-board,
+      .timeline-card,
+      .cert-layout,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card:nth-child(2),
+      .project-card:nth-child(4) {
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page-shell {
+        width: min(calc(100% - 20px), var(--max));
+        padding-top: 10px;
+      }
+
+      .topbar {
+        top: 8px;
+      }
+
+      .brand-mark strong {
+        display: none;
+      }
+
+      .hero-copy,
+      .ops-panel,
+      .proof-strip,
+      .stack-board,
+      .timeline-card,
+      .project-card,
+      .callout,
+      .cert-list,
+      .contact-card {
+        border-radius: 24px;
+      }
+
+      .proof-strip,
+      .cert-list,
+      .panel-foot {
+        grid-template-columns: 1fr;
+      }
+
+      .service-row {
+        grid-template-columns: 76px minmax(0, 1fr) auto;
+        gap: 0.5rem;
+      }
+
+      .filter-rail,
+      .project-toolbar {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 0.75rem;
+      }
+
+      .filter-button,
+      .project-filter {
+        min-width: max-content;
+      }
+
+      .contact-actions {
+        min-width: 0;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media print {
+      html {
+        color-scheme: light;
+      }
+
+      body {
+        color: oklch(22% 0.03 252);
+        background: oklch(98% 0.006 77);
+      }
+
+      body::before,
+      .scroll-meter,
+      .topbar,
+      .hero-copy::after,
+      .toast,
+      .button.secondary,
+      .project-toolbar {
+        display: none !important;
+      }
+
+      .page-shell {
+        width: 100%;
+        padding: 0;
+      }
+
+      .hero,
+      .proof-strip,
+      .stack-board,
+      .timeline-card,
+      .project-grid,
+      .cert-layout,
+      .contact-card {
+        display: block;
+      }
+
+      .hero-copy,
+      .ops-panel,
+      .proof-item,
+      .timeline-card,
+      .project-card,
+      .callout,
+      .cert-item,
+      .contact-card {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+
+      .project-card {
+        margin: 0 0 12px !important;
+      }
+
+      a[href^="http"]::after,
+      a[href^="mailto"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.82em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to resume content</a>
+  <div class="scroll-meter" aria-hidden="true"></div>
+  <div class="page-shell">
+    <header class="topbar" aria-label="Primary navigation">
+      <a class="brand-mark" href="#top" aria-label="Jordan Vale resume home">
+        <span>JV</span>
+        <strong>Jordan Vale</strong>
+      </a>
+      <nav class="nav-links" aria-label="Resume sections">
+        <a href="#impact">Impact</a>
+        <a href="#skills">Stack</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="top-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false">Theme</button>
+        <button class="print-button" type="button">Print</button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Senior DevOps Engineer, platform reliability specialist</p>
+          <h1 id="hero-title">Jordan Vale</h1>
+          <p class="role-line">I build resilient cloud platforms for product teams that need <strong>speed, traceability, and calm operations</strong>. Kubernetes, Terraform, GitOps, CI/CD, observability, incident response, and security automation.</p>
+          <div class="hero-cta" aria-label="Resume actions">
+            <a class="button primary" href="mailto:jordan.vale@example.com">Book an interview</a>
+            <button class="button secondary" type="button" data-copy="jordan.vale@example.com">Copy email</button>
+          </div>
+          <ul class="availability" aria-label="Candidate highlights">
+            <li>Remote or hybrid</li>
+            <li>UTC to UTC+3 overlap</li>
+            <li>AWS, Azure, Kubernetes</li>
+            <li>Open to platform leadership</li>
+          </ul>
+        </div>
+
+        <aside class="ops-panel reveal" aria-label="Operational reliability summary">
+          <div class="panel-head">
+            <p class="panel-title">live capability profile</p>
+            <span class="panel-state"><span class="pulse" aria-hidden="true"></span>operational</span>
+          </div>
+          <div class="node-map" aria-hidden="true">
+            <span class="node good" style="--i:1"></span>
+            <span class="node" style="--i:2"></span>
+            <span class="node good" style="--i:3"></span>
+            <span class="node hot" style="--i:4"></span>
+            <span class="node" style="--i:5"></span>
+            <span class="node good" style="--i:6"></span>
+            <span class="node" style="--i:7"></span>
+            <span class="node good" style="--i:8"></span>
+            <span class="node" style="--i:9"></span>
+            <span class="node good" style="--i:10"></span>
+            <span class="node hot" style="--i:11"></span>
+            <span class="node" style="--i:12"></span>
+          </div>
+          <div class="service-list" aria-label="Service health indicators">
+            <div class="service-row"><span>deploy</span><div class="bar"><span style="--w:92%"></span></div><strong>92%</strong></div>
+            <div class="service-row"><span>slo</span><div class="bar"><span style="--w:99%"></span></div><strong>99%</strong></div>
+            <div class="service-row"><span>cost</span><div class="bar"><span style="--w:74%"></span></div><strong>74%</strong></div>
+            <div class="service-row"><span>risk</span><div class="bar"><span style="--w:88%"></span></div><strong>88%</strong></div>
+          </div>
+          <div class="panel-foot" aria-label="Snapshot metrics">
+            <div><strong>12</strong><span>production clusters owned</span></div>
+            <div><strong>4.2k</strong><span>monthly deployments governed</span></div>
+            <div><strong>31%</strong><span>cloud spend cut in one year</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section reveal" id="impact" aria-labelledby="impact-title">
+        <div class="section-heading">
+          <div>
+            <span class="kicker">Measured impact</span>
+            <h2 id="impact-title">Reliability work with numbers attached.</h2>
+          </div>
+          <p>Every program tied deployment speed, incident load, cost, or audit confidence to a measurable business result.</p>
+        </div>
+        <div class="proof-strip" aria-label="Achievement statistics">
+          <article class="proof-item">
+            <strong><span data-count="99.99" data-decimals="2">0</span>%</strong>
+            <span>payment API availability</span>
+            <p>Protected critical workloads through progressive delivery, error budgets, and multi-zone recovery drills.</p>
+          </article>
+          <article class="proof-item">
+            <strong><span data-count="42">0</span>%</strong>
+            <span>MTTR reduction</span>
+            <p>Rebuilt alert routing, runbooks, ownership maps, and post-incident review habits across six teams.</p>
+          </article>
+          <article class="proof-item">
+            <strong><span data-count="180">0</span>+</strong>
+            <span>Terraform modules shipped</span>
+            <p>Standardized account vending, networking, secrets, Kubernetes add-ons, and golden service templates.</p>
+          </article>
+          <article class="proof-item">
+            <strong><span data-count="28">0</span>m</strong>
+            <span>pipeline time saved monthly</span>
+            <p>Removed redundant builds, added remote caching, parallelized test suites, and automated rollback gates.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="skills" aria-labelledby="skills-title">
+        <div class="section-heading">
+          <div>
+            <span class="kicker">Technical stack</span>
+            <h2 id="skills-title">Hands-on across the delivery path.</h2>
+          </div>
+          <p>Filter the stack by operating mode. The emphasis is production ownership, not keyword collection.</p>
+        </div>
+        <div class="stack-board">
+          <div class="filter-rail" role="group" aria-label="Filter technical skills">
+            <button class="filter-button" type="button" data-skill-filter="all" aria-pressed="true">All systems</button>
+            <button class="filter-button" type="button" data-skill-filter="platform" aria-pressed="false">Platform runtime</button>
+            <button class="filter-button" type="button" data-skill-filter="iac" aria-pressed="false">Infrastructure as code</button>
+            <button class="filter-button" type="button" data-skill-filter="delivery" aria-pressed="false">Delivery flow</button>
+            <button class="filter-button" type="button" data-skill-filter="security" aria-pressed="false">Security and observability</button>
+          </div>
+          <div class="skill-cloud" aria-live="polite">
+            <span class="skill-pill" data-skill-group="platform">Kubernetes</span>
+            <span class="skill-pill" data-skill-group="platform">EKS</span>
+            <span class="skill-pill" data-skill-group="platform">AKS</span>
+            <span class="skill-pill" data-skill-group="platform">Helm</span>
+            <span class="skill-pill" data-skill-group="platform">Istio</span>
+            <span class="skill-pill" data-skill-group="platform">Linux</span>
+            <span class="skill-pill" data-skill-group="iac">Terraform</span>
+            <span class="skill-pill" data-skill-group="iac">Terragrunt</span>
+            <span class="skill-pill" data-skill-group="iac">Pulumi</span>
+            <span class="skill-pill" data-skill-group="iac">Ansible</span>
+            <span class="skill-pill" data-skill-group="iac">Packer</span>
+            <span class="skill-pill" data-skill-group="iac">OPA</span>
+            <span class="skill-pill" data-skill-group="delivery">GitHub Actions</span>
+            <span class="skill-pill" data-skill-group="delivery">GitLab CI</span>
+            <span class="skill-pill" data-skill-group="delivery">Jenkins</span>
+            <span class="skill-pill" data-skill-group="delivery">Argo CD</span>
+            <span class="skill-pill" data-skill-group="delivery">Docker</span>
+            <span class="skill-pill" data-skill-group="delivery">Release automation</span>
+            <span class="skill-pill" data-skill-group="security">Prometheus</span>
+            <span class="skill-pill" data-skill-group="security">Grafana</span>
+            <span class="skill-pill" data-skill-group="security">OpenTelemetry</span>
+            <span class="skill-pill" data-skill-group="security">Vault</span>
+            <span class="skill-pill" data-skill-group="security">SOPS</span>
+            <span class="skill-pill" data-skill-group="security">Trivy</span>
+            <span class="skill-pill" data-skill-group="security">Falco</span>
+            <span class="skill-pill" data-skill-group="security">PagerDuty</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="experience" aria-labelledby="experience-title">
+        <div class="section-heading">
+          <div>
+            <span class="kicker">Experience</span>
+            <h2 id="experience-title">Roles that turned infrastructure into leverage.</h2>
+          </div>
+          <p>Focused on reliable abstractions, paved roads, and operating models that reduce cognitive load for product engineering.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card">
+              <div>
+                <h3>Senior DevOps Engineer, NimbusGrid Systems</h3>
+                <p class="timeline-meta">2021 to present · Cloud platform, Kubernetes, regulated SaaS</p>
+                <ul>
+                  <li>Owned multi-account AWS platform with Terraform, centralized policy checks, service catalog templates, and GitOps promotion flow.</li>
+                  <li>Designed incident command playbooks that cut paging noise by 36% and reduced unresolved severity-two follow-ups by 58%.</li>
+                  <li>Introduced progressive delivery for 70+ services with canary analysis, automated rollback, and service-level objective dashboards.</li>
+                </ul>
+              </div>
+              <div class="timeline-tags" aria-label="Role tools">
+                <span class="tag">AWS</span><span class="tag">EKS</span><span class="tag">Terraform</span><span class="tag">Argo CD</span><span class="tag">Prometheus</span><span class="tag">Vault</span>
+              </div>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card">
+              <div>
+                <h3>Platform Engineer, AtlasPay</h3>
+                <p class="timeline-meta">2018 to 2021 · Payments, compliance, high-throughput APIs</p>
+                <ul>
+                  <li>Built reusable CI templates and deployment guardrails that moved release cadence from weekly windows to daily self-service releases.</li>
+                  <li>Led SOC 2 evidence automation for infrastructure changes, access reviews, vulnerability scans, and production deployment records.</li>
+                  <li>Migrated legacy workloads to containerized services with blue-green deployment and zero planned customer downtime.</li>
+                </ul>
+              </div>
+              <div class="timeline-tags" aria-label="Role tools">
+                <span class="tag">GitLab CI</span><span class="tag">Docker</span><span class="tag">KMS</span><span class="tag">Datadog</span><span class="tag">Ansible</span><span class="tag">PostgreSQL</span>
+              </div>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card">
+              <div>
+                <h3>Cloud Automation Engineer, ByteFoundry</h3>
+                <p class="timeline-meta">2016 to 2018 · Managed cloud, automation, internal developer tools</p>
+                <ul>
+                  <li>Automated environment provisioning, hardened Linux images, backup verification, and configuration drift detection.</li>
+                  <li>Wrote operational tooling that converted repetitive support tasks into audited self-service workflows.</li>
+                  <li>Partnered with application teams to define readiness checks, deployment checklists, and escalation paths.</li>
+                </ul>
+              </div>
+              <div class="timeline-tags" aria-label="Role tools">
+                <span class="tag">Python</span><span class="tag">Packer</span><span class="tag">Linux</span><span class="tag">Jenkins</span><span class="tag">Bash</span><span class="tag">Nagios</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <div>
+            <span class="kicker">Selected projects</span>
+            <h2 id="projects-title">Visible wins beyond the job title.</h2>
+          </div>
+          <p>Each project combined technical build work with adoption, documentation, and measurable operating outcomes.</p>
+        </div>
+        <div class="project-toolbar" role="group" aria-label="Filter projects">
+          <button class="project-filter" type="button" data-project-filter="all" aria-pressed="true">All</button>
+          <button class="project-filter" type="button" data-project-filter="reliability" aria-pressed="false">Reliability</button>
+          <button class="project-filter" type="button" data-project-filter="automation" aria-pressed="false">Automation</button>
+          <button class="project-filter" type="button" data-project-filter="security" aria-pressed="false">Security</button>
+          <button class="project-filter" type="button" data-project-filter="cost" aria-pressed="false">Cost</button>
+        </div>
+        <div class="project-grid">
+          <article class="project-card" data-project-tags="reliability automation" data-code="SLO">
+            <h3>SLO command center</h3>
+            <p>Built a shared reliability workspace for golden signals, error budgets, deployment correlation, and on-call readiness.</p>
+            <ul>
+              <li>Reduced noisy alerts from 1,140 to 410 per month.</li>
+              <li>Raised ownership coverage for tier-one services to 100%.</li>
+              <li>Created review ritual that tied product priorities to error budgets.</li>
+            </ul>
+            <div class="project-foot"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">OpenTelemetry</span></div>
+          </article>
+          <article class="project-card" data-project-tags="automation security" data-code="GIT">
+            <h3>GitOps compliance runway</h3>
+            <p>Replaced manual cluster changes with signed pull requests, admission policy, drift alerts, and automated evidence capture.</p>
+            <ul>
+              <li>Moved 94% of cluster mutations to reviewed Git workflows.</li>
+              <li>Cut audit evidence prep from three weeks to two days.</li>
+              <li>Blocked privileged workload patterns before deployment.</li>
+            </ul>
+            <div class="project-foot"><span class="tag">Argo CD</span><span class="tag">OPA</span><span class="tag">Vault</span></div>
+          </article>
+          <article class="project-card" data-project-tags="cost automation" data-code="FIN">
+            <h3>Cloud cost telemetry</h3>
+            <p>Created team-level cloud spend telemetry with actionable rightsizing, idle resource cleanup, and forecast alerts.</p>
+            <ul>
+              <li>Saved $1.2M annualized without reducing platform capacity.</li>
+              <li>Gave every squad cost ownership in weekly engineering review.</li>
+              <li>Automated cleanup for preview environments and orphaned volumes.</li>
+            </ul>
+            <div class="project-foot"><span class="tag">AWS CUR</span><span class="tag">Lambda</span><span class="tag">Terraform</span></div>
+          </article>
+          <article class="project-card" data-project-tags="security reliability" data-code="SEC">
+            <h3>Container supply-chain shield</h3>
+            <p>Implemented image provenance, vulnerability gates, runtime threat detection, and exception workflows that developers could actually use.</p>
+            <ul>
+              <li>Reached 97% signed image coverage across production services.</li>
+              <li>Cut critical vulnerability exposure window from 19 days to 4 days.</li>
+              <li>Integrated security findings directly into delivery pipelines.</li>
+            </ul>
+            <div class="project-foot"><span class="tag">Trivy</span><span class="tag">Cosign</span><span class="tag">Falco</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="credentials" aria-labelledby="credentials-title">
+        <div class="section-heading">
+          <div>
+            <span class="kicker">Credentials</span>
+            <h2 id="credentials-title">Certified where it supports execution.</h2>
+          </div>
+          <p>Certifications are paired with repeatable delivery systems, not treated as substitutes for production judgement.</p>
+        </div>
+        <div class="cert-layout">
+          <aside class="callout">
+            <strong>Operator mindset.</strong>
+            <p>Own the lifecycle: design the platform, document the path, measure behavior, rehearse failure, improve the loop.</p>
+          </aside>
+          <div class="cert-list" aria-label="Certifications and education">
+            <article class="cert-item">
+              <span>Certification</span>
+              <strong>AWS Certified Solutions Architect Professional</strong>
+              <p>Multi-account governance, resilient design, migration strategy, and cost-aware architectures.</p>
+            </article>
+            <article class="cert-item">
+              <span>Certification</span>
+              <strong>Certified Kubernetes Administrator</strong>
+              <p>Cluster operations, networking, troubleshooting, workload scheduling, and security contexts.</p>
+            </article>
+            <article class="cert-item">
+              <span>Certification</span>
+              <strong>HashiCorp Terraform Associate</strong>
+              <p>Reusable modules, remote state, policy checks, and infrastructure delivery workflows.</p>
+            </article>
+            <article class="cert-item">
+              <span>Education</span>
+              <strong>B.S. Computer Science, Systems Track</strong>
+              <p>Distributed systems, Linux internals, databases, networking, and software engineering.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="contact" aria-labelledby="contact-title">
+        <div class="contact-card">
+          <div>
+            <span class="kicker">Contact</span>
+            <h2 id="contact-title">Need a platform engineer who reduces chaos?</h2>
+            <p>Send a note with the platform, team size, and reliability challenge. I will respond with the first questions I would ask in a technical discovery call.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="button primary" href="mailto:jordan.vale@example.com">jordan.vale@example.com</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/jordan-vale">LinkedIn profile</a>
+            <a class="button secondary" href="https://github.com/jordanvale">GitHub portfolio</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Single-file HTML resume · CSS and JavaScript are embedded.</span>
+      <span>Last updated <time datetime="2026-06">June 2026</time></span>
+    </footer>
+  </div>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const root = document.documentElement;
+    const themeButton = document.querySelector('.theme-toggle');
+    const printButton = document.querySelector('.print-button');
+    const scrollMeter = document.querySelector('.scroll-meter');
+    const toast = document.querySelector('.toast');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const savedTheme = localStorage.getItem('resume-theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initialTheme = savedTheme || systemTheme;
+    root.dataset.theme = initialTheme;
+    themeButton.setAttribute('aria-pressed', String(initialTheme === 'dark'));
+
+    themeButton.addEventListener('click', () => {
+      const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = nextTheme;
+      localStorage.setItem('resume-theme', nextTheme);
+      themeButton.setAttribute('aria-pressed', String(nextTheme === 'dark'));
+      showToast(`${nextTheme === 'dark' ? 'Dark' : 'Light'} theme enabled`);
+    });
+
+    printButton.addEventListener('click', () => window.print());
+
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const value = button.getAttribute('data-copy');
+        try {
+          await navigator.clipboard.writeText(value);
+          showToast('Email copied to clipboard');
+        } catch {
+          showToast(value);
+        }
+      });
+    });
+
+    const skillButtons = document.querySelectorAll('[data-skill-filter]');
+    const skillPills = document.querySelectorAll('[data-skill-group]');
+
+    skillButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.skillFilter;
+        skillButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        skillPills.forEach((pill) => {
+          pill.classList.toggle('is-muted', filter !== 'all' && pill.dataset.skillGroup !== filter);
+        });
+      });
+    });
+
+    const projectButtons = document.querySelectorAll('[data-project-filter]');
+    const projectCards = document.querySelectorAll('[data-project-tags]');
+
+    projectButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.projectFilter;
+        projectButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        projectCards.forEach((card) => {
+          const tags = card.dataset.projectTags.split(' ');
+          card.classList.toggle('is-hidden', filter !== 'all' && !tags.includes(filter));
+        });
+      });
+    });
+
+    const counters = document.querySelectorAll('[data-count]');
+    const animateCounter = (counter) => {
+      const target = Number(counter.dataset.count);
+      const decimals = Number(counter.dataset.decimals || 0);
+      const duration = prefersReducedMotion ? 1 : 1200;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        counter.textContent = (target * eased).toFixed(decimals);
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const revealItems = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries, entryObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        if (entry.target.id === 'impact' || entry.target.querySelector('#impact-title')) {
+          counters.forEach(animateCounter);
+        }
+        entryObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.18 });
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    const updateScrollMeter = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll <= 0 ? 0 : window.scrollY / maxScroll;
+      scrollMeter.style.transform = `scaleX(${progress})`;
+    };
+
+    window.addEventListener('scroll', updateScrollMeter, { passive: true });
+    window.addEventListener('resize', updateScrollMeter);
+    updateScrollMeter();
+
+    let toastTimer;
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('is-visible');
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 2200);
+    }
+  </script>
+</body>
+</html>
